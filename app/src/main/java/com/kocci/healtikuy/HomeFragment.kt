@@ -26,7 +26,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        appbarConfiguration()
+        setupAppBarWithMenuDrawer()
 
         binding.statusIndicator.setProgressCompat(50, true)
     }
@@ -39,7 +39,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun appbarConfiguration(){
+    private fun setupAppBarWithMenuDrawer(){
         val navController = findNavController()
         val drawerLayout = activity?.findViewById<DrawerLayout>(R.id.drawer_layout)
         val appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
