@@ -11,22 +11,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <View
             android:id="@+id/imgAvatar"
             android:layout_width="120dp"
             android:layout_height="120dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:background="@color/black"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
         <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:text="Kakaranara"
             app:layout_constraintStart_toEndOf="@+id/imgAvatar"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="Kakaranara" />
+            app:layout_constraintTop_toTopOf="@+id/imgAvatar" />
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/statusIndicator"
