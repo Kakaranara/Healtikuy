@@ -23,14 +23,14 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.button.setOnClickListener(this)
+        binding.statusIndicator.setProgressCompat(50, true)
     }
 
     override fun onClick(v: View?) {
         when(v){
-            binding.button -> {
-                Toast.makeText(requireActivity(), "Hello", Toast.LENGTH_SHORT).show()
-            }
+            /**
+             * handle button click
+             */
         }
     }
 
