@@ -51,10 +51,15 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    //? Database Related
-
+    // ? Persistence Data Related
+    // * Database
     implementation "androidx.room:room-runtime:2.5.0"
 //    annotationProcessor "androidx.room:room-compiler:2.5.0"
     ksp "androidx.room:room-compiler:2.5.0"
+
+    // * Preferences Datastore (most likely same with shared preferences)
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    //?
 
 }
