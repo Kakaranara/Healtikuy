@@ -64,4 +64,5 @@
     <!-- custom -->
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="gray">#D3D3D3</color>
 </resources>

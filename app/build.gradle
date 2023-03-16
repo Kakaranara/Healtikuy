@@ -60,6 +60,7 @@ dependencies {
     // * Preferences Datastore (most likely same with shared preferences)
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
-    //?
+    //? UI related
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
 }
