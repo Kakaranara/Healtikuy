@@ -22,6 +22,12 @@
         <action
             android:id="@+id/action_homeFragment_to_exerciseFragment"
             app:destination="@id/exerciseFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_sleepFragment"
+            app:destination="@id/sleepFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_nutritionFragment"
+            app:destination="@id/nutritionFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -45,6 +51,16 @@
     <fragment
         android:id="@+id/exerciseFragment"
         android:name="com.kocci.healtikuy.ui.main.feature.ExerciseFragment"
-        android:label="fragment_exercise"
+        android:label="@string/exercise"
         tools:layout="@layout/fragment_exercise" />
+    <fragment
+        android:id="@+id/sleepFragment"
+        android:name="com.kocci.healtikuy.ui.main.feature.SleepFragment"
+        android:label="@string/sleep"
+        tools:layout="@layout/fragment_sleep" />
+    <fragment
+        android:id="@+id/nutritionFragment"
+        android:name="com.kocci.healtikuy.ui.main.feature.NutritionFragment"
+        android:label="@string/nutrition"
+        tools:layout="@layout/fragment_nutrition" />
 </navigation>

@@ -30,17 +30,39 @@ class HomeFragment : Fragment(), View.OnClickListener {
         setupAppBarWithMenuDrawer()
 
         binding.statusIndicator.setProgressCompat(50, true)
+        binding.btnExercise.setOnClickListener(this)
+        binding.btnNutrition.setOnClickListener(this)
+        binding.btnSleep.setOnClickListener(this)
+        binding.btnSunExposure.setOnClickListener(this)
+        binding.btnWaterIntake.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v) {
-            /**
-             * handle button click
-             */
+            binding.btnWaterIntake -> {
+                val directions = HomeFragmentDirections.actionHomeFragmentToWaterIntakeFragment()
+                findNavController().navigate(directions)
+            }
+            binding.btnSleep -> {
+                val directions = HomeFragmentDirections.actionHomeFragmentToSleepFragment()
+                findNavController().navigate(directions)
+            }
+            binding.btnExercise -> {
+                val directions = HomeFragmentDirections.actionHomeFragmentToExerciseFragment()
+                findNavController().navigate(directions)
+            }
+            binding.btnNutrition -> {
+                val directions = HomeFragmentDirections.actionHomeFragmentToNutritionFragment()
+                findNavController().navigate(directions)
+            }
+            binding.btnSunExposure -> {
+                val directions = HomeFragmentDirections.actionHomeFragmentToSunExposureFragment()
+                findNavController().navigate(directions)
+            }
         }
     }
 
-    private fun setupAppBarWithMenuDrawer(){
+    private fun setupAppBarWithMenuDrawer() {
         val navController = findNavController()
         val drawerLayout = activity?.findViewById<DrawerLayout>(R.id.drawer_layout)
         val appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)

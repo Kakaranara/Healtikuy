@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.kocci.healtikuy.databinding.FragmentExerciseBinding
 import com.kocci.healtikuy.databinding.FragmentNutritionBinding
 
-class ExerciseFragment : Fragment() {
-    private var _binding: FragmentExerciseBinding? = null
+
+class NutritionFragment : Fragment() {
+    private var _binding: FragmentNutritionBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -17,7 +17,7 @@ class ExerciseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentExerciseBinding.inflate(inflater, container, false)
+        _binding = FragmentNutritionBinding.inflate(inflater, container, false)
         return binding.root
     }
 

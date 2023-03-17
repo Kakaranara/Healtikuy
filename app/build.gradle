@@ -51,6 +51,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
+    //? Memory Leaks Detector
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
+
     // ? Persistence Data Related
     // * Database
     implementation "androidx.room:room-runtime:2.5.0"
