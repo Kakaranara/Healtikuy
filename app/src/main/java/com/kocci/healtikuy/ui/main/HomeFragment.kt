@@ -1,4 +1,4 @@
-package com.kocci.healtikuy
+package com.kocci.healtikuy.ui.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.kocci.healtikuy.R
 import com.kocci.healtikuy.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment(), View.OnClickListener {
