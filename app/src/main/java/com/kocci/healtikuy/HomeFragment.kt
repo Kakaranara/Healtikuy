@@ -5,11 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment(), View.OnClickListener {
-    private var _binding : FragmentHomeBinding? = null
+    private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -23,15 +26,24 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.button.setOnClickListener(this)
+        setupAppBarWithMenuDrawer()
+
+        binding.statusIndicator.setProgressCompat(50, true)
     }
 
     override fun onClick(v: View?) {
-        when(v){
-            binding.button -> {
-                Toast.makeText(requireActivity(), "Hello", Toast.LENGTH_SHORT).show()
-            }
+        when (v) {
+            /**
+             * handle button click
+             */
         }
+    }
+
+    private fun setupAppBarWithMenuDrawer(){
+        val navController = findNavController()
+        val drawerLayout = activity?.findViewById<DrawerLayout>(R.id.drawer_layout)
+        val appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
     override fun onDestroyView() {

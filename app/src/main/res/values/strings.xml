@@ -2,4 +2,13 @@
     <string name="app_name">Healtikuy</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="main_feature">Main Feature</string>
+    <string name="home">Home</string>
+    <string name="leaderboards">Leaderboards</string>
+    <string name="logout">Logout</string>
+    <string name="exercise">Exercise</string>
+    <string name="water_intake">Water Intake</string>
+    <string name="nutrition">Nutrition</string>
+    <string name="sleep">Sleep</string>
+    <string name="sun_exposure">Sun Exposure</string>
 </resources>
