@@ -1,10 +1,8 @@
-package com.kocci.healtikuy.ui.main.feature
+package com.kocci.healtikuy.ui.main.feature.water
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kocci.healtikuy.R
 

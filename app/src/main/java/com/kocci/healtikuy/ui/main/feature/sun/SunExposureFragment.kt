@@ -1,16 +1,15 @@
-package com.kocci.healtikuy.ui.main.feature
+package com.kocci.healtikuy.ui.main.feature.sun
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.kocci.healtikuy.databinding.FragmentNutritionBinding
-import com.kocci.healtikuy.databinding.FragmentSleepBinding
+import com.kocci.healtikuy.databinding.FragmentSunExposureBinding
 
 
-class SleepFragment : Fragment() {
-    private var _binding: FragmentSleepBinding? = null
+class SunExposureFragment : Fragment() {
+    private var _binding: FragmentSunExposureBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -18,7 +17,7 @@ class SleepFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSleepBinding.inflate(inflater, container, false)
+        _binding = FragmentSunExposureBinding.inflate(inflater, container, false)
         return binding.root
     }
 

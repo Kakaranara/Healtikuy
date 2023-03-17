@@ -1,4 +1,4 @@
-package com.kocci.healtikuy.ui.main.feature
+package com.kocci.healtikuy.ui.main.feature.water
 
 import android.os.Bundle
 import android.view.LayoutInflater
