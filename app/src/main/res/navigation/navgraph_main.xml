@@ -34,17 +34,17 @@
     </fragment>
     <fragment
         android:id="@+id/waterIntakeFragment"
-        android:name="com.kocci.healtikuy.ui.main.WaterIntakeFragment"
+        android:name="com.kocci.healtikuy.ui.main.feature.WaterIntakeFragment"
         android:label="@string/water_intake"
         tools:layout="@layout/fragment_water_intake" />
     <fragment
         android:id="@+id/sunExposureFragment"
-        android:name="com.kocci.healtikuy.ui.main.SunExposureFragment"
+        android:name="com.kocci.healtikuy.ui.main.feature.SunExposureFragment"
         android:label="@string/sun_exposure"
         tools:layout="@layout/fragment_sun_exposure" />
     <fragment
         android:id="@+id/exerciseFragment"
-        android:name="com.kocci.healtikuy.ui.main.ExerciseFragment"
+        android:name="com.kocci.healtikuy.ui.main.feature.ExerciseFragment"
         android:label="fragment_exercise"
         tools:layout="@layout/fragment_exercise" />
 </navigation>
