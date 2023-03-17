@@ -32,6 +32,7 @@ class WaterIntakeFragment : Fragment(), View.OnClickListener {
         binding.button.setOnClickListener(this)
     }
 
+
     override fun onClick(v: View?) {
         when (v) {
             binding.button -> {
