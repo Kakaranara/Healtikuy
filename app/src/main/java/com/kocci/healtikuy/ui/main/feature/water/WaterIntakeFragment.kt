@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kocci.healtikuy.databinding.FragmentWaterIntakeBinding
+import com.kocci.healtikuy.util.extension.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class WaterIntakeFragment : Fragment(), View.OnClickListener {
@@ -34,6 +37,12 @@ class WaterIntakeFragment : Fragment(), View.OnClickListener {
         binding.toolbarWaterIntake.setupWithNavController(findNavController())
         setupAdapter()
 
+        lifecycleScope.launch {
+            viewModel.flow.collect {
+                showToast("points : ${it.points}")
+            }
+        }
+
         binding.button.setOnClickListener(this)
     }
 
@@ -45,6 +54,7 @@ class WaterIntakeFragment : Fragment(), View.OnClickListener {
                 val adapter = WaterIntakeAdapter(itemCount)
                 binding.recyclerView.adapter = adapter
 
+                viewModel.addPoints(10000)
             }
         }
     }
