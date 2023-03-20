@@ -3,7 +3,6 @@ package com.kocci.healtikuy.core.data.local.preferences
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -17,7 +16,6 @@ data class UserPreferences(
 private object PreferenceKeys {
     val LAST_LOGIN = longPreferencesKey("last_login")
     val POINTS = longPreferencesKey("points")
-    val TEST = intPreferencesKey("test")
 }
 
 class UserPreferencesRepository @Inject constructor(

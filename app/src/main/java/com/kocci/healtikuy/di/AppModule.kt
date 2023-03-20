@@ -10,9 +10,9 @@ import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
 @InstallIn(ViewModelComponent::class)
-abstract class PreferenceModules {
+abstract class AppModule {
 
     @Binds
     @ViewModelScoped
-    abstract fun bindPreferenceUseCase(preferencesInteractor: PreferencesInteractor): PreferencesUseCase
+    abstract fun bindPreferencesUseCase(preferencesInteractor: PreferencesInteractor): PreferencesUseCase
 }
