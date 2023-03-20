@@ -1,0 +1,9 @@
+dependencies{
+    //? Memory Leaks Detector
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
+
+    //? Dependency Injection
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
+
+}

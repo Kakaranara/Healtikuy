@@ -5,15 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kocci.healtikuy.databinding.FragmentWaterIntakeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class WaterIntakeFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentWaterIntakeBinding? = null
     private val binding get() = _binding!!
     var itemCount = 1
+
+    val viewModel: WaterIntakeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +44,7 @@ class WaterIntakeFragment : Fragment(), View.OnClickListener {
                 itemCount++
                 val adapter = WaterIntakeAdapter(itemCount)
                 binding.recyclerView.adapter = adapter
+
             }
         }
     }
