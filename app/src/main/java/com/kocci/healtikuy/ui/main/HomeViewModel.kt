@@ -2,20 +2,20 @@ package com.kocci.healtikuy.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kocci.healtikuy.core.data.local.preferences.UserPreferencesRepository
+import com.kocci.healtikuy.core.domain.PreferencesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val userPreferencesRepository: UserPreferencesRepository
+    private val preferencesUseCase: PreferencesUseCase
 ) : ViewModel() {
-    val flow = userPreferencesRepository.userPreferences
+    private val flow = preferencesUseCase.getUserPreferences()
 
     fun addPoints(point: Long) {
         viewModelScope.launch {
-            userPreferencesRepository.addPoints(point)
+            preferencesUseCase.updatePoints(point)
         }
     }
 
