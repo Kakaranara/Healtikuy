@@ -23,12 +23,16 @@ class PreferencesInteractor @Inject constructor(
 
     override fun listenForStatusChanges(): Flow<HealthyStatusIndicator> {
         return repository.userPreferences.map {
-            if (it.points >= GameRules.MAX_STATUS_POINTS) {
-                return@map HealthyStatusIndicator.COMPLETED(it.points)
-            } else if (it.points > 0) {
-                return@map HealthyStatusIndicator.NEARLY_COMPLETE(it.points)
+            val points = it.points
+            val progress = calculateStatusPercentage(points)
+            if (progress == GameRules.STATUS_COMPLETE_PERCENTAGE) {
+                HealthyStatusIndicator.Completed(points)
+            } else if (progress >= 75) {
+                HealthyStatusIndicator.NearlyComplete(points)
+            } else if (progress >= 35) {
+                HealthyStatusIndicator.MidComplete(points)
             } else {
-                return@map HealthyStatusIndicator.ZERO
+                HealthyStatusIndicator.Low(points)
             }
         }
     }

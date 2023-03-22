@@ -4,16 +4,17 @@ import com.kocci.healtikuy.core.data.local.preferences.UserPreferences
 import kotlinx.coroutines.flow.Flow
 
 sealed class HealthyStatusIndicator(val point: Long) {
-    object ZERO : HealthyStatusIndicator(0)
-    class NEARLY_COMPLETE(points: Long) : HealthyStatusIndicator(points)
-    class COMPLETED(points: Long) : HealthyStatusIndicator(points)
+    class Low(points: Long) : HealthyStatusIndicator(points)
+
+    class MidComplete(points: Long) : HealthyStatusIndicator(points)
+    class NearlyComplete(points: Long) : HealthyStatusIndicator(points)
+    class Completed(points: Long) : HealthyStatusIndicator(points)
 }
 
 interface PreferencesUseCase {
     fun getUserPreferences(): Flow<UserPreferences>
+    fun listenForStatusChanges(): Flow<HealthyStatusIndicator>
+    fun calculateStatusPercentage(points: Long): Int
     suspend fun updatePoints(points: Long)
     suspend fun updateLastLogin()
-    fun listenForStatusChanges(): Flow<HealthyStatusIndicator>
-
-    fun calculateStatusPercentage(points : Long) : Int
 }

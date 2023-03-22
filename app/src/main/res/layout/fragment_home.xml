@@ -45,8 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/desc"
+            app:layout_constraintBottom_toBottomOf="@+id/imgAvatar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imgAvatar"
@@ -66,13 +65,16 @@
 
         <TextView
             android:id="@+id/desc"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Sedikit lagi menuju langkah hidup sehat!"
+            android:layout_marginTop="8dp"
+            android:text="Selamat! anda sudah menjalankan pola hidup sehat. Pertahankanlah!"
             android:textColor="#a9a9a9"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imgAvatar"
-            app:layout_constraintStart_toStartOf="@+id/statusIndicator" />
+            app:layout_constraintEnd_toEndOf="@+id/statusIndicator"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/statusIndicator"
+            app:layout_constraintTop_toBottomOf="@+id/statusIndicator" />
 
 
         <TextView
@@ -84,7 +86,7 @@
             android:layout_marginTop="32dp"
             android:text="Langkah Menuju Hidup Sehat"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgAvatar" />
+            app:layout_constraintTop_toBottomOf="@+id/desc" />
 
         <GridLayout
             android:layout_width="match_parent"

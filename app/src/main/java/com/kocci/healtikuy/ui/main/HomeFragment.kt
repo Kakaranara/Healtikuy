@@ -55,15 +55,24 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 binding.tvPoint.text = pointView
             }
 
+            showToast(healthyStatusIndicator.toString())
+
             when (healthyStatusIndicator) {
-                is HealthyStatusIndicator.COMPLETED -> {
+                is HealthyStatusIndicator.Completed -> {
                     showToast("completed : ${healthyStatusIndicator.point}")
+                    binding.desc.text = getString(R.string.status_completed)
                 }
-                is HealthyStatusIndicator.NEARLY_COMPLETE -> {
+                is HealthyStatusIndicator.NearlyComplete -> {
                     showToast("nearly complete ${healthyStatusIndicator.point}")
+                    binding.desc.text = getString(R.string.status_near_complete)
                 }
-                is HealthyStatusIndicator.ZERO -> {
-                    showToast("ZERO POINTS ${healthyStatusIndicator.point}")
+                is HealthyStatusIndicator.MidComplete -> {
+                    binding.desc.text = getString(R.string.status_mid)
+                    showToast("mid complete ${healthyStatusIndicator.point}")
+                }
+                is HealthyStatusIndicator.Low -> {
+                    binding.desc.text = getString(R.string.status_low)
+                    showToast("low complete ${healthyStatusIndicator.point}")
                 }
             }
         }
