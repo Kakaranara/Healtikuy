@@ -7,20 +7,60 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.kocci.healtikuy.HomeFragment"
+        android:name="com.kocci.healtikuy.ui.main.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_waterIntakeFragment"
+            app:destination="@id/waterIntakeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_sunExposureFragment"
+            app:destination="@id/sunExposureFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_exerciseFragment"
+            app:destination="@id/exerciseFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_sleepFragment"
+            app:destination="@id/sleepFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_nutritionFragment"
+            app:destination="@id/nutritionFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.kocci.healtikuy.LoginFragment"
+        android:name="com.kocci.healtikuy.ui.auth.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/waterIntakeFragment"
+        android:name="com.kocci.healtikuy.ui.main.feature.water.WaterIntakeFragment"
+        android:label="@string/water_intake"
+        tools:layout="@layout/fragment_water_intake" />
+    <fragment
+        android:id="@+id/sunExposureFragment"
+        android:name="com.kocci.healtikuy.ui.main.feature.sun.SunExposureFragment"
+        android:label="@string/sun_exposure"
+        tools:layout="@layout/fragment_sun_exposure" />
+    <fragment
+        android:id="@+id/exerciseFragment"
+        android:name="com.kocci.healtikuy.ui.main.feature.exercise.ExerciseFragment"
+        android:label="@string/exercise"
+        tools:layout="@layout/fragment_exercise" />
+    <fragment
+        android:id="@+id/sleepFragment"
+        android:name="com.kocci.healtikuy.ui.main.feature.sleep.SleepFragment"
+        android:label="@string/sleep"
+        tools:layout="@layout/fragment_sleep" />
+    <fragment
+        android:id="@+id/nutritionFragment"
+        android:name="com.kocci.healtikuy.ui.main.feature.nutrition.NutritionFragment"
+        android:label="@string/nutrition"
+        tools:layout="@layout/fragment_nutrition" />
 </navigation>

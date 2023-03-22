@@ -1,0 +1,52 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+}
+
+apply from : "../shared_dependencies.gradle"
+
+android {
+    namespace 'com.kocci.healtikuy.core'
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 24
+        targetSdk 33
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    // ? Persistence Data Related
+    // * Database
+    implementation "androidx.room:room-runtime:2.5.0"
+    //   annotationProcessor "androidx.room:room-compiler:2.5.0"
+    ksp "androidx.room:room-compiler:2.5.0"
+
+    // * Preferences Datastore (most likely same with shared preferences)
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+}
+
+kapt{
+    correctErrorTypes true
+}

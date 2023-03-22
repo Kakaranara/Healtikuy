@@ -11,4 +11,10 @@
     <string name="nutrition">Nutrition</string>
     <string name="sleep">Sleep</string>
     <string name="sun_exposure">Sun Exposure</string>
+    <string name="number_of_glass_of_water_you_drink">number of glass of water you drink</string>
+    <string name="status_points">Points : %d / %d</string>
+    <string name="status_low">Cheers up! You can do this!</string>
+    <string name="status_mid">You can do this!</string>
+    <string name="status_near_complete">Butuh sedikit lagi perjalanan menuju pola hidup sehat!</string>
+    <string name="status_completed">Selamat! anda sudah menjalankan pola hidup sehat. Pertahankanlah! </string>
 </resources>

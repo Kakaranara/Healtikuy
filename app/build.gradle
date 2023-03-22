@@ -4,8 +4,12 @@ plugins {
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
     id 'com.google.devtools.ksp'
-    id 'org.jetbrains.kotlin.kapt' //? for hilt support
+    id 'kotlin-kapt' //? for hilt support
+    id 'com.google.dagger.hilt.android'
+
 }
+
+apply from : "../shared_dependencies.gradle"
 
 android {
     namespace 'com.kocci.healtikuy'
@@ -41,26 +45,23 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation project (":core")
+
+    //? navigation component
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    // ? Persistence Data Related
-    // * Database
-    implementation "androidx.room:room-runtime:2.5.0"
-//    annotationProcessor "androidx.room:room-compiler:2.5.0"
-    ksp "androidx.room:room-compiler:2.5.0"
-
-    // * Preferences Datastore (most likely same with shared preferences)
-    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    //? Memory Leaks Detector
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
 
     //? UI related
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    //? lifecycle
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.0"
+
+}
+
+kapt{
+    correctErrorTypes true
 }
