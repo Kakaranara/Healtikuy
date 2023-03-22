@@ -12,4 +12,5 @@
     <string name="sleep">Sleep</string>
     <string name="sun_exposure">Sun Exposure</string>
     <string name="number_of_glass_of_water_you_drink">number of glass of water you drink</string>
+    <string name="status_points">Points : %d / %d</string>
 </resources>

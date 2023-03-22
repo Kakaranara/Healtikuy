@@ -5,18 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.R
+import com.kocci.healtikuy.core.constant.GameRules
+import com.kocci.healtikuy.core.domain.HealthyStatusIndicator
 import com.kocci.healtikuy.databinding.FragmentHomeBinding
 import com.kocci.healtikuy.util.extension.showToast
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), View.OnClickListener {
@@ -34,16 +33,40 @@ class HomeFragment : Fragment(), View.OnClickListener {
         return binding.root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupAppBarWithMenuDrawer()
+        bindClickListener()
 
-        binding.statusIndicator.setProgressCompat(50, true)
-        binding.btnExercise.setOnClickListener(this)
-        binding.btnNutrition.setOnClickListener(this)
-        binding.btnSleep.setOnClickListener(this)
-        binding.btnSunExposure.setOnClickListener(this)
-        binding.btnWaterIntake.setOnClickListener(this)
+
+        viewModel.healthyStatus.observe(viewLifecycleOwner) { healthyStatusIndicator ->
+            val progressStatus = viewModel.calculateStatusPercentage(healthyStatusIndicator.point)
+            val pointView = getString(
+                R.string.status_points,
+                healthyStatusIndicator.point,
+                GameRules.MAX_STATUS_POINTS
+            )
+            binding.apply {
+                statusIndicator.setProgressCompat(progressStatus, true)
+                binding.tvPoint.text = pointView
+            }
+
+            when (healthyStatusIndicator) {
+                is HealthyStatusIndicator.COMPLETED -> {
+                    showToast("completed : ${healthyStatusIndicator.point}")
+                }
+                is HealthyStatusIndicator.NEARLY_COMPLETE -> {
+                    showToast("nearly complete ${healthyStatusIndicator.point}")
+                }
+                is HealthyStatusIndicator.ZERO -> {
+                    showToast("ZERO POINTS ${healthyStatusIndicator.point}")
+                }
+            }
+        }
     }
 
     override fun onClick(v: View?) {
@@ -69,6 +92,14 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 findNavController().navigate(directions)
             }
         }
+    }
+
+    private fun bindClickListener() {
+        binding.btnExercise.setOnClickListener(this)
+        binding.btnNutrition.setOnClickListener(this)
+        binding.btnSleep.setOnClickListener(this)
+        binding.btnSunExposure.setOnClickListener(this)
+        binding.btnWaterIntake.setOnClickListener(this)
     }
 
     private fun setupAppBarWithMenuDrawer() {

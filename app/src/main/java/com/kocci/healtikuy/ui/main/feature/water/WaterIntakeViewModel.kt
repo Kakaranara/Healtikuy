@@ -11,7 +11,6 @@ import javax.inject.Inject
 class WaterIntakeViewModel @Inject constructor(
     private val userPreferencesRepository: PreferencesUseCase
 ) : ViewModel() {
-    val flow = userPreferencesRepository.getUserPreferences()
 
     fun addPoints(point: Long) {
         viewModelScope.launch {

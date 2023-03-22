@@ -54,15 +54,15 @@
             app:trackThickness="30dp" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tvPoint"
             style="@style/TextAppearance.Material3.LabelMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="8dp"
-            android:text="Points : 5000 / 3000000"
             app:layout_constraintBottom_toTopOf="@+id/statusIndicator"
-            app:layout_constraintStart_toEndOf="@+id/imgAvatar" />
+            app:layout_constraintStart_toEndOf="@+id/imgAvatar"
+            tools:text="Points : 5000 / 3000000" />
 
         <TextView
             android:id="@+id/desc"

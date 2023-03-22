@@ -37,12 +37,6 @@ class WaterIntakeFragment : Fragment(), View.OnClickListener {
         binding.toolbarWaterIntake.setupWithNavController(findNavController())
         setupAdapter()
 
-        lifecycleScope.launch {
-            viewModel.flow.collect {
-                showToast("points : ${it.points}")
-            }
-        }
-
         binding.button.setOnClickListener(this)
     }
 
@@ -54,7 +48,7 @@ class WaterIntakeFragment : Fragment(), View.OnClickListener {
                 val adapter = WaterIntakeAdapter(itemCount)
                 binding.recyclerView.adapter = adapter
 
-                viewModel.addPoints(10000)
+                viewModel.addPoints(500)
             }
         }
     }
