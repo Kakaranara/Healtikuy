@@ -1,7 +1,7 @@
 package com.kocci.healtikuy.di
 
-import com.kocci.healtikuy.core.domain.PreferencesInteractor
-import com.kocci.healtikuy.core.domain.PreferencesUseCase
+import com.kocci.healtikuy.core.domain.interactor.PreferencesInteractor
+import com.kocci.healtikuy.core.domain.usecase.PreferencesUseCase
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

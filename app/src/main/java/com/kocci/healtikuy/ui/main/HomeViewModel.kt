@@ -2,7 +2,7 @@ package com.kocci.healtikuy.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.kocci.healtikuy.core.domain.PreferencesUseCase
+import com.kocci.healtikuy.core.domain.usecase.PreferencesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

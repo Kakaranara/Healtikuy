@@ -2,7 +2,7 @@ package com.kocci.healtikuy.ui.main.feature.water
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kocci.healtikuy.core.domain.PreferencesUseCase
+import com.kocci.healtikuy.core.domain.usecase.PreferencesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
