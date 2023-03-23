@@ -17,4 +17,5 @@ class HomeViewModel @Inject constructor(
         preferencesUseCase.calculateStatusPercentage(points)
 
 
+
 }

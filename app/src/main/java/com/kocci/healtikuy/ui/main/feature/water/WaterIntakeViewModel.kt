@@ -1,26 +1,31 @@
 package com.kocci.healtikuy.ui.main.feature.water
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.kocci.healtikuy.core.domain.usecase.PreferencesUseCase
+import com.kocci.healtikuy.core.domain.model.WaterIntake
+import com.kocci.healtikuy.core.domain.usecase.WaterIntakeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class WaterIntakeViewModel @Inject constructor(
-    private val userPreferencesRepository: PreferencesUseCase
+    private val waterIntakeUseCase: WaterIntakeUseCase
 ) : ViewModel() {
 
-    fun addPoints(point: Long) {
+    init {
         viewModelScope.launch {
-            userPreferencesRepository.updatePoints(point)
+//i            waterIntakeUseCase.insertData(WaterIntake(0, 0, System.currentTimeMillis() - 76000000))
         }
     }
 
-    fun setLastLogin() {
+    val listenMe = waterIntakeUseCase.getWaterIntakeData().asLiveData()
+
+    fun updateData(data: WaterIntake) {
+        data.quantity += 1
         viewModelScope.launch {
-            userPreferencesRepository.updateLastLogin()
+            waterIntakeUseCase.updateData(data)
         }
     }
 }
