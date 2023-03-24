@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.kocci.healtikuy.R
+import com.kocci.healtikuy.core.constant.GameRules
 import com.kocci.healtikuy.core.domain.model.WaterIntake
 import com.kocci.healtikuy.databinding.FragmentWaterIntakeBinding
 import com.kocci.healtikuy.util.extension.showToast
@@ -18,10 +20,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class WaterIntakeFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentWaterIntakeBinding? = null
     private val binding get() = _binding!!
-    var itemCount = 1
+    private val viewModel: WaterIntakeViewModel by viewModels()
 
-    var waterIntake: WaterIntake? = null
-    val viewModel: WaterIntakeViewModel by viewModels()
+    private lateinit var waterIntake: WaterIntake
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,25 +36,33 @@ class WaterIntakeFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbarWaterIntake.setupWithNavController(findNavController())
-        setupAdapter()
+        binding.button.setOnClickListener(this)
 
-        viewModel.listenMe.observe(viewLifecycleOwner) {
+        viewModel.waterIntakeLiveData.observe(viewLifecycleOwner) {
             waterIntake = it
+            setupAdapter()
+            if (it.quantity >= GameRules.GOALS_WATER_INTAKE) {
+                binding.tvWaterSupportiveText.text = getString(R.string.water_intake_enough)
+                binding.tvGlassLeft.text = getString(R.string.water_intake_glass_left, 0)
+            } else {
+                val glassLeft = GameRules.GOALS_WATER_INTAKE - waterIntake.quantity
+                binding.tvWaterSupportiveText.text = getString(R.string.water_intake_low)
+                binding.tvGlassLeft.text =
+                    getString(R.string.water_intake_glass_left, glassLeft)
+            }
             showToast(it.toString())
         }
 
-        binding.button.setOnClickListener(this)
     }
 
 
     override fun onClick(v: View?) {
         when (v) {
             binding.button -> {
-                itemCount++
-                val adapter = WaterIntakeAdapter(itemCount)
+                val adapter = WaterIntakeAdapter(waterIntake.quantity)
                 binding.recyclerView.adapter = adapter
 
-                viewModel.updateData(waterIntake!!)
+                viewModel.drinkOneGlass(waterIntake)
             }
         }
     }
@@ -61,7 +70,7 @@ class WaterIntakeFragment : Fragment(), View.OnClickListener {
     private fun setupAdapter() {
         val gridLayoutManager = GridLayoutManager(requireActivity(), 4)
 
-        val waterIntakeAdapter = WaterIntakeAdapter(itemCount)
+        val waterIntakeAdapter = WaterIntakeAdapter(waterIntake.quantity)
         binding.recyclerView.apply {
             adapter = waterIntakeAdapter
             layoutManager = gridLayoutManager
