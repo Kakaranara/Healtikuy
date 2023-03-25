@@ -1,6 +1,6 @@
 package com.kocci.healtikuy.core
 
-import com.kocci.healtikuy.core.domain.util.helper.DateHelper
+import com.kocci.healtikuy.core.util.helper.DateHelper
 import org.junit.Assert
 import org.junit.Test
 import java.text.SimpleDateFormat

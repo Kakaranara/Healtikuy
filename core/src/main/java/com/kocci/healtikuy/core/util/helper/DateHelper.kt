@@ -1,4 +1,4 @@
-package com.kocci.healtikuy.core.domain.util.helper
+package com.kocci.healtikuy.core.util.helper
 
 import java.util.*
 

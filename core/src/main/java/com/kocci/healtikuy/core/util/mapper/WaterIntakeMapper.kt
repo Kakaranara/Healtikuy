@@ -1,4 +1,4 @@
-package com.kocci.healtikuy.core.domain.util.mapper
+package com.kocci.healtikuy.core.util.mapper
 
 import com.kocci.healtikuy.core.data.local.entity.WaterIntakeEntity
 import com.kocci.healtikuy.core.domain.model.WaterIntake

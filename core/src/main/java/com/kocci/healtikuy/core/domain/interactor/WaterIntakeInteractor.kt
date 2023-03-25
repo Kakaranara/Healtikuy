@@ -4,9 +4,9 @@ import android.util.Log
 import com.kocci.healtikuy.core.data.HealtikuyRepository
 import com.kocci.healtikuy.core.domain.model.WaterIntake
 import com.kocci.healtikuy.core.domain.usecase.WaterIntakeUseCase
-import com.kocci.healtikuy.core.domain.util.helper.DateHelper
-import com.kocci.healtikuy.core.domain.util.mapper.toDomain
-import com.kocci.healtikuy.core.domain.util.mapper.toEntity
+import com.kocci.healtikuy.core.util.helper.DateHelper
+import com.kocci.healtikuy.core.util.mapper.toDomain
+import com.kocci.healtikuy.core.util.mapper.toEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
