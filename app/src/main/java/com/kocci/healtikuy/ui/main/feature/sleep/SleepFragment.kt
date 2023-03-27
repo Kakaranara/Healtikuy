@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.databinding.FragmentSleepBinding
+import com.kocci.healtikuy.ui.picker.TimePickerFragment
+import com.kocci.healtikuy.util.extension.showToast
 
 
-class SleepFragment : Fragment() {
+class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimePickerListener {
     private var _binding: FragmentSleepBinding? = null
     private val binding get() = _binding!!
 
@@ -27,7 +29,19 @@ class SleepFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbarSleep.setupWithNavController(findNavController())
 
+        binding.btnSleepTime.setOnClickListener(this)
+    }
 
+    override fun onClick(v: View?) {
+        when (v) {
+            binding.btnSleepTime -> {
+                TimePickerFragment().show(childFragmentManager, "fsf")
+            }
+        }
+    }
+
+    override fun onTimeSet(tag: String?, hour: Int, minute: Int) {
+        showToast("$hour : $minute")
     }
 
     override fun onDestroyView() {
