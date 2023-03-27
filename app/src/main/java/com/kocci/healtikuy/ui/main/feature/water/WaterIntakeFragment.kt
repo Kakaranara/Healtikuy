@@ -41,9 +41,14 @@ class WaterIntakeFragment : Fragment(), View.OnClickListener {
         viewModel.waterIntakeLiveData.observe(viewLifecycleOwner) {
             waterIntake = it
             setupAdapter()
+            //! Current business logic is in UI
+            //! Need to be refactored later (using sealed class)
             if (it.quantity >= GameRules.GOALS_WATER_INTAKE) {
                 binding.tvWaterSupportiveText.text = getString(R.string.water_intake_enough)
                 binding.tvGlassLeft.text = getString(R.string.water_intake_glass_left, 0)
+                if (!it.isCompleted) {
+                    viewModel.updatePointsForGoals(it)
+                }
             } else {
                 val glassLeft = GameRules.GOALS_WATER_INTAKE - waterIntake.quantity
                 binding.tvWaterSupportiveText.text = getString(R.string.water_intake_low)
