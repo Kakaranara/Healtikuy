@@ -3,6 +3,7 @@ package com.kocci.healtikuy.core.di
 import android.content.Context
 import androidx.room.Room
 import com.kocci.healtikuy.core.data.local.db.HealtikuyRoomDatabase
+import com.kocci.healtikuy.core.data.local.db.SleepDao
 import com.kocci.healtikuy.core.data.local.db.WaterIntakeDao
 import dagger.Module
 import dagger.Provides
@@ -30,4 +31,12 @@ class DatabaseModule {
     fun provideWaterIntakeDao(database: HealtikuyRoomDatabase): WaterIntakeDao {
         return database.waterDao()
     }
+
+    @Provides
+    @Singleton
+    fun provideSleepDao(database: HealtikuyRoomDatabase): SleepDao {
+        return database.sleepDao()
+    }
+
+
 }

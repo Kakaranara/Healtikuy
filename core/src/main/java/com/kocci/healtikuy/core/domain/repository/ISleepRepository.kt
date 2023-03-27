@@ -5,6 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface ISleepRepository {
     fun getLatestData(): Flow<SleepEntity?>
-    fun insertData(entity: SleepEntity)
-    fun updateData(entity: SleepEntity)
+    suspend fun insertData(entity: SleepEntity)
+    suspend fun updateData(entity: SleepEntity)
 }

@@ -25,5 +25,5 @@ class LocalDataSource @Inject constructor(
 
     fun getSleepLastRow() = sleepDao.selectLastRow()
     suspend fun insertSleep(entity: SleepEntity) = sleepDao.insertNewData(entity)
-    suspend fun updateEntity(entity: SleepEntity) = sleepDao.insertNewData(entity)
+    suspend fun updateSleep(entity: SleepEntity) = sleepDao.insertNewData(entity)
 }

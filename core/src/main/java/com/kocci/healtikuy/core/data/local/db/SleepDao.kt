@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface SleepDao {
-    @Query("SELECT * FROM WaterIntake ORDER BY id DESC LIMIT 1")
+    @Query("SELECT * FROM sleep ORDER BY id DESC LIMIT 1")
     fun selectLastRow(): Flow<SleepEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

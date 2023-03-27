@@ -4,19 +4,20 @@ import com.kocci.healtikuy.core.data.local.LocalDataSource
 import com.kocci.healtikuy.core.data.local.entity.SleepEntity
 import com.kocci.healtikuy.core.domain.repository.ISleepRepository
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class SleepRepository(
+class SleepRepository @Inject constructor(
     private val localDataSource: LocalDataSource,
 ) : ISleepRepository {
     override fun getLatestData(): Flow<SleepEntity?> {
-        TODO("Not yet implemented")
+        return localDataSource.getSleepLastRow()
     }
 
-    override fun insertData(entity: SleepEntity) {
-        TODO("Not yet implemented")
+    override suspend fun insertData(entity: SleepEntity) {
+        return localDataSource.insertSleep(entity)
     }
 
-    override fun updateData(entity: SleepEntity) {
-        TODO("Not yet implemented")
+    override suspend fun updateData(entity: SleepEntity) {
+        return localDataSource.updateSleep(entity)
     }
 }
