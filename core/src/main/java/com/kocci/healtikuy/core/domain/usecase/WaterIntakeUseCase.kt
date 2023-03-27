@@ -7,4 +7,5 @@ interface WaterIntakeUseCase {
     fun getWaterIntakeData(): Flow<WaterIntake>
     suspend fun insertData(waterIntake: WaterIntake)
     suspend fun updateData(waterIntake: WaterIntake)
+    suspend fun updatePoint(waterIntake: WaterIntake)
 }

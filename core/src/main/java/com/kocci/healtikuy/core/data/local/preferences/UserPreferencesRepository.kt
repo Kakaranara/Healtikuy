@@ -8,6 +8,7 @@ import com.kocci.healtikuy.core.constant.GameRules
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import javax.inject.Singleton
 
 data class UserPreferences(
     val lastLogin: Long,
@@ -19,6 +20,7 @@ private object PreferenceKeys {
     val POINTS = longPreferencesKey("points")
 }
 
+@Singleton
 class UserPreferencesRepository @Inject constructor(
     private val dataStore: DataStore<Preferences>
 ) {

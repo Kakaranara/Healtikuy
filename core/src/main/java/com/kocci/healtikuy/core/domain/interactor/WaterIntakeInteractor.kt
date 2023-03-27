@@ -1,7 +1,6 @@
 package com.kocci.healtikuy.core.domain.interactor
 
-import android.util.Log
-import com.kocci.healtikuy.core.data.HealtikuyRepository
+import com.kocci.healtikuy.core.data.repository.WaterIntakeRepository
 import com.kocci.healtikuy.core.domain.model.WaterIntake
 import com.kocci.healtikuy.core.domain.usecase.WaterIntakeUseCase
 import com.kocci.healtikuy.core.util.helper.DateHelper
@@ -12,13 +11,8 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class WaterIntakeInteractor @Inject constructor(
-    private val repository: HealtikuyRepository
+    private val repository: WaterIntakeRepository,
 ) : WaterIntakeUseCase {
-
-    companion object {
-        private const val TAG = "WaterIntakeInteractor"
-    }
-
     override fun getWaterIntakeData(): Flow<WaterIntake> {
         return repository.getLatestWaterIntakeData().map {
             if (it == null) {
@@ -41,5 +35,9 @@ class WaterIntakeInteractor @Inject constructor(
 
     override suspend fun updateData(waterIntake: WaterIntake) {
         repository.updateWaterIntake(waterIntake.toEntity())
+    }
+
+    override suspend fun updatePoint(waterIntake: WaterIntake) {
+
     }
 }

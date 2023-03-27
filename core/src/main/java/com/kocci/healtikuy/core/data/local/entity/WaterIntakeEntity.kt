@@ -8,5 +8,6 @@ data class WaterIntakeEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val quantity: Int,
-    val timeStamp: Long
+    val timeStamp: Long,
+    var isCompleted: Boolean = false
 )

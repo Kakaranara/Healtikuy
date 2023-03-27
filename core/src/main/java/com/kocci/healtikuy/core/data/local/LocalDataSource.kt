@@ -13,4 +13,5 @@ class LocalDataSource @Inject constructor(
     suspend fun insertWaterIntake(data: WaterIntakeEntity) = waterIntakeDao.insertNewData(data)
     suspend fun updateWaterIntake(data: WaterIntakeEntity) = waterIntakeDao.updateData(data)
 
+
 }
