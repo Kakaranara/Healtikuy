@@ -19,12 +19,23 @@ class UserPreferencesRepository @Inject constructor(
     private object PreferenceKeys {
         val LAST_LOGIN = longPreferencesKey("last_login")
         val POINTS = longPreferencesKey("points")
+        val SLEEP_TIME = longPreferencesKey("sleep_time")
     }
 
     val userPreferences: Flow<UserPreferences> = dataStore.data.map { preferences ->
         val lastLogin = preferences[PreferenceKeys.LAST_LOGIN] ?: System.currentTimeMillis()
         val points = preferences[PreferenceKeys.POINTS] ?: GameRules.FIRST_TIME_POINTS
         UserPreferences(lastLogin, points)
+    }
+
+    val sleepTimePreference: Flow<Long?> = dataStore.data.map { preferences ->
+        preferences[PreferenceKeys.SLEEP_TIME]
+    }
+
+    suspend fun changeSleepTime(time: Long) {
+        dataStore.edit { preferences ->
+            preferences[PreferenceKeys.SLEEP_TIME] = time
+        }
     }
 
     suspend fun addPoints(points: Long) {
