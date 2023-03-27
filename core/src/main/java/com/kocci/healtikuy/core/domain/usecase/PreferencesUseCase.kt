@@ -1,6 +1,6 @@
 package com.kocci.healtikuy.core.domain.usecase
 
-import com.kocci.healtikuy.core.data.local.preferences.UserPreferences
+import com.kocci.healtikuy.core.domain.model.UserPreferences
 import kotlinx.coroutines.flow.Flow
 
 sealed class HealthyStatusIndicator(val point: Long) {

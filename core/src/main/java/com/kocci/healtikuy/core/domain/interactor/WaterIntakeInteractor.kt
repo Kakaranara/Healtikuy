@@ -10,7 +10,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class WaterIntakeInteractor @Inject constructor(
+class
+WaterIntakeInteractor @Inject constructor(
     private val repository: WaterIntakeRepository,
 ) : WaterIntakeUseCase {
     override fun getWaterIntakeData(): Flow<WaterIntake> {

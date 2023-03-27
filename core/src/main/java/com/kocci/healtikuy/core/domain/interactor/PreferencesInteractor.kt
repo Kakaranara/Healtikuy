@@ -1,8 +1,8 @@
 package com.kocci.healtikuy.core.domain.interactor
 
 import com.kocci.healtikuy.core.constant.GameRules
-import com.kocci.healtikuy.core.data.local.preferences.UserPreferences
-import com.kocci.healtikuy.core.data.local.preferences.UserPreferencesRepository
+import com.kocci.healtikuy.core.data.repository.UserPreferencesRepository
+import com.kocci.healtikuy.core.domain.model.UserPreferences
 import com.kocci.healtikuy.core.domain.usecase.HealthyStatusIndicator
 import com.kocci.healtikuy.core.domain.usecase.PreferencesUseCase
 import kotlinx.coroutines.flow.*
