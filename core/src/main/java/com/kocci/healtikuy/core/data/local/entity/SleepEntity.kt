@@ -1,0 +1,12 @@
+package com.kocci.healtikuy.core.data.local.entity
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class SleepEntity(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+    val timeStamp : Long = System.currentTimeMillis(),
+    val isCompleted: Boolean = false
+)
