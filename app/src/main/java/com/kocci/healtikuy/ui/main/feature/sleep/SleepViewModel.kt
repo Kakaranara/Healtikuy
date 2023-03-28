@@ -1,5 +1,7 @@
 package com.kocci.healtikuy.ui.main.feature.sleep
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -16,6 +18,12 @@ class SleepViewModel @Inject constructor(
 
     val getDataModel = useCase.getSleepData().asLiveData()
     val isTimeSet = useCase.getSetTime().asLiveData()
+    fun isTheTimeWithin1Hours(time: Long): LiveData<Boolean> {
+        val isTimeReady = MutableLiveData<Boolean>(false)
+        isTimeReady.value = useCase.isTheTimeWithin1Hours(time)
+        return isTimeReady
+    }
+
 
     fun setTime(time: Long) {
         viewModelScope.launch {

@@ -1,5 +1,6 @@
 package com.kocci.healtikuy.core.domain.interactor
 
+import android.icu.util.Calendar
 import com.kocci.healtikuy.core.data.repository.SleepRepository
 import com.kocci.healtikuy.core.data.repository.UserPreferencesRepository
 import com.kocci.healtikuy.core.domain.model.Sleep
@@ -10,6 +11,8 @@ import com.kocci.healtikuy.core.util.mapper.toDomain
 import com.kocci.healtikuy.core.util.mapper.toEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import java.time.LocalTime
+import java.util.*
 import javax.inject.Inject
 
 class SleepInteractor @Inject constructor(
@@ -52,6 +55,24 @@ class SleepInteractor @Inject constructor(
             }
         }
     }
+
+    override fun isTheTimeWithin1Hours(time: Long): Boolean {
+        val setTime = Calendar.getInstance()
+        setTime.time = Date(time)
+
+        val hours = setTime.get(Calendar.HOUR_OF_DAY)
+        val minutes = setTime.get(Calendar.MINUTE)
+        //? format will be = ${hours:minutes)
+        val timeInString =
+            "${if (hours < 10) hours.toString().padStart(2, '0') else hours.toString()}:$minutes"
+        val localTime = LocalTime.parse(timeInString)
+        val localTimeNow = LocalTime.now()
+
+        return localTimeNow.plusHours(1).isAfter(localTime) && localTimeNow.minusHours(1)
+            .isBefore(localTime)
+    }
+
+    override fun showFormattedSetTime(time: Long): String = DateHelper.showHoursAndMinutes(time)
 
     override suspend fun changeSetTime(time: Long) {
         return preferencesRepository.changeSleepTime(time)

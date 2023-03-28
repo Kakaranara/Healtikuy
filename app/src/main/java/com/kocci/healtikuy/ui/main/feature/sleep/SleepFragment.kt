@@ -62,10 +62,13 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
                         if (sleep.isCompleted) {
                             binding.btnSleepTime.isEnabled = false
                         } else {
+                            viewModel.isTheTimeWithin1Hours(sleepIndicator.data)
+                                .observe(viewLifecycleOwner) {
+                                    binding.btnSleepTime.isEnabled = it
+                                }
                             binding.btnSleepTime.apply {
                                 setOnClickListener(null)
                                 setOnClickListener {
-                                    showToast("hai aku")
                                     viewModel.completeMission(sleep)
                                 }
                             }

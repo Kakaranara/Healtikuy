@@ -13,6 +13,11 @@ interface SleepUseCase {
 
     //    fun getSetTime(): Flow<Long?>
     fun getSetTime(): Flow<SleepIndicator>
+
+    fun isTheTimeWithin1Hours(time: Long): Boolean
+
+    fun showFormattedSetTime(time: Long): String
+
     suspend fun changeSetTime(time: Long)
     suspend fun insertNewData(sleep: Sleep)
     suspend fun updateNewData(sleep: Sleep)
