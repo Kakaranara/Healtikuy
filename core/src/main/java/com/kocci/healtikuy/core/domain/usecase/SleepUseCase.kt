@@ -17,6 +17,8 @@ interface SleepUseCase {
 
     fun showFormattedSetTime(time: Long): String
 
+    fun setScheduleForNotification(time: Long)
+
     suspend fun changeSetTime(time: Long)
     suspend fun insertNewData(sleep: Sleep)
     suspend fun updateNewData(sleep: Sleep)

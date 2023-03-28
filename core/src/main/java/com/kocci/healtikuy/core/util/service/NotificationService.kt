@@ -3,9 +3,27 @@ package com.kocci.healtikuy.core.util.service
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.media.RingtoneManager
 import android.os.Build
+import androidx.core.app.NotificationCompat
+import com.kocci.healtikuy.core.R
+import com.kocci.healtikuy.core.domain.model.Sleep
 
-class NotificationService {
+class NotificationService(private val context: Context) {
+
+    private val manager = context.getSystemService(NotificationManager::class.java)
+
+    fun showNotification(sleep: Sleep) {
+        val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        val builder = NotificationCompat.Builder(context, SLEEP_CHANNEL_ID)
+            .setContentTitle("Sleep time!")
+            .setContentText("Dont forget to sleep!")
+            .setSound(soundUri)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+
+        manager.notify(sleep.id, builder.build())
+    }
 
     companion object {
 

@@ -79,4 +79,8 @@ class SleepInteractor @Inject constructor(
     override suspend fun changeSetTime(time: Long) {
         return preferencesRepository.changeSleepTime(time)
     }
+
+    override fun setScheduleForNotification(time: Long) {
+
+    }
 }
