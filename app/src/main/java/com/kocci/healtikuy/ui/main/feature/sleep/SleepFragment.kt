@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.domain.usecase.SleepIndicator
+import com.kocci.healtikuy.core.util.helper.DateHelper
 import com.kocci.healtikuy.databinding.FragmentSleepBinding
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
 import com.kocci.healtikuy.util.extension.showToast
@@ -23,8 +24,6 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
     private val binding get() = _binding!!
     private val viewModel by viewModels<SleepViewModel>()
 
-    private var isTimeSet: Boolean = false
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,11 +36,12 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbarSleep.setupWithNavController(findNavController())
+        binding.btnChangeSleepTime.setOnClickListener(this)
 
-        viewModel.isTimeSet.observe(viewLifecycleOwner) {
-            when (it) {
+        viewModel.isTimeSet.observe(viewLifecycleOwner) { sleepIndicator ->
+            when (sleepIndicator) {
                 SleepIndicator.NotSet -> {
-                    showToast(it.toString())
+                    showToast(sleepIndicator.toString())
                     binding.btnSleepTime.apply {
                         setOnClickListener(null)
                         text = getString(R.string.set_time)
@@ -50,18 +50,27 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
                         }
                     }
                     binding.tvSleepTime.text = getString(R.string.time_not_set)
+                    binding.btnChangeSleepTime.visibility = View.GONE
                 }
                 is SleepIndicator.Set -> {
-                    showToast(it.toString())
-                    binding.btnSleepTime.apply {
-                        setOnClickListener(null)
-                        text = getString(R.string.sleep)
-                        setOnClickListener {
-                            showToast("hai aku")
+                    showToast(sleepIndicator.toString())
+                    binding.tvSleepTime.text = DateHelper.showHoursAndMinutes(sleepIndicator.data)
+                    binding.btnSleepTime.text = getString(R.string.sleep)
+                    binding.btnChangeSleepTime.visibility = View.VISIBLE
+
+                    viewModel.getDataModel.observe(viewLifecycleOwner) { sleep ->
+                        if (sleep.isCompleted) {
+                            binding.btnSleepTime.isEnabled = false
+                        } else {
+                            binding.btnSleepTime.apply {
+                                setOnClickListener(null)
+                                setOnClickListener {
+                                    showToast("hai aku")
+                                    viewModel.completeMission(sleep)
+                                }
+                            }
                         }
                     }
-                    binding.tvSleepTime.text = it.data.toString()
-
                 }
             }
         }
@@ -69,11 +78,14 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
 
     override fun onClick(v: View?) {
         when (v) {
-
+            binding.btnChangeSleepTime -> {
+                TimePickerFragment().show(childFragmentManager, "sleep")
+            }
         }
     }
 
     override fun onTimeSet(tag: String?, hour: Int, minute: Int) {
+        //? Handle the time dialog (when submitted)
         val cal = Calendar.getInstance()
         cal.set(Calendar.HOUR_OF_DAY, hour)
         cal.set(Calendar.MINUTE, minute)

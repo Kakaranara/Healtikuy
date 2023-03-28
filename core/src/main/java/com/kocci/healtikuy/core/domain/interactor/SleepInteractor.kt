@@ -33,12 +33,14 @@ class SleepInteractor @Inject constructor(
         }
     }
 
-    override suspend fun insertNewData(data: Sleep) {
-        repository.insertData(data.toEntity())
+    override suspend fun insertNewData(sleep: Sleep) {
+        repository.insertData(sleep.toEntity())
     }
 
-    override suspend fun updateNewData(data: Sleep) {
-        repository.updateData(data.toEntity())
+    override suspend fun updateNewData(sleep: Sleep) {
+        sleep.isCompleted = true
+        preferencesRepository.addPoints(1000)
+        repository.updateData(sleep.toEntity())
     }
 
     override fun getSetTime(): Flow<SleepIndicator> {

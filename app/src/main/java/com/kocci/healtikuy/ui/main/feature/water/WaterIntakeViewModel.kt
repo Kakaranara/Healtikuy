@@ -17,7 +17,6 @@ class WaterIntakeViewModel @Inject constructor(
     val waterIntakeLiveData = waterIntakeUseCase.getWaterIntakeData().asLiveData()
 
     fun drinkOneGlass(data: WaterIntake) {
-        data.quantity += 1
         viewModelScope.launch {
             waterIntakeUseCase.updateData(data)
         }

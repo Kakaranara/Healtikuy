@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 class WaterIntakeInteractor @Inject constructor(
     private val repository: WaterIntakeRepository,
-    private val preferenceRepository: UserPreferencesRepository
+    private val preferenceRepository: UserPreferencesRepository,
 ) : WaterIntakeUseCase {
     override fun getWaterIntakeData(): Flow<WaterIntake> {
         return repository.getLatestWaterIntakeData().map {
@@ -36,6 +36,7 @@ class WaterIntakeInteractor @Inject constructor(
     }
 
     override suspend fun updateData(waterIntake: WaterIntake) {
+        waterIntake.quantity += 1
         repository.updateWaterIntake(waterIntake.toEntity())
     }
 

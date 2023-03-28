@@ -14,6 +14,6 @@ interface SleepUseCase {
     //    fun getSetTime(): Flow<Long?>
     fun getSetTime(): Flow<SleepIndicator>
     suspend fun changeSetTime(time: Long)
-    suspend fun insertNewData(data: Sleep)
-    suspend fun updateNewData(data: Sleep)
+    suspend fun insertNewData(sleep: Sleep)
+    suspend fun updateNewData(sleep: Sleep)
 }
