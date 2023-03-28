@@ -1,5 +1,6 @@
 package com.kocci.healtikuy.ui.main.feature.sleep
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,6 +27,9 @@ class SleepViewModel @Inject constructor(
 
     fun showFormattedTime(time: Long) = useCase.showFormattedSetTime(time)
 
+    fun setSchedule(context: Context, sleep: Sleep, time: Long) {
+        useCase.setScheduleForNotification(context, sleep, time)
+    }
 
     fun setTime(time: Long) {
         viewModelScope.launch {

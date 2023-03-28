@@ -17,6 +17,7 @@ class NotificationService(private val context: Context) {
         val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
         val builder = NotificationCompat.Builder(context, SLEEP_CHANNEL_ID)
+            .setSmallIcon(R.drawable.baseline_edit_24)
             .setContentTitle("Sleep time!")
             .setContentText("Dont forget to sleep!")
             .setSound(soundUri)

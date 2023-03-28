@@ -1,5 +1,6 @@
 package com.kocci.healtikuy.core.domain.interactor
 
+import android.content.Context
 import android.icu.util.Calendar
 import com.kocci.healtikuy.core.data.repository.SleepRepository
 import com.kocci.healtikuy.core.data.repository.UserPreferencesRepository
@@ -10,6 +11,7 @@ import com.kocci.healtikuy.core.util.helper.DateHelper
 import com.kocci.healtikuy.core.util.helper.FormatHelper
 import com.kocci.healtikuy.core.util.mapper.toDomain
 import com.kocci.healtikuy.core.util.mapper.toEntity
+import com.kocci.healtikuy.core.util.service.AlarmService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.time.LocalTime
@@ -19,6 +21,7 @@ import javax.inject.Inject
 class SleepInteractor @Inject constructor(
     private val repository: SleepRepository,
     private val preferencesRepository: UserPreferencesRepository,
+    private val alarmService: AlarmService,
 ) : SleepUseCase {
 
     override fun getSleepData(): Flow<Sleep> {
@@ -77,10 +80,12 @@ class SleepInteractor @Inject constructor(
     override fun showFormattedSetTime(time: Long): String = DateHelper.showHoursAndMinutes(time)
 
     override suspend fun changeSetTime(time: Long) {
+        //! it's hardcoded for now! need to call sleep object in the database
+//        setScheduleForNotification(Sleep(), time)
         return preferencesRepository.changeSleepTime(time)
     }
 
-    override fun setScheduleForNotification(time: Long) {
-
+    override fun setScheduleForNotification(context: Context, sleep: Sleep, time: Long) {
+        alarmService.setRepeatingSchedule(context, sleep, time)
     }
 }

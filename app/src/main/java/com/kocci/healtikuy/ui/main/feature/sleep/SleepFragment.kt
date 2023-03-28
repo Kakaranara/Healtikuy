@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.R
+import com.kocci.healtikuy.core.domain.model.Sleep
 import com.kocci.healtikuy.core.domain.usecase.SleepIndicator
 import com.kocci.healtikuy.databinding.FragmentSleepBinding
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
@@ -93,6 +94,7 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
         cal.set(Calendar.MINUTE, minute)
 
         viewModel.setTime(cal.timeInMillis)
+        viewModel.setSchedule(requireActivity(), Sleep(), cal.timeInMillis)
         showToast("$hour : $minute")
     }
 

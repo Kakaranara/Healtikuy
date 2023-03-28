@@ -1,5 +1,6 @@
 package com.kocci.healtikuy.core.domain.usecase
 
+import android.content.Context
 import com.kocci.healtikuy.core.domain.model.Sleep
 import kotlinx.coroutines.flow.Flow
 
@@ -17,7 +18,7 @@ interface SleepUseCase {
 
     fun showFormattedSetTime(time: Long): String
 
-    fun setScheduleForNotification(time: Long)
+    fun setScheduleForNotification(context: Context, sleep: Sleep, time: Long)
 
     suspend fun changeSetTime(time: Long)
     suspend fun insertNewData(sleep: Sleep)
