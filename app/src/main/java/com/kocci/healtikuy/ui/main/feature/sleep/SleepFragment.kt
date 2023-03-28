@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.domain.usecase.SleepIndicator
 import com.kocci.healtikuy.databinding.FragmentSleepBinding
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
@@ -20,8 +21,9 @@ import java.util.*
 class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimePickerListener {
     private var _binding: FragmentSleepBinding? = null
     private val binding get() = _binding!!
-
     private val viewModel by viewModels<SleepViewModel>()
+
+    private var isTimeSet: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,15 +37,31 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbarSleep.setupWithNavController(findNavController())
-        binding.btnSleepTime.setOnClickListener(this)
 
         viewModel.isTimeSet.observe(viewLifecycleOwner) {
             when (it) {
                 SleepIndicator.NotSet -> {
                     showToast(it.toString())
+                    binding.btnSleepTime.apply {
+                        setOnClickListener(null)
+                        text = getString(R.string.set_time)
+                        setOnClickListener {
+                            TimePickerFragment().show(childFragmentManager, "sleep")
+                        }
+                    }
+                    binding.tvSleepTime.text = getString(R.string.time_not_set)
                 }
                 is SleepIndicator.Set -> {
                     showToast(it.toString())
+                    binding.btnSleepTime.apply {
+                        setOnClickListener(null)
+                        text = getString(R.string.sleep)
+                        setOnClickListener {
+                            showToast("hai aku")
+                        }
+                    }
+                    binding.tvSleepTime.text = it.data.toString()
+
                 }
             }
         }
@@ -51,9 +69,7 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
 
     override fun onClick(v: View?) {
         when (v) {
-            binding.btnSleepTime -> {
-                TimePickerFragment().show(childFragmentManager, "fsf")
-            }
+
         }
     }
 

@@ -20,4 +20,7 @@
     <string name="water_intake_low">You need at least 8 glass everyday</string>
     <string name="water_intake_enough">Nice! you\'ve enough water for today!</string>
     <string name="water_intake_glass_left">%d Glass left</string>
+    <string name="set_time">Set Time</string>
+    <string name="time_not_set">Time is not set yet</string>
+    <string name="complete">Complete</string>
 </resources>
