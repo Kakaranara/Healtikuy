@@ -7,6 +7,7 @@ import com.kocci.healtikuy.core.domain.model.Sleep
 import com.kocci.healtikuy.core.domain.usecase.SleepIndicator
 import com.kocci.healtikuy.core.domain.usecase.SleepUseCase
 import com.kocci.healtikuy.core.util.helper.DateHelper
+import com.kocci.healtikuy.core.util.helper.FormatHelper
 import com.kocci.healtikuy.core.util.mapper.toDomain
 import com.kocci.healtikuy.core.util.mapper.toEntity
 import kotlinx.coroutines.flow.Flow
@@ -62,9 +63,10 @@ class SleepInteractor @Inject constructor(
 
         val hours = setTime.get(Calendar.HOUR_OF_DAY)
         val minutes = setTime.get(Calendar.MINUTE)
-        //? format will be = ${hours:minutes)
-        val timeInString =
-            "${if (hours < 10) hours.toString().padStart(2, '0') else hours.toString()}:$minutes"
+        val hourString = FormatHelper.pad2StartForTime(hours)
+        val minuteString = FormatHelper.pad2StartForTime(minutes)
+
+        val timeInString = "$hourString:$minuteString"
         val localTime = LocalTime.parse(timeInString)
         val localTimeNow = LocalTime.now()
 

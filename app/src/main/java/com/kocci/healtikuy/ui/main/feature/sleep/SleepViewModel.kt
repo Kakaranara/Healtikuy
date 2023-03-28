@@ -24,6 +24,8 @@ class SleepViewModel @Inject constructor(
         return isTimeReady
     }
 
+    fun showFormattedTime(time: Long) = useCase.showFormattedSetTime(time)
+
 
     fun setTime(time: Long) {
         viewModelScope.launch {

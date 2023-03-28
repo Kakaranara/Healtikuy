@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.domain.usecase.SleepIndicator
-import com.kocci.healtikuy.core.util.helper.DateHelper
 import com.kocci.healtikuy.databinding.FragmentSleepBinding
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
 import com.kocci.healtikuy.util.extension.showToast
@@ -54,7 +53,7 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
                 }
                 is SleepIndicator.Set -> {
                     showToast(sleepIndicator.toString())
-                    binding.tvSleepTime.text = DateHelper.showHoursAndMinutes(sleepIndicator.data)
+                    binding.tvSleepTime.text = viewModel.showFormattedTime(sleepIndicator.data)
                     binding.btnSleepTime.text = getString(R.string.sleep)
                     binding.btnChangeSleepTime.visibility = View.VISIBLE
 

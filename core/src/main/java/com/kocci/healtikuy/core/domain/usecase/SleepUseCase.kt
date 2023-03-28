@@ -11,7 +11,6 @@ sealed class SleepIndicator(val data: Long) {
 interface SleepUseCase {
     fun getSleepData(): Flow<Sleep>
 
-    //    fun getSetTime(): Flow<Long?>
     fun getSetTime(): Flow<SleepIndicator>
 
     fun isTheTimeWithin1Hours(time: Long): Boolean
