@@ -1,8 +1,10 @@
 package com.kocci.healtikuy.di
 
+import com.kocci.healtikuy.core.domain.interactor.AuthInteractor
 import com.kocci.healtikuy.core.domain.interactor.WaterIntakeInteractor
 import com.kocci.healtikuy.core.domain.interactor.PreferencesInteractor
 import com.kocci.healtikuy.core.domain.interactor.SleepInteractor
+import com.kocci.healtikuy.core.domain.usecase.AuthUseCase
 import com.kocci.healtikuy.core.domain.usecase.PreferencesUseCase
 import com.kocci.healtikuy.core.domain.usecase.SleepUseCase
 import com.kocci.healtikuy.core.domain.usecase.WaterIntakeUseCase
@@ -34,5 +36,7 @@ abstract class AppModule {
     @ViewModelScoped
     abstract fun bindSleepUseCase(sleepInteractor: SleepInteractor): SleepUseCase
 
-
+    @Binds
+    @ViewModelScoped
+    abstract fun bindAuthUseCase(authInteractor: AuthInteractor) : AuthUseCase
 }

@@ -6,6 +6,7 @@ plugins {
     id 'com.google.devtools.ksp'
     id 'com.google.dagger.hilt.android'
     id 'kotlin-kapt' //? for hilt support
+    id 'com.google.gms.google-services'
 }
 
 apply from : "../shared_dependencies.gradle"
