@@ -16,6 +16,7 @@ import com.kocci.healtikuy.core.domain.usecase.HealthyStatusIndicator
 import com.kocci.healtikuy.databinding.FragmentHomeBinding
 import com.kocci.healtikuy.util.extension.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), View.OnClickListener {
@@ -37,6 +38,13 @@ class HomeFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         setupAppBarWithMenuDrawer()
         bindClickListener()
+
+        runBlocking {
+            if (!viewModel.isUserLogin()) {
+                val goToLogin = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
+                findNavController().navigate(goToLogin)
+            }
+        }
 
         viewModel.healthyStatus.observe(viewLifecycleOwner) { healthyStatusIndicator ->
             val progressStatus = viewModel.calculateStatusPercentage(healthyStatusIndicator.point)

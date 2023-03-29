@@ -28,4 +28,7 @@
     <string name="store">Store</string>
     <string name="feature">Feature</string>
     <string name="account">Account</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
 </resources>
