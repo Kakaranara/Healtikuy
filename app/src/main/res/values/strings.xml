@@ -17,4 +17,10 @@
     <string name="status_mid">You can do this!</string>
     <string name="status_near_complete">Butuh sedikit lagi perjalanan menuju pola hidup sehat!</string>
     <string name="status_completed">Selamat! anda sudah menjalankan pola hidup sehat. Pertahankanlah! </string>
+    <string name="water_intake_low">You need at least 8 glass everyday</string>
+    <string name="water_intake_enough">Nice! you\'ve enough water for today!</string>
+    <string name="water_intake_glass_left">%d Glass left</string>
+    <string name="set_time">Set Time</string>
+    <string name="time_not_set">Time is not set yet</string>
+    <string name="complete">Complete</string>
 </resources>
