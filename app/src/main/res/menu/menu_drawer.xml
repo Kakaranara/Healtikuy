@@ -2,23 +2,46 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_home"
-        android:title="@string/home"
-        app:showAsAction="never" />
+        android:id="@+id/main_action"
+        android:title="@string/feature">
+        <menu>
+            <item
+                android:id="@+id/action_home"
+                android:icon="@drawable/baseline_home_24"
+                android:title="@string/home"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/action_leaderboards"
+                android:icon="@drawable/baseline_leaderboard_24"
+                android:title="@string/leaderboards"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/action_store"
+                android:icon="@drawable/baseline_local_grocery_store_24"
+                android:title="@string/store"
+                app:showAsAction="never" />
+        </menu>
+    </item>
     <item
-        android:id="@+id/action_leaderboards"
-        android:title="@string/leaderboards"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_profile"
-        android:title="@string/profile"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_store"
-        android:title="@string/store"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_logout"
-        android:title="@string/logout"
-        app:showAsAction="never" />
+        android:id="@+id/auth_action"
+        android:title="@string/account">
+
+        <menu>
+            <item
+                android:id="@+id/action_profile"
+                android:icon="@drawable/baseline_person_24"
+                android:title="@string/profile"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/action_logout"
+                android:icon="@drawable/baseline_logout_24"
+                android:title="@string/logout"
+                app:showAsAction="never" />
+        </menu>
+
+
+    </item>
+
+
 </menu>

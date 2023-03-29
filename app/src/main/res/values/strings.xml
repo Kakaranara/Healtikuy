@@ -26,4 +26,6 @@
     <string name="sub_header_drawer">Make yourself Healthy!</string>
     <string name="profile">Profile</string>
     <string name="store">Store</string>
+    <string name="feature">Feature</string>
+    <string name="account">Account</string>
 </resources>
