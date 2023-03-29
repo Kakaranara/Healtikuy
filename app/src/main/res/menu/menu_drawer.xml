@@ -10,6 +10,14 @@
         android:title="@string/leaderboards"
         app:showAsAction="never" />
     <item
+        android:id="@+id/action_profile"
+        android:title="@string/profile"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_store"
+        android:title="@string/store"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/action_logout"
         android:title="@string/logout"
         app:showAsAction="never" />

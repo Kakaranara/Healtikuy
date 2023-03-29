@@ -23,4 +23,7 @@
     <string name="set_time">Set Time</string>
     <string name="time_not_set">Time is not set yet</string>
     <string name="complete">Complete</string>
+    <string name="sub_header_drawer">Make yourself Healthy!</string>
+    <string name="profile">Profile</string>
+    <string name="store">Store</string>
 </resources>
