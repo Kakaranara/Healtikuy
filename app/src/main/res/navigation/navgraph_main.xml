@@ -75,4 +75,19 @@
         app:destination="@id/homeFragment"
         app:popUpTo="@id/navgraph_main"
         app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.kocci.healtikuy.ui.auth.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/leaderboardsFragment"
+        android:name="com.kocci.healtikuy.ui.main.leaderboards.LeaderboardsFragment"
+        android:label="fragment_leaderboards"
+        tools:layout="@layout/fragment_leaderboards" />
+    <fragment
+        android:id="@+id/storeFragment"
+        android:name="com.kocci.healtikuy.ui.main.store.StoreFragment"
+        android:label="fragment_store"
+        tools:layout="@layout/fragment_store" />
 </navigation>
