@@ -1,6 +1,7 @@
 package com.kocci.healtikuy.core.data.remote
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import com.kocci.healtikuy.core.data.remote.model.Async
@@ -20,8 +21,8 @@ class RemoteDataSource @Inject constructor(
     private val rootRef: FirebaseFirestore,
 ) {
 
-    fun isUserLogin(): Boolean {
-        return firebaseAuth.currentUser != null
+    fun getUserInstance(): FirebaseUser? {
+        return firebaseAuth.currentUser
     }
 
     fun registerUserWithEmailPassword(registerForm: RegisterForm): Flow<Async<Unit>> = flow {

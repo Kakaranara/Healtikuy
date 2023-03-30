@@ -46,6 +46,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
             }
         }
 
+        val user = viewModel.getUserInstance()
+        binding.tvName.text = user.username
+
         viewModel.healthyStatus.observe(viewLifecycleOwner) { healthyStatusIndicator ->
             val progressStatus = viewModel.calculateStatusPercentage(healthyStatusIndicator.point)
             val pointView = getString(

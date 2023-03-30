@@ -22,4 +22,6 @@ class HomeViewModel @Inject constructor(
         return authUseCase.checkIfUserIsLogged()
     }
 
+    fun getUserInstance() = authUseCase.getUserData()
+
 }

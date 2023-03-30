@@ -1,6 +1,7 @@
 package com.kocci.healtikuy.core.domain.usecase
 
 import com.kocci.healtikuy.core.data.remote.model.Async
+import com.kocci.healtikuy.core.domain.model.User
 import kotlinx.coroutines.flow.Flow
 
 data class RegisterForm(
@@ -16,6 +17,8 @@ data class LoginForm(
 
 interface AuthUseCase {
     fun checkIfUserIsLogged(): Boolean
+
+    fun getUserData() : User
 
     fun registerWithEmailPassword(form: RegisterForm): Flow<Async<Unit>>
 
