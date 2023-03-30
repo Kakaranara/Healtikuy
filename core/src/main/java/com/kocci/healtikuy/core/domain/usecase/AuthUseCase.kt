@@ -19,5 +19,5 @@ interface AuthUseCase {
 
     fun registerWithEmailPassword(form: RegisterForm): Flow<Async<Unit>>
 
-    fun loginWithEmailPassword(email: String, password: String): Flow<Async<Unit>>
+    fun loginWithEmailPassword(form: LoginForm): Flow<Async<Unit>>
 }
