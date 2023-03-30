@@ -17,11 +17,7 @@ data class LoginForm(
 interface AuthUseCase {
     fun checkIfUserIsLogged(): Boolean
 
-    fun registerWithEmailPassword(
-        email: String,
-        password: String,
-        username: String,
-    ): Flow<Async<Unit>>
+    fun registerWithEmailPassword(form: RegisterForm): Flow<Async<Unit>>
 
     fun loginWithEmailPassword(email: String, password: String): Flow<Async<Unit>>
 }

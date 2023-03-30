@@ -1,13 +1,13 @@
 package com.kocci.healtikuy.ui.auth.register
 
-import android.opengl.Visibility
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.kocci.healtikuy.core.data.remote.model.Async
+import com.kocci.healtikuy.core.domain.usecase.RegisterForm
 import com.kocci.healtikuy.databinding.FragmentRegisterBinding
 import com.kocci.healtikuy.util.extension.gone
 import com.kocci.healtikuy.util.extension.showToast
@@ -32,7 +32,8 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                 val email = binding.etRegisterEmail.text.toString()
                 val password = binding.etRegisterPassword.text.toString()
                 val username = binding.etUsername.text.toString()
-                viewModel.registerUserWithEmailAndPassword(email, password, username)
+                val form = RegisterForm(email, password, username)
+                viewModel.registerUserWithEmailAndPassword(form)
                     .observe(viewLifecycleOwner) {
                         when (it) {
                             is Async.Error -> {

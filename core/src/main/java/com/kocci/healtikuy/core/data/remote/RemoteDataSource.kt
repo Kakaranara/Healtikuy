@@ -4,6 +4,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import com.kocci.healtikuy.core.data.remote.model.Async
+import com.kocci.healtikuy.core.domain.usecase.RegisterForm
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -22,17 +23,16 @@ class RemoteDataSource @Inject constructor(
         return firebaseAuth.currentUser != null
     }
 
-    fun registerUserWithEmailPassword(
-        email: String,
-        password: String,
-        username: String,
-    ): Flow<Async<Unit>> {
+    fun registerUserWithEmailPassword(registerForm: RegisterForm): Flow<Async<Unit>> {
         return flow {
             emit(Async.Loading)
             try {
-                firebaseAuth.createUserWithEmailAndPassword(email, password).await()
+                firebaseAuth.createUserWithEmailAndPassword(
+                    registerForm.email,
+                    registerForm.password
+                ).await()
                 val profileUpdate = userProfileChangeRequest {
-                    displayName = username
+                    displayName = registerForm.username
                 }
                 firebaseAuth.currentUser?.updateProfile(profileUpdate)?.await()
                 emit(Async.Success(Unit))
