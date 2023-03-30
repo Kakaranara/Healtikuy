@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.usecase.RegisterForm
 import com.kocci.healtikuy.databinding.FragmentRegisterBinding
@@ -45,7 +46,10 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                             }
                             is Async.Success -> {
                                 binding.progressRegisterIndicator.gone()
-                                showToast(it.toString())
+                                showToast("Welcome")
+                                val goToHome =
+                                    RegisterFragmentDirections.actionGlobalHomeFragment()
+                                findNavController().navigate(goToHome)
                             }
                         }
                     }

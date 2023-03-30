@@ -48,7 +48,9 @@ class LoginFragment : Fragment(), View.OnClickListener {
                         }
                         is Async.Success -> {
                             binding.progressBarLogin.gone()
-                            showToast(it.toString())
+                            val goToHome = LoginFragmentDirections.actionGlobalHomeFragment()
+                            findNavController().navigate(goToHome)
+                            showToast("Welcome!")
                         }
                     }
                 }
