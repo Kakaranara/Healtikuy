@@ -39,4 +39,5 @@ abstract class AppModule {
     @Binds
     @ViewModelScoped
     abstract fun bindAuthUseCase(authInteractor: AuthInteractor) : AuthUseCase
+
 }

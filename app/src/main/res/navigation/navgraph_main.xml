@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/navgraph_main"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_homeFragment_to_waterIntakeFragment"
             app:destination="@id/waterIntakeFragment" />
@@ -68,7 +70,7 @@
         tools:layout="@layout/fragment_nutrition" />
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.kocci.healtikuy.ui.auth.RegisterFragment"
+        android:name="com.kocci.healtikuy.ui.auth.register.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
 </navigation>
