@@ -3,7 +3,6 @@ package com.kocci.healtikuy.core.domain.interactor
 import android.content.Context
 import android.icu.util.Calendar
 import com.kocci.healtikuy.core.data.repository.SleepRepository
-import com.kocci.healtikuy.core.data.repository.UserPreferencesRepository
 import com.kocci.healtikuy.core.domain.model.Sleep
 import com.kocci.healtikuy.core.domain.usecase.SleepIndicator
 import com.kocci.healtikuy.core.domain.usecase.SleepUseCase
@@ -20,7 +19,6 @@ import javax.inject.Inject
 
 class SleepInteractor @Inject constructor(
     private val repository: SleepRepository,
-    private val preferencesRepository: UserPreferencesRepository,
     private val alarmService: AlarmService,
 ) : SleepUseCase {
 
@@ -44,20 +42,13 @@ class SleepInteractor @Inject constructor(
         repository.insertData(sleep.toEntity())
     }
 
-    override suspend fun updateNewData(sleep: Sleep) {
+    override suspend fun completeMission(sleep: Sleep) {
         sleep.isCompleted = true
-        preferencesRepository.addPoints(1000)
-        repository.updateData(sleep.toEntity())
+        repository.updateAndAddPoints(sleep.toEntity())
     }
 
     override fun getSetTime(): Flow<SleepIndicator> {
-        return preferencesRepository.sleepTimePreference.map {
-            if (it == null) {
-                SleepIndicator.NotSet
-            } else {
-                SleepIndicator.Set(it)
-            }
-        }
+        return repository.getSetTime()
     }
 
     override fun isTheTimeWithin1Hours(time: Long): Boolean {
@@ -80,9 +71,7 @@ class SleepInteractor @Inject constructor(
     override fun showFormattedSetTime(time: Long): String = DateHelper.showHoursAndMinutes(time)
 
     override suspend fun changeSetTime(time: Long) {
-        //! it's hardcoded for now! need to call sleep object in the database
-//        setScheduleForNotification(Sleep(), time)
-        return preferencesRepository.changeSleepTime(time)
+        return repository.changeSetTime(time)
     }
 
     override fun setScheduleForNotification(context: Context, sleep: Sleep, time: Long) {

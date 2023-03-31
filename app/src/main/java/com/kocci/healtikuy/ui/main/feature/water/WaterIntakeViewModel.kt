@@ -24,7 +24,7 @@ class WaterIntakeViewModel @Inject constructor(
 
     fun updatePointsForGoals(data: WaterIntake) {
         viewModelScope.launch {
-            waterIntakeUseCase.updatePoint(data)
+            waterIntakeUseCase.completeMission(data)
         }
     }
 }

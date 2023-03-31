@@ -1,6 +1,5 @@
 package com.kocci.healtikuy.core.domain.interactor
 
-import com.kocci.healtikuy.core.data.repository.UserPreferencesRepository
 import com.kocci.healtikuy.core.data.repository.WaterIntakeRepository
 import com.kocci.healtikuy.core.domain.model.WaterIntake
 import com.kocci.healtikuy.core.domain.usecase.WaterIntakeUseCase
@@ -13,7 +12,6 @@ import javax.inject.Inject
 
 class WaterIntakeInteractor @Inject constructor(
     private val repository: WaterIntakeRepository,
-    private val preferenceRepository: UserPreferencesRepository,
 ) : WaterIntakeUseCase {
     override fun getWaterIntakeData(): Flow<WaterIntake> {
         return repository.getLatestWaterIntakeData().map {
@@ -40,9 +38,8 @@ class WaterIntakeInteractor @Inject constructor(
         repository.updateWaterIntake(waterIntake.toEntity())
     }
 
-    override suspend fun updatePoint(waterIntake: WaterIntake) {
+    override suspend fun completeMission(waterIntake: WaterIntake) {
         waterIntake.isCompleted = true
-        repository.updateWaterIntake(waterIntake.toEntity())
-        preferenceRepository.addPoints(500)
+        repository.updateAndAddPoints(waterIntake.toEntity())
     }
 }

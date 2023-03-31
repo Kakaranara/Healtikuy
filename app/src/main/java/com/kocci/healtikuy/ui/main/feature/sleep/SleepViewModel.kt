@@ -39,7 +39,7 @@ class SleepViewModel @Inject constructor(
 
     fun completeMission(sleep: Sleep) {
         viewModelScope.launch {
-            useCase.updateNewData(sleep)
+            useCase.completeMission(sleep)
         }
     }
 }

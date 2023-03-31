@@ -7,7 +7,8 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class WaterIntakeRepository @Inject constructor(
-    private val localDataSource: LocalDataSource
+    private val localDataSource: LocalDataSource,
+    private val userPreferenceRepository : UserPreferencesRepository
 ) : IWaterIntakeRepository {
     override fun getLatestWaterIntakeData(): Flow<WaterIntakeEntity?> =
         localDataSource.getWaterIntakeLastRow()
@@ -17,4 +18,9 @@ class WaterIntakeRepository @Inject constructor(
 
     override suspend fun updateWaterIntake(entity: WaterIntakeEntity) =
         localDataSource.updateWaterIntake(entity)
+
+    override suspend fun updateAndAddPoints(entity: WaterIntakeEntity) {
+        localDataSource.updateWaterIntake(entity)
+        userPreferenceRepository.addPoints(500)
+    }
 }

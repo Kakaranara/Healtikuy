@@ -9,4 +9,5 @@ interface IWaterIntakeRepository {
     suspend fun insertWaterIntake(entity: WaterIntakeEntity)
 
     suspend fun updateWaterIntake(entity: WaterIntakeEntity)
+    suspend fun updateAndAddPoints(entity: WaterIntakeEntity)
 }
