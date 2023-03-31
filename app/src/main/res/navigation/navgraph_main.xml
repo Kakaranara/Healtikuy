@@ -78,7 +78,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.kocci.healtikuy.ui.auth.profile.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/leaderboardsFragment"
