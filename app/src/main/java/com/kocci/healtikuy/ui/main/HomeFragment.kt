@@ -1,11 +1,11 @@
 package com.kocci.healtikuy.ui.main
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -16,6 +16,7 @@ import com.kocci.healtikuy.core.domain.usecase.HealthyStatusIndicator
 import com.kocci.healtikuy.databinding.FragmentHomeBinding
 import com.kocci.healtikuy.util.extension.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), View.OnClickListener {
@@ -27,7 +28,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -38,6 +39,15 @@ class HomeFragment : Fragment(), View.OnClickListener {
         setupAppBarWithMenuDrawer()
         bindClickListener()
 
+        runBlocking {
+            if (!viewModel.isUserLogin()) {
+                val goToLogin = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
+                findNavController().navigate(goToLogin)
+            }
+        }
+
+        val user = viewModel.getUserInstance()
+        binding.tvName.text = user.username.replaceFirstChar(Char::titlecase)
 
         viewModel.healthyStatus.observe(viewLifecycleOwner) { healthyStatusIndicator ->
             val progressStatus = viewModel.calculateStatusPercentage(healthyStatusIndicator.point)

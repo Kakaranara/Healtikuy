@@ -19,13 +19,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/imgAvatar"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:src="@drawable/user9"
+            android:src="@drawable/popeye"
+            android:contentDescription="@string/an_image_of_avatar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
@@ -34,16 +35,16 @@
             style="@style/TextAppearance.Material3.TitleMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Kakaranara"
+            android:layout_marginStart="22dp"
             app:layout_constraintStart_toEndOf="@+id/imgAvatar"
-            app:layout_constraintTop_toTopOf="@+id/imgAvatar" />
+            app:layout_constraintTop_toTopOf="@+id/imgAvatar"
+            tools:text="Kakaranara" />
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/statusIndicator"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="22dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/imgAvatar"
             app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +58,7 @@
             style="@style/TextAppearance.Material3.LabelMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="22dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/statusIndicator"
             app:layout_constraintStart_toEndOf="@+id/imgAvatar"
@@ -68,13 +69,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Selamat! anda sudah menjalankan pola hidup sehat. Pertahankanlah!"
             android:textColor="#a9a9a9"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@+id/statusIndicator"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/statusIndicator"
-            app:layout_constraintTop_toBottomOf="@+id/statusIndicator" />
+            app:layout_constraintTop_toBottomOf="@+id/statusIndicator"
+            tools:text="Selamat! anda sudah menjalankan pola hidup sehat. Pertahankanlah!" />
 
 
         <TextView
@@ -83,10 +84,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:text="Langkah Menuju Hidup Sehat"
+            android:layout_marginTop="16dp"
+            android:text="@string/ways_to_healthy"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/desc" />
+            app:layout_constraintTop_toBottomOf="@+id/button2" />
 
         <GridLayout
             android:layout_width="match_parent"
@@ -119,6 +120,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
                         android:scaleType="fitXY"
+                        android:contentDescription="@string/image_of_water"
                         android:src="@drawable/water" />
 
                     <TextView
@@ -155,6 +157,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
                         android:scaleType="fitXY"
+                        android:contentDescription="@string/image_of_sleep_person"
                         android:src="@drawable/sleep" />
 
                     <TextView
@@ -191,6 +194,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
                         android:scaleType="fitXY"
+                        android:contentDescription="@string/image_of_exercise"
                         android:src="@drawable/exercise" />
 
                     <TextView
@@ -227,6 +231,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
                         android:scaleType="fitXY"
+                        android:contentDescription="@string/image_of_nutrition"
                         android:src="@drawable/water" />
 
                     <TextView
@@ -263,6 +268,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
                         android:scaleType="fitXY"
+                        android:contentDescription="@string/image_of_sun_exposure"
                         android:src="@drawable/water" />
 
                     <TextView
@@ -279,6 +285,43 @@
 
 
         </GridLayout>
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/challenges"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgAvatar" />
+
+        <LinearLayout
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toEndOf="@+id/imgAvatar"
+            app:layout_constraintTop_toBottomOf="@id/tvName">
+
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:contentDescription="@string/image_of_coin"
+                android:src="@drawable/coin" />
+
+            <TextView
+                android:id="@+id/tvCoin"
+                android:layout_width="21dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                tools:text="45" />
+
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
