@@ -1,4 +1,4 @@
-package com.kocci.healtikuy.core.data.repository
+package com.kocci.healtikuy.core.data.local.preferences
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
@@ -11,7 +11,7 @@ import javax.inject.Singleton
 
 
 @Singleton
-class UserPreferencesRepository @Inject constructor(
+class UserPreferencesManager @Inject constructor(
     private val dataStore: DataStore<Preferences>,
 ) {
     private object PreferenceKeys {
