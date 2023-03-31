@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.kocci.healtikuy.core.domain.model.UserPreferences
 import com.kocci.healtikuy.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,16 +18,26 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ProfileViewModel by viewModels()
+    private lateinit var userPreference: UserPreferences
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbarProfile.setupWithNavController(findNavController())
 
-        binding.apply {
-            val userData = viewModel.userData
-            tvProfileEmail.text = userData.email
-            tvProfileName.text = userData.username
+        viewModel.userData.observe(viewLifecycleOwner) { userData ->
+            userPreference = userData
+            binding.apply {
+                tvProfileEmail.text = userData.email
+                tvProfileName.text = userData.username
+            }
         }
+
+        binding.btnEditProfile.setOnClickListener {
+            val gotoEdit =
+                ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment(userPreference)
+            findNavController().navigate(gotoEdit)
+        }
+
     }
 
     override fun onCreateView(

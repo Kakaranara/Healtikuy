@@ -44,4 +44,7 @@
     <string name="image_of_sun_exposure">image of sun exposure</string>
     <string name="challenges">Challenges</string>
     <string name="image_of_coin">Image of coin</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="change_avatar">Change Avatar</string>
+    <string name="submit">Submit</string>
 </resources>

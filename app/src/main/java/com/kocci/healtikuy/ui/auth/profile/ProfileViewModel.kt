@@ -1,13 +1,14 @@
 package com.kocci.healtikuy.ui.auth.profile
 
 import androidx.lifecycle.ViewModel
-import com.kocci.healtikuy.core.domain.usecase.AuthUseCase
+import androidx.lifecycle.asLiveData
+import com.kocci.healtikuy.core.domain.usecase.UserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val authUseCase: AuthUseCase,
+    private val userUseCase: UserUseCase,
 ) : ViewModel() {
-    val userData = authUseCase.getUserData()
+    val userData = userUseCase.getUserPreferences().asLiveData()
 }

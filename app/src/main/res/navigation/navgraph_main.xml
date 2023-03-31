@@ -79,7 +79,11 @@
         android:id="@+id/profileFragment"
         android:name="com.kocci.healtikuy.ui.auth.profile.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/leaderboardsFragment"
         android:name="com.kocci.healtikuy.ui.main.leaderboards.LeaderboardsFragment"
@@ -90,4 +94,13 @@
         android:name="com.kocci.healtikuy.ui.main.store.StoreFragment"
         android:label="fragment_store"
         tools:layout="@layout/fragment_store" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.kocci.healtikuy.ui.auth.profile.edit.EditProfileFragment"
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <argument
+            android:name="userdata"
+            app:argType="com.kocci.healtikuy.core.domain.model.UserPreferences" />
+    </fragment>
 </navigation>
