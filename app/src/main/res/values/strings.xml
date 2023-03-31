@@ -36,4 +36,12 @@
     <string name="username">Username</string>
     <string name="not_a_user">Not a user?</string>
     <string name="ways_to_healthy">Langkah Menuju Hidup Sehat</string>
+    <string name="an_image_of_avatar">An image of avatar</string>
+    <string name="image_of_water">Image of water</string>
+    <string name="image_of_sleep_person">Image of sleep person</string>
+    <string name="image_of_exercise">image of exercise</string>
+    <string name="image_of_nutrition">image of nutrition</string>
+    <string name="image_of_sun_exposure">image of sun exposure</string>
+    <string name="challenges">Challenges</string>
+    <string name="image_of_coin">Image of coin</string>
 </resources>

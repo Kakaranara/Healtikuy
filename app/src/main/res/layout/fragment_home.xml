@@ -26,6 +26,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/popeye"
+            android:contentDescription="@string/an_image_of_avatar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
@@ -119,6 +120,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
                         android:scaleType="fitXY"
+                        android:contentDescription="@string/image_of_water"
                         android:src="@drawable/water" />
 
                     <TextView
@@ -155,6 +157,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
                         android:scaleType="fitXY"
+                        android:contentDescription="@string/image_of_sleep_person"
                         android:src="@drawable/sleep" />
 
                     <TextView
@@ -191,6 +194,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
                         android:scaleType="fitXY"
+                        android:contentDescription="@string/image_of_exercise"
                         android:src="@drawable/exercise" />
 
                     <TextView
@@ -227,6 +231,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
                         android:scaleType="fitXY"
+                        android:contentDescription="@string/image_of_nutrition"
                         android:src="@drawable/water" />
 
                     <TextView
@@ -263,6 +268,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
                         android:scaleType="fitXY"
+                        android:contentDescription="@string/image_of_sun_exposure"
                         android:src="@drawable/water" />
 
                     <TextView
@@ -286,7 +292,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="Challenges"
+            android:text="@string/challenges"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imgAvatar" />
 
@@ -303,15 +309,17 @@
 
 
             <ImageView
-                android:layout_width="23dp"
+                android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:contentDescription="@string/image_of_coin"
                 android:src="@drawable/coin" />
 
             <TextView
+                android:id="@+id/tvCoin"
                 android:layout_width="21dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="45" />
+                tools:text="45" />
 
         </LinearLayout>
 
