@@ -6,16 +6,15 @@ import kotlinx.coroutines.flow.Flow
 
 sealed class HealthyStatusIndicator(val point: Long) {
     class Low(points: Long) : HealthyStatusIndicator(points)
-
     class MidComplete(points: Long) : HealthyStatusIndicator(points)
     class NearlyComplete(points: Long) : HealthyStatusIndicator(points)
     class Completed(points: Long) : HealthyStatusIndicator(points)
 }
 
 interface UserUseCase {
-    fun getUserPreferences(): Flow<UserPreferences>
+    fun getUserData(): Flow<UserPreferences>
+    fun isUserLogin(): Boolean
     fun listenForStatusChanges(): Flow<HealthyStatusIndicator>
     fun calculateStatusPercentage(points: Long): Int
-    fun isUserLogin(): Boolean
     fun updateProfile(userData: UserPreferences): Flow<Async<Unit>>
 }

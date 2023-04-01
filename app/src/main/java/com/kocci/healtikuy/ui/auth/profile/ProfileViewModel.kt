@@ -10,5 +10,5 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val userUseCase: UserUseCase,
 ) : ViewModel() {
-    val userData = userUseCase.getUserPreferences().asLiveData()
+    val userData = userUseCase.getUserData().asLiveData()
 }

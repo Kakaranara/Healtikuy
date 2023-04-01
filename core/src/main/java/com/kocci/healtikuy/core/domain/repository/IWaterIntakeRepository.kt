@@ -5,9 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface IWaterIntakeRepository {
     fun getLatestWaterIntakeData(): Flow<WaterIntakeEntity?>
-
     suspend fun insertWaterIntake(entity: WaterIntakeEntity)
-
     suspend fun updateWaterIntake(entity: WaterIntakeEntity)
     suspend fun updateAndAddPoints(entity: WaterIntakeEntity)
 }

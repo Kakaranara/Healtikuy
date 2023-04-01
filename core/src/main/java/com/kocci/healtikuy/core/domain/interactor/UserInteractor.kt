@@ -1,7 +1,6 @@
 package com.kocci.healtikuy.core.domain.interactor
 
 import com.kocci.healtikuy.core.constant.GameRules
-import com.kocci.healtikuy.core.data.local.preferences.UserPreferencesManager
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.data.repository.UserRepository
 import com.kocci.healtikuy.core.domain.model.UserPreferences
@@ -13,12 +12,12 @@ import javax.inject.Inject
 class UserInteractor @Inject constructor(
     private val repository: UserRepository,
 ) : UserUseCase {
-    override fun getUserPreferences(): Flow<UserPreferences> {
-        return repository.getUserData()
+    override fun getUserData(): Flow<UserPreferences> {
+        return repository.getUserDataAndUpdatePreference()
     }
 
     override fun listenForStatusChanges(): Flow<HealthyStatusIndicator> {
-        return repository.getUserPreference().map {
+        return repository.getRawUserPreference().map {
             val points = it.points
             val progress = calculateStatusPercentage(points)
             if (progress == GameRules.STATUS_COMPLETE_PERCENTAGE) {

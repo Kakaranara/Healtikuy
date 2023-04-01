@@ -5,8 +5,8 @@ import com.kocci.healtikuy.core.domain.model.UserPreferences
 import kotlinx.coroutines.flow.Flow
 
 interface IUserRepository {
-    fun getUserPreference(): Flow<UserPreferences>
-    fun getUserData(): Flow<UserPreferences>
+    fun getRawUserPreference(): Flow<UserPreferences>
+    fun getUserDataAndUpdatePreference(): Flow<UserPreferences>
     fun updateUserProfile(userData: UserPreferences): Flow<Async<Unit>>
     fun isUserLogin(): Boolean
 }

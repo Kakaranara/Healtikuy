@@ -6,12 +6,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface ISleepRepository {
     fun getLatestData(): Flow<SleepEntity?>
+    fun getSetTime(): Flow<SleepIndicator>
     suspend fun insertData(entity: SleepEntity)
     suspend fun updateData(entity: SleepEntity)
-
     suspend fun updateAndAddPoints(entity: SleepEntity)
-
-    fun getSetTime() : Flow<SleepIndicator>
-
     suspend fun changeSetTime(time: Long)
 }

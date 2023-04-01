@@ -19,11 +19,11 @@ class UserRepository @Inject constructor(
     private val userPreferenceManager: UserPreferencesManager,
     private val remoteDataSource: RemoteDataSource
 ) : IUserRepository {
-    override fun getUserPreference(): Flow<UserPreferences> {
+    override fun getRawUserPreference(): Flow<UserPreferences> {
         return userPreferenceManager.userPreferences
     }
 
-    override fun getUserData(): Flow<UserPreferences> {
+    override fun getUserDataAndUpdatePreference(): Flow<UserPreferences> {
         CoroutineScope(Dispatchers.IO).launch {
             val fbUser = remoteDataSource.getFirebaseUser()
             userPreferenceManager.updateUserProfile(

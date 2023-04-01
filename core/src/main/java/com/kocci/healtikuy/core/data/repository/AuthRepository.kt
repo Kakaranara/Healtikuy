@@ -1,9 +1,6 @@
 package com.kocci.healtikuy.core.data.repository
 
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.userProfileChangeRequest
-import com.kocci.healtikuy.core.constant.Dummy
-import com.kocci.healtikuy.core.data.local.preferences.UserPreferencesManager
 import com.kocci.healtikuy.core.data.remote.RemoteDataSource
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.repository.IAuthRepository
@@ -19,10 +16,6 @@ import javax.inject.Inject
 class AuthRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource
 ) : IAuthRepository {
-    override fun getUserInstance(): FirebaseUser? {
-        return remoteDataSource.getFirebaseUser()
-    }
-
     override fun registerUserWithEmailPassword(form: RegisterForm): Flow<Async<Unit>> =
         flow {
             emit(Async.Loading)

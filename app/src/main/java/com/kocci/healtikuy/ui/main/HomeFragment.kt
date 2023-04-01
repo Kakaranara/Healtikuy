@@ -46,7 +46,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
             }
         }
 
-        viewModel.getUserInstance().observe(viewLifecycleOwner) {
+        viewModel.getUserData().observe(viewLifecycleOwner) {
             binding.apply {
                 tvName.text = it.username
                 tvCoin.text = it.coin.toString()

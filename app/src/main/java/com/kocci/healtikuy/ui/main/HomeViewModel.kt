@@ -2,15 +2,13 @@ package com.kocci.healtikuy.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.kocci.healtikuy.core.domain.usecase.AuthUseCase
 import com.kocci.healtikuy.core.domain.usecase.UserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val userUseCase: UserUseCase,
-    private val authUseCase: AuthUseCase,
+    private val userUseCase: UserUseCase
 ) : ViewModel() {
 
     val healthyStatus = userUseCase.listenForStatusChanges().asLiveData()
@@ -22,6 +20,6 @@ class HomeViewModel @Inject constructor(
         return userUseCase.isUserLogin()
     }
 
-    fun getUserInstance() = userUseCase.getUserPreferences().asLiveData()
+    fun getUserData() = userUseCase.getUserData().asLiveData()
 
 }
