@@ -121,7 +121,7 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
         cal.set(Calendar.MINUTE, minute)
 
         viewModel.setTime(cal.timeInMillis)
-        viewModel.setSchedule(requireActivity(), Sleep(), cal.timeInMillis)
+        viewModel.setSchedule(requireActivity().applicationContext, Sleep(), cal.timeInMillis)
         showToast("$hour : $minute")
     }
 
