@@ -1,15 +1,14 @@
-package com.kocci.healtikuy.core.util.service
+package com.kocci.healtikuy.core.receiver.alarm
 
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.os.Build
-import android.os.Parcelable
 import android.util.Log
 import com.kocci.healtikuy.core.domain.model.Sleep
-import dagger.hilt.android.qualifiers.ApplicationContext
+import com.kocci.healtikuy.core.util.getParcel
+import com.kocci.healtikuy.core.util.service.NotificationService
 import javax.inject.Inject
 
 class AlarmService @Inject constructor() : BroadcastReceiver() {
@@ -53,8 +52,3 @@ class AlarmService @Inject constructor() : BroadcastReceiver() {
     }
 }
 
-//ext
-inline fun <reified T : Parcelable> Intent.getParcel(key: String): T? = when {
-    Build.VERSION.SDK_INT >= 33 -> getParcelableExtra(key, T::class.java)
-    else -> @Suppress("DEPRECATION") getParcelableExtra(key) as? T
-}
