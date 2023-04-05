@@ -20,6 +20,9 @@
     <string name="water_intake_low">You need at least 8 glass everyday</string>
     <string name="water_intake_enough">Nice! you\'ve enough water for today!</string>
     <string name="water_intake_glass_left">%d Glass left</string>
+    <string name="sleep_description_after_complete">Happy Sleep!</string>
+    <string name="sleep_description_before_sleep">Make sure you have turn off your phone after pressing the button!</string>
+    <string name="sleep_description_not_in_time">You can press this button in within 1 hours of your sleep schedule.</string>
     <string name="set_time">Set Time</string>
     <string name="time_not_set">Time is not set yet</string>
     <string name="complete">Complete</string>
@@ -47,4 +50,7 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="change_avatar">Change Avatar</string>
     <string name="submit">Submit</string>
+    <string name="description_when_time_not_set">a notification will appear once you set the time.</string>
+    <string name="button_for_complete_sleep_mission">button for complete sleep mission</string>
+
 </resources>
