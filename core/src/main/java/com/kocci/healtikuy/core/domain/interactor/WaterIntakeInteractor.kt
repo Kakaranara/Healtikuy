@@ -17,11 +17,11 @@ class WaterIntakeInteractor @Inject constructor(
         return repository.getLatestWaterIntakeData().map {
             if (it == null) {
                 val waterIntake = WaterIntake(quantity = 0, timeStamp = System.currentTimeMillis())
-                insertData(waterIntake)
+                insertNewData(waterIntake)
                 waterIntake
             } else if (!DateHelper.isToday(it.timeStamp)) {
                 val waterIntake = WaterIntake(quantity = 0, timeStamp = System.currentTimeMillis())
-                insertData(waterIntake)
+                insertNewData(waterIntake)
                 waterIntake
             } else {
                 it.toDomain()
@@ -29,13 +29,13 @@ class WaterIntakeInteractor @Inject constructor(
         }
     }
 
-    override suspend fun insertData(waterIntake: WaterIntake) {
-        repository.insertWaterIntake(waterIntake.toEntity())
+    override suspend fun insertNewData(waterIntake: WaterIntake) {
+        repository.insert(waterIntake.toEntity())
     }
 
-    override suspend fun updateData(waterIntake: WaterIntake) {
+    override suspend fun updateQuantity(waterIntake: WaterIntake) {
         waterIntake.quantity += 1
-        repository.updateWaterIntake(waterIntake.toEntity())
+        repository.update(waterIntake.toEntity())
     }
 
     override suspend fun completeMission(waterIntake: WaterIntake) {

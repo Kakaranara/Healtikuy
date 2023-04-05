@@ -14,10 +14,10 @@ class WaterIntakeRepository @Inject constructor(
     override fun getLatestWaterIntakeData(): Flow<WaterIntakeEntity?> =
         localDataSource.getWaterIntakeLastRow()
 
-    override suspend fun insertWaterIntake(entity: WaterIntakeEntity) =
+    override suspend fun insert(entity: WaterIntakeEntity) =
         localDataSource.insertWaterIntake(entity)
 
-    override suspend fun updateWaterIntake(entity: WaterIntakeEntity) =
+    override suspend fun update(entity: WaterIntakeEntity) =
         localDataSource.updateWaterIntake(entity)
 
     override suspend fun updateAndAddPoints(entity: WaterIntakeEntity) {

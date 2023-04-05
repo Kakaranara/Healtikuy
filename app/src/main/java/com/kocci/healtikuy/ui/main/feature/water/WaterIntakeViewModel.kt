@@ -18,7 +18,7 @@ class WaterIntakeViewModel @Inject constructor(
 
     fun drinkOneGlass(data: WaterIntake) {
         viewModelScope.launch {
-            waterIntakeUseCase.updateData(data)
+            waterIntakeUseCase.updateQuantity(data)
         }
     }
 
