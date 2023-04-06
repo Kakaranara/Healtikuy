@@ -18,11 +18,11 @@ class WaterIntakeInteractor @Inject constructor(
     override fun getWaterIntakeData(): Flow<WaterIntake> {
         return repository.getLatestWaterIntakeData().map {
             if (it == null) {
-                val waterIntake = WaterIntake(quantity = 0, timeStamp = System.currentTimeMillis())
+                val waterIntake = WaterIntake()
                 insertNewData(waterIntake)
                 waterIntake
             } else if (!DateHelper.isToday(it.timeStamp)) {
-                val waterIntake = WaterIntake(quantity = 0, timeStamp = System.currentTimeMillis())
+                val waterIntake = WaterIntake()
                 insertNewData(waterIntake)
                 waterIntake
             } else {

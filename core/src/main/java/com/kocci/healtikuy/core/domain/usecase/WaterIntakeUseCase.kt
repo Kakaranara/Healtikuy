@@ -5,9 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface WaterIntakeUseCase {
     fun getWaterIntakeData(): Flow<WaterIntake>
-
     fun setAlarm(isGoalsCompleted: Boolean)
-
     fun cancelAlarm()
 
     suspend fun insertNewData(waterIntake: WaterIntake)
