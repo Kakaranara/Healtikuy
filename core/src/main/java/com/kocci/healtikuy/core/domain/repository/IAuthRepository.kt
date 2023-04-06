@@ -8,4 +8,6 @@ import kotlinx.coroutines.flow.Flow
 interface IAuthRepository {
     fun registerUserWithEmailPassword(form: RegisterForm): Flow<Async<Unit>>
     fun loginUserWithEmailPassword(form: LoginForm): Flow<Async<Unit>>
+
+    fun logout()
 }

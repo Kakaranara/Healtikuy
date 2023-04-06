@@ -34,7 +34,7 @@
                 app:showAsAction="never" />
 
             <item
-                android:id="@+id/action_logout"
+                android:id="@id/loginFragment"
                 android:icon="@drawable/baseline_logout_24"
                 android:title="@string/logout"
                 app:showAsAction="never" />

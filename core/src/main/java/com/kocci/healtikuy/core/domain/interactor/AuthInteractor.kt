@@ -17,4 +17,8 @@ class AuthInteractor @Inject constructor(private val authRepository: AuthReposit
     override fun loginWithEmailPassword(form: LoginForm): Flow<Async<Unit>> {
         return authRepository.loginUserWithEmailPassword(form)
     }
+
+    override fun logout() {
+        authRepository.logout()
+    }
 }

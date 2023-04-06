@@ -15,8 +15,7 @@ data class LoginForm(
 )
 
 interface AuthUseCase {
-
     fun registerWithEmailPassword(form: RegisterForm): Flow<Async<Unit>>
-
     fun loginWithEmailPassword(form: LoginForm): Flow<Async<Unit>>
+    fun logout()
 }

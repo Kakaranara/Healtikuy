@@ -1,7 +1,9 @@
 package com.kocci.healtikuy.ui.main
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.R
@@ -11,9 +13,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val binding by lazy {
-        ActivityMainBinding.inflate(layoutInflater)
-    }
+    private val viewModel: MainViewModel by viewModels()
+
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +24,14 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-        val navController = navHostFragment.navController
+        navController = navHostFragment.navController
         binding.navigationView.setupWithNavController(navController)
 
+        navController.addOnDestinationChangedListener { _, dest, _ ->
+            if (dest.id == R.id.loginFragment) {
+                viewModel.logout()
+            }
+        }
     }
+
 }

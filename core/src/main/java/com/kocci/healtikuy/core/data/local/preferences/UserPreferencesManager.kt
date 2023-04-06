@@ -74,6 +74,12 @@ class UserPreferencesManager @Inject constructor(
         }
     }
 
+    suspend fun clearAllData() {
+        dataStore.edit {
+            it.clear()
+        }
+    }
+
     companion object {
         private const val TAG = "UserPreferencesManager"
     }

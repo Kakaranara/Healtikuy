@@ -7,11 +7,8 @@ import com.kocci.healtikuy.core.data.remote.RemoteDataSource
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.model.UserPreferences
 import com.kocci.healtikuy.core.domain.repository.IUserRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -24,14 +21,6 @@ class UserRepository @Inject constructor(
     }
 
     override fun getUserDataAndUpdatePreference(): Flow<UserPreferences> {
-        CoroutineScope(Dispatchers.IO).launch {
-            val fbUser = remoteDataSource.getFirebaseUser()
-            userPreferenceManager.updateUserProfile(
-                username = fbUser?.displayName.toString(),
-                email = fbUser?.email.toString(),
-                photoUrl = fbUser?.photoUrl.toString()
-            )
-        }
         return userPreferenceManager.userPreferences
     }
 
