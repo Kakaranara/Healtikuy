@@ -10,7 +10,7 @@ import com.kocci.healtikuy.core.util.helper.DateHelper
 import com.kocci.healtikuy.core.util.helper.FormatHelper
 import com.kocci.healtikuy.core.util.mapper.toDomain
 import com.kocci.healtikuy.core.util.mapper.toEntity
-import com.kocci.healtikuy.core.util.service.AlarmService
+import com.kocci.healtikuy.core.service.AlarmService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.time.LocalTime

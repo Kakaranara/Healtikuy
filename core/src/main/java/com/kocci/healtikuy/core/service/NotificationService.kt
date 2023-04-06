@@ -1,4 +1,4 @@
-package com.kocci.healtikuy.core.util.service
+package com.kocci.healtikuy.core.service
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

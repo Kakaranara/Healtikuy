@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import com.kocci.healtikuy.core.util.service.NotificationService
+import com.kocci.healtikuy.core.service.NotificationService
 
 class WaterAlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent?) {

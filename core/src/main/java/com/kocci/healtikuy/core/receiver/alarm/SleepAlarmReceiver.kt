@@ -6,8 +6,8 @@ import android.content.Intent
 import android.util.Log
 import com.kocci.healtikuy.core.domain.model.Sleep
 import com.kocci.healtikuy.core.util.getParcel
-import com.kocci.healtikuy.core.util.service.AlarmService.Companion.EXTRA_SLEEP_SCHEDULE
-import com.kocci.healtikuy.core.util.service.NotificationService
+import com.kocci.healtikuy.core.service.AlarmService.Companion.EXTRA_SLEEP_SCHEDULE
+import com.kocci.healtikuy.core.service.NotificationService
 
 class SleepAlarmReceiver : BroadcastReceiver() {
 

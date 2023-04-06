@@ -1,4 +1,4 @@
-package com.kocci.healtikuy.core.util.service
+package com.kocci.healtikuy.core.service
 
 import android.app.AlarmManager
 import android.app.PendingIntent

@@ -56,7 +56,7 @@
 
     <!-- Sleep Related -->
     <string name="sleep">Sleep</string>
-    <string name="sleep_description_after_complete">Happy Sleep!</string>
+    <string name="sleep_description_after_complete">Make Sure to turn off your phone. Happy Sleep!</string>
     <string name="sleep_description_before_sleep">Make sure you have turn off your phone after pressing the button!</string>
     <string name="sleep_description_not_in_time">You can press this button in within 1 hours of your sleep schedule.</string>
 

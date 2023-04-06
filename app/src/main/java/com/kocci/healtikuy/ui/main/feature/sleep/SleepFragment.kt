@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -42,31 +41,24 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
         viewModel.isTimeSet.observe(viewLifecycleOwner) { sleepIndicator ->
             when (sleepIndicator) {
                 SleepIndicator.NotSet -> {
-                    showToast(sleepIndicator.toString())
                     buttonClickGoesToTimer()
                     binding.tvSleepTime.text = getString(R.string.time_not_set)
                     binding.btnChangeSleepTime.visibility = View.GONE
                     binding.tvSleepDesc.text = getString(R.string.description_when_time_not_set)
                 }
                 is SleepIndicator.Set -> {
-                    showToast(sleepIndicator.toString())
                     binding.tvSleepTime.text = viewModel.showFormattedTime(sleepIndicator.data)
                     binding.btnSleepTime.text = getString(R.string.sleep)
                     binding.btnChangeSleepTime.visibility = View.VISIBLE
 
                     viewModel.getDataModel.observe(viewLifecycleOwner) { sleep ->
+                        showToast(sleep.toString())
                         if (sleep.isCompleted) {
-                            //! need to be updated
-                            //! Doesnt seems to be good
-                            val successColor = ContextCompat.getColor(
-                                requireActivity(),
-                                R.color.green_success
-                            )
                             binding.btnSleepTime.isEnabled = false
-                            binding.btnSleepTime.setBackgroundColor(successColor)
                             binding.tvSleepDesc.text =
                                 getString(R.string.sleep_description_after_complete)
                         } else {
+                            buttonClickGoesToCompleteMission(sleep)
                             viewModel.isTheTimeWithin1Hours(sleepIndicator.data)
                                 .observe(viewLifecycleOwner) { isWithinOneHours ->
                                     if (!isWithinOneHours) {
@@ -79,7 +71,6 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
                                             getString(R.string.sleep_description_before_sleep)
                                     }
                                 }
-                            buttonClickGoesToCompleteMission(sleep)
                         }
                     }
                 }
