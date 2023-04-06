@@ -10,7 +10,7 @@ import com.kocci.healtikuy.core.util.helper.DateHelper
 import com.kocci.healtikuy.core.util.helper.FormatHelper
 import com.kocci.healtikuy.core.util.mapper.toDomain
 import com.kocci.healtikuy.core.util.mapper.toEntity
-import com.kocci.healtikuy.core.receiver.alarm.AlarmService
+import com.kocci.healtikuy.core.util.service.AlarmService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.time.LocalTime
@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 class SleepInteractor @Inject constructor(
     private val repository: SleepRepository,
-    private val alarmService: AlarmService,
+    private val sleepAlarmReceiver: AlarmService,
 ) : SleepUseCase {
 
     override fun getSleepData(): Flow<Sleep> {
@@ -75,6 +75,6 @@ class SleepInteractor @Inject constructor(
     }
 
     override fun setScheduleForNotification(context: Context, sleep: Sleep, time: Long) {
-        alarmService.setRepeatingSchedule(context, sleep, time)
+        sleepAlarmReceiver.setRepeatingScheduleForSleep(sleep, time)
     }
 }

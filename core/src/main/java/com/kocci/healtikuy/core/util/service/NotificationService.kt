@@ -13,17 +13,29 @@ class NotificationService(private val context: Context) {
 
     private val manager = context.getSystemService(NotificationManager::class.java)
 
-    fun showNotification(sleep: Sleep) {
+    fun showNotificationForSleep(sleep: Sleep) {
         val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
         val builder = NotificationCompat.Builder(context, SLEEP_CHANNEL_ID)
             .setSmallIcon(R.drawable.baseline_edit_24)
             .setContentTitle("Sleep time!")
-            .setContentText("Dont forget to sleep!")
+            .setContentText("Don't forget to sleep!")
             .setSound(soundUri)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 
-        manager.notify(sleep.id, builder.build())
+        manager.notify(AlarmService.RQC_SLEEP, builder.build())
+    }
+
+    fun showNotificationForWater() {
+        val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        val builder = NotificationCompat.Builder(context, WATER_CHANNEL_ID)
+            .setSmallIcon(R.drawable.baseline_edit_24)
+            .setContentTitle("Don't forget your water intake!")
+            .setContentText("You still have to drink more water!")
+            .setSound(soundUri)
+
+        manager.notify(AlarmService.RQC_WATER, builder.build())
     }
 
     companion object {
