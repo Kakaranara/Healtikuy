@@ -16,11 +16,7 @@ class UserRepository @Inject constructor(
     private val userPreferenceManager: UserPreferencesManager,
     private val remoteDataSource: RemoteDataSource
 ) : IUserRepository {
-    override fun getRawUserPreference(): Flow<UserPreferences> {
-        return userPreferenceManager.userPreferences
-    }
-
-    override fun getUserDataAndUpdatePreference(): Flow<UserPreferences> {
+    override fun getUserPreferences(): Flow<UserPreferences> {
         return userPreferenceManager.userPreferences
     }
 

@@ -13,11 +13,11 @@ class UserInteractor @Inject constructor(
     private val repository: UserRepository,
 ) : UserUseCase {
     override fun getUserData(): Flow<UserPreferences> {
-        return repository.getUserDataAndUpdatePreference()
+        return repository.getUserPreferences()
     }
 
     override fun listenForStatusChanges(): Flow<HealthyStatusIndicator> {
-        return repository.getRawUserPreference().map {
+        return repository.getUserPreferences().map {
             val points = it.points
             val progress = calculateStatusPercentage(points)
             if (progress == GameRules.STATUS_COMPLETE_PERCENTAGE) {
