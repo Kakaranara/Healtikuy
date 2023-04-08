@@ -58,8 +58,9 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     //? lifecycle
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
 
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
 }
 
 kapt{
