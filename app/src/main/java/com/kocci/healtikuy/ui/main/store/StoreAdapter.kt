@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.kocci.healtikuy.MyApplication
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.util.store.CharacterInStore
 
@@ -17,11 +16,11 @@ class StoreAdapter(private val item: List<CharacterInStore>, private val activit
     RecyclerView.Adapter<StoreAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: CharacterInStore) {
-            val name: TextView = itemView.findViewById(R.id.tvStoreItemName)
-            val image: ImageView = itemView.findViewById(R.id.imgStoreItemAvatar)
-            val price: TextView = itemView.findViewById(R.id.tvStoreItemPrice)
+            val name: TextView = itemView.findViewById(R.id.imgStoreItemName2)
+            val image: ImageView = itemView.findViewById(R.id.imgStoreItemAvatar2)
+            val price: TextView = itemView.findViewById(R.id.imgStoreItemPrice2)
 
-            name.text = item.name
+            name.text = item.name.replace("_"," ")
             price.text = item.price.toString()
 
             val resources = activityContext.resources
@@ -35,7 +34,8 @@ class StoreAdapter(private val item: List<CharacterInStore>, private val activit
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_store, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_store_gridversion, parent, false)
         return ViewHolder(view)
     }
 

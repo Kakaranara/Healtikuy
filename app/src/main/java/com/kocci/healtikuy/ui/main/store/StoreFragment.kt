@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.kocci.healtikuy.R
+import androidx.recyclerview.widget.GridLayoutManager
 import com.kocci.healtikuy.core.util.store.generateCharacterInStore
 import com.kocci.healtikuy.databinding.FragmentStoreBinding
 
@@ -26,7 +25,7 @@ class StoreFragment : Fragment() {
     private fun setupAdapter() {
         val list = generateCharacterInStore()
         val mAdapter = StoreAdapter(list, requireActivity())
-        val mLayoutManager = LinearLayoutManager(requireActivity())
+        val mLayoutManager = GridLayoutManager(requireActivity(), 3)
         binding.rvStore.apply {
             adapter = mAdapter
             layoutManager = mLayoutManager
