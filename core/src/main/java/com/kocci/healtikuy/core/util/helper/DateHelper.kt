@@ -8,6 +8,20 @@ object DateHelper {
     private const val FULL_DATE_FORMAT = "dd/MM/yyyy, HH:mm"
     private const val TIME_FORMAT = "HH:mm"
 
+    const val secondInMill = 1000
+    const val minuteInMill = secondInMill * 60
+    const val hourInMill = minuteInMill * 60
+    const val dayInMill = hourInMill * 24
+
+    fun dayTimeElapsed(from: Long): Int {
+        val timeNow = System.currentTimeMillis()
+        val timeDifferent = timeNow - from
+
+        val dayElapsed = timeDifferent / dayInMill
+
+        return dayElapsed.toInt()
+    }
+
     fun isToday(time: Long): Boolean {
         val calendarNow = Calendar.getInstance()
         val calendarSet = Calendar.getInstance()
