@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/imgStoreCoin"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:contentDescription="@string/image_of_coin"
@@ -31,9 +31,10 @@
 
         <TextView
             android:id="@+id/tvStoreCoin"
+            style="@style/TextAppearance.Material3.TitleMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/imgStoreCoin"
             app:layout_constraintStart_toEndOf="@id/imgStoreCoin"
             app:layout_constraintTop_toTopOf="@+id/imgStoreCoin"
@@ -44,7 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
