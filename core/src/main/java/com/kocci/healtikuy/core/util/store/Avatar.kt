@@ -1,11 +1,11 @@
 package com.kocci.healtikuy.core.util.store
 
-enum class Avatar(val lowerNames: String) {
-    POPEYE("popeye"),
-    FINN("finn"),
-    ICE_KING("ice_king"),
-    BRUTUS("brutus"),
-    HELLO_KITTY("hello_kitty"),
+enum class Avatar(val lowerNames: String, val prices: Int) {
+    POPEYE("popeye", 800),
+    FINN("finn", 100),
+    ICE_KING("ice_king", 200),
+    BRUTUS("brutus", 200),
+    HELLO_KITTY("hello_kitty", 400),
 }
 
 data class CharacterInStore(
@@ -14,11 +14,11 @@ data class CharacterInStore(
 )
 
 fun generateCharacterInStore() = listOf<CharacterInStore>(
-    CharacterInStore(Avatar.FINN.lowerNames, 100),
-    CharacterInStore(Avatar.ICE_KING.lowerNames, 200),
-    CharacterInStore(Avatar.BRUTUS.lowerNames, 200),
-    CharacterInStore(Avatar.HELLO_KITTY.lowerNames, 400),
-    CharacterInStore(Avatar.POPEYE.lowerNames, 800),
+    CharacterInStore(Avatar.FINN.lowerNames, Avatar.FINN.prices),
+    CharacterInStore(Avatar.ICE_KING.lowerNames, Avatar.ICE_KING.prices),
+    CharacterInStore(Avatar.BRUTUS.lowerNames, Avatar.BRUTUS.prices),
+    CharacterInStore(Avatar.HELLO_KITTY.lowerNames, Avatar.HELLO_KITTY.prices),
+    CharacterInStore(Avatar.POPEYE.lowerNames, Avatar.POPEYE.prices),
 )
 
 fun main() {

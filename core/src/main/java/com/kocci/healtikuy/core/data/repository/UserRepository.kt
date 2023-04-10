@@ -7,6 +7,7 @@ import com.kocci.healtikuy.core.data.remote.RemoteDataSource
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.model.UserPreferences
 import com.kocci.healtikuy.core.domain.repository.IUserRepository
+import com.kocci.healtikuy.core.util.store.CharacterInStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
@@ -43,5 +44,9 @@ class UserRepository @Inject constructor(
             emit(Async.Error(e.message.toString()))
         }
 
+    }
+
+    override suspend fun buyAvatar(characterInStore: CharacterInStore): Flow<Async<Unit>> {
+        TODO("Not yet implemented")
     }
 }
