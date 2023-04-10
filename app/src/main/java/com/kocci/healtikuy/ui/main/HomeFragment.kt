@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,6 +16,7 @@ import com.kocci.healtikuy.core.constant.GameRules
 import com.kocci.healtikuy.core.domain.usecase.HealthyStatusIndicator
 import com.kocci.healtikuy.databinding.FragmentHomeBinding
 import com.kocci.healtikuy.util.extension.showToast
+import com.kocci.healtikuy.util.helper.DrawableHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
 
@@ -47,6 +49,12 @@ class HomeFragment : Fragment(), View.OnClickListener {
         }
 
         viewModel.getUserData().observe(viewLifecycleOwner) {
+            binding.imgAvatar.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireActivity(),
+                    DrawableHelper.getIdentifier(requireActivity(), it.avatar)
+                )
+            )
             binding.apply {
                 tvName.text = it.username
                 tvCoin.text = it.coin.toString()

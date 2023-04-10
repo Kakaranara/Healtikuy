@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -12,6 +13,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.databinding.FragmentEditProfileBinding
 import com.kocci.healtikuy.util.extension.showToast
+import com.kocci.healtikuy.util.helper.DrawableHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,6 +29,12 @@ class EditProfileFragment : Fragment() {
         val userPreferences = args.userdata
 
         binding.etUsernameEditProfile.setText(userPreferences.username)
+        binding.imgAvatarEditProfile.setImageDrawable(
+            ContextCompat.getDrawable(
+                requireActivity(),
+                DrawableHelper.getIdentifier(requireActivity(), userPreferences.avatar)
+            )
+        )
 
         binding.btnSubmit.setOnClickListener {
             val username = binding.etUsernameEditProfile.text.toString()

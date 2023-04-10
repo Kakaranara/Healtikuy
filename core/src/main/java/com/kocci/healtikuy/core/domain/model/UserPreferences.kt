@@ -10,5 +10,6 @@ data class UserPreferences(
     var coin: Int,
     var username: String,
     var email: String,
-    var photoUrl: String,
+    var avatar: String,
+    var inventory : Set<String>
 ) : Parcelable

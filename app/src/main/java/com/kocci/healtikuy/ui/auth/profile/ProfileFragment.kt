@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.core.domain.model.UserPreferences
 import com.kocci.healtikuy.databinding.FragmentProfileBinding
+import com.kocci.healtikuy.util.helper.DrawableHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -26,6 +28,12 @@ class ProfileFragment : Fragment() {
 
         viewModel.userData.observe(viewLifecycleOwner) { userData ->
             userPreference = userData
+            binding.imgProfile.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireActivity(),
+                    DrawableHelper.getIdentifier(requireActivity(), userData.avatar)
+                )
+            )
             binding.apply {
                 tvProfileEmail.text = userData.email
                 tvProfileName.text = userData.username

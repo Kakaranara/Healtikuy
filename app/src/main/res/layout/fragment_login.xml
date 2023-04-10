@@ -63,7 +63,7 @@
             android:id="@+id/etLoginPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="kucing123"
+            android:text="555555"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>

@@ -30,12 +30,12 @@ class UserRepository @Inject constructor(
         try {
             val updateProfileRequest = userProfileChangeRequest {
                 displayName = userData.username
-                photoUri = userData.photoUrl.toUri()
+                photoUri = userData.avatar.toUri()
             }
             firebaseUser?.updateProfile(updateProfileRequest)?.await()
             userPreferenceManager.updateUserProfile(
                 userData.username,
-                userData.photoUrl,
+                userData.avatar,
                 userData.email
             )
             emit(Async.Success(Unit))

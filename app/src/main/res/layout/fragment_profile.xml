@@ -14,7 +14,7 @@
         tools:background="@color/black" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imgProfile"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginStart="16dp"
@@ -30,9 +30,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2">
+        app:layout_constraintBottom_toBottomOf="@+id/imgProfile"
+        app:layout_constraintStart_toEndOf="@+id/imgProfile"
+        app:layout_constraintTop_toTopOf="@+id/imgProfile">
 
         <TextView
             android:id="@+id/tvProfileName"
@@ -59,7 +59,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/edit_profile"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imgProfile" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

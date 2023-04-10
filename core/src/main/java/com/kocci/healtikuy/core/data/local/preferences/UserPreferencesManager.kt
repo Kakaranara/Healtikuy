@@ -3,7 +3,6 @@ package com.kocci.healtikuy.core.data.local.preferences
 import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
-import com.kocci.healtikuy.core.constant.Dummy
 import com.kocci.healtikuy.core.constant.GameRules
 import com.kocci.healtikuy.core.domain.model.UserPreferences
 import kotlinx.coroutines.flow.Flow
@@ -22,8 +21,9 @@ class UserPreferencesManager @Inject constructor(
         val POINTS = longPreferencesKey("points")
         val USERNAME = stringPreferencesKey("username")
         val EMAIL = stringPreferencesKey("email")
-        val PHOTO_URL = stringPreferencesKey("photo_url")
+        val AVATAR = stringPreferencesKey("avatar")
         val COIN = intPreferencesKey("coin")
+        val INVENTORY = stringSetPreferencesKey("inventory")
 
         //? FEATURE PREFERENCES
         val SLEEP_TIME = longPreferencesKey("sleep_time")
@@ -34,11 +34,13 @@ class UserPreferencesManager @Inject constructor(
         val points = preferences[PreferenceKeys.POINTS] ?: GameRules.FIRST_TIME_POINTS
         val username = preferences[PreferenceKeys.USERNAME] ?: "Username not set"
         val email = preferences[PreferenceKeys.EMAIL] ?: "Email not set"
-        val photoUrl =
-            preferences[PreferenceKeys.PHOTO_URL] ?: Dummy.DummyImage
+        val avatar =
+            preferences[PreferenceKeys.AVATAR] ?: "finn"
         val coin = preferences[PreferenceKeys.COIN] ?: 0
+        val inventory = preferences[PreferenceKeys.INVENTORY] ?: setOf()
 
-        val userPref = UserPreferences(lastLogin, points, coin, username, email, photoUrl)
+        val userPref =
+            UserPreferences(lastLogin, points, coin, username, email, avatar, inventory)
         Log.e(TAG, "prefManager: $userPref")
         return@map userPref
     }
@@ -47,17 +49,29 @@ class UserPreferencesManager @Inject constructor(
         preferences[PreferenceKeys.SLEEP_TIME]
     }
 
-    suspend fun updateUserProfile(username: String, photoUrl: String, email: String) {
+    suspend fun updateUserProfile(username: String, avatar: String, email: String) {
         dataStore.edit { pref ->
             pref[PreferenceKeys.EMAIL] = email
             pref[PreferenceKeys.USERNAME] = username
-            pref[PreferenceKeys.PHOTO_URL] = photoUrl
+            pref[PreferenceKeys.AVATAR] = avatar
         }
     }
 
     suspend fun changeSleepTime(time: Long) {
         dataStore.edit { preferences ->
             preferences[PreferenceKeys.SLEEP_TIME] = time
+        }
+    }
+
+    suspend fun loginSync(userPreferences: UserPreferences) {
+        dataStore.edit { pref ->
+            pref[PreferenceKeys.EMAIL] = userPreferences.email
+            pref[PreferenceKeys.USERNAME] = userPreferences.username
+            pref[PreferenceKeys.AVATAR] = userPreferences.avatar
+            pref[PreferenceKeys.COIN] = userPreferences.coin
+            pref[PreferenceKeys.POINTS] = userPreferences.points
+            pref[PreferenceKeys.INVENTORY] = userPreferences.inventory
+            pref[PreferenceKeys.LAST_LOGIN] = userPreferences.lastLogin
         }
     }
 

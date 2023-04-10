@@ -9,7 +9,7 @@ import javax.inject.Singleton
 @Singleton
 class RemoteDataSource @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
-    private val rootRef: FirebaseFirestore,
+    private val firestore: FirebaseFirestore,
 ) {
 
     fun getFirebaseUser(): FirebaseUser? {
@@ -18,6 +18,10 @@ class RemoteDataSource @Inject constructor(
 
     fun getFirebaseAuth(): FirebaseAuth {
         return firebaseAuth
+    }
+
+    fun getFirestore() : FirebaseFirestore{
+        return firestore
     }
 
 }
