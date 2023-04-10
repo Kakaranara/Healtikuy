@@ -10,6 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.util.store.CharacterInStore
 import com.kocci.healtikuy.core.util.store.generateCharacterInStore
 import com.kocci.healtikuy.databinding.FragmentStoreBinding
@@ -41,7 +43,30 @@ class StoreFragment : Fragment() {
         val mAdapter = StoreAdapter(list, requireActivity())
         mAdapter.listener = object : StoreAdapter.Listener {
             override fun onItemClick(item: CharacterInStore) {
-                showToast(viewModel.isCoinEnough(coin, item).toString())
+                MaterialAlertDialogBuilder(requireActivity())
+                    .setTitle("Are you sure?")
+                    .setMessage("You want to buy ${item.name} with ${item.price} Coin?")
+                    .setPositiveButton("YES") { dialog, which ->
+                        if (viewModel.isCoinEnough(coin, item)) {
+                            viewModel.buyAvatar(item).observe(viewLifecycleOwner) {
+                                when (it) {
+                                    is Async.Error -> {
+                                        showToast(it.msg)
+                                    }
+                                    Async.Loading -> {
+                                        showToast("loading")
+                                    }
+                                    is Async.Success -> {
+                                        showToast("success")
+                                    }
+                                }
+                            }
+                        } else {
+                            showToast("Sorry, not enough coin")
+                        }
+                    }.setNegativeButton("CANCEL") { dialog, which ->
+
+                    }.show()
             }
         }
         val mLayoutManager = GridLayoutManager(requireActivity(), 3)

@@ -57,6 +57,18 @@ class UserPreferencesManager @Inject constructor(
         }
     }
 
+    suspend fun changeInventory(item: Set<String>) {
+        dataStore.edit { pref ->
+            pref[PreferenceKeys.INVENTORY] = item
+        }
+    }
+
+    suspend fun changeCoin(item: Int){
+        dataStore.edit { pref ->
+            pref[PreferenceKeys.COIN] = item
+        }
+    }
+
     suspend fun changeSleepTime(time: Long) {
         dataStore.edit { preferences ->
             preferences[PreferenceKeys.SLEEP_TIME] = time

@@ -9,5 +9,5 @@ interface IUserRepository {
     fun getUserPreferences(): Flow<UserPreferences>
     fun updateUserProfile(userData: UserPreferences): Flow<Async<Unit>>
     fun isUserLogin(): Boolean
-    suspend fun buyAvatar(characterInStore: CharacterInStore): Flow<Async<Unit>>
+    fun buyAvatar(characterInStore: CharacterInStore): Flow<Async<Unit>>
 }

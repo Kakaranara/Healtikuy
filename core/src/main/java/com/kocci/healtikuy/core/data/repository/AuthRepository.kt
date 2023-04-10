@@ -45,10 +45,11 @@ class AuthRepository @Inject constructor(
             }
             val fbUser = firebaseAuth.currentUser as FirebaseUser
             fbUser.updateProfile(profileUpdate).await()
-            preferencesManager.updateUserProfile(
-                username = fbUser.displayName.toString(),
-                avatar = fbUser.photoUrl.toString(),
-                email = fbUser.email.toString()
+            preferencesManager.loginSync(
+                FirstTimeService.getFirstTimeSync(
+                    fbUser.displayName.toString(),
+                    fbUser.email.toString()
+                )
             )
             val firestoreRef = remoteDataSource.getFirestore()
             firestoreRef.collection(FsCollection.USERS)

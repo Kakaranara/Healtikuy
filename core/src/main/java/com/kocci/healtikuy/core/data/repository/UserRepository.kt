@@ -1,14 +1,17 @@
 package com.kocci.healtikuy.core.data.repository
 
 import androidx.core.net.toUri
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.kocci.healtikuy.core.data.local.preferences.UserPreferencesManager
 import com.kocci.healtikuy.core.data.remote.RemoteDataSource
+import com.kocci.healtikuy.core.data.remote.firestore.FsCollection
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.model.UserPreferences
 import com.kocci.healtikuy.core.domain.repository.IUserRepository
 import com.kocci.healtikuy.core.util.store.CharacterInStore
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -46,7 +49,30 @@ class UserRepository @Inject constructor(
 
     }
 
-    override suspend fun buyAvatar(characterInStore: CharacterInStore): Flow<Async<Unit>> {
-        TODO("Not yet implemented")
+    override fun buyAvatar(characterInStore: CharacterInStore): Flow<Async<Unit>> = flow {
+        emit(Async.Loading)
+        try {
+            val preference = userPreferenceManager.userPreferences.first()
+            val newInventory = preference.inventory.toMutableSet().apply {
+                add(characterInStore.name)
+            }.toSet()
+            val coinNow = preference.coin - characterInStore.price
+            userPreferenceManager.changeCoin(coinNow)
+            userPreferenceManager.changeInventory(newInventory)
+
+            val fbUser = remoteDataSource.getFirebaseUser() as FirebaseUser
+            val firestore = remoteDataSource.getFirestore()
+//            val newData = hashMapOf(
+//                "coin" to coinNow,
+//                "avatar" to newInventory.toList()
+//            )
+//            firestore.collection(FsCollection.USERS).document(fbUser.uid).set(newData).await()
+            //! set here is wrong
+            //TODO : UPDATE JUST COIN AND AVATAR IN REMOTE
+
+            emit(Async.Success(Unit))
+        } catch (e: Exception) {
+            emit(Async.Error(e.message.toString()))
+        }
     }
 }

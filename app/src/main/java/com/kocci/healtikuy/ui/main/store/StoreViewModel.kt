@@ -14,6 +14,7 @@ class StoreViewModel @Inject constructor(
     private val userUseCase: UserUseCase,
 ) : ViewModel() {
     val userData = userUseCase.getUserData().asLiveData()
-
     fun isCoinEnough(coin: Int, item: CharacterInStore) = storeUseCase.isCoinEnough(coin, item)
+    fun buyAvatar(item: CharacterInStore) = storeUseCase.buyAvatar(item).asLiveData()
+
 }
