@@ -56,7 +56,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 )
             )
             binding.apply {
-                tvName.text = it.username
+                tvName.text = it.username.replaceFirstChar(Char::titlecase)
                 tvCoin.text = it.coin.toString()
             }
         }
