@@ -62,13 +62,11 @@ class UserRepository @Inject constructor(
 
             val fbUser = remoteDataSource.getFirebaseUser() as FirebaseUser
             val firestore = remoteDataSource.getFirestore()
-//            val newData = hashMapOf(
-//                "coin" to coinNow,
-//                "avatar" to newInventory.toList()
-//            )
-//            firestore.collection(FsCollection.USERS).document(fbUser.uid).set(newData).await()
-            //! set here is wrong
-            //TODO : UPDATE JUST COIN AND AVATAR IN REMOTE
+            val newData = hashMapOf(
+                "coin" to coinNow,
+                "avatar" to newInventory.toList()
+            )
+            firestore.collection(FsCollection.USERS).document(fbUser.uid).update(newData).await()
 
             emit(Async.Success(Unit))
         } catch (e: Exception) {
