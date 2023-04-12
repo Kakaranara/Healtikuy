@@ -5,7 +5,6 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.kocci.healtikuy.core.data.local.preferences.UserPreferencesManager
 import com.kocci.healtikuy.core.data.remote.RemoteDataSource
-import com.kocci.healtikuy.core.data.remote.firestore.FsCollection
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.model.UserPreferences
 import com.kocci.healtikuy.core.domain.repository.IUserRepository
@@ -38,13 +37,10 @@ class UserRepository @Inject constructor(
             }
             firebaseUser.updateProfile(updateProfileRequest).await()
             userPreferenceManager.updateUserProfile(
-                userData.username, userData.avatar, userData.email
+                userData.username,
+                userData.avatar,
             )
-            val firestore = remoteDataSource.getFirestore()
-            val newAvatar: HashMap<String, Any> = hashMapOf("avatar" to userData.avatar)
-            firestore.collection(FsCollection.USERS).document(firebaseUser.uid).update(
-                newAvatar
-            ).await()
+            remoteDataSource.updateAvatar(firebaseUser.uid, userData.avatar)
             emit(Async.Success(Unit))
         } catch (e: Exception) {
             emit(Async.Error(e.message.toString()))
@@ -64,12 +60,7 @@ class UserRepository @Inject constructor(
             userPreferenceManager.changeInventory(newInventory)
 
             val fbUser = remoteDataSource.getFirebaseUser() as FirebaseUser
-            val firestore = remoteDataSource.getFirestore()
-            val newData = hashMapOf(
-                "coin" to coinNow, "inventory" to newInventory.toList()
-            )
-            firestore.collection(FsCollection.USERS).document(fbUser.uid).update(newData).await()
-
+            remoteDataSource.updateAfterBuyAvatar(fbUser.uid, coinNow, newInventory)
             emit(Async.Success(Unit))
         } catch (e: Exception) {
             emit(Async.Error(e.message.toString()))

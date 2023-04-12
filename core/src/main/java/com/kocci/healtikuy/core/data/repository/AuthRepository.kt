@@ -6,7 +6,6 @@ import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.kocci.healtikuy.core.data.local.LocalDataSource
 import com.kocci.healtikuy.core.data.local.preferences.UserPreferencesManager
 import com.kocci.healtikuy.core.data.remote.RemoteDataSource
-import com.kocci.healtikuy.core.data.remote.firestore.FsCollection
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.model.UserPreferences
 import com.kocci.healtikuy.core.domain.repository.IAuthRepository
@@ -40,23 +39,17 @@ class AuthRepository @Inject constructor(
             firebaseAuth.createUserWithEmailAndPassword(
                 form.email, form.password
             ).await()
-            val profileUpdate = userProfileChangeRequest {
-                displayName = form.username
-            }
             val fbUser = firebaseAuth.currentUser as FirebaseUser
-            fbUser.updateProfile(profileUpdate).await()
+            fbUser.updateProfile(userProfileChangeRequest {
+                displayName = form.username
+            }).await()
             preferencesManager.loginSync(
                 FirstTimeService.getFirstTimeSync(
                     fbUser.displayName.toString(),
                     fbUser.email.toString()
                 )
             )
-            val firestoreRef = remoteDataSource.getFirestore()
-            firestoreRef.collection(FsCollection.USERS)
-                .document(fbUser.uid)
-                .set(FirstTimeService.getFirstTimeAttributes())
-                .await()
-
+            remoteDataSource.createUserDataFirstTime(fbUser.uid)
             emit(Async.Success(Unit))
         } catch (e: Exception) {
             Log.e(TAG, "registerUserWithEmailPassword: ${e.message.toString()}")
@@ -73,14 +66,8 @@ class AuthRepository @Inject constructor(
             preferencesManager.updateUserProfile(
                 username = fbUser.displayName.toString(),
                 avatar = fbUser.photoUrl.toString(),
-                email = fbUser.email.toString()
             )
-            val firestoreRef = remoteDataSource.getFirestore()
-            val snapshot = firestoreRef.collection(FsCollection.USERS)
-                .document(fbUser.uid)
-                .get()
-                .await()
-
+            val snapshot = remoteDataSource.getUserData(fbUser.uid)
             val remoteData = snapshot.data
             remoteData?.let { map ->
                 val newUsers = UserPreferences(
@@ -94,7 +81,6 @@ class AuthRepository @Inject constructor(
                 )
                 preferencesManager.loginSync(newUsers)
             } ?: Log.e(TAG, "REMOTE DATA IS NULL")
-
             emit(Async.Success(Unit))
         } catch (e: Exception) {
             emit(Async.Error(e.message.toString()))

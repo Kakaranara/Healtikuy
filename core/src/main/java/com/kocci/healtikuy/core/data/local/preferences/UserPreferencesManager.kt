@@ -49,9 +49,8 @@ class UserPreferencesManager @Inject constructor(
         preferences[PreferenceKeys.SLEEP_TIME]
     }
 
-    suspend fun updateUserProfile(username: String, avatar: String, email: String) {
+    suspend fun updateUserProfile(username: String, avatar: String) {
         dataStore.edit { pref ->
-            pref[PreferenceKeys.EMAIL] = email
             pref[PreferenceKeys.USERNAME] = username
             pref[PreferenceKeys.AVATAR] = avatar
         }
@@ -63,7 +62,7 @@ class UserPreferencesManager @Inject constructor(
         }
     }
 
-    suspend fun changeCoin(item: Int){
+    suspend fun changeCoin(item: Int) {
         dataStore.edit { pref ->
             pref[PreferenceKeys.COIN] = item
         }
