@@ -7,19 +7,8 @@
     <string name="leaderboards">Leaderboards</string>
     <string name="logout">Logout</string>
     <string name="exercise">Exercise</string>
-    <string name="water_intake">Water Intake</string>
     <string name="nutrition">Nutrition</string>
-    <string name="sleep">Sleep</string>
     <string name="sun_exposure">Sun Exposure</string>
-    <string name="number_of_glass_of_water_you_drink">number of glass of water you drink</string>
-    <string name="status_points">Points : %d / %d</string>
-    <string name="status_low">Cheers up! You can do this!</string>
-    <string name="status_mid">You can do this!</string>
-    <string name="status_near_complete">Butuh sedikit lagi perjalanan menuju pola hidup sehat!</string>
-    <string name="status_completed">Selamat! anda sudah menjalankan pola hidup sehat. Pertahankanlah! </string>
-    <string name="water_intake_low">You need at least 8 glass everyday</string>
-    <string name="water_intake_enough">Nice! you\'ve enough water for today!</string>
-    <string name="water_intake_glass_left">%d Glass left</string>
     <string name="set_time">Set Time</string>
     <string name="time_not_set">Time is not set yet</string>
     <string name="complete">Complete</string>
@@ -35,7 +24,6 @@
     <string name="already_a_user">Already a user?</string>
     <string name="username">Username</string>
     <string name="not_a_user">Not a user?</string>
-    <string name="ways_to_healthy">Langkah Menuju Hidup Sehat</string>
     <string name="an_image_of_avatar">An image of avatar</string>
     <string name="image_of_water">Image of water</string>
     <string name="image_of_sleep_person">Image of sleep person</string>
@@ -44,4 +32,36 @@
     <string name="image_of_sun_exposure">image of sun exposure</string>
     <string name="challenges">Challenges</string>
     <string name="image_of_coin">Image of coin</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="change_avatar">Change Avatar</string>
+    <string name="submit">Submit</string>
+    <string name="description_when_time_not_set">a notification will appear once you set the time.</string>
+    <string name="button_for_complete_sleep_mission">button for complete sleep mission</string>
+
+    <!-- Home Related -->
+    <string name="status_points">Points : %d / %d</string>
+    <string name="status_low">Cheers up! You can do this!</string>
+    <string name="status_mid">You can do this!</string>
+    <string name="status_near_complete">Butuh sedikit lagi perjalanan menuju pola hidup sehat!</string>
+    <string name="status_completed">Selamat! anda sudah menjalankan pola hidup sehat. Pertahankanlah! </string>
+    <string name="ways_to_healthy">Langkah Menuju Hidup Sehat</string>
+
+
+    <!-- Water Related -->
+    <string name="water_intake">Water Intake</string>
+    <string name="number_of_glass_of_water_you_drink">number of glass of water you drink</string>
+    <string name="water_intake_low">You need at least 8 glass everyday</string>
+    <string name="water_intake_enough">Nice! you\'ve enough water for today!</string>
+    <string name="water_intake_glass_left">%d Glass left</string>
+
+    <!-- Sleep Related -->
+    <string name="sleep">Sleep</string>
+    <string name="sleep_description_after_complete">Make Sure to turn off your phone. Happy Sleep!</string>
+    <string name="sleep_description_before_sleep">Make sure you have turn off your phone after pressing the button!</string>
+    <string name="sleep_description_not_in_time">You can press this button in within 1 hours of your sleep schedule.</string>
+
+    <!-- Exercise Related -->
+    <!-- Nutrition Related -->
+    <!-- Sun Related -->
+
 </resources>

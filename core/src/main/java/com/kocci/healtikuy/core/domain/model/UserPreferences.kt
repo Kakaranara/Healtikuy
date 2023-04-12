@@ -1,6 +1,15 @@
 package com.kocci.healtikuy.core.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class UserPreferences(
-    val lastLogin: Long,
-    val points: Long
-)
+    var lastLogin: Long,
+    var points: Long,
+    var coin: Int,
+    var username: String,
+    var email: String,
+    var avatar: String,
+    var inventory : Set<String>
+) : Parcelable

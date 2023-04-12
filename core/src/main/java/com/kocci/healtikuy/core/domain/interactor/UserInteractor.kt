@@ -1,30 +1,23 @@
 package com.kocci.healtikuy.core.domain.interactor
 
 import com.kocci.healtikuy.core.constant.GameRules
-import com.kocci.healtikuy.core.data.repository.UserPreferencesRepository
+import com.kocci.healtikuy.core.data.remote.model.Async
+import com.kocci.healtikuy.core.data.repository.UserRepository
 import com.kocci.healtikuy.core.domain.model.UserPreferences
 import com.kocci.healtikuy.core.domain.usecase.HealthyStatusIndicator
-import com.kocci.healtikuy.core.domain.usecase.PreferencesUseCase
+import com.kocci.healtikuy.core.domain.usecase.UserUseCase
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
-class PreferencesInteractor @Inject constructor(
-    private val repository: UserPreferencesRepository
-) : PreferencesUseCase {
-    override fun getUserPreferences(): Flow<UserPreferences> {
-        return repository.userPreferences
-    }
-
-    override suspend fun updatePoints(points: Long) {
-        repository.addPoints(points)
-    }
-
-    override suspend fun updateLastLogin() {
-        repository.setLastLoginToToday()
+class UserInteractor @Inject constructor(
+    private val repository: UserRepository,
+) : UserUseCase {
+    override fun getUserData(): Flow<UserPreferences> {
+        return repository.getUserPreferences()
     }
 
     override fun listenForStatusChanges(): Flow<HealthyStatusIndicator> {
-        return repository.userPreferences.map {
+        return repository.getUserPreferences().map {
             val points = it.points
             val progress = calculateStatusPercentage(points)
             if (progress == GameRules.STATUS_COMPLETE_PERCENTAGE) {
@@ -48,5 +41,11 @@ class PreferencesInteractor @Inject constructor(
         }
     }
 
+    override fun isUserLogin(): Boolean {
+        return repository.isUserLogin()
+    }
 
+    override fun updateProfile(userData: UserPreferences): Flow<Async<Unit>> {
+        return repository.updateUserProfile(userData)
+    }
 }

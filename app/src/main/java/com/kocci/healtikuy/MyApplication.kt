@@ -1,7 +1,7 @@
 package com.kocci.healtikuy
 
 import android.app.Application
-import com.kocci.healtikuy.core.util.service.NotificationService
+import com.kocci.healtikuy.core.service.NotificationService
 import dagger.hilt.android.HiltAndroidApp
 
 //? Generate Hilt file for Injection

@@ -2,15 +2,10 @@ package com.kocci.healtikuy.core.data.remote
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
-import com.kocci.healtikuy.core.data.remote.model.Async
-import com.kocci.healtikuy.core.domain.usecase.LoginForm
-import com.kocci.healtikuy.core.domain.usecase.RegisterForm
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import com.kocci.healtikuy.core.data.remote.firestore.FsCollection
+import com.kocci.healtikuy.core.util.helper.FirstTimeService
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -18,40 +13,47 @@ import javax.inject.Singleton
 @Singleton
 class RemoteDataSource @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
-    private val rootRef: FirebaseFirestore,
+    private val firestore: FirebaseFirestore,
 ) {
 
-    fun getUserInstance(): FirebaseUser? {
+    fun getFirebaseUser(): FirebaseUser? {
         return firebaseAuth.currentUser
     }
 
-    fun registerUserWithEmailPassword(registerForm: RegisterForm): Flow<Async<Unit>> = flow {
-        emit(Async.Loading)
-        try {
-            firebaseAuth.createUserWithEmailAndPassword(
-                registerForm.email,
-                registerForm.password
-            ).await()
-            val profileUpdate = userProfileChangeRequest {
-                displayName = registerForm.username
-            }
-            firebaseAuth.currentUser?.updateProfile(profileUpdate)?.await()
-            emit(Async.Success(Unit))
-        } catch (e: Exception) {
-            emit(Async.Error(e.message.toString()))
-        }
+    fun getFirebaseAuth(): FirebaseAuth {
+        return firebaseAuth
+    }
 
-    }.flowOn(Dispatchers.IO)
+    fun getFirestore(): FirebaseFirestore {
+        return firestore
+    }
 
+    suspend fun createUserDataFirstTime(uid: String) {
+        firestore.collection(FsCollection.USERS)
+            .document(uid)
+            .set(FirstTimeService.getFirstTimeAttributes())
+            .await()
+    }
 
-    fun loginUserWithEmailPassword(loginForm: LoginForm): Flow<Async<Unit>> = flow {
-        emit(Async.Loading)
-        try {
-            firebaseAuth.signInWithEmailAndPassword(loginForm.email, loginForm.password).await()
-            emit(Async.Success(Unit))
-        } catch (e: Exception) {
-            emit(Async.Error(e.message.toString()))
-        }
+    suspend fun getUserData(uid: String): DocumentSnapshot {
+        return firestore.collection(FsCollection.USERS)
+            .document(uid)
+            .get()
+            .await()
+    }
+
+    suspend fun updateAvatar(uid: String, newAvatar: String) {
+        val avatar: HashMap<String, Any> = hashMapOf("avatar" to newAvatar)
+        firestore.collection(FsCollection.USERS).document(uid).update(
+            avatar
+        ).await()
+    }
+
+    suspend fun updateAfterBuyAvatar(uid: String, coin: Int, inventory: Set<String>) {
+        val newData = hashMapOf(
+            "coin" to coin, "inventory" to inventory.toList()
+        )
+        firestore.collection(FsCollection.USERS).document(uid).update(newData).await()
     }
 
 }

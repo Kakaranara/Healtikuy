@@ -9,7 +9,7 @@
         android:id="@+id/homeFragment"
         android:name="com.kocci.healtikuy.ui.main.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment"
@@ -35,7 +35,7 @@
         android:id="@+id/loginFragment"
         android:name="com.kocci.healtikuy.ui.auth.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
@@ -79,7 +79,11 @@
         android:id="@+id/profileFragment"
         android:name="com.kocci.healtikuy.ui.auth.profile.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/leaderboardsFragment"
         android:name="com.kocci.healtikuy.ui.main.leaderboards.LeaderboardsFragment"
@@ -88,6 +92,15 @@
     <fragment
         android:id="@+id/storeFragment"
         android:name="com.kocci.healtikuy.ui.main.store.StoreFragment"
-        android:label="fragment_store"
+        android:label="Store"
         tools:layout="@layout/fragment_store" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.kocci.healtikuy.ui.auth.profile.edit.EditProfileFragment"
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_edit_profile">
+        <argument
+            android:name="userdata"
+            app:argType="com.kocci.healtikuy.core.domain.model.UserPreferences" />
+    </fragment>
 </navigation>

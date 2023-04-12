@@ -1,13 +1,7 @@
 package com.kocci.healtikuy.di
 
-import com.kocci.healtikuy.core.domain.interactor.AuthInteractor
-import com.kocci.healtikuy.core.domain.interactor.WaterIntakeInteractor
-import com.kocci.healtikuy.core.domain.interactor.PreferencesInteractor
-import com.kocci.healtikuy.core.domain.interactor.SleepInteractor
-import com.kocci.healtikuy.core.domain.usecase.AuthUseCase
-import com.kocci.healtikuy.core.domain.usecase.PreferencesUseCase
-import com.kocci.healtikuy.core.domain.usecase.SleepUseCase
-import com.kocci.healtikuy.core.domain.usecase.WaterIntakeUseCase
+import com.kocci.healtikuy.core.domain.interactor.*
+import com.kocci.healtikuy.core.domain.usecase.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -26,7 +20,7 @@ abstract class AppModule {
 
     @Binds
     @ViewModelScoped
-    abstract fun bindPreferencesUseCase(preferencesInteractor: PreferencesInteractor): PreferencesUseCase
+    abstract fun bindPreferencesUseCase(preferencesInteractor: UserInteractor): UserUseCase
 
     @Binds
     @ViewModelScoped
@@ -39,5 +33,9 @@ abstract class AppModule {
     @Binds
     @ViewModelScoped
     abstract fun bindAuthUseCase(authInteractor: AuthInteractor) : AuthUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindStoreUseCase(storeUseCase: StoreInteractor) : StoreUseCase
 
 }

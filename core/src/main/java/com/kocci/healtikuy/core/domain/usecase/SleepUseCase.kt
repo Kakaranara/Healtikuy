@@ -22,5 +22,5 @@ interface SleepUseCase {
 
     suspend fun changeSetTime(time: Long)
     suspend fun insertNewData(sleep: Sleep)
-    suspend fun updateNewData(sleep: Sleep)
+    suspend fun completeMission(sleep: Sleep)
 }

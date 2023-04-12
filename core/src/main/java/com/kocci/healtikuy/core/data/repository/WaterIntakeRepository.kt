@@ -2,19 +2,26 @@ package com.kocci.healtikuy.core.data.repository
 
 import com.kocci.healtikuy.core.data.local.LocalDataSource
 import com.kocci.healtikuy.core.data.local.entity.WaterIntakeEntity
+import com.kocci.healtikuy.core.data.local.preferences.UserPreferencesManager
 import com.kocci.healtikuy.core.domain.repository.IWaterIntakeRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class WaterIntakeRepository @Inject constructor(
-    private val localDataSource: LocalDataSource
+    private val localDataSource: LocalDataSource,
+    private val preferenceManager : UserPreferencesManager
 ) : IWaterIntakeRepository {
     override fun getLatestWaterIntakeData(): Flow<WaterIntakeEntity?> =
         localDataSource.getWaterIntakeLastRow()
 
-    override suspend fun insertWaterIntake(entity: WaterIntakeEntity) =
+    override suspend fun insert(entity: WaterIntakeEntity) =
         localDataSource.insertWaterIntake(entity)
 
-    override suspend fun updateWaterIntake(entity: WaterIntakeEntity) =
+    override suspend fun update(entity: WaterIntakeEntity) =
         localDataSource.updateWaterIntake(entity)
+
+    override suspend fun updateAndAddPoints(entity: WaterIntakeEntity) {
+        localDataSource.updateWaterIntake(entity)
+        preferenceManager.addPoints(500)
+    }
 }

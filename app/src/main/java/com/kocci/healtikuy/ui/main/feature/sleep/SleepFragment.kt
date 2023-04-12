@@ -41,37 +41,36 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
         viewModel.isTimeSet.observe(viewLifecycleOwner) { sleepIndicator ->
             when (sleepIndicator) {
                 SleepIndicator.NotSet -> {
-                    showToast(sleepIndicator.toString())
-                    binding.btnSleepTime.apply {
-                        setOnClickListener(null)
-                        text = getString(R.string.set_time)
-                        setOnClickListener {
-                            TimePickerFragment().show(childFragmentManager, "sleep")
-                        }
-                    }
+                    buttonClickGoesToTimer()
                     binding.tvSleepTime.text = getString(R.string.time_not_set)
                     binding.btnChangeSleepTime.visibility = View.GONE
+                    binding.tvSleepDesc.text = getString(R.string.description_when_time_not_set)
                 }
                 is SleepIndicator.Set -> {
-                    showToast(sleepIndicator.toString())
                     binding.tvSleepTime.text = viewModel.showFormattedTime(sleepIndicator.data)
                     binding.btnSleepTime.text = getString(R.string.sleep)
                     binding.btnChangeSleepTime.visibility = View.VISIBLE
 
                     viewModel.getDataModel.observe(viewLifecycleOwner) { sleep ->
+                        showToast(sleep.toString())
                         if (sleep.isCompleted) {
                             binding.btnSleepTime.isEnabled = false
+                            binding.tvSleepDesc.text =
+                                getString(R.string.sleep_description_after_complete)
                         } else {
+                            buttonClickGoesToCompleteMission(sleep)
                             viewModel.isTheTimeWithin1Hours(sleepIndicator.data)
-                                .observe(viewLifecycleOwner) {
-                                    binding.btnSleepTime.isEnabled = it
+                                .observe(viewLifecycleOwner) { isWithinOneHours ->
+                                    if (!isWithinOneHours) {
+                                        binding.btnSleepTime.isEnabled = false
+                                        binding.tvSleepDesc.text =
+                                            getString(R.string.sleep_description_not_in_time)
+                                    } else {
+                                        binding.btnSleepTime.isEnabled = true
+                                        binding.tvSleepDesc.text =
+                                            getString(R.string.sleep_description_before_sleep)
+                                    }
                                 }
-                            binding.btnSleepTime.apply {
-                                setOnClickListener(null)
-                                setOnClickListener {
-                                    viewModel.completeMission(sleep)
-                                }
-                            }
                         }
                     }
                 }
@@ -87,6 +86,25 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
         }
     }
 
+    private fun buttonClickGoesToTimer() {
+        binding.btnSleepTime.apply {
+            setOnClickListener(null)
+            text = getString(R.string.set_time)
+            setOnClickListener {
+                TimePickerFragment().show(childFragmentManager, "sleep")
+            }
+        }
+    }
+
+    private fun buttonClickGoesToCompleteMission(sleepData: Sleep) {
+        binding.btnSleepTime.apply {
+            setOnClickListener(null)
+            setOnClickListener {
+                viewModel.completeMission(sleepData)
+            }
+        }
+    }
+
     override fun onTimeSet(tag: String?, hour: Int, minute: Int) {
         //? Handle the time dialog (when submitted)
         val cal = Calendar.getInstance()
@@ -94,7 +112,7 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
         cal.set(Calendar.MINUTE, minute)
 
         viewModel.setTime(cal.timeInMillis)
-        viewModel.setSchedule(requireActivity(), Sleep(), cal.timeInMillis)
+        viewModel.setSchedule(requireActivity().applicationContext, Sleep(), cal.timeInMillis)
         showToast("$hour : $minute")
     }
 

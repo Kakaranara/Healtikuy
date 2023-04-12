@@ -12,6 +12,7 @@ class DateTest {
     private val dateFormat = SimpleDateFormat("dd/MM/yyyy")
     private val yesterday = "22/3/2023"
     private val tomorrow = "24/3/2023"
+    private val example = "4/4/2023"
 
     @Test
     fun test() {
@@ -28,8 +29,14 @@ class DateTest {
         val date = Date(time)
         val str = dateFormat.format(date)
 
+        Assert.assertEquals("24/3/2023", str)
+    }
 
+    @Test
+    fun testElapsedTime() {
+        val beforeTimeExample = dateFormat.parse(example)!!.time
+        val elapsedDay = DateHelper.dayTimeElapsed(beforeTimeExample)
 
-        Assert.assertEquals("24/3/2023",str)
+        Assert.assertEquals(5, elapsedDay)
     }
 }

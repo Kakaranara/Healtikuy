@@ -21,7 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".core.util.service.AlarmService" />
+
+        <receiver android:name=".core.receiver.alarm.SleepAlarmReceiver" />
+        <receiver android:name=".core.receiver.alarm.WaterAlarmReceiver" />
     </application>
 
 </manifest>
