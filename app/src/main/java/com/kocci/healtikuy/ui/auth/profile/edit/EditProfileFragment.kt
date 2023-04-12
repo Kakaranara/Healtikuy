@@ -1,17 +1,19 @@
 package com.kocci.healtikuy.ui.auth.profile.edit
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.databinding.FragmentEditProfileBinding
+import com.kocci.healtikuy.ui.dialog.ModalBottomSheet
 import com.kocci.healtikuy.util.extension.showToast
 import com.kocci.healtikuy.util.helper.DrawableHelper
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,25 +22,42 @@ import dagger.hilt.android.AndroidEntryPoint
 class EditProfileFragment : Fragment() {
     private var _binding: FragmentEditProfileBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: EditProfileViewModel by viewModels()
+    private val viewModel: EditProfileViewModel by activityViewModels()
     private val args by navArgs<EditProfileFragmentArgs>()
+
+    companion object {
+        private const val TAG = "EditProfileFragment"
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbarEditProfile.setupWithNavController(findNavController())
         val userPreferences = args.userdata
 
-        binding.etUsernameEditProfile.setText(userPreferences.username)
-        binding.imgAvatarEditProfile.setImageDrawable(
-            ContextCompat.getDrawable(
-                requireActivity(),
-                DrawableHelper.getIdentifier(requireActivity(), userPreferences.avatar)
+        viewModel.changeAvatar(userPreferences.avatar)
+
+        viewModel.avatar.observe(viewLifecycleOwner) {
+            binding.imgAvatarEditProfile.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireActivity(),
+                    DrawableHelper.getIdentifier(requireActivity(), it)
+                )
             )
-        )
+        }
+
+        binding.etUsernameEditProfile.setText(userPreferences.username)
+
+
+        binding.btnChangeAvatar.setOnClickListener {
+            val modalBottomSheet = ModalBottomSheet()
+            modalBottomSheet.pref = userPreferences
+            modalBottomSheet.show(childFragmentManager, ModalBottomSheet.TAG)
+        }
 
         binding.btnSubmit.setOnClickListener {
             val username = binding.etUsernameEditProfile.text.toString()
             userPreferences.username = username
+            userPreferences.avatar = viewModel.avatar.value ?: "finn"
             viewModel.updateProfile(userPreferences).observe(viewLifecycleOwner) {
                 when (it) {
                     is Async.Error -> {
@@ -55,6 +74,16 @@ class EditProfileFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.e(TAG, "onResume: ")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.e(TAG, "onPause: ")
     }
 
     override fun onCreateView(

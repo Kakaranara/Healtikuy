@@ -30,18 +30,21 @@ class UserRepository @Inject constructor(
 
     override fun updateUserProfile(userData: UserPreferences): Flow<Async<Unit>> = flow {
         emit(Async.Loading)
-        val firebaseUser = remoteDataSource.getFirebaseUser()
+        val firebaseUser = remoteDataSource.getFirebaseUser() as FirebaseUser
         try {
             val updateProfileRequest = userProfileChangeRequest {
                 displayName = userData.username
                 photoUri = userData.avatar.toUri()
             }
-            firebaseUser?.updateProfile(updateProfileRequest)?.await()
+            firebaseUser.updateProfile(updateProfileRequest).await()
             userPreferenceManager.updateUserProfile(
-                userData.username,
-                userData.avatar,
-                userData.email
+                userData.username, userData.avatar, userData.email
             )
+            val firestore = remoteDataSource.getFirestore()
+            val newAvatar: HashMap<String, Any> = hashMapOf("avatar" to userData.avatar)
+            firestore.collection(FsCollection.USERS).document(firebaseUser.uid).update(
+                newAvatar
+            ).await()
             emit(Async.Success(Unit))
         } catch (e: Exception) {
             emit(Async.Error(e.message.toString()))
@@ -63,8 +66,7 @@ class UserRepository @Inject constructor(
             val fbUser = remoteDataSource.getFirebaseUser() as FirebaseUser
             val firestore = remoteDataSource.getFirestore()
             val newData = hashMapOf(
-                "coin" to coinNow,
-                "avatar" to newInventory.toList()
+                "coin" to coinNow, "inventory" to newInventory.toList()
             )
             firestore.collection(FsCollection.USERS).document(fbUser.uid).update(newData).await()
 

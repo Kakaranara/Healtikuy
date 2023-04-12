@@ -24,9 +24,9 @@ class StoreAdapter(private val item: List<CharacterInStore>, private val activit
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: CharacterInStore) {
-            val name: TextView = itemView.findViewById(R.id.imgStoreItemName2)
-            val image: ImageView = itemView.findViewById(R.id.imgStoreItemAvatar2)
-            val price: TextView = itemView.findViewById(R.id.imgStoreItemPrice2)
+            val name: TextView = itemView.findViewById(R.id.tvStoreItemName)
+            val image: ImageView = itemView.findViewById(R.id.imgStoreItemAvatar)
+            val price: TextView = itemView.findViewById(R.id.imgStoreItemPrice)
             val card: CardView = itemView.findViewById(R.id.cardStoreItemAvatar)
 
             name.text = item.name.replace("_", " ")

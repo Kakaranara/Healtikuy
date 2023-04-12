@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Widget.Material3.CardView.Elevated"
-    android:id="@+id/cardStoreItemAvatar"
+    android:id="@+id/cardProfileItemAvatar"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
@@ -17,7 +17,7 @@
         android:padding="12dp">
 
         <ImageView
-            android:id="@+id/imgStoreItemAvatar"
+            android:id="@+id/imgProfileItemAvatar"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:contentDescription="@string/an_image_of_avatar"
@@ -27,23 +27,14 @@
             tools:src="@drawable/popeye" />
 
         <TextView
-            android:id="@+id/tvStoreItemName"
+            android:id="@+id/tvProfileItemName"
             style="@style/TextAppearance.Material3.TitleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imgStoreItemAvatar"
+            app:layout_constraintTop_toBottomOf="@id/imgProfileItemAvatar"
             tools:text="Popeye" />
-
-        <TextView
-            android:id="@+id/imgStoreItemPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvStoreItemName"
-            tools:text="500C" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
