@@ -54,7 +54,11 @@
         android:id="@+id/exerciseFragment"
         android:name="com.kocci.healtikuy.ui.main.feature.exercise.ExerciseFragment"
         android:label="@string/exercise"
-        tools:layout="@layout/fragment_exercise" />
+        tools:layout="@layout/fragment_exercise" >
+        <action
+            android:id="@+id/action_exerciseFragment_to_cardioListFragment"
+            app:destination="@id/cardioListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/sleepFragment"
         android:name="com.kocci.healtikuy.ui.main.feature.sleep.SleepFragment"
@@ -103,4 +107,18 @@
             android:name="userdata"
             app:argType="com.kocci.healtikuy.core.domain.model.UserPreferences" />
     </fragment>
+    <fragment
+        android:id="@+id/cardioListFragment"
+        android:name="com.kocci.healtikuy.ui.main.feature.exercise.cardio.CardioListFragment"
+        android:label="Cardio List"
+        tools:layout="@layout/fragment_cardio_list" >
+        <action
+            android:id="@+id/action_cardioListFragment_to_joggingFragment"
+            app:destination="@id/joggingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/joggingFragment"
+        android:name="com.kocci.healtikuy.ui.main.feature.exercise.cardio.jogging.JoggingFragment"
+        android:label="Jogging"
+        tools:layout="@layout/fragment_jogging" />
 </navigation>

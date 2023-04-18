@@ -59,6 +59,11 @@
     <string name="sleep_description_after_complete">Make Sure to turn off your phone. Happy Sleep!</string>
     <string name="sleep_description_before_sleep">Make sure you have turn off your phone after pressing the button!</string>
     <string name="sleep_description_not_in_time">You can press this button in within 1 hours of your sleep schedule.</string>
+    <string name="cardio">Cardio</string>
+    <string name="jogging">Jogging</string>
+    <string name="running">Running</string>
+    <string name="icon_of_exercise">icon of exercise</string>
+    <string name="set_your_schedule">Set Your Schedule!</string>
 
     <!-- Exercise Related -->
     <!-- Nutrition Related -->

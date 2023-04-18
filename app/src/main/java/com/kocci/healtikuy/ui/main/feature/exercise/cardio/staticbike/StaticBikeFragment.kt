@@ -1,4 +1,4 @@
-package com.kocci.healtikuy.ui.main.feature.exercise
+package com.kocci.healtikuy.ui.main.feature.exercise.cardio.staticbike
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,20 +7,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.kocci.healtikuy.databinding.FragmentExerciseBinding
+import com.kocci.healtikuy.databinding.FragmentStaticBikeBinding
 
-class ExerciseFragment : Fragment() {
-    private var _binding: FragmentExerciseBinding? = null
+
+class StaticBikeFragment : Fragment() {
+    private var _binding: FragmentStaticBikeBinding? = null
     private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.toolbarExercise.setupWithNavController(findNavController())
+        binding.toolbarStaticBike.setupWithNavController(findNavController())
 
-        binding.btnExerciseCardio.setOnClickListener {
-            val direction = ExerciseFragmentDirections.actionExerciseFragmentToCardioListFragment()
-            findNavController().navigate(direction)
-        }
+
     }
 
     override fun onCreateView(
@@ -28,7 +26,7 @@ class ExerciseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentExerciseBinding.inflate(inflater, container, false)
+        _binding = FragmentStaticBikeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
