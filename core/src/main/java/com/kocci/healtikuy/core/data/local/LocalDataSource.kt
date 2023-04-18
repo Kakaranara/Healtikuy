@@ -3,6 +3,9 @@ package com.kocci.healtikuy.core.data.local
 import com.kocci.healtikuy.core.data.local.db.HealtikuyRoomDatabase
 import com.kocci.healtikuy.core.data.local.db.SleepDao
 import com.kocci.healtikuy.core.data.local.db.WaterIntakeDao
+import com.kocci.healtikuy.core.data.local.db.exercise.JoggingDao
+import com.kocci.healtikuy.core.data.local.db.exercise.RunningDao
+import com.kocci.healtikuy.core.data.local.db.exercise.StaticBikeDao
 import com.kocci.healtikuy.core.data.local.entity.SleepEntity
 import com.kocci.healtikuy.core.data.local.entity.WaterIntakeEntity
 import javax.inject.Inject
@@ -13,6 +16,9 @@ class LocalDataSource @Inject constructor(
     private val database: HealtikuyRoomDatabase,
     private val waterIntakeDao: WaterIntakeDao,
     private val sleepDao: SleepDao,
+    private val joggingDao: JoggingDao,
+    private val runningDao: RunningDao,
+    private val staticBikeDao: StaticBikeDao
 ) {
 
     /**
