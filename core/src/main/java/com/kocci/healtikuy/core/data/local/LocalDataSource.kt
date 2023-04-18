@@ -8,6 +8,9 @@ import com.kocci.healtikuy.core.data.local.db.exercise.RunningDao
 import com.kocci.healtikuy.core.data.local.db.exercise.StaticBikeDao
 import com.kocci.healtikuy.core.data.local.entity.SleepEntity
 import com.kocci.healtikuy.core.data.local.entity.WaterIntakeEntity
+import com.kocci.healtikuy.core.data.local.entity.exercise.JoggingEntity
+import com.kocci.healtikuy.core.data.local.entity.exercise.RunningEntity
+import com.kocci.healtikuy.core.data.local.entity.exercise.StaticBikeEntity
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -35,6 +38,39 @@ class LocalDataSource @Inject constructor(
     fun getSleepLastRow() = sleepDao.selectLastRow()
     suspend fun insertSleep(entity: SleepEntity) = sleepDao.insertNewData(entity)
     suspend fun updateSleep(entity: SleepEntity) = sleepDao.insertNewData(entity)
+
+    /**
+     * Jogging
+     */
+
+    fun getJoggingLastRow() = joggingDao.getLatestData()
+    fun getAllJoggingData() = joggingDao.getAllData()
+    fun insertJoggingData(entity: JoggingEntity) = joggingDao.insertEntity(entity)
+    fun updateJoggingData(entity: JoggingEntity) = joggingDao.updateEntity(entity)
+
+    /**
+     * Running
+     */
+
+    fun getRunningLastRow() = runningDao.getLatestData()
+    fun getAllRunningData() = runningDao.getAllData()
+    fun insertRunningData(entity: RunningEntity) = runningDao.insertEntity(entity)
+    fun updateRunningData(entity: RunningEntity) = runningDao.updateEntity(entity)
+
+
+    /**
+     * Static Bike
+     */
+
+    fun getStaticBikeLastRow() = staticBikeDao.getLatestData()
+    fun getAllStaticBikeData() = staticBikeDao.getAllData()
+    fun insertStaticBikeData(entity: StaticBikeEntity) = staticBikeDao.insertEntity(entity)
+    fun updateStaticBikeData(entity: StaticBikeEntity) = staticBikeDao.updateEntity(entity)
+
+
+    /**
+     * ! Danger Zone
+     */
 
     fun clearDatabase() {
         database.clearAllTables()

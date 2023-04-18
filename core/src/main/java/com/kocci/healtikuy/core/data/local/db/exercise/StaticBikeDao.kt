@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.kocci.healtikuy.core.data.local.entity.exercise.StaticBikeEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface StaticBikeDao {
@@ -12,7 +13,7 @@ interface StaticBikeDao {
     fun getAllData(): List<StaticBikeEntity>
 
     @Query("SELECT * FROM static_bike ORDER BY id DESC LIMIT 1")
-    fun getLatestData(): StaticBikeEntity?
+    fun getLatestData(): Flow<StaticBikeEntity?>
 
     @Update
     fun updateEntity(entity: StaticBikeEntity)

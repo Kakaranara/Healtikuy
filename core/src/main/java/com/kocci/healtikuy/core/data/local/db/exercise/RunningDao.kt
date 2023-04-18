@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.kocci.healtikuy.core.data.local.entity.exercise.RunningEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface RunningDao {
@@ -12,7 +13,7 @@ interface RunningDao {
     fun getAllData() : List<RunningEntity>
 
     @Query("SELECT * FROM running ORDER BY id DESC LIMIT 1")
-    fun getLatestData(): RunningEntity?
+    fun getLatestData(): Flow<RunningEntity?>
 
     @Update
     fun updateEntity(entity: RunningEntity)
