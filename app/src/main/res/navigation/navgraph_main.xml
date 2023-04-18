@@ -115,10 +115,26 @@
         <action
             android:id="@+id/action_cardioListFragment_to_joggingFragment"
             app:destination="@id/joggingFragment" />
+        <action
+            android:id="@+id/action_cardioListFragment_to_runningFragment"
+            app:destination="@id/runningFragment" />
+        <action
+            android:id="@+id/action_cardioListFragment_to_staticBikeFragment"
+            app:destination="@id/staticBikeFragment" />
     </fragment>
     <fragment
         android:id="@+id/joggingFragment"
         android:name="com.kocci.healtikuy.ui.main.feature.exercise.cardio.jogging.JoggingFragment"
         android:label="Jogging"
         tools:layout="@layout/fragment_jogging" />
+    <fragment
+        android:id="@+id/runningFragment"
+        android:name="com.kocci.healtikuy.ui.main.feature.exercise.cardio.running.RunningFragment"
+        android:label="Running"
+        tools:layout="@layout/fragment_running" />
+    <fragment
+        android:id="@+id/staticBikeFragment"
+        android:name="com.kocci.healtikuy.ui.main.feature.exercise.cardio.staticbike.StaticBikeFragment"
+        android:label="Static Biking"
+        tools:layout="@layout/fragment_static_bike" />
 </navigation>

@@ -8,7 +8,8 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.kocci.healtikuy.R
-import com.kocci.healtikuy.core.domain.usecase.CardioStatus
+import com.kocci.healtikuy.core.constant.CardioType
+import com.kocci.healtikuy.core.domain.model.exercise.CardioStatus
 
 class CardioListAdapter(private val list: List<CardioStatus>) :
     RecyclerView.Adapter<CardioListAdapter.ViewHolder>() {
@@ -26,12 +27,22 @@ class CardioListAdapter(private val list: List<CardioStatus>) :
             val icon: ImageView = itemView.findViewById(R.id.iconExercise)
 
             when (data.name) {
-                CardioListFragment.STATIC_BIKE -> {
-                    setDrawable(icon, R.drawable.icon_running)
-                }
+//                CardioListFragment.STATIC_BIKE -> {
+//                    setDrawable(icon, R.drawable.icon_running)
+//                }
+                CardioType.JOGGING -> setDrawable(icon, R.drawable.icon_jogging)
+                CardioType.RUNNING -> setDrawable(icon, R.drawable.icon_running)
+                CardioType.STATIC_BIKE -> setDrawable(icon, R.drawable.icon_static_bike)
+
             }
 
-            title.text = data.name
+            val featureName =
+                data.name.name
+                    .replace("_", " ")
+                    .lowercase()
+                    .replaceFirstChar(Char::titlecase)
+
+            title.text = featureName
             checkList.visibility = if (data.isCompleted) View.VISIBLE else View.INVISIBLE
 
             itemView.rootView.setOnClickListener {

@@ -8,24 +8,19 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kocci.healtikuy.core.domain.usecase.CardioStatus
+import com.kocci.healtikuy.core.constant.CardioType
+import com.kocci.healtikuy.core.domain.model.exercise.CardioStatus
 import com.kocci.healtikuy.databinding.FragmentCardioListBinding
 
 
 class CardioListFragment : Fragment() {
     private var _binding: FragmentCardioListBinding? = null
     private val binding get() = _binding!!
-
-    companion object {
-        const val CARDIO = "cardio"
-        const val JOGGING = "Jogging"
-        const val STATIC_BIKE = "Static Bike"
-    }
-
     private fun generateCardioList(): List<CardioStatus> {
         return listOf(
-            CardioStatus(JOGGING),
-            CardioStatus(STATIC_BIKE),
+            CardioStatus(CardioType.JOGGING, false),
+            CardioStatus(CardioType.RUNNING, false),
+            CardioStatus(CardioType.STATIC_BIKE, false),
         )
     }
 
@@ -42,9 +37,22 @@ class CardioListFragment : Fragment() {
             listener = object : CardioListAdapter.ClickListener {
                 override fun OnCardioClick(data: CardioStatus) {
                     when (data.name) {
-                        JOGGING -> {
+//                        JOGGING -> {
+//
+//                        }
+                        CardioType.JOGGING -> {
                             val direction =
                                 CardioListFragmentDirections.actionCardioListFragmentToJoggingFragment()
+                            findNavController().navigate(direction)
+                        }
+                        CardioType.RUNNING -> {
+                            val direction =
+                                CardioListFragmentDirections.actionCardioListFragmentToRunningFragment()
+                            findNavController().navigate(direction)
+                        }
+                        CardioType.STATIC_BIKE -> {
+                            val direction =
+                                CardioListFragmentDirections.actionCardioListFragmentToStaticBikeFragment()
                             findNavController().navigate(direction)
                         }
                     }
