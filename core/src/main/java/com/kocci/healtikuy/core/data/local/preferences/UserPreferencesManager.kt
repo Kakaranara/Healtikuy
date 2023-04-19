@@ -27,6 +27,11 @@ class UserPreferencesManager @Inject constructor(
 
         //? FEATURE PREFERENCES
         val SLEEP_TIME = longPreferencesKey("sleep_time")
+
+        //? Exercise PREFERENCE
+        val JOGGING_TIME = longPreferencesKey("jogging_time")
+        val RUNNING_TIME = longPreferencesKey("running_time")
+        val STATIC_BIKE_TIME = longPreferencesKey("static_bike_time")
     }
 
     val userPreferences: Flow<UserPreferences> = dataStore.data.map { preferences ->
@@ -47,6 +52,18 @@ class UserPreferencesManager @Inject constructor(
 
     val sleepTimePreference: Flow<Long?> = dataStore.data.map { preferences ->
         preferences[PreferenceKeys.SLEEP_TIME]
+    }
+
+    val joggingTimePreference: Flow<Long?> = dataStore.data.map { pref ->
+        pref[PreferenceKeys.JOGGING_TIME]
+    }
+
+    val runningTimePreference: Flow<Long?> = dataStore.data.map { pref ->
+        pref[PreferenceKeys.RUNNING_TIME]
+    }
+
+    val staticBikeTimePreference: Flow<Long?> = dataStore.data.map { pref ->
+        pref[PreferenceKeys.STATIC_BIKE_TIME]
     }
 
     suspend fun updateUserProfile(username: String, avatar: String) {
@@ -71,6 +88,24 @@ class UserPreferencesManager @Inject constructor(
     suspend fun changeSleepTime(time: Long) {
         dataStore.edit { preferences ->
             preferences[PreferenceKeys.SLEEP_TIME] = time
+        }
+    }
+
+    suspend fun changeJoggingTime(time: Long) {
+        dataStore.edit { pref ->
+            pref[PreferenceKeys.JOGGING_TIME] = time
+        }
+    }
+
+    suspend fun changeRunningTime(time: Long) {
+        dataStore.edit { pref ->
+            pref[PreferenceKeys.RUNNING_TIME] = time
+        }
+    }
+
+    suspend fun changeStaticBikeTime(time: Long) {
+        dataStore.edit { pref ->
+            pref[PreferenceKeys.STATIC_BIKE_TIME] = time
         }
     }
 

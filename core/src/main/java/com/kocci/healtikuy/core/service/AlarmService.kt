@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import com.kocci.healtikuy.core.domain.model.Sleep
+import com.kocci.healtikuy.core.receiver.alarm.ExerciseAlarmReceiver
 import com.kocci.healtikuy.core.receiver.alarm.SleepAlarmReceiver
 import com.kocci.healtikuy.core.receiver.alarm.WaterAlarmReceiver
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -44,7 +45,7 @@ class AlarmService @Inject constructor(@ApplicationContext private val context: 
             PendingIntent.FLAG_IMMUTABLE
         )
         manager.setInexactRepeating(AlarmManager.RTC, triggerTime, interval3Hours, pendingIntent)
-        Log.e(TAG, "setRepeatingScheduleForWater: WATER Alarm Set", )
+        Log.e(TAG, "setRepeatingScheduleForWater: WATER Alarm Set")
     }
 
     fun cancelRepeatingAlarmForWater() {
@@ -56,11 +57,18 @@ class AlarmService @Inject constructor(@ApplicationContext private val context: 
             PendingIntent.FLAG_IMMUTABLE
         )
         manager.cancel(pendingIntent)
-        Log.e(TAG, "cancelRepeatingAlarmForWater: WATER ALARM CANCEL", )
+        Log.e(TAG, "cancelRepeatingAlarmForWater: WATER ALARM CANCEL")
     }
 
-    fun setRepeatingScheduleForCardioExercise(time: Long) {
-
+    fun setRepeatingScheduleForCardioExercise(time: Long, intervalInMillis: Long) {
+        val intent = Intent(context, ExerciseAlarmReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(
+            context,
+            RQC_EXERCISE,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE
+        )
+        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, time, intervalInMillis, pendingIntent)
     }
 
     companion object {
@@ -70,6 +78,7 @@ class AlarmService @Inject constructor(@ApplicationContext private val context: 
         //RQC stands for Request Code
         const val RQC_SLEEP = 5
         const val RQC_WATER = 6
+        const val RQC_EXERCISE = 7
         private const val TAG = "AlarmService"
     }
 }

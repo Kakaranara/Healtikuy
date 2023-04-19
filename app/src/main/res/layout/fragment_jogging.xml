@@ -51,6 +51,7 @@
                     android:text="Time : " />
 
                 <TextView
+                    android:id="@+id/tvExerciseTime"
                     style="@style/TextAppearance.Material3.TitleMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -58,27 +59,51 @@
 
             </LinearLayout>
 
+            <Space
+                android:id="@+id/spacer"
+                android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:visibility="visible" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
                     style="@style/TextAppearance.Material3.TitleMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Interval : " />
+                    android:text="@string/intervalcolon" />
 
-                <EditText
+                <FrameLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/etInterval"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tvInterval"
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="HALO " />
+
+
+                </FrameLayout>
+
 
                 <TextView
                     style="@style/TextAppearance.Material3.TitleMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Days" />
+                    android:text="@string/days" />
 
             </LinearLayout>
 
@@ -92,10 +117,11 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/btnExerciseSetTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="Set Time" />
+                    android:text="@string/set_time" />
 
                 <View
                     android:layout_width="0dp"
@@ -103,10 +129,11 @@
                     android:layout_weight="1" />
 
                 <Button
+                    android:id="@+id/btnExerciseTimeSubmit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:text="Submit" />
+                    android:text="@string/submit" />
             </LinearLayout>
 
         </LinearLayout>
