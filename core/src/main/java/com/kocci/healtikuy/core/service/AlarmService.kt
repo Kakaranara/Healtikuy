@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import com.kocci.healtikuy.core.constant.CardioType
 import com.kocci.healtikuy.core.domain.model.Sleep
 import com.kocci.healtikuy.core.receiver.alarm.ExerciseAlarmReceiver
 import com.kocci.healtikuy.core.receiver.alarm.SleepAlarmReceiver
@@ -60,8 +61,14 @@ class AlarmService @Inject constructor(@ApplicationContext private val context: 
         Log.e(TAG, "cancelRepeatingAlarmForWater: WATER ALARM CANCEL")
     }
 
-    fun setRepeatingScheduleForCardioExercise(time: Long, intervalInMillis: Long) {
-        val intent = Intent(context, ExerciseAlarmReceiver::class.java)
+    fun setRepeatingScheduleForCardioExercise(
+        time: Long,
+        intervalInMillis: Long,
+        cardioType: CardioType
+    ) {
+        val intent = Intent(context, ExerciseAlarmReceiver::class.java).apply {
+            putExtra("name", cardioType.name)
+        }
         val pendingIntent = PendingIntent.getBroadcast(
             context,
             RQC_EXERCISE,

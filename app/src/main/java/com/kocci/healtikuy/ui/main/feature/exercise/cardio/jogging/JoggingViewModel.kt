@@ -20,4 +20,10 @@ class JoggingViewModel @Inject constructor(
     }
 
     fun showFormattedTime(time: Long) = joggingUseCase.showFormattedTime(time)
+
+    fun editSchedule() {
+        viewModelScope.launch {
+            joggingUseCase.editExerciseSchedule()
+        }
+    }
 }

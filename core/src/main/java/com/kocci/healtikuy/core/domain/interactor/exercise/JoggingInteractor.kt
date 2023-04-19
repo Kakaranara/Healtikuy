@@ -23,11 +23,18 @@ class JoggingInteractor @Inject constructor(
 
     override suspend fun setExerciseSchedule(timeInString: String, intervalInDays: Int) {
         val time = DateHelper.convertTimeStringToTodayDate(timeInString)
-        repository.setSchedule(time)
+        repository.setSchedule(time, intervalInDays)
         val intervalInMillis = (DateHelper.dayInMill * intervalInDays).toLong()
-        alarmService.setRepeatingScheduleForCardioExercise(time, intervalInMillis)
+        alarmService.setRepeatingScheduleForCardioExercise(
+            time,
+            intervalInMillis,
+            CardioType.JOGGING
+        )
     }
 
     override fun showFormattedTime(time: Long): String = DateHelper.showHoursAndMinutes(time)
 
+    override suspend fun editExerciseSchedule() {
+        repository.editJoggingTime()
+    }
 }

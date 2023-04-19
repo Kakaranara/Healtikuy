@@ -7,5 +7,6 @@ abstract class BaseCardioRepository<EntityType> {
     abstract fun getAllData(): List<EntityType>
     abstract fun getLatestData(): Flow<EntityType?>
     abstract fun getSchedule(): Flow<ExerciseTimeIndicator>
-    abstract suspend fun setSchedule(time: Long)
+    abstract suspend fun setSchedule(time: Long, interval: Int)
+    abstract suspend fun editJoggingTime()
 }

@@ -38,18 +38,32 @@ class NotificationService(private val context: Context) {
         manager.notify(AlarmService.RQC_WATER, builder.build())
     }
 
+    fun showNotificationForExercise(exType: String) {
+        val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        val builder = NotificationCompat.Builder(context, EXERCISE_CHANNEL_ID)
+            .setSmallIcon(R.drawable.baseline_edit_24)
+            .setContentTitle("Don't forget your ${exType.lowercase()}!")
+            .setContentText("Get points from exercise!!")
+            .setSound(soundUri)
+
+        manager.notify(AlarmService.RQC_EXERCISE, builder.build())
+    }
+
     companion object {
 
         const val WATER_CHANNEL_ID = "water_channel_id"
         const val SUN_CHANNEL_ID = "sun_channel_id"
         const val SLEEP_CHANNEL_ID = "sleep_channel_id"
+        const val EXERCISE_CHANNEL_ID = "exercise_channel_id"
 
         const val WATER_CHANNEL_NAME = "Water Intake"
         const val SUN_CHANNEL_NAME = "Sun Exposure Time"
         const val SLEEP_CHANNEL_NAME = "Sleep Time"
+        const val EXERCISE_CHANNEL_NAME = "Exercise Schedule"
 
         /**
-         * Creating channel should be done 1 times after an app creates
+         * Creating channel should be done 1 times after an app creates.
          * can be called within application context
          */
         fun createNotificationChannel(context: Context) {
@@ -59,6 +73,7 @@ class NotificationService(private val context: Context) {
                 val waterImportance = NotificationManager.IMPORTANCE_LOW
                 val sunImportance = NotificationManager.IMPORTANCE_LOW
                 val sleepImportance = NotificationManager.IMPORTANCE_HIGH
+                val exerciseImportance = NotificationManager.IMPORTANCE_HIGH
                 val notificationManager = context.getSystemService(NotificationManager::class.java)
 
                 val waterChannel = NotificationChannel(
@@ -79,7 +94,13 @@ class NotificationService(private val context: Context) {
                     sunImportance
                 )
 
-                val channel = listOf(waterChannel, sleepChannel, sunChannel)
+                val exerciseChannel = NotificationChannel(
+                    EXERCISE_CHANNEL_ID,
+                    EXERCISE_CHANNEL_NAME,
+                    exerciseImportance
+                )
+
+                val channel = listOf(waterChannel, sleepChannel, sunChannel, exerciseChannel)
                 notificationManager.createNotificationChannels(channel)
             }
 

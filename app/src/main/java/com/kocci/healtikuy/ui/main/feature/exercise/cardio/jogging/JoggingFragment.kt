@@ -28,26 +28,30 @@ class JoggingFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
         super.onViewCreated(view, savedInstanceState)
         binding.toolbarJogging.setupWithNavController(findNavController())
         binding.btnExerciseTimeSubmit.setOnClickListener(this)
+        binding.btnExerciseTimeEdit.setOnClickListener(this)
         binding.btnExerciseSetTime.setOnClickListener(this)
 
         viewModel.getSchedule().observe(viewLifecycleOwner) {
             when (it) {
                 is ExerciseTimeIndicator.Set -> {
-                    showToast(it.toString())
                     binding.apply {
                         spacer.visible()
                         tvInterval.visible()
                         etInterval.gone()
                         btnExerciseSetTime.gone()
+                        btnExerciseTimeEdit.visible()
+                        tvInterval.text = it.interval.toString()
+                        tvExerciseTime.text = DateHelper.showHoursAndMinutes(it.data)
                     }
                 }
                 ExerciseTimeIndicator.NotSet -> {
-                    showToast(it.toString())
                     binding.apply {
                         spacer.gone()
                         tvInterval.gone()
                         etInterval.visible()
                         btnExerciseSetTime.visible()
+                        btnExerciseTimeSubmit.visible()
+                        btnExerciseTimeEdit.gone()
                     }
                 }
             }
@@ -64,6 +68,10 @@ class JoggingFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
                 val timeInString = binding.tvExerciseTime.text.toString()
                 val interval = binding.etInterval.text.toString().toInt()
                 viewModel.setExerciseSchedule(timeInString, interval)
+                showToast("Alarm set!")
+            }
+            binding.btnExerciseTimeEdit -> {
+                viewModel.editSchedule()
             }
         }
     }

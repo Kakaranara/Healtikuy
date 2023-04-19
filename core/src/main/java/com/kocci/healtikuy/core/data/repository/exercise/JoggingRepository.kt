@@ -22,16 +22,21 @@ class JoggingRepository @Inject constructor(
 
     override fun getSchedule(): Flow<ExerciseTimeIndicator> {
         return preference.joggingTimePreference.map {
-            if (it == null) {
+            if (it.time == null || it.interval == null || it.isEditing) {
                 ExerciseTimeIndicator.NotSet
             } else {
-                ExerciseTimeIndicator.Set(it)
+                val time = it.time
+                val int = it.interval
+                ExerciseTimeIndicator.Set(time, int)
             }
         }
     }
 
-    override suspend fun setSchedule(time: Long) {
-        preference.changeJoggingTime(time)
+    override suspend fun setSchedule(time: Long, interval: Int) {
+        preference.changeJoggingTime(time, interval)
     }
 
+    override suspend fun editJoggingTime() {
+        preference.editJoggingTime(true)
+    }
 }

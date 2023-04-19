@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import com.kocci.healtikuy.core.constant.GameRules
 import com.kocci.healtikuy.core.domain.model.UserPreferences
+import com.kocci.healtikuy.core.domain.model.exercise.JoggingTimePreferences
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -30,6 +31,8 @@ class UserPreferencesManager @Inject constructor(
 
         //? Exercise PREFERENCE
         val JOGGING_TIME = longPreferencesKey("jogging_time")
+        val JOGGING_INTERVAL = intPreferencesKey("jogging_interval")
+        val JOGGING_IS_EDITING = booleanPreferencesKey("jogging_is_editing")
         val RUNNING_TIME = longPreferencesKey("running_time")
         val STATIC_BIKE_TIME = longPreferencesKey("static_bike_time")
     }
@@ -54,8 +57,12 @@ class UserPreferencesManager @Inject constructor(
         preferences[PreferenceKeys.SLEEP_TIME]
     }
 
-    val joggingTimePreference: Flow<Long?> = dataStore.data.map { pref ->
-        pref[PreferenceKeys.JOGGING_TIME]
+    val joggingTimePreference: Flow<JoggingTimePreferences> = dataStore.data.map { pref ->
+        val time = pref[PreferenceKeys.JOGGING_TIME]
+        val interval = pref[PreferenceKeys.JOGGING_INTERVAL]
+        val isEditing = pref[PreferenceKeys.JOGGING_IS_EDITING] ?: false
+
+        JoggingTimePreferences(time, interval, isEditing)
     }
 
     val runningTimePreference: Flow<Long?> = dataStore.data.map { pref ->
@@ -91,9 +98,17 @@ class UserPreferencesManager @Inject constructor(
         }
     }
 
-    suspend fun changeJoggingTime(time: Long) {
+    suspend fun changeJoggingTime(time: Long, interval: Int) {
         dataStore.edit { pref ->
             pref[PreferenceKeys.JOGGING_TIME] = time
+            pref[PreferenceKeys.JOGGING_INTERVAL] = interval
+            pref[PreferenceKeys.JOGGING_IS_EDITING] = false
+        }
+    }
+
+    suspend fun editJoggingTime(isEditing: Boolean = false) {
+        dataStore.edit { pref ->
+            pref[PreferenceKeys.JOGGING_IS_EDITING] = isEditing
         }
     }
 

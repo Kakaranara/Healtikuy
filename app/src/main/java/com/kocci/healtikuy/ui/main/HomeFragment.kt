@@ -74,7 +74,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 binding.tvPoint.text = pointView
             }
 
-            showToast(healthyStatusIndicator.toString())
+//            showToast(healthyStatusIndicator.toString())
 
             when (healthyStatusIndicator) {
                 is HealthyStatusIndicator.Completed -> {

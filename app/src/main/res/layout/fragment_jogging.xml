@@ -48,14 +48,14 @@
                     style="@style/TextAppearance.Material3.TitleMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Time : " />
+                    android:text="@string/time" />
 
                 <TextView
                     android:id="@+id/tvExerciseTime"
                     style="@style/TextAppearance.Material3.TitleMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Not Set" />
+                    android:text="@string/not_set" />
 
             </LinearLayout>
 
@@ -79,6 +79,7 @@
 
                 <FrameLayout
                     android:layout_width="wrap_content"
+                    android:layout_marginStart="4dp"
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -93,7 +94,7 @@
                         style="@style/TextAppearance.Material3.TitleMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="HALO " />
+                        tools:text="5" />
 
 
                 </FrameLayout>
@@ -103,6 +104,7 @@
                     style="@style/TextAppearance.Material3.TitleMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
                     android:text="@string/days" />
 
             </LinearLayout>
@@ -128,12 +130,26 @@
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <Button
-                    android:id="@+id/btnExerciseTimeSubmit"
+                <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/submit" />
+                    android:layout_marginEnd="8dp">
+
+                    <Button
+                        android:id="@+id/btnExerciseTimeSubmit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/submit" />
+
+                    <Button
+                        android:id="@+id/btnExerciseTimeEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/edit_schedule" />
+
+
+                </FrameLayout>
+
             </LinearLayout>
 
         </LinearLayout>
