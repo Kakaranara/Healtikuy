@@ -45,8 +45,8 @@ class LocalDataSource @Inject constructor(
 
     fun getJoggingLastRow() = joggingDao.getLatestData()
     fun getAllJoggingData() = joggingDao.getAllData()
-    fun insertJoggingData(entity: JoggingEntity) = joggingDao.insertEntity(entity)
-    fun updateJoggingData(entity: JoggingEntity) = joggingDao.updateEntity(entity)
+    suspend fun insertJoggingData(entity: JoggingEntity) = joggingDao.insertEntity(entity)
+    suspend fun updateJoggingData(entity: JoggingEntity) = joggingDao.updateEntity(entity)
 
     /**
      * Running
@@ -54,8 +54,8 @@ class LocalDataSource @Inject constructor(
 
     fun getRunningLastRow() = runningDao.getLatestData()
     fun getAllRunningData() = runningDao.getAllData()
-    fun insertRunningData(entity: RunningEntity) = runningDao.insertEntity(entity)
-    fun updateRunningData(entity: RunningEntity) = runningDao.updateEntity(entity)
+    suspend fun insertRunningData(entity: RunningEntity) = runningDao.insertEntity(entity)
+    suspend fun updateRunningData(entity: RunningEntity) = runningDao.updateEntity(entity)
 
 
     /**
@@ -64,8 +64,8 @@ class LocalDataSource @Inject constructor(
 
     fun getStaticBikeLastRow() = staticBikeDao.getLatestData()
     fun getAllStaticBikeData() = staticBikeDao.getAllData()
-    fun insertStaticBikeData(entity: StaticBikeEntity) = staticBikeDao.insertEntity(entity)
-    fun updateStaticBikeData(entity: StaticBikeEntity) = staticBikeDao.updateEntity(entity)
+    suspend fun insertStaticBikeData(entity: StaticBikeEntity) = staticBikeDao.insertEntity(entity)
+    suspend fun updateStaticBikeData(entity: StaticBikeEntity) = staticBikeDao.updateEntity(entity)
 
 
     /**

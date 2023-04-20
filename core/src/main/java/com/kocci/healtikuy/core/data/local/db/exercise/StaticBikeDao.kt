@@ -16,8 +16,8 @@ interface StaticBikeDao {
     fun getLatestData(): Flow<StaticBikeEntity?>
 
     @Update
-    fun updateEntity(entity: StaticBikeEntity)
+    suspend fun updateEntity(entity: StaticBikeEntity)
 
     @Insert
-    fun insertEntity(entity: StaticBikeEntity)
+    suspend fun insertEntity(entity: StaticBikeEntity)
 }

@@ -3,6 +3,7 @@ package com.kocci.healtikuy.ui.main.feature.exercise.cardio.jogging
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.kocci.healtikuy.core.domain.model.exercise.Jogging
 import com.kocci.healtikuy.core.domain.usecase.exercise.cardio.JoggingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -12,10 +13,18 @@ import javax.inject.Inject
 class JoggingViewModel @Inject constructor(
     private val joggingUseCase: JoggingUseCase
 ) : ViewModel() {
-    fun getSchedule() = joggingUseCase.getExerciseSchedule().asLiveData()
+    fun getSchedule() = joggingUseCase.getSchedule().asLiveData()
+    fun getProgressData() = joggingUseCase.getDataProgress().asLiveData()
+
+    fun updateData(data: Jogging) {
+        viewModelScope.launch {
+            joggingUseCase.updateData(data)
+        }
+    }
+
     fun setExerciseSchedule(timeInString: String, interval: Int) {
         viewModelScope.launch {
-            joggingUseCase.setExerciseSchedule(timeInString, interval)
+            joggingUseCase.setSchedule(timeInString, interval)
         }
     }
 
@@ -23,7 +32,7 @@ class JoggingViewModel @Inject constructor(
 
     fun editSchedule() {
         viewModelScope.launch {
-            joggingUseCase.editExerciseSchedule()
+            joggingUseCase.editSchedule()
         }
     }
 }

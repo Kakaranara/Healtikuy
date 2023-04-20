@@ -70,6 +70,10 @@
     <string name="edit_schedule">Edit Schedule</string>
     <string name="time">Time :</string>
     <string name="not_set">Not Set</string>
+    <string name="durationcolon">Duration :</string>
+    <string name="mileagecolon">Mileage :</string>
+    <string name="minutes">Minutes</string>
+    <string name="meter">Meter</string>
 
     <!-- Exercise Related -->
     <!-- Nutrition Related -->

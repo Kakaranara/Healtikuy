@@ -16,8 +16,8 @@ interface RunningDao {
     fun getLatestData(): Flow<RunningEntity?>
 
     @Update
-    fun updateEntity(entity: RunningEntity)
+    suspend fun updateEntity(entity: RunningEntity)
 
     @Insert
-    fun insertEntity(entity: RunningEntity)
+    suspend fun insertEntity(entity: RunningEntity)
 }

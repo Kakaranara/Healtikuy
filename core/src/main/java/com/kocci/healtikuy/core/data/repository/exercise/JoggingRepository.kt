@@ -3,7 +3,7 @@ package com.kocci.healtikuy.core.data.repository.exercise
 import com.kocci.healtikuy.core.data.local.LocalDataSource
 import com.kocci.healtikuy.core.data.local.entity.exercise.JoggingEntity
 import com.kocci.healtikuy.core.data.local.preferences.UserPreferencesManager
-import com.kocci.healtikuy.core.domain.usecase.exercise.ExerciseTimeIndicator
+import com.kocci.healtikuy.core.domain.usecase.exercise.scheduler.ExerciseTimeIndicator
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -32,8 +32,16 @@ class JoggingRepository @Inject constructor(
         }
     }
 
+    override suspend fun updateData(data: JoggingEntity) {
+        localDataSource.updateJoggingData(data)
+    }
+
+    override suspend fun insertNewData(data: JoggingEntity) {
+        localDataSource.insertJoggingData(data)
+    }
+
     override suspend fun setSchedule(time: Long, interval: Int) {
-        preference.changeJoggingTime(time, interval)
+        preference.changeJoggingTime(time, interval, false)
     }
 
     override suspend fun editJoggingTime() {

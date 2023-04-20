@@ -98,11 +98,11 @@ class UserPreferencesManager @Inject constructor(
         }
     }
 
-    suspend fun changeJoggingTime(time: Long, interval: Int) {
+    suspend fun changeJoggingTime(time: Long, interval: Int, isEditing: Boolean = false) {
         dataStore.edit { pref ->
             pref[PreferenceKeys.JOGGING_TIME] = time
             pref[PreferenceKeys.JOGGING_INTERVAL] = interval
-            pref[PreferenceKeys.JOGGING_IS_EDITING] = false
+            pref[PreferenceKeys.JOGGING_IS_EDITING] = isEditing
         }
     }
 

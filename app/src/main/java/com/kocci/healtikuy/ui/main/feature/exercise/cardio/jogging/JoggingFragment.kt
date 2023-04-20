@@ -8,7 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.kocci.healtikuy.core.domain.usecase.exercise.ExerciseTimeIndicator
+import com.kocci.healtikuy.core.domain.model.exercise.Jogging
+import com.kocci.healtikuy.core.domain.usecase.exercise.scheduler.ExerciseTimeIndicator
 import com.kocci.healtikuy.core.util.helper.DateHelper
 import com.kocci.healtikuy.databinding.FragmentJoggingBinding
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
@@ -24,12 +25,15 @@ class JoggingFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
     private val binding get() = _binding!!
     private val viewModel: JoggingViewModel by viewModels()
 
+    private var joggingValue: Jogging? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbarJogging.setupWithNavController(findNavController())
         binding.btnExerciseTimeSubmit.setOnClickListener(this)
         binding.btnExerciseTimeEdit.setOnClickListener(this)
         binding.btnExerciseSetTime.setOnClickListener(this)
+        binding.btnJoggingSubmit.setOnClickListener(this)
 
         viewModel.getSchedule().observe(viewLifecycleOwner) {
             when (it) {
@@ -56,6 +60,28 @@ class JoggingFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
                 }
             }
         }
+
+        viewModel.getProgressData().observe(viewLifecycleOwner) {
+            if (it.isCompleted) {
+                binding.apply {
+                    tvJoggingDuration.visible()
+                    tvJoggingDuration.text = it.duration.toString()
+                    etJoggingDuration.gone()
+                    tvJoggingMileage.visible()
+                    tvJoggingMileage.text = it.distance.toString()
+                    etJoggingMileage.gone()
+                    btnJoggingSubmit.isEnabled = false
+                }
+            } else {
+                binding.apply {
+                    tvJoggingDuration.gone()
+                    tvJoggingMileage.gone()
+                    etJoggingDuration.visible()
+                    etJoggingMileage.visible()
+                    joggingValue = it
+                }
+            }
+        }
     }
 
     override fun onClick(v: View?) {
@@ -72,6 +98,17 @@ class JoggingFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
             }
             binding.btnExerciseTimeEdit -> {
                 viewModel.editSchedule()
+            }
+            binding.btnJoggingSubmit -> {
+                val duration = binding.etJoggingDuration.text.toString().toInt()
+                val mileage = binding.etJoggingMileage.text.toString().toInt()
+                joggingValue?.let {
+                    it.duration = duration
+                    it.distance = mileage
+                    viewModel.updateData(it)
+                } ?: run {
+                    showToast("Make sure!")
+                }
             }
         }
     }
