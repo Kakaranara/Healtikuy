@@ -47,4 +47,8 @@ class JoggingRepository @Inject constructor(
     override suspend fun editJoggingTime() {
         preference.editJoggingTime(true)
     }
+
+    override suspend fun updatePoints() {
+        preference.addPoints(1000)
+    }
 }

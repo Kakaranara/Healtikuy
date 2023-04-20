@@ -11,4 +11,5 @@ abstract class BaseCardioRepository<EntityType> {
     abstract suspend fun updateData(data: EntityType)
     abstract suspend fun setSchedule(time: Long, interval: Int)
     abstract suspend fun editJoggingTime()
+    abstract suspend fun updatePoints()
 }

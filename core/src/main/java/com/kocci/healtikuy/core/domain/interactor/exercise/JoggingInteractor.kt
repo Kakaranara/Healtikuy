@@ -42,6 +42,7 @@ class JoggingInteractor @Inject constructor(
     override suspend fun updateData(data: Jogging) {
         data.isCompleted = true
         repository.updateData(data.toEntity())
+        repository.updatePoints()
     }
 
     override fun getSchedule(): Flow<ExerciseTimeIndicator> {
