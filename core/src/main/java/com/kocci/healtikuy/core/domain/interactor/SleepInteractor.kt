@@ -1,6 +1,5 @@
 package com.kocci.healtikuy.core.domain.interactor
 
-import android.content.Context
 import android.icu.util.Calendar
 import com.kocci.healtikuy.core.data.repository.SleepRepository
 import com.kocci.healtikuy.core.domain.model.Sleep
@@ -22,7 +21,7 @@ class SleepInteractor @Inject constructor(
     private val sleepAlarmReceiver: AlarmService,
 ) : SleepUseCase {
 
-    override fun getSleepData(): Flow<Sleep> {
+    override fun getSleepProgress(): Flow<Sleep> {
         return repository.getLatestData().map {
             if (it == null) {
                 val sleep = Sleep()
@@ -47,8 +46,8 @@ class SleepInteractor @Inject constructor(
         repository.updateAndAddPoints(sleep.toEntity())
     }
 
-    override fun getSetTime(): Flow<SleepIndicator> {
-        return repository.getSetTime()
+    override fun getSchedule(): Flow<SleepIndicator> {
+        return repository.getSchedule()
     }
 
     override fun isTheTimeWithin1Hours(time: Long): Boolean {
@@ -70,11 +69,12 @@ class SleepInteractor @Inject constructor(
 
     override fun showFormattedSetTime(time: Long): String = DateHelper.showHoursAndMinutes(time)
 
-    override suspend fun changeSetTime(time: Long) {
-        return repository.changeSetTime(time)
+    override suspend fun setSchedule(time: Long) {
+        repository.changeSchedule(time)
+        setScheduleForNotification(Sleep(), time)
     }
 
-    override fun setScheduleForNotification(context: Context, sleep: Sleep, time: Long) {
+    override fun setScheduleForNotification(sleep: Sleep, time: Long) {
         sleepAlarmReceiver.setRepeatingScheduleForSleep(sleep, time)
     }
 }

@@ -30,7 +30,7 @@ class SleepRepository @Inject constructor(
         preferenceManager.addPoints(1000)
     }
 
-    override fun getSetTime(): Flow<SleepIndicator> {
+    override fun getSchedule(): Flow<SleepIndicator> {
         return preferenceManager.sleepTimePreference.map {
             if (it == null) {
                 SleepIndicator.NotSet
@@ -40,7 +40,7 @@ class SleepRepository @Inject constructor(
         }
     }
 
-    override suspend fun changeSetTime(time: Long) {
+    override suspend fun changeSchedule(time: Long) {
         return preferenceManager.changeSleepTime(time)
     }
 }
