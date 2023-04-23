@@ -9,16 +9,18 @@ fun Jogging.toEntity(): JoggingEntity {
         duration = this.duration,
         distance = this.distance,
         isCompleted = this.isCompleted,
+        timeCompleted = this.timeCompleted,
         timeStamp = this.timeStamp
     )
 }
 
-fun JoggingEntity.toDomain() : Jogging{
+fun JoggingEntity.toDomain(): Jogging {
     return Jogging(
         id = this.id,
         duration = this.duration,
         distance = this.distance,
         isCompleted = this.isCompleted,
+        timeCompleted = this.timeCompleted,
         timeStamp = this.timeStamp
     )
 }

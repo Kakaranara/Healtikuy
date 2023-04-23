@@ -12,7 +12,7 @@ class JoggingRepository @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val preference: UserPreferencesManager
 ) : BaseCardioRepository<JoggingEntity>() {
-    override fun getAllData(): List<JoggingEntity> {
+    override suspend fun getAllData(): List<JoggingEntity> {
         return localDataSource.getAllJoggingData()
     }
 

@@ -10,7 +10,8 @@
         android:id="@+id/toolbarJogging"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/menu_feature" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"

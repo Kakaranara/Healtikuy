@@ -29,7 +29,7 @@ class JoggingInteractor @Inject constructor(
         }
     }
 
-    override fun getAllData(): List<Jogging> {
+    override suspend fun getAllData(): List<Jogging> {
         return repository.getAllData().map {
             it.toDomain()
         }

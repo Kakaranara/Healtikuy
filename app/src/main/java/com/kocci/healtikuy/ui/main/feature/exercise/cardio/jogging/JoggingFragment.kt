@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.domain.model.exercise.Jogging
 import com.kocci.healtikuy.core.domain.usecase.exercise.scheduler.ExerciseTimeIndicator
 import com.kocci.healtikuy.core.util.helper.DateHelper
@@ -16,7 +17,9 @@ import com.kocci.healtikuy.ui.picker.TimePickerFragment
 import com.kocci.healtikuy.util.extension.gone
 import com.kocci.healtikuy.util.extension.showToast
 import com.kocci.healtikuy.util.extension.visible
+import com.kocci.healtikuy.util.helper.HistoryHelper
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 import java.util.*
 
 @AndroidEntryPoint
@@ -29,7 +32,7 @@ class JoggingFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.toolbarJogging.setupWithNavController(findNavController())
+        setupToolbar()
         binding.btnExerciseTimeSubmit.setOnClickListener(this)
         binding.btnExerciseTimeEdit.setOnClickListener(this)
         binding.btnExerciseSetTime.setOnClickListener(this)
@@ -84,6 +87,33 @@ class JoggingFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
         }
     }
 
+    private fun setupToolbar() {
+        binding.apply {
+            toolbarJogging.setupWithNavController(findNavController())
+            toolbarJogging.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.action_history -> {
+                        //TODO : ORCHESTRATE HISTORY LIST HERE
+                        runBlocking {
+                            val joggingList = viewModel.getAllData()
+                            val historyList = HistoryHelper.orchestrateJogging(joggingList)
+                            val direction =
+                                JoggingFragmentDirections.actionGlobalHistoryFragment(historyList)
+
+                            findNavController().navigate(direction)
+                        }
+
+                        true
+                    }
+                    else -> {
+                        false
+                    }
+                }
+            }
+        }
+        binding.toolbarJogging.setupWithNavController(findNavController())
+    }
+
     override fun onClick(v: View?) {
         when (v) {
             binding.btnExerciseSetTime -> {
@@ -122,6 +152,7 @@ class JoggingFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
         val formattedTime = viewModel.showFormattedTime(cal.timeInMillis)
         binding.tvExerciseTime.text = formattedTime
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,

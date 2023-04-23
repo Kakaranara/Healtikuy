@@ -6,6 +6,7 @@ import java.util.*
 object DateHelper {
 
     const val FULL_DATE_FORMAT = "dd/MM/yyyy, HH:mm"
+    const val DATE_FORMAT = "dd/MM/yyyy"
     const val TIME_FORMAT = "HH:mm"
 
     const val secondInMill = 1000
@@ -55,5 +56,11 @@ object DateHelper {
             set(Calendar.MINUTE, cal2.get(Calendar.MINUTE))
         }
         return cal.time.time
+    }
+
+    fun formatDateString(dateInMillis: Long): String {
+        val date = Date(dateInMillis)
+        val formatter = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
+        return formatter.format(date)
     }
 }

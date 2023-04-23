@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface JoggingDao {
     @Query("SELECT * FROM jogging")
-    fun getAllData(): List<JoggingEntity>
+    suspend fun getAllData(): List<JoggingEntity>
 
     @Query("SELECT * FROM jogging ORDER BY id DESC LIMIT 1")
     fun getLatestData(): Flow<JoggingEntity?>

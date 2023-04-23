@@ -15,6 +15,7 @@ class JoggingViewModel @Inject constructor(
 ) : ViewModel() {
     fun getSchedule() = joggingUseCase.getSchedule().asLiveData()
     fun getProgressData() = joggingUseCase.getDataProgress().asLiveData()
+    suspend fun getAllData() = joggingUseCase.getAllData()
 
     fun updateData(data: Jogging) {
         viewModelScope.launch {

@@ -54,7 +54,7 @@
         android:id="@+id/exerciseFragment"
         android:name="com.kocci.healtikuy.ui.main.feature.exercise.ExerciseFragment"
         android:label="@string/exercise"
-        tools:layout="@layout/fragment_exercise" >
+        tools:layout="@layout/fragment_exercise">
         <action
             android:id="@+id/action_exerciseFragment_to_cardioListFragment"
             app:destination="@id/cardioListFragment" />
@@ -111,7 +111,7 @@
         android:id="@+id/cardioListFragment"
         android:name="com.kocci.healtikuy.ui.main.feature.exercise.cardio.CardioListFragment"
         android:label="Cardio List"
-        tools:layout="@layout/fragment_cardio_list" >
+        tools:layout="@layout/fragment_cardio_list">
         <action
             android:id="@+id/action_cardioListFragment_to_joggingFragment"
             app:destination="@id/joggingFragment" />
@@ -137,4 +137,16 @@
         android:name="com.kocci.healtikuy.ui.main.feature.exercise.cardio.staticbike.StaticBikeFragment"
         android:label="Static Biking"
         tools:layout="@layout/fragment_static_bike" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.kocci.healtikuy.ui.main.history.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history">
+        <argument
+            android:name="history"
+            app:argType="com.kocci.healtikuy.core.domain.model.history.HistoryList" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_historyFragment"
+        app:destination="@id/historyFragment" />
 </navigation>

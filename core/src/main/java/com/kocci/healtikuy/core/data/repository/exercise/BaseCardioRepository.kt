@@ -4,7 +4,7 @@ import com.kocci.healtikuy.core.domain.usecase.exercise.scheduler.ExerciseTimeIn
 import kotlinx.coroutines.flow.Flow
 
 abstract class BaseCardioRepository<EntityType> {
-    abstract fun getAllData(): List<EntityType>
+    abstract suspend fun getAllData(): List<EntityType>
     abstract fun getLatestData(): Flow<EntityType?>
     abstract fun getSchedule(): Flow<ExerciseTimeIndicator>
     abstract suspend fun insertNewData(data: EntityType)

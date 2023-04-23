@@ -44,7 +44,7 @@ class LocalDataSource @Inject constructor(
      */
 
     fun getJoggingLastRow() = joggingDao.getLatestData()
-    fun getAllJoggingData() = joggingDao.getAllData()
+    suspend fun getAllJoggingData() = joggingDao.getAllData()
     suspend fun insertJoggingData(entity: JoggingEntity) = joggingDao.insertEntity(entity)
     suspend fun updateJoggingData(entity: JoggingEntity) = joggingDao.updateEntity(entity)
 
