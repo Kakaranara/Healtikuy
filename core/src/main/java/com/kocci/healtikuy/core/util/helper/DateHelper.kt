@@ -58,9 +58,14 @@ object DateHelper {
         return cal.time.time
     }
 
+    fun convertDayToMillis(dayTime : Int) : Long {
+        return (dayInMill * dayTime).toLong()
+    }
+
     fun formatDateString(dateInMillis: Long): String {
         val date = Date(dateInMillis)
         val formatter = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
         return formatter.format(date)
     }
+
 }

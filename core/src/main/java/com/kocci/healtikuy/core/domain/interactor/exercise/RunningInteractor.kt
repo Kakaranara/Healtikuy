@@ -1,43 +1,71 @@
 package com.kocci.healtikuy.core.domain.interactor.exercise
 
+import com.kocci.healtikuy.core.constant.CardioType
+import com.kocci.healtikuy.core.data.repository.exercise.RunningRepository
 import com.kocci.healtikuy.core.domain.model.exercise.Running
 import com.kocci.healtikuy.core.domain.usecase.exercise.cardio.RunningUseCase
 import com.kocci.healtikuy.core.domain.usecase.exercise.scheduler.ExerciseTimeIndicator
+import com.kocci.healtikuy.core.service.AlarmService
+import com.kocci.healtikuy.core.util.helper.DateHelper
+import com.kocci.healtikuy.core.util.mapper.exercise.toDomain
+import com.kocci.healtikuy.core.util.mapper.exercise.toEntity
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class RunningInteractor @Inject constructor(
-
+    private val repository: RunningRepository,
+    private val alarmService: AlarmService
 ) : RunningUseCase {
     override fun getDataProgress(): Flow<Running> {
-        TODO("Not yet implemented")
+        return repository.getLatestData().map { entity ->
+            if (entity == null) {
+                val running = Running()
+                insertNewData(running)
+                running
+            } else if (!DateHelper.isToday(entity.timeStamp)) {
+                val running = Running()
+                insertNewData(running)
+                running
+            } else {
+                entity.toDomain()
+            }
+        }
     }
 
     override suspend fun getAllData(): List<Running> {
-        TODO("Not yet implemented")
+        return repository.getAllData().map {
+            it.toDomain()
+        }
     }
 
     override suspend fun insertNewData(data: Running) {
-        TODO("Not yet implemented")
+        repository.insertNewData(data.toEntity())
     }
 
     override suspend fun updateData(data: Running) {
-        TODO("Not yet implemented")
+        repository.updateData(data.toEntity())
     }
 
     override fun getSchedule(): Flow<ExerciseTimeIndicator> {
-        TODO("Not yet implemented")
+        return repository.getSchedule()
     }
 
     override fun showFormattedTime(time: Long): String {
-        TODO("Not yet implemented")
+        return DateHelper.showHoursAndMinutes(time)
     }
 
     override suspend fun setSchedule(timeInString: String, intervalInDays: Int) {
-        TODO("Not yet implemented")
+        val time = DateHelper.convertTimeStringToTodayDate(timeInString)
+        val intervalInMillis = DateHelper.convertDayToMillis(intervalInDays)
+        alarmService.setRepeatingScheduleForCardioExercise(
+            time,
+            intervalInMillis,
+            CardioType.RUNNING
+        )
     }
 
     override suspend fun editSchedule() {
-        TODO("Not yet implemented")
+        repository.editSchedule()
     }
 }
