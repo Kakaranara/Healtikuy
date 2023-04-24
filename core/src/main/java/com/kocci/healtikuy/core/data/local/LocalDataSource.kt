@@ -53,7 +53,7 @@ class LocalDataSource @Inject constructor(
      */
 
     fun getRunningLastRow() = runningDao.getLatestData()
-    fun getAllRunningData() = runningDao.getAllData()
+    suspend fun getAllRunningData() = runningDao.getAllData()
     suspend fun insertRunningData(entity: RunningEntity) = runningDao.insertEntity(entity)
     suspend fun updateRunningData(entity: RunningEntity) = runningDao.updateEntity(entity)
 
@@ -63,7 +63,7 @@ class LocalDataSource @Inject constructor(
      */
 
     fun getStaticBikeLastRow() = staticBikeDao.getLatestData()
-    fun getAllStaticBikeData() = staticBikeDao.getAllData()
+    suspend fun getAllStaticBikeData() = staticBikeDao.getAllData()
     suspend fun insertStaticBikeData(entity: StaticBikeEntity) = staticBikeDao.insertEntity(entity)
     suspend fun updateStaticBikeData(entity: StaticBikeEntity) = staticBikeDao.updateEntity(entity)
 

@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface RunningDao {
     @Query("SELECT * FROM running")
-    fun getAllData() : List<RunningEntity>
+    suspend fun getAllData() : List<RunningEntity>
 
     @Query("SELECT * FROM running ORDER BY id DESC LIMIT 1")
     fun getLatestData(): Flow<RunningEntity?>

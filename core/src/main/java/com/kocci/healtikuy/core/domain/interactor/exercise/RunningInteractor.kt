@@ -44,7 +44,9 @@ class RunningInteractor @Inject constructor(
     }
 
     override suspend fun updateData(data: Running) {
+        data.isCompleted = true
         repository.updateData(data.toEntity())
+        repository.updatePoints()
     }
 
     override fun getSchedule(): Flow<ExerciseTimeIndicator> {
@@ -57,6 +59,7 @@ class RunningInteractor @Inject constructor(
 
     override suspend fun setSchedule(timeInString: String, intervalInDays: Int) {
         val time = DateHelper.convertTimeStringToTodayDate(timeInString)
+        repository.setSchedule(time, intervalInDays)
         val intervalInMillis = DateHelper.convertDayToMillis(intervalInDays)
         alarmService.setRepeatingScheduleForCardioExercise(
             time,

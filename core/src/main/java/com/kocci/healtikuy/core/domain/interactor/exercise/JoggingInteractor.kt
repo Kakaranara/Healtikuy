@@ -52,7 +52,8 @@ class JoggingInteractor @Inject constructor(
     override suspend fun setSchedule(timeInString: String, intervalInDays: Int) {
         val time = DateHelper.convertTimeStringToTodayDate(timeInString)
         repository.setSchedule(time, intervalInDays)
-        val intervalInMillis = (DateHelper.dayInMill * intervalInDays).toLong()
+//        val intervalInMillis = (DateHelper.dayInMill * intervalInDays).toLong()
+        val intervalInMillis = DateHelper.convertDayToMillis(intervalInDays)
         alarmService.setRepeatingScheduleForCardioExercise(
             time,
             intervalInMillis,
