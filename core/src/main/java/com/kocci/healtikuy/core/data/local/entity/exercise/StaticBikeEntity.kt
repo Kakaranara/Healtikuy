@@ -11,5 +11,6 @@ data class StaticBikeEntity(
     var restTime: Int,
     var interval: Int,
     var isCompleted: Boolean = false,
+    var timeCompleted: Long,
     var timeStamp: Long
 )

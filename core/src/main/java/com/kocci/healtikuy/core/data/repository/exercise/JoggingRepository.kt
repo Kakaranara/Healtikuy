@@ -44,7 +44,7 @@ class JoggingRepository @Inject constructor(
         preference.changeJoggingTime(time, interval, false)
     }
 
-    override suspend fun editJoggingTime() {
+    override suspend fun editSchedule() {
         preference.editJoggingTime(true)
     }
 

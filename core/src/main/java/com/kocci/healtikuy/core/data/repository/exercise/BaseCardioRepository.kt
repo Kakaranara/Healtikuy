@@ -10,6 +10,6 @@ abstract class BaseCardioRepository<EntityType> {
     abstract suspend fun insertNewData(data: EntityType)
     abstract suspend fun updateData(data: EntityType)
     abstract suspend fun setSchedule(time: Long, interval: Int)
-    abstract suspend fun editJoggingTime()
+    abstract suspend fun editSchedule()
     abstract suspend fun updatePoints()
 }

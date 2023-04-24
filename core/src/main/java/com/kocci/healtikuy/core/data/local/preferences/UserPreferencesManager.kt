@@ -5,7 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import com.kocci.healtikuy.core.constant.GameRules
 import com.kocci.healtikuy.core.domain.model.UserPreferences
-import com.kocci.healtikuy.core.domain.model.exercise.JoggingTimePreferences
+import com.kocci.healtikuy.core.domain.model.exercise.ExerciseTimePreferences
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -34,7 +34,12 @@ class UserPreferencesManager @Inject constructor(
         val JOGGING_INTERVAL = intPreferencesKey("jogging_interval")
         val JOGGING_IS_EDITING = booleanPreferencesKey("jogging_is_editing")
         val RUNNING_TIME = longPreferencesKey("running_time")
+        val RUNNING_INTERVAL = intPreferencesKey("jogging_interval")
+
+        val RUNNING_IS_EDITING = booleanPreferencesKey("jogging_is_editing")
         val STATIC_BIKE_TIME = longPreferencesKey("static_bike_time")
+        val STATIC_BIKE_INTERVAL = intPreferencesKey("jogging_interval")
+        val STATIC_BIKE_IS_EDITING = booleanPreferencesKey("jogging_is_editing")
     }
 
     val userPreferences: Flow<UserPreferences> = dataStore.data.map { preferences ->
@@ -57,20 +62,29 @@ class UserPreferencesManager @Inject constructor(
         preferences[PreferenceKeys.SLEEP_TIME]
     }
 
-    val joggingTimePreference: Flow<JoggingTimePreferences> = dataStore.data.map { pref ->
+    val joggingTimePreference: Flow<ExerciseTimePreferences> = dataStore.data.map { pref ->
         val time = pref[PreferenceKeys.JOGGING_TIME]
         val interval = pref[PreferenceKeys.JOGGING_INTERVAL]
         val isEditing = pref[PreferenceKeys.JOGGING_IS_EDITING] ?: false
 
-        JoggingTimePreferences(time, interval, isEditing)
+        ExerciseTimePreferences(time, interval, isEditing)
     }
 
-    val runningTimePreference: Flow<Long?> = dataStore.data.map { pref ->
-        pref[PreferenceKeys.RUNNING_TIME]
+    val runningTimePreference: Flow<ExerciseTimePreferences> = dataStore.data.map { pref ->
+        val time = pref[PreferenceKeys.RUNNING_TIME]
+        val interval = pref[PreferenceKeys.RUNNING_INTERVAL]
+        val isEditing = pref[PreferenceKeys.RUNNING_IS_EDITING] ?: false
+
+        ExerciseTimePreferences(time, interval, isEditing)
     }
 
-    val staticBikeTimePreference: Flow<Long?> = dataStore.data.map { pref ->
-        pref[PreferenceKeys.STATIC_BIKE_TIME]
+
+    val staticBikeTimePreference: Flow<ExerciseTimePreferences> = dataStore.data.map { pref ->
+        val time = pref[PreferenceKeys.STATIC_BIKE_TIME]
+        val interval = pref[PreferenceKeys.STATIC_BIKE_INTERVAL]
+        val isEditing = pref[PreferenceKeys.STATIC_BIKE_IS_EDITING] ?: false
+
+        ExerciseTimePreferences(time, interval, isEditing)
     }
 
     suspend fun updateUserProfile(username: String, avatar: String) {
@@ -112,17 +126,35 @@ class UserPreferencesManager @Inject constructor(
         }
     }
 
-    suspend fun changeRunningTime(time: Long) {
+    suspend fun changeRunningTime(time: Long, interval: Int, isEditing: Boolean = false) {
         dataStore.edit { pref ->
             pref[PreferenceKeys.RUNNING_TIME] = time
+            pref[PreferenceKeys.RUNNING_INTERVAL] = interval
+            pref[PreferenceKeys.RUNNING_IS_EDITING] = isEditing
         }
     }
 
-    suspend fun changeStaticBikeTime(time: Long) {
+    suspend fun editRunningtime(isEditing: Boolean = false) {
         dataStore.edit { pref ->
-            pref[PreferenceKeys.STATIC_BIKE_TIME] = time
+            pref[PreferenceKeys.RUNNING_IS_EDITING] = isEditing
         }
     }
+
+
+    suspend fun changeStaticBikeTime(time: Long, interval: Int, isEditing: Boolean = false) {
+        dataStore.edit { pref ->
+            pref[PreferenceKeys.STATIC_BIKE_TIME] = time
+            pref[PreferenceKeys.STATIC_BIKE_INTERVAL] = interval
+            pref[PreferenceKeys.STATIC_BIKE_IS_EDITING] = isEditing
+        }
+    }
+
+    suspend fun editStaticBikeTime(isEditing: Boolean = false) {
+        dataStore.edit { pref ->
+            pref[PreferenceKeys.STATIC_BIKE_IS_EDITING] = isEditing
+        }
+    }
+
 
     suspend fun loginSync(userPreferences: UserPreferences) {
         dataStore.edit { pref ->

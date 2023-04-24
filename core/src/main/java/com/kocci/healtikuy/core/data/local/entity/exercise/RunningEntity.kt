@@ -10,5 +10,6 @@ data class RunningEntity(
     var duration: Int,
     var distance: Int,
     var isCompleted: Boolean = false,
+    var timeCompleted: Long,
     var timeStamp: Long
 )

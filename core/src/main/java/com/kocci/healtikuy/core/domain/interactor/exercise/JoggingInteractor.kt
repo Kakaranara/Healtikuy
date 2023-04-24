@@ -63,6 +63,6 @@ class JoggingInteractor @Inject constructor(
     override fun showFormattedTime(time: Long): String = DateHelper.showHoursAndMinutes(time)
 
     override suspend fun editSchedule() {
-        repository.editJoggingTime()
+        repository.editSchedule()
     }
 }
