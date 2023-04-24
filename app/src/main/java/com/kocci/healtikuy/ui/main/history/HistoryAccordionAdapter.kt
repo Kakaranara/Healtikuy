@@ -48,11 +48,11 @@ class HistoryAccordionAdapter(
         parent: ViewGroup?
     ): View {
         var groupView = convertView
-        var groupTitle = getGroup(groupPosition) as String
+        val groupTitle = getGroup(groupPosition) as String
         if (groupView == null) {
             val inflater =
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            groupView = inflater.inflate(R.layout.group_list_history, null)
+            groupView = inflater.inflate(R.layout.item_parentlist_history, null)
         }
         val tvGroupList = groupView!!.findViewById<TextView>(R.id.listTitle)
         tvGroupList.text = groupTitle
@@ -67,7 +67,7 @@ class HistoryAccordionAdapter(
         parent: ViewGroup?
     ): View {
         var childView = convertView
-        var itemTitle = getChild(groupPosition, childPosition) as String
+        val itemTitle = getChild(groupPosition, childPosition) as String
         if (childView == null) {
             val inflater =
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater

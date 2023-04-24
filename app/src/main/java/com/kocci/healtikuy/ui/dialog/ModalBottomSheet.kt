@@ -25,7 +25,7 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.dialog_bottom_sheet, container, false)
+        val view = inflater.inflate(R.layout.dialog_bsheet_inventory, container, false)
         return view
     }
 
