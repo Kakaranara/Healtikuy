@@ -11,28 +11,33 @@ object HistoryHelper {
         val itemList = hashMapOf<String, List<String>>()
 
         list.forEach { jogging ->
-            val title = DateHelper.formatDateString(dateInMillis = jogging.timeCompleted)
-            groupList.add(title)
-            val child = listOf<String>(
-                "Duration : ${jogging.duration} Second",
-                "Mileage : ${jogging.distance} Meter"
-            )
-            itemList[title] = child
+            if (jogging.isCompleted) {
+                val title = DateHelper.formatDateString(dateInMillis = jogging.timeCompleted)
+                groupList.add(title)
+                val child = listOf<String>(
+                    "Duration : ${jogging.duration} Second",
+                    "Mileage : ${jogging.distance} Meter"
+                )
+                itemList[title] = child
+            }
         }
         return HistoryList(groupList, itemList)
     }
+
     fun orchestrateRunning(list: List<Running>): HistoryList {
         val groupList = mutableListOf<String>()
         val itemList = hashMapOf<String, List<String>>()
 
         list.forEach { running ->
-            val title = DateHelper.formatDateString(dateInMillis = running.timeCompleted)
-            groupList.add(title)
-            val child = listOf<String>(
-                "Duration : ${running.duration} Second",
-                "Mileage : ${running.distance} Meter"
-            )
-            itemList[title] = child
+            if (running.isCompleted) {
+                val title = DateHelper.formatDateString(dateInMillis = running.timeCompleted)
+                groupList.add(title)
+                val child = listOf<String>(
+                    "Duration : ${running.duration} Second",
+                    "Mileage : ${running.distance} Meter"
+                )
+                itemList[title] = child
+            }
         }
         return HistoryList(groupList, itemList)
     }

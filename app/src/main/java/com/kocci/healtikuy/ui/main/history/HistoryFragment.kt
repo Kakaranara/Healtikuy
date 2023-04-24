@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.databinding.FragmentHistoryBinding
+import com.kocci.healtikuy.util.extension.visible
 
 class HistoryFragment : Fragment(R.layout.fragment_history) {
 
@@ -27,6 +28,10 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
         val list = args.history
         val groupList = list.groupList
         val itemList = list.itemList
+
+        if (groupList.isEmpty()) {
+            binding.tvNoData.visible()
+        }
 
         val adapter = HistoryAccordionAdapter(requireActivity(), groupList, itemList)
         binding.elvHistory.apply {
