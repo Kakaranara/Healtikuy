@@ -16,7 +16,7 @@ class UserInteractor @Inject constructor(
         return repository.getUserPreferences()
     }
 
-    override fun listenForStatusChanges(): Flow<HealthyStatusIndicator> {
+    override fun listenForPointsChanges(): Flow<HealthyStatusIndicator> {
         return repository.getUserPreferences().map {
             val points = it.points
             val progress = calculateStatusPercentage(points)

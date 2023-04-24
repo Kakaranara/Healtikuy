@@ -46,8 +46,9 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
                     binding.btnChangeSleepTime.visibility = View.GONE
                     binding.tvSleepDesc.text = getString(R.string.description_when_time_not_set)
                 }
+
                 is SleepIndicator.Set -> {
-                    binding.tvSleepTime.text = viewModel.showFormattedTime(sleepIndicator.data)
+                    binding.tvSleepTime.text = viewModel.showFormattedTime(sleepIndicator.sleepTime)
                     binding.btnSleepTime.text = getString(R.string.sleep)
                     binding.btnChangeSleepTime.visibility = View.VISIBLE
 
@@ -59,7 +60,7 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
                                 getString(R.string.sleep_description_after_complete)
                         } else {
                             buttonClickGoesToCompleteMission(sleep)
-                            viewModel.isTheTimeWithin1Hours(sleepIndicator.data)
+                            viewModel.isTheTimeWithin1Hours(sleepIndicator.sleepTime)
                                 .observe(viewLifecycleOwner) { isWithinOneHours ->
                                     if (!isWithinOneHours) {
                                         binding.btnSleepTime.isEnabled = false

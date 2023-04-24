@@ -11,7 +11,7 @@ class HomeViewModel @Inject constructor(
     private val userUseCase: UserUseCase
 ) : ViewModel() {
 
-    val healthyStatus = userUseCase.listenForStatusChanges().asLiveData()
+    val healthyStatus = userUseCase.listenForPointsChanges().asLiveData()
 
     fun calculateStatusPercentage(points: Long): Int =
         userUseCase.calculateStatusPercentage(points)

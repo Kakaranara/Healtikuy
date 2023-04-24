@@ -47,8 +47,8 @@ class WaterIntakeInteractor @Inject constructor(
         cancelAlarm()
     }
 
-    override fun setAlarm(isGoalsCompleted: Boolean) {
-        if (!isGoalsCompleted) {
+    override fun setAlarm(isGoalsReached: Boolean) {
+        if (!isGoalsReached) {
             alarmService.cancelRepeatingAlarmForWater()
             alarmService.setRepeatingScheduleForWater()
         }

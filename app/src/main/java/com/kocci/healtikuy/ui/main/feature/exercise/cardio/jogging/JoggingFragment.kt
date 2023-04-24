@@ -48,7 +48,7 @@ class JoggingFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
                         btnExerciseSetTime.gone()
                         btnExerciseTimeEdit.visible()
                         tvInterval.text = it.interval.toString()
-                        tvExerciseTime.text = DateHelper.showHoursAndMinutes(it.data)
+                        tvExerciseTime.text = DateHelper.showHoursAndMinutes(it.time)
                     }
                 }
                 ExerciseTimeIndicator.NotSet -> {
