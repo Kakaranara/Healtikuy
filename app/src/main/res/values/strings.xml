@@ -75,6 +75,7 @@
     <string name="minutes">Minutes</string>
     <string name="meter">Meter</string>
     <string name="history">History</string>
+    <string name="clear_history">Clear History</string>
 
     <!-- Exercise Related -->
     <!-- Nutrition Related -->

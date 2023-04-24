@@ -140,7 +140,7 @@
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.kocci.healtikuy.ui.main.history.HistoryFragment"
-        android:label="fragment_history"
+        android:label="History"
         tools:layout="@layout/fragment_history">
         <argument
             android:name="history"

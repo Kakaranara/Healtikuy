@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -28,7 +29,11 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
         val itemList = list.itemList
 
         val adapter = HistoryAccordionAdapter(requireActivity(), groupList, itemList)
-        binding.elvHistory.setAdapter(adapter)
+        binding.elvHistory.apply {
+            setAdapter(adapter)
+            divider = ContextCompat.getDrawable(requireActivity(), R.color.transparent)
+            dividerHeight = 16
+        }
     }
 
     override fun onCreateView(

@@ -6,7 +6,7 @@ import java.util.*
 object DateHelper {
 
     const val FULL_DATE_FORMAT = "dd/MM/yyyy, HH:mm"
-    const val DATE_FORMAT = "dd/MM/yyyy"
+    const val DATE_FORMAT = "dd MMMM yyyy"
     const val TIME_FORMAT = "HH:mm"
 
     const val secondInMill = 1000
