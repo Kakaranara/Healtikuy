@@ -10,7 +10,8 @@
         android:id="@+id/toolbarSleep"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/menu_feature" />
 
     <View
         android:id="@+id/imgViewSleep"

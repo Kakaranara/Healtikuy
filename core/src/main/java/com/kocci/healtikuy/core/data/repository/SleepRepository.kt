@@ -13,6 +13,11 @@ class SleepRepository @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val preferenceManager: UserPreferencesManager,
 ) : ISleepRepository {
+
+    override suspend fun getAllData(): List<SleepEntity> {
+        return localDataSource.getAllData()
+    }
+
     override fun getLatestData(): Flow<SleepEntity?> {
         return localDataSource.getSleepLastRow()
     }

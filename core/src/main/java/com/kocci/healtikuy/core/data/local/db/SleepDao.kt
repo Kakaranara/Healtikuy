@@ -15,4 +15,7 @@ interface SleepDao {
 
     @Update
     suspend fun updateData(sleepEntity: SleepEntity)
+
+    @Query("SELECT * FROM sleep")
+    suspend fun getAllData(): List<SleepEntity>
 }

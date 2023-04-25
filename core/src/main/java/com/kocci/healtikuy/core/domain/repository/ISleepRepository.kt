@@ -5,6 +5,7 @@ import com.kocci.healtikuy.core.domain.usecase.SleepIndicator
 import kotlinx.coroutines.flow.Flow
 
 interface ISleepRepository {
+    suspend fun getAllData() : List<SleepEntity>
     fun getLatestData(): Flow<SleepEntity?>
     fun getSchedule(): Flow<SleepIndicator>
     suspend fun insertData(entity: SleepEntity)

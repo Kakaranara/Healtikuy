@@ -21,6 +21,10 @@ class SleepInteractor @Inject constructor(
     private val sleepAlarmReceiver: AlarmService,
 ) : SleepUseCase {
 
+    override suspend fun getAllData(): List<Sleep> {
+        return repository.getAllData().map { it.toDomain() }
+    }
+
     override fun getSleepProgress(): Flow<Sleep> {
         return repository.getLatestData().map {
             if (it == null) {

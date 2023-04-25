@@ -9,6 +9,7 @@ sealed class SleepIndicator(val sleepTime: Long) {
 }
 
 interface SleepUseCase {
+    suspend fun getAllData(): List<Sleep>
     fun getSleepProgress(): Flow<Sleep>
     fun getSchedule(): Flow<SleepIndicator>
     fun isTheTimeWithin1Hours(time: Long): Boolean
