@@ -33,13 +33,14 @@ class UserPreferencesManager @Inject constructor(
         val JOGGING_TIME = longPreferencesKey("jogging_time")
         val JOGGING_INTERVAL = intPreferencesKey("jogging_interval")
         val JOGGING_IS_EDITING = booleanPreferencesKey("jogging_is_editing")
-        val RUNNING_TIME = longPreferencesKey("running_time")
-        val RUNNING_INTERVAL = intPreferencesKey("jogging_interval")
 
-        val RUNNING_IS_EDITING = booleanPreferencesKey("jogging_is_editing")
+        val RUNNING_TIME = longPreferencesKey("running_time")
+        val RUNNING_INTERVAL = intPreferencesKey("running_interval")
+        val RUNNING_IS_EDITING = booleanPreferencesKey("running_is_editing")
+
         val STATIC_BIKE_TIME = longPreferencesKey("static_bike_time")
-        val STATIC_BIKE_INTERVAL = intPreferencesKey("jogging_interval")
-        val STATIC_BIKE_IS_EDITING = booleanPreferencesKey("jogging_is_editing")
+        val STATIC_BIKE_INTERVAL = intPreferencesKey("static_bike_interval")
+        val STATIC_BIKE_IS_EDITING = booleanPreferencesKey("static_bike_is_editing")
     }
 
     val userPreferences: Flow<UserPreferences> = dataStore.data.map { preferences ->
