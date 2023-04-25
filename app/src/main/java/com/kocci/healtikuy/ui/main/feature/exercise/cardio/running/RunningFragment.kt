@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -22,7 +23,6 @@ import com.kocci.healtikuy.util.helper.HistoryHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
 import java.util.Calendar
-import kotlin.system.measureTimeMillis
 
 
 @AndroidEntryPoint
@@ -32,6 +32,10 @@ class RunningFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
 
     private val viewModel: RunningViewModel by viewModels()
     private var runningValue: Running? = null
+
+    companion object {
+        val SHORT_DISTANCE_RUNNING = arrayOf("100", "200", "400")
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -73,7 +77,8 @@ class RunningFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
                     etRunningDuration.gone()
                     tvRunningMileage.visible()
                     tvRunningMileage.text = it.distance.toString()
-                    etRunningMileage.gone()
+                    actvRunningMileage.gone()
+                    ilRunningMilleage.gone()
                     btnRunningSubmit.isEnabled = false
                 }
             } else {
@@ -81,7 +86,8 @@ class RunningFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
                     tvRunningDuration.gone()
                     tvRunningMileage.gone()
                     etRunningDuration.visible()
-                    etRunningMileage.visible()
+                    actvRunningMileage.visible()
+                    ilRunningMilleage.visible()
                     runningValue = it
                 }
             }
@@ -116,7 +122,7 @@ class RunningFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
 
             binding.btnRunningSubmit -> {
                 val duration = binding.etRunningDuration.text.toString().toInt()
-                val mileage = binding.etRunningMileage.text.toString().toInt()
+                val mileage = binding.actvRunningMileage.text.toString().toInt()
                 try {
                     runningValue?.let {
                         it.duration = duration

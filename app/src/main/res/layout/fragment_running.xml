@@ -58,6 +58,7 @@
                     style="@style/TextAppearance.Material3.TitleMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
                     android:text="@string/not_set" />
 
             </LinearLayout>
@@ -231,7 +232,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="@string/minutes" />
+            android:text="@string/seconds" />
 
     </LinearLayout>
 
@@ -252,17 +253,26 @@
 
         <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp">
 
-            <EditText
-                android:id="@+id/etRunningMileage"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ilRunningMilleage"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="2"
-                android:inputType="numberDecimal"
-                android:maxLength="5"
-                android:visibility="gone"
-                tools:visibility="gone" />
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/actvRunningMileage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:visibility="gone"
+
+                    app:simpleItems="@array/short_distance_run"
+                    tools:visibility="gone" />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <TextView
                 android:id="@+id/tvRunningMileage"
