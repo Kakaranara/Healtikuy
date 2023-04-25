@@ -24,7 +24,7 @@ class StaticBikeInteractor @Inject constructor(
                 val data = StaticBike()
                 insertNewData(data)
                 data
-            } else if (DateHelper.isToday(it.timeStamp)) {
+            } else if (!DateHelper.isToday(it.timeStamp)) {
                 val data = StaticBike()
                 insertNewData(data)
                 data

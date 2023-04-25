@@ -3,6 +3,7 @@ package com.kocci.healtikuy.ui.main.feature.exercise.cardio.staticbike
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.kocci.healtikuy.core.domain.model.exercise.StaticBike
 import com.kocci.healtikuy.core.domain.usecase.exercise.cardio.StaticBikeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -20,6 +21,12 @@ class StaticBikeViewModel @Inject constructor(
     fun setExerciseSchedule(time: String, interval: Int) {
         viewModelScope.launch {
             staticBikeUseCase.setSchedule(time, interval)
+        }
+    }
+
+    fun submitData(data: StaticBike) {
+        viewModelScope.launch {
+            staticBikeUseCase.updateData(data)
         }
     }
 

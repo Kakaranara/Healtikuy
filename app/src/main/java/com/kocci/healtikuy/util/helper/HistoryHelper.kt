@@ -2,6 +2,7 @@ package com.kocci.healtikuy.util.helper
 
 import com.kocci.healtikuy.core.domain.model.exercise.Jogging
 import com.kocci.healtikuy.core.domain.model.exercise.Running
+import com.kocci.healtikuy.core.domain.model.exercise.StaticBike
 import com.kocci.healtikuy.core.domain.model.history.HistoryList
 import com.kocci.healtikuy.core.util.helper.DateHelper
 
@@ -39,6 +40,26 @@ object HistoryHelper {
                 itemList[title] = child
             }
         }
+        return HistoryList(groupList, itemList)
+    }
+
+    fun orchestrateStaticBike(list: List<StaticBike>): HistoryList {
+        val groupList = mutableListOf<String>()
+        val itemList = hashMapOf<String, List<String>>()
+
+        list.forEach {
+            if (it.isCompleted) {
+                val title = DateHelper.formatDateString(dateInMillis = it.timeCompleted)
+                groupList.add(title)
+                val child = listOf<String>(
+                    "Set : ${it.set} Second",
+                    "Interval : ${it.interval} Meter",
+                    "Rest Time : ${it.restTime} Seconds"
+                )
+                itemList[title] = child
+            }
+        }
+
         return HistoryList(groupList, itemList)
     }
 }

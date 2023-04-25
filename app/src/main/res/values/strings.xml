@@ -59,6 +59,8 @@
     <string name="sleep_description_after_complete">Make Sure to turn off your phone. Happy Sleep!</string>
     <string name="sleep_description_before_sleep">Make sure you have turn off your phone after pressing the button!</string>
     <string name="sleep_description_not_in_time">You can press this button in within 1 hours of your sleep schedule.</string>
+
+    <!-- Exercise Related -->
     <string name="cardio">Cardio</string>
     <string name="jogging">Jogging</string>
     <string name="running">Running</string>
@@ -79,8 +81,11 @@
     <string name="inventory">Inventory</string>
     <string name="no_data">There is still no data.</string>
     <string name="seconds">Seconds</string>
-
-    <!-- Exercise Related -->
+    <string name="setcolon">Set :</string>
+    <string name="rest_time_colon">Rest Time :</string>
+    <string name="set">Set</string>
+    <string name="minute">Minute</string>
+    <string name="second">Second</string>
     <!-- Nutrition Related -->
     <!-- Sun Related -->
 

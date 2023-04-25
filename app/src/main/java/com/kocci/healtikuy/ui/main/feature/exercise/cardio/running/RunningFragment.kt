@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -32,10 +31,6 @@ class RunningFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
 
     private val viewModel: RunningViewModel by viewModels()
     private var runningValue: Running? = null
-
-    companion object {
-        val SHORT_DISTANCE_RUNNING = arrayOf("100", "200", "400")
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

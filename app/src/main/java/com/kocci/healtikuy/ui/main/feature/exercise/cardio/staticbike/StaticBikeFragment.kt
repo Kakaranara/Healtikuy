@@ -1,7 +1,6 @@
 package com.kocci.healtikuy.ui.main.feature.exercise.cardio.staticbike
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,9 @@ import com.kocci.healtikuy.ui.picker.TimePickerFragment
 import com.kocci.healtikuy.util.extension.gone
 import com.kocci.healtikuy.util.extension.showToast
 import com.kocci.healtikuy.util.extension.visible
+import com.kocci.healtikuy.util.helper.HistoryHelper
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 import java.util.Calendar
 
 
@@ -27,6 +28,8 @@ class StaticBikeFragment : Fragment(), View.OnClickListener, TimePickerFragment.
     private var _binding: FragmentStaticBikeBinding? = null
     private val binding get() = _binding!!
     private val viewModel: StaticBikeViewModel by viewModels()
+
+    private var staticBikeValue: StaticBike? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,12 +62,41 @@ class StaticBikeFragment : Fragment(), View.OnClickListener, TimePickerFragment.
                 }
             }
         }
+
+        viewModel.progress.observe(viewLifecycleOwner) { it ->
+            if (it.isCompleted) {
+                binding.apply {
+                    tvStaticBikeInterval.visible()
+                    tvStaticBikeRest.visible()
+                    tvStaticBikeSet.visible()
+                    etStaticBikeInterval.gone()
+                    etStaticBikeRest.gone()
+                    etStaticBikeSet.gone()
+                    tvStaticBikeInterval.text = it.interval.toString()
+                    tvStaticBikeRest.text = it.restTime.toString()
+                    tvStaticBikeSet.text = it.set.toString()
+                    btnStaticBikeSubmit.isEnabled = false
+
+                }
+            } else {
+                binding.apply {
+                    tvStaticBikeInterval.gone()
+                    tvStaticBikeRest.gone()
+                    tvStaticBikeSet.gone()
+                    etStaticBikeInterval.visible()
+                    etStaticBikeRest.visible()
+                    etStaticBikeSet.visible()
+                    staticBikeValue = it
+                }
+            }
+        }
     }
 
     private fun setupButtonBinding() {
         binding.btnExerciseSetTime.setOnClickListener(this)
         binding.btnExerciseTimeEdit.setOnClickListener(this)
         binding.btnExerciseTimeSubmit.setOnClickListener(this)
+        binding.btnStaticBikeSubmit.setOnClickListener(this)
     }
 
     private fun setupToolbar() {
@@ -73,7 +105,13 @@ class StaticBikeFragment : Fragment(), View.OnClickListener, TimePickerFragment.
             setOnMenuItemClickListener { menu ->
                 when (menu.itemId) {
                     R.id.action_history -> {
-                        //TODOS : ORCHESTRATE
+                        runBlocking {
+                            val data = viewModel.getAllData()
+                            val history = HistoryHelper.orchestrateStaticBike(data)
+                            val direction =
+                                StaticBikeFragmentDirections.actionGlobalHistoryFragment(history)
+                            findNavController().navigate(direction)
+                        }
                         true
                     }
 
@@ -101,23 +139,21 @@ class StaticBikeFragment : Fragment(), View.OnClickListener, TimePickerFragment.
             binding.btnExerciseTimeEdit -> {
                 viewModel.editSchedule()
             }
-//
-//            binding.btnRunningSubmit -> {
-//                val duration = binding.etRunningDuration.text.toString().toInt()
-//                val mileage = binding.actvRunningMileage.text.toString().toInt()
-//                try {
-//                    runningValue?.let {
-//                        it.duration = duration
-//                        it.distance = mileage
-//                        viewModel.updateData(it)
-//                    } ?: kotlin.run {
-//                        showToast("Data is null!")
-//                    }
-//                } catch (e: Exception) {
-//                    Log.e("Running fragment", "onClick: ${e.message}")
-//                    showToast("Failed to execute!")
-//                }
-//            }
+
+            binding.btnStaticBikeSubmit -> {
+                val set = binding.etStaticBikeSet.text.toString().toInt()
+                val interval = binding.etStaticBikeInterval.text.toString().toInt()
+                val restTime = binding.etStaticBikeRest.text.toString().toInt()
+                staticBikeValue?.let { staticBike ->
+                    staticBike.set = set
+                    staticBike.interval = interval
+                    staticBike.restTime = restTime
+
+                    viewModel.submitData(staticBike)
+                } ?: kotlin.run {
+                    showToast("NO DATA!")
+                }
+            }
         }
     }
 
