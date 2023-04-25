@@ -3,9 +3,11 @@ package com.kocci.healtikuy.di
 import com.kocci.healtikuy.core.domain.interactor.*
 import com.kocci.healtikuy.core.domain.interactor.exercise.JoggingInteractor
 import com.kocci.healtikuy.core.domain.interactor.exercise.RunningInteractor
+import com.kocci.healtikuy.core.domain.interactor.exercise.StaticBikeInteractor
 import com.kocci.healtikuy.core.domain.usecase.*
 import com.kocci.healtikuy.core.domain.usecase.exercise.cardio.JoggingUseCase
 import com.kocci.healtikuy.core.domain.usecase.exercise.cardio.RunningUseCase
+import com.kocci.healtikuy.core.domain.usecase.exercise.cardio.StaticBikeUseCase
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -48,6 +50,9 @@ abstract class AppModule {
 
     @Binds
     @ViewModelScoped
-    abstract fun bindRunningUseCase(runningInteractor: RunningInteractor) : RunningUseCase
+    abstract fun bindRunningUseCase(runningInteractor: RunningInteractor): RunningUseCase
 
+    @Binds
+    @ViewModelScoped
+    abstract fun bindStaticBikeUseCase(staticBikeInteractor: StaticBikeInteractor): StaticBikeUseCase
 }
