@@ -11,7 +11,7 @@ import com.kocci.healtikuy.core.domain.model.UserPreferences
 import com.kocci.healtikuy.core.domain.repository.IAuthRepository
 import com.kocci.healtikuy.core.domain.usecase.LoginForm
 import com.kocci.healtikuy.core.domain.usecase.RegisterForm
-import com.kocci.healtikuy.core.util.helper.FirstTimeService
+import com.kocci.healtikuy.core.service.FirstTimeService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -49,7 +49,7 @@ class AuthRepository @Inject constructor(
                     fbUser.email.toString()
                 )
             )
-            remoteDataSource.createUserDataFirstTime(fbUser.uid)
+            remoteDataSource.createUserDataFirstTime(fbUser.uid, fbUser.displayName.toString())
             emit(Async.Success(Unit))
         } catch (e: Exception) {
             Log.e(TAG, "registerUserWithEmailPassword: ${e.message.toString()}")

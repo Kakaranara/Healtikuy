@@ -5,7 +5,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.kocci.healtikuy.core.data.remote.firestore.FsCollection
-import com.kocci.healtikuy.core.util.helper.FirstTimeService
+import com.kocci.healtikuy.core.service.FirstTimeService
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -28,10 +28,12 @@ class RemoteDataSource @Inject constructor(
         return firestore
     }
 
-    suspend fun createUserDataFirstTime(uid: String) {
+    suspend fun createUserDataFirstTime(uid: String, username: String) {
+        val document = FirstTimeService.getFirstTimeAttributes()
+        document["username"] = username
         firestore.collection(FsCollection.USERS)
             .document(uid)
-            .set(FirstTimeService.getFirstTimeAttributes())
+            .set(document)
             .await()
     }
 
