@@ -26,6 +26,11 @@ class UserPreferencesManager @Inject constructor(
         val COIN = intPreferencesKey("coin")
         val INVENTORY = stringSetPreferencesKey("inventory")
 
+        //? Leaderboards Preference
+        val LEADERBOARDS_RUNNING100 = longPreferencesKey("running_100")
+        val LEADERBOARDS_RUNNING200 = longPreferencesKey("running_200")
+        val LEADERBOARDS_RUNNING400 = longPreferencesKey("running_400")
+
         //? FEATURE PREFERENCES
         val SLEEP_TIME = longPreferencesKey("sleep_time")
 
@@ -41,6 +46,8 @@ class UserPreferencesManager @Inject constructor(
         val STATIC_BIKE_TIME = longPreferencesKey("static_bike_time")
         val STATIC_BIKE_INTERVAL = intPreferencesKey("static_bike_interval")
         val STATIC_BIKE_IS_EDITING = booleanPreferencesKey("static_bike_is_editing")
+
+
     }
 
     val userPreferences: Flow<UserPreferences> = dataStore.data.map { preferences ->
@@ -52,9 +59,23 @@ class UserPreferencesManager @Inject constructor(
             preferences[PreferenceKeys.AVATAR] ?: "finn"
         val coin = preferences[PreferenceKeys.COIN] ?: 0
         val inventory = preferences[PreferenceKeys.INVENTORY] ?: setOf()
+        val running100 = preferences[PreferenceKeys.LEADERBOARDS_RUNNING100] ?: 0
+        val running200 = preferences[PreferenceKeys.LEADERBOARDS_RUNNING200] ?: 0
+        val running400 = preferences[PreferenceKeys.LEADERBOARDS_RUNNING400] ?: 0
 
         val userPref =
-            UserPreferences(lastLogin, points, coin, username, email, avatar, inventory)
+            UserPreferences(
+                lastLogin,
+                points,
+                coin,
+                username,
+                email,
+                avatar,
+                inventory,
+                running100,
+                running200,
+                running400
+            )
         Log.e(TAG, "prefManager: $userPref")
         return@map userPref
     }

@@ -44,6 +44,13 @@ class RemoteDataSource @Inject constructor(
             .await()
     }
 
+    suspend fun updateUserData(uid: String, document: HashMap<String, Any>) {
+        firestore.collection(FsCollection.USERS)
+            .document(uid)
+            .set(document)
+            .await()
+    }
+
     suspend fun updateAvatar(uid: String, newAvatar: String) {
         val avatar: HashMap<String, Any> = hashMapOf("avatar" to newAvatar)
         firestore.collection(FsCollection.USERS).document(uid).update(

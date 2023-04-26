@@ -32,7 +32,10 @@ object FirstTimeService {
             username = username,
             email = email,
             avatar = AVATAR,
-            inventory = setOf(AVATAR)
+            inventory = setOf(AVATAR),
+            0,
+            0,
+            0
         )
     }
 }

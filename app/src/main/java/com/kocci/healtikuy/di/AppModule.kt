@@ -55,4 +55,8 @@ abstract class AppModule {
     @Binds
     @ViewModelScoped
     abstract fun bindStaticBikeUseCase(staticBikeInteractor: StaticBikeInteractor): StaticBikeUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindSyncUseCase(syncInteractor: SynchronizationInteractor): SynchronizationUseCase
 }

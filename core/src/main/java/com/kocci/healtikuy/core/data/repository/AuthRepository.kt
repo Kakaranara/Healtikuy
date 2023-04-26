@@ -77,7 +77,10 @@ class AuthRepository @Inject constructor(
                     username = fbUser.displayName.toString(),
                     email = fbUser.email.toString(),
                     avatar = map["avatar"] as String,
-                    inventory = (map["inventory"] as ArrayList<String>).toSet()
+                    inventory = (map["inventory"] as ArrayList<String>).toSet(),
+                    map["running_100"] as Long,
+                    map["running_200"] as Long,
+                    map["running_400"] as Long
                 )
                 preferencesManager.loginSync(newUsers)
             } ?: Log.e(TAG, "REMOTE DATA IS NULL")

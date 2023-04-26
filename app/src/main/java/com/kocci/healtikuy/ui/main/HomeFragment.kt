@@ -13,6 +13,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.constant.GameRules
+import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.usecase.HealthyStatusIndicator
 import com.kocci.healtikuy.databinding.FragmentHomeBinding
 import com.kocci.healtikuy.util.extension.showToast
@@ -78,20 +79,23 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
             when (healthyStatusIndicator) {
                 is HealthyStatusIndicator.Completed -> {
-                    showToast("completed : ${healthyStatusIndicator.point}")
                     binding.desc.text = getString(R.string.status_completed)
+//                    showToast("completed : ${healthyStatusIndicator.point}")
                 }
+
                 is HealthyStatusIndicator.NearlyComplete -> {
-                    showToast("nearly complete ${healthyStatusIndicator.point}")
                     binding.desc.text = getString(R.string.status_near_complete)
+//                    showToast("nearly complete ${healthyStatusIndicator.point}")
                 }
+
                 is HealthyStatusIndicator.MidComplete -> {
                     binding.desc.text = getString(R.string.status_mid)
-                    showToast("mid complete ${healthyStatusIndicator.point}")
+//                    showToast("mid complete ${healthyStatusIndicator.point}")
                 }
+
                 is HealthyStatusIndicator.Low -> {
                     binding.desc.text = getString(R.string.status_low)
-                    showToast("low complete ${healthyStatusIndicator.point}")
+//                    showToast("low complete ${healthyStatusIndicator.point}")
                 }
             }
         }
@@ -103,18 +107,22 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 val directions = HomeFragmentDirections.actionHomeFragmentToWaterIntakeFragment()
                 findNavController().navigate(directions)
             }
+
             binding.btnSleep -> {
                 val directions = HomeFragmentDirections.actionHomeFragmentToSleepFragment()
                 findNavController().navigate(directions)
             }
+
             binding.btnExercise -> {
                 val directions = HomeFragmentDirections.actionHomeFragmentToExerciseFragment()
                 findNavController().navigate(directions)
             }
+
             binding.btnNutrition -> {
                 val directions = HomeFragmentDirections.actionHomeFragmentToNutritionFragment()
                 findNavController().navigate(directions)
             }
+
             binding.btnSunExposure -> {
                 val directions = HomeFragmentDirections.actionHomeFragmentToSunExposureFragment()
                 findNavController().navigate(directions)
@@ -134,7 +142,52 @@ class HomeFragment : Fragment(), View.OnClickListener {
         val navController = findNavController()
         val drawerLayout = activity?.findViewById<DrawerLayout>(R.id.drawer_layout)
         val appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
-        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbar.apply {
+            setupWithNavController(navController, appBarConfiguration)
+            setOnMenuItemClickListener { menu ->
+                when (menu.itemId) {
+                    R.id.action_sync_local -> {
+                        viewModel.localSync().observe(viewLifecycleOwner) {
+                            when (it) {
+                                is Async.Error -> {
+                                    showToast("Error : ${it.msg}")
+                                }
+
+                                Async.Loading -> {
+                                    showToast("Loading..")
+                                }
+
+                                is Async.Success -> {
+                                    showToast("Success ")
+                                }
+                            }
+                        }
+                        true
+                    }
+
+                    R.id.action_sync_remote -> {
+                        viewModel.cloudSync().observe(viewLifecycleOwner) {
+                            when (it) {
+                                is Async.Error -> {
+                                    showToast("Error : ${it.msg}")
+                                }
+
+                                Async.Loading -> {
+                                    showToast("Loading..")
+                                }
+
+                                is Async.Success -> {
+                                    showToast("Success ")
+                                }
+                            }
+                        }
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {
