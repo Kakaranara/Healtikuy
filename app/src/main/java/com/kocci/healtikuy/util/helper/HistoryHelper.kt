@@ -1,7 +1,6 @@
 package com.kocci.healtikuy.util.helper
 
 import com.kocci.healtikuy.core.domain.model.Sleep
-import com.kocci.healtikuy.core.domain.model.WaterIntake
 import com.kocci.healtikuy.core.domain.model.exercise.Jogging
 import com.kocci.healtikuy.core.domain.model.exercise.Running
 import com.kocci.healtikuy.core.domain.model.exercise.StaticBike
@@ -81,7 +80,7 @@ object HistoryHelper {
                 val title = DateHelper.formatDateString(dateInMillis = it.timeCompleted)
                 groupList.add(title)
                 val child = listOf<String>(
-                    "Set : ${it.set} Second",
+                    "Set : ${it.set} Set",
                     "Interval : ${it.interval} Meter",
                     "Rest Time : ${it.restTime} Seconds"
                 )
