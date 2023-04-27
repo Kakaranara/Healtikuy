@@ -17,7 +17,7 @@ class SynchronizationInteractor @Inject constructor(
         return repository.getLocalDataThenSyncToCloud()
     }
 
-    override suspend fun syncDataEveryDay() {
-        repository.syncDataIfDayChanged()
+    override suspend fun syncDataIfDayChanged() {
+        return repository.regularSync()
     }
 }

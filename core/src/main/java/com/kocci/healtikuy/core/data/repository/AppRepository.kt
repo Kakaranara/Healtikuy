@@ -6,6 +6,7 @@ import com.kocci.healtikuy.core.data.local.preferences.UserPreferencesManager
 import com.kocci.healtikuy.core.data.remote.RemoteDataSource
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.model.UserPreferences
+import com.kocci.healtikuy.core.util.helper.DateHelper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
@@ -52,6 +53,7 @@ class AppRepository @Inject constructor(
                 "inventory" to (localData.inventory.toMutableList() as ArrayList<String>), //? firestore just accept a few datatypes
                 "coin" to localData.coin,
                 "points" to localData.points,
+                "username" to localData.username,
                 "running_100" to localData.running100MPoint,
                 "running_200" to localData.running200MPoint,
                 "running_400" to localData.running400MPoint,
@@ -65,9 +67,31 @@ class AppRepository @Inject constructor(
         }
     }
 
-    suspend fun syncDataIfDayChanged() {
-        val pref = preferencesManager.userPreferences.first()
+    suspend fun regularSync() {
+        val localData = preferencesManager.userPreferences.first()
+        val lastLogin = localData.lastLogin
+        if (!DateHelper.isToday(lastLogin)) {
+            val fbUser = remoteDataSource.getFirebaseUser() as FirebaseUser
+            try {
+                val firestoreDocument = hashMapOf<String, Any>(
+                    "avatar" to localData.avatar,
+                    "inventory" to (localData.inventory.toMutableList() as ArrayList<String>), //? firestore just accept a few datatypes
+                    "coin" to localData.coin,
+                    "points" to localData.points,
+                    "username" to localData.username,
+                    "running_100" to localData.running100MPoint,
+                    "running_200" to localData.running200MPoint,
+                    "running_400" to localData.running400MPoint,
+                    "last_login" to localData.lastLogin
+                )
+                remoteDataSource.updateUserData(fbUser.uid, firestoreDocument)
+                preferencesManager.setLastLoginToToday()
+                Log.e("APP REPO SYNC", "regular sync success")
 
+            } catch (e: Exception) {
+                Log.e("APP REPO SYNC", "FAILED with msg : ${e.message}")
+            }
+        }
     }
 
 }

@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 interface SynchronizationUseCase {
     fun cloudSync(): Flow<Async<Unit>>
     fun localSync(): Flow<Async<Unit>>
-    suspend fun syncDataEveryDay()
+    suspend fun syncDataIfDayChanged()
 }
