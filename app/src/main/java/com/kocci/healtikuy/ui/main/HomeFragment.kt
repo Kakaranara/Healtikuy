@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.constant.GameRules
 import com.kocci.healtikuy.core.data.remote.model.Async
@@ -147,40 +148,56 @@ class HomeFragment : Fragment(), View.OnClickListener {
             setOnMenuItemClickListener { menu ->
                 when (menu.itemId) {
                     R.id.action_sync_local -> {
-                        viewModel.localSync().observe(viewLifecycleOwner) {
-                            when (it) {
-                                is Async.Error -> {
-                                    showToast("Error : ${it.msg}")
-                                }
+                        MaterialAlertDialogBuilder(requireActivity())
+                            .setTitle(resources.getString(R.string.are_you_sure))
+                            .setMessage(resources.getString(R.string.local_sync_is_sure))
+                            .setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
+                                viewModel.localSync().observe(viewLifecycleOwner) {
+                                    when (it) {
+                                        is Async.Error -> {
+                                            showToast("Error : ${it.msg}")
+                                        }
 
-                                Async.Loading -> {
-                                    showToast("Loading..")
-                                }
+                                        Async.Loading -> {
+                                            showToast("Loading..")
+                                        }
 
-                                is Async.Success -> {
-                                    showToast("Success ")
+                                        is Async.Success -> {
+                                            showToast("Success ")
+                                        }
+                                    }
                                 }
                             }
-                        }
+                            .setNegativeButton(resources.getString(R.string.no)) { _, _ ->
+
+                            }.show()
                         true
                     }
 
                     R.id.action_sync_remote -> {
-                        viewModel.cloudSync().observe(viewLifecycleOwner) {
-                            when (it) {
-                                is Async.Error -> {
-                                    showToast("Error : ${it.msg}")
-                                }
+                        MaterialAlertDialogBuilder(requireActivity())
+                            .setTitle(resources.getString(R.string.are_you_sure))
+                            .setMessage(resources.getString(R.string.cloud_sync_is_sure))
+                            .setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
+                                viewModel.cloudSync().observe(viewLifecycleOwner) {
+                                    when (it) {
+                                        is Async.Error -> {
+                                            showToast("Error : ${it.msg}")
+                                        }
 
-                                Async.Loading -> {
-                                    showToast("Loading..")
-                                }
+                                        Async.Loading -> {
+                                            showToast("Loading..")
+                                        }
 
-                                is Async.Success -> {
-                                    showToast("Success ")
+                                        is Async.Success -> {
+                                            showToast("Success ")
+                                        }
+                                    }
                                 }
                             }
-                        }
+                            .setNegativeButton(resources.getString(R.string.no)) { _, _ ->
+
+                            }.show()
                         true
                     }
 

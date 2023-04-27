@@ -37,6 +37,13 @@
     <string name="submit">Submit</string>
     <string name="description_when_time_not_set">a notification will appear once you set the time.</string>
     <string name="button_for_complete_sleep_mission">button for complete sleep mission</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <!-- Modal Related -->
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="local_sync_is_sure">Local sync means uploading all your local data to the server. This has done automatically every day. Continue?</string>
+    <string name="cloud_sync_is_sure">Cloud sync means replacing all your local data from the server. Continue?</string>
 
     <!-- Home Related -->
     <string name="status_points">Points : %d / %d</string>

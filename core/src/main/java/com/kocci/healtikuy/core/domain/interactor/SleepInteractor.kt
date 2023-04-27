@@ -47,6 +47,7 @@ class SleepInteractor @Inject constructor(
 
     override suspend fun completeMission(sleep: Sleep) {
         sleep.isCompleted = true
+        sleep.timeCompleted = System.currentTimeMillis()
         repository.updateAndAddPoints(sleep.toEntity())
     }
 
