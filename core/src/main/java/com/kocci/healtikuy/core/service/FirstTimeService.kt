@@ -1,4 +1,4 @@
-package com.kocci.healtikuy.core.util.helper
+package com.kocci.healtikuy.core.service
 
 import com.kocci.healtikuy.core.constant.GameRules
 import com.kocci.healtikuy.core.domain.model.UserPreferences
@@ -17,6 +17,9 @@ object FirstTimeService {
             "inventory" to INVENTORY,
             "coin" to COIN,
             "points" to POINTS,
+            "running_100" to 0,
+            "running_200" to 0,
+            "running_400" to 0,
             "last_login" to System.currentTimeMillis()
         )
     }
@@ -29,7 +32,10 @@ object FirstTimeService {
             username = username,
             email = email,
             avatar = AVATAR,
-            inventory = setOf(AVATAR)
+            inventory = setOf(AVATAR),
+            0,
+            0,
+            0
         )
     }
 }

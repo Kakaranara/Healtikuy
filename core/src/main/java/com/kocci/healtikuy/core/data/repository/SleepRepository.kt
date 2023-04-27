@@ -13,6 +13,11 @@ class SleepRepository @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val preferenceManager: UserPreferencesManager,
 ) : ISleepRepository {
+
+    override suspend fun getAllData(): List<SleepEntity> {
+        return localDataSource.getAllData()
+    }
+
     override fun getLatestData(): Flow<SleepEntity?> {
         return localDataSource.getSleepLastRow()
     }
@@ -30,7 +35,7 @@ class SleepRepository @Inject constructor(
         preferenceManager.addPoints(1000)
     }
 
-    override fun getSetTime(): Flow<SleepIndicator> {
+    override fun getSchedule(): Flow<SleepIndicator> {
         return preferenceManager.sleepTimePreference.map {
             if (it == null) {
                 SleepIndicator.NotSet
@@ -40,7 +45,7 @@ class SleepRepository @Inject constructor(
         }
     }
 
-    override suspend fun changeSetTime(time: Long) {
+    override suspend fun changeSchedule(time: Long) {
         return preferenceManager.changeSleepTime(time)
     }
 }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.R
@@ -14,7 +15,10 @@ import com.kocci.healtikuy.core.domain.usecase.SleepIndicator
 import com.kocci.healtikuy.databinding.FragmentSleepBinding
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
 import com.kocci.healtikuy.util.extension.showToast
+import com.kocci.healtikuy.util.helper.HistoryHelper
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.util.*
 
 
@@ -35,7 +39,7 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.toolbarSleep.setupWithNavController(findNavController())
+        setupToolbar()
         binding.btnChangeSleepTime.setOnClickListener(this)
 
         viewModel.isTimeSet.observe(viewLifecycleOwner) { sleepIndicator ->
@@ -46,8 +50,9 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
                     binding.btnChangeSleepTime.visibility = View.GONE
                     binding.tvSleepDesc.text = getString(R.string.description_when_time_not_set)
                 }
+
                 is SleepIndicator.Set -> {
-                    binding.tvSleepTime.text = viewModel.showFormattedTime(sleepIndicator.data)
+                    binding.tvSleepTime.text = viewModel.showFormattedTime(sleepIndicator.sleepTime)
                     binding.btnSleepTime.text = getString(R.string.sleep)
                     binding.btnChangeSleepTime.visibility = View.VISIBLE
 
@@ -59,7 +64,7 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
                                 getString(R.string.sleep_description_after_complete)
                         } else {
                             buttonClickGoesToCompleteMission(sleep)
-                            viewModel.isTheTimeWithin1Hours(sleepIndicator.data)
+                            viewModel.isTheTimeWithin1Hours(sleepIndicator.sleepTime)
                                 .observe(viewLifecycleOwner) { isWithinOneHours ->
                                     if (!isWithinOneHours) {
                                         binding.btnSleepTime.isEnabled = false
@@ -73,6 +78,28 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
                                 }
                         }
                     }
+                }
+            }
+        }
+    }
+
+    private fun setupToolbar() {
+        binding.toolbarSleep.apply {
+            setupWithNavController(findNavController())
+            setOnMenuItemClickListener { menu ->
+                when (menu.itemId) {
+                    R.id.action_history -> {
+                        runBlocking {
+                            val list = viewModel.getAllData()
+                            val historyList = HistoryHelper.orchestrateSleep(list)
+                            val direction =
+                                SleepFragmentDirections.actionGlobalHistoryFragment(historyList)
+                            findNavController().navigate(direction)
+                        }
+                        true
+                    }
+
+                    else -> false
                 }
             }
         }
@@ -111,8 +138,7 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
         cal.set(Calendar.HOUR_OF_DAY, hour)
         cal.set(Calendar.MINUTE, minute)
 
-        viewModel.setTime(cal.timeInMillis)
-        viewModel.setSchedule(requireActivity().applicationContext, Sleep(), cal.timeInMillis)
+        viewModel.setSchedule(cal.timeInMillis)
         showToast("$hour : $minute")
     }
 

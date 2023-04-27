@@ -23,7 +23,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Inventory"
+                android:text="@string/inventory"
                 android:textAlignment="center" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Submit" />
+                android:text="@string/submit" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

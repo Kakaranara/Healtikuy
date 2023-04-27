@@ -5,8 +5,9 @@ import java.util.*
 
 object DateHelper {
 
-    private const val FULL_DATE_FORMAT = "dd/MM/yyyy, HH:mm"
-    private const val TIME_FORMAT = "HH:mm"
+    const val FULL_DATE_FORMAT = "dd/MM/yyyy, HH:mm"
+    const val DATE_FORMAT = "dd MMMM yyyy"
+    const val TIME_FORMAT = "HH:mm"
 
     const val secondInMill = 1000
     const val minuteInMill = secondInMill * 60
@@ -36,4 +37,35 @@ object DateHelper {
         val dateFormat = SimpleDateFormat(TIME_FORMAT, Locale.getDefault())
         return dateFormat.format(Date(time))
     }
+
+    fun convertTimeStringToLong(str: String): Long {
+        val dateFormat = SimpleDateFormat(TIME_FORMAT, Locale.getDefault())
+        return dateFormat.parse(str)!!.time
+    }
+
+    fun convertTimeStringToTodayDate(time: String): Long {
+        val timeFormat = SimpleDateFormat(TIME_FORMAT, Locale.getDefault())
+        val timeTemp = timeFormat.parse(time)
+
+        val cal = Calendar.getInstance()
+        val cal2 = Calendar.getInstance()
+
+        cal2.time = timeTemp as Date
+        cal.apply {
+            set(Calendar.HOUR_OF_DAY, cal2.get(Calendar.HOUR_OF_DAY))
+            set(Calendar.MINUTE, cal2.get(Calendar.MINUTE))
+        }
+        return cal.time.time
+    }
+
+    fun convertDayToMillis(dayTime : Int) : Long {
+        return (dayInMill * dayTime).toLong()
+    }
+
+    fun formatDateString(dateInMillis: Long): String {
+        val date = Date(dateInMillis)
+        val formatter = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
+        return formatter.format(date)
+    }
+
 }

@@ -1,7 +1,13 @@
 package com.kocci.healtikuy.di
 
 import com.kocci.healtikuy.core.domain.interactor.*
+import com.kocci.healtikuy.core.domain.interactor.exercise.JoggingInteractor
+import com.kocci.healtikuy.core.domain.interactor.exercise.RunningInteractor
+import com.kocci.healtikuy.core.domain.interactor.exercise.StaticBikeInteractor
 import com.kocci.healtikuy.core.domain.usecase.*
+import com.kocci.healtikuy.core.domain.usecase.exercise.cardio.JoggingUseCase
+import com.kocci.healtikuy.core.domain.usecase.exercise.cardio.RunningUseCase
+import com.kocci.healtikuy.core.domain.usecase.exercise.cardio.StaticBikeUseCase
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -32,10 +38,25 @@ abstract class AppModule {
 
     @Binds
     @ViewModelScoped
-    abstract fun bindAuthUseCase(authInteractor: AuthInteractor) : AuthUseCase
+    abstract fun bindAuthUseCase(authInteractor: AuthInteractor): AuthUseCase
 
     @Binds
     @ViewModelScoped
-    abstract fun bindStoreUseCase(storeUseCase: StoreInteractor) : StoreUseCase
+    abstract fun bindStoreUseCase(storeUseCase: StoreInteractor): StoreUseCase
 
+    @Binds
+    @ViewModelScoped
+    abstract fun bindJoggingUseCase(joggingUseCase: JoggingInteractor): JoggingUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindRunningUseCase(runningInteractor: RunningInteractor): RunningUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindStaticBikeUseCase(staticBikeInteractor: StaticBikeInteractor): StaticBikeUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindSyncUseCase(syncInteractor: SynchronizationInteractor): SynchronizationUseCase
 }

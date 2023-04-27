@@ -35,11 +35,11 @@ android {
         coreLibraryDesugaringEnabled true
         // for more information : https://developer.android.com/studio/write/java8-support#library-desugaring
         // Sets Java compatibility to Java 8
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
 }
 
@@ -49,8 +49,8 @@ dependencies {
     // * Database
     implementation "androidx.room:room-runtime:2.5.1"
     implementation "androidx.room:room-ktx:2.5.1"
-    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.5'
-    implementation 'com.google.firebase:firebase-auth-ktx:21.2.0'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.5.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.3.0'
     implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
     //   annotationProcessor "androidx.room:room-compiler:2.5.0"
     ksp "androidx.room:room-compiler:2.5.1"

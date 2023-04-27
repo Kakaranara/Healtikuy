@@ -11,8 +11,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.constant.GameRules
+import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.usecase.HealthyStatusIndicator
 import com.kocci.healtikuy.databinding.FragmentHomeBinding
 import com.kocci.healtikuy.util.extension.showToast
@@ -74,24 +76,27 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 binding.tvPoint.text = pointView
             }
 
-            showToast(healthyStatusIndicator.toString())
+//            showToast(healthyStatusIndicator.toString())
 
             when (healthyStatusIndicator) {
                 is HealthyStatusIndicator.Completed -> {
-                    showToast("completed : ${healthyStatusIndicator.point}")
                     binding.desc.text = getString(R.string.status_completed)
+//                    showToast("completed : ${healthyStatusIndicator.point}")
                 }
+
                 is HealthyStatusIndicator.NearlyComplete -> {
-                    showToast("nearly complete ${healthyStatusIndicator.point}")
                     binding.desc.text = getString(R.string.status_near_complete)
+//                    showToast("nearly complete ${healthyStatusIndicator.point}")
                 }
+
                 is HealthyStatusIndicator.MidComplete -> {
                     binding.desc.text = getString(R.string.status_mid)
-                    showToast("mid complete ${healthyStatusIndicator.point}")
+//                    showToast("mid complete ${healthyStatusIndicator.point}")
                 }
+
                 is HealthyStatusIndicator.Low -> {
                     binding.desc.text = getString(R.string.status_low)
-                    showToast("low complete ${healthyStatusIndicator.point}")
+//                    showToast("low complete ${healthyStatusIndicator.point}")
                 }
             }
         }
@@ -103,18 +108,22 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 val directions = HomeFragmentDirections.actionHomeFragmentToWaterIntakeFragment()
                 findNavController().navigate(directions)
             }
+
             binding.btnSleep -> {
                 val directions = HomeFragmentDirections.actionHomeFragmentToSleepFragment()
                 findNavController().navigate(directions)
             }
+
             binding.btnExercise -> {
                 val directions = HomeFragmentDirections.actionHomeFragmentToExerciseFragment()
                 findNavController().navigate(directions)
             }
+
             binding.btnNutrition -> {
                 val directions = HomeFragmentDirections.actionHomeFragmentToNutritionFragment()
                 findNavController().navigate(directions)
             }
+
             binding.btnSunExposure -> {
                 val directions = HomeFragmentDirections.actionHomeFragmentToSunExposureFragment()
                 findNavController().navigate(directions)
@@ -134,7 +143,68 @@ class HomeFragment : Fragment(), View.OnClickListener {
         val navController = findNavController()
         val drawerLayout = activity?.findViewById<DrawerLayout>(R.id.drawer_layout)
         val appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
-        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbar.apply {
+            setupWithNavController(navController, appBarConfiguration)
+            setOnMenuItemClickListener { menu ->
+                when (menu.itemId) {
+                    R.id.action_sync_local -> {
+                        MaterialAlertDialogBuilder(requireActivity())
+                            .setTitle(resources.getString(R.string.are_you_sure))
+                            .setMessage(resources.getString(R.string.local_sync_is_sure))
+                            .setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
+                                viewModel.localSync().observe(viewLifecycleOwner) {
+                                    when (it) {
+                                        is Async.Error -> {
+                                            showToast("Error : ${it.msg}")
+                                        }
+
+                                        Async.Loading -> {
+                                            showToast("Loading..")
+                                        }
+
+                                        is Async.Success -> {
+                                            showToast("Success ")
+                                        }
+                                    }
+                                }
+                            }
+                            .setNegativeButton(resources.getString(R.string.no)) { _, _ ->
+
+                            }.show()
+                        true
+                    }
+
+                    R.id.action_sync_remote -> {
+                        MaterialAlertDialogBuilder(requireActivity())
+                            .setTitle(resources.getString(R.string.are_you_sure))
+                            .setMessage(resources.getString(R.string.cloud_sync_is_sure))
+                            .setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
+                                viewModel.cloudSync().observe(viewLifecycleOwner) {
+                                    when (it) {
+                                        is Async.Error -> {
+                                            showToast("Error : ${it.msg}")
+                                        }
+
+                                        Async.Loading -> {
+                                            showToast("Loading..")
+                                        }
+
+                                        is Async.Success -> {
+                                            showToast("Success ")
+                                        }
+                                    }
+                                }
+                            }
+                            .setNegativeButton(resources.getString(R.string.no)) { _, _ ->
+
+                            }.show()
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

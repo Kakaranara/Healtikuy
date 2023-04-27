@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class SleepEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val timeStamp : Long = System.currentTimeMillis(),
-    val isCompleted: Boolean = false
+    val timeStamp: Long = System.currentTimeMillis(),
+    val timeCompleted: Long = System.currentTimeMillis(),
+    val isCompleted: Boolean = false,
 )

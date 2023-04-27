@@ -9,6 +9,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -22,6 +23,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        //? Sync are done every day (if day has changed -> from lastLogin preferences)
+        runBlocking {
+            if (viewModel.isUserLogin) {
+                viewModel.syncData()
+            }
+        }
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
@@ -32,6 +40,8 @@ class MainActivity : AppCompatActivity() {
                 viewModel.logout()
             }
         }
+
+
     }
 
 }

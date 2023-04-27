@@ -14,7 +14,7 @@ sealed class HealthyStatusIndicator(val point: Long) {
 interface UserUseCase {
     fun getUserData(): Flow<UserPreferences>
     fun isUserLogin(): Boolean
-    fun listenForStatusChanges(): Flow<HealthyStatusIndicator>
+    fun listenForPointsChanges(): Flow<HealthyStatusIndicator>
     fun calculateStatusPercentage(points: Long): Int
     fun updateProfile(userData: UserPreferences): Flow<Async<Unit>>
 }

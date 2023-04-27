@@ -37,6 +37,13 @@
     <string name="submit">Submit</string>
     <string name="description_when_time_not_set">a notification will appear once you set the time.</string>
     <string name="button_for_complete_sleep_mission">button for complete sleep mission</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <!-- Modal Related -->
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="local_sync_is_sure">Local sync means uploading all your local data to the server. This has done automatically every day. Continue?</string>
+    <string name="cloud_sync_is_sure">Cloud sync means replacing all your local data from the server. Continue?</string>
 
     <!-- Home Related -->
     <string name="status_points">Points : %d / %d</string>
@@ -61,6 +68,33 @@
     <string name="sleep_description_not_in_time">You can press this button in within 1 hours of your sleep schedule.</string>
 
     <!-- Exercise Related -->
+    <string name="cardio">Cardio</string>
+    <string name="jogging">Jogging</string>
+    <string name="running">Running</string>
+    <string name="icon_of_exercise">icon of exercise</string>
+    <string name="set_your_schedule">Set Your Schedule!</string>
+    <string name="intervalcolon">Interval : </string>
+    <string name="days">Days</string>
+    <string name="edit">Edit</string>
+    <string name="edit_schedule">Edit Schedule</string>
+    <string name="time">Time :</string>
+    <string name="not_set">Not Set</string>
+    <string name="durationcolon">Duration :</string>
+    <string name="mileagecolon">Mileage :</string>
+    <string name="minutes">Minutes</string>
+    <string name="meter">Meter</string>
+    <string name="history">History</string>
+    <string name="clear_history">Clear History</string>
+    <string name="inventory">Inventory</string>
+    <string name="no_data">There is still no data.</string>
+    <string name="seconds">Seconds</string>
+    <string name="setcolon">Set :</string>
+    <string name="rest_time_colon">Rest Time :</string>
+    <string name="set">Set</string>
+    <string name="minute">Minute</string>
+    <string name="second">Second</string>
+    <string name="local_sync">Local Sync</string>
+    <string name="cloud_sync">Cloud Sync</string>
     <!-- Nutrition Related -->
     <!-- Sun Related -->
 
