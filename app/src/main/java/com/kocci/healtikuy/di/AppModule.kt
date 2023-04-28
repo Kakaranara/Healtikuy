@@ -59,4 +59,8 @@ abstract class AppModule {
     @Binds
     @ViewModelScoped
     abstract fun bindSyncUseCase(syncInteractor: SynchronizationInteractor): SynchronizationUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindLeaderboardsUseCase(leaderboardsInteractor: LeaderboardsInteractor): LeaderboardsUseCase
 }

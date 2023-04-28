@@ -4,6 +4,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 import com.kocci.healtikuy.core.data.remote.firestore.FsCollection
 import com.kocci.healtikuy.core.service.FirstTimeService
 import kotlinx.coroutines.tasks.await
@@ -40,6 +41,13 @@ class RemoteDataSource @Inject constructor(
     suspend fun getUserData(uid: String): DocumentSnapshot {
         return firestore.collection(FsCollection.USERS)
             .document(uid)
+            .get()
+            .await()
+    }
+
+    suspend fun getUserDataForLeaderboards(): QuerySnapshot {
+        return firestore.collection(FsCollection.USERS)
+            .limit(20)
             .get()
             .await()
     }

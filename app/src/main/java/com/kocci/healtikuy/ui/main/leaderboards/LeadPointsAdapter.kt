@@ -8,14 +8,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kocci.healtikuy.R
+import com.kocci.healtikuy.core.domain.model.leaderboards.LeaderboardsPoint
 import com.kocci.healtikuy.util.helper.DrawableHelper
 
 class LeadPointsAdapter(
-    private val data: List<LeaderPoints>,
+    private val data: List<LeaderboardsPoint>,
     private val context: Context
 ) : RecyclerView.Adapter<LeadPointsAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(data: LeaderPoints) {
+        fun bind(data: LeaderboardsPoint) {
             val position: TextView = itemView.findViewById(R.id.tvLeadNumber)
             val avatar: ImageView = itemView.findViewById(R.id.imgLeadAvatar)
             val username: TextView = itemView.findViewById(R.id.tvLeadAvatar)
