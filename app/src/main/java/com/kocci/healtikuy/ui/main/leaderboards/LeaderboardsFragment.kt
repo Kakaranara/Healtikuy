@@ -11,7 +11,6 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.model.leaderboards.LeaderboardsAttr
-import com.kocci.healtikuy.core.domain.model.leaderboards.LeaderboardsPoint
 import com.kocci.healtikuy.databinding.FragmentLeaderboardsBinding
 import com.kocci.healtikuy.util.extension.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,20 +44,8 @@ class LeaderboardsFragment : Fragment() {
     }
 
     private fun setupAdapter(data: List<LeaderboardsAttr>) {
-        val dataCopy = data.toMutableList()
-        dataCopy.sortByDescending { it.points }
-        val leaderPoints = dataCopy.mapIndexed { index, it ->
-            LeaderboardsPoint(
-                it.name,
-                it.avatar,
-                it.points,
-                index + 1,
-                it.running100MPoints,
-                it.running200MPoints,
-                it.running400MPoints
-            )
-        }
-        val mAdapter = LeadPointsAdapter(leaderPoints, requireActivity())
+        val listOfPoints = viewModel.getSortedData(data)
+        val mAdapter = LeadPointsAdapter(listOfPoints, requireActivity())
         val manager = LinearLayoutManager(requireActivity())
         binding.rvLeaderboards.apply {
             adapter = mAdapter
