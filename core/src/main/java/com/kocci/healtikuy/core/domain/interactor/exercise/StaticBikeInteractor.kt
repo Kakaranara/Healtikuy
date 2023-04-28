@@ -42,7 +42,7 @@ class StaticBikeInteractor @Inject constructor(
         repository.insertNewData(data.toEntity())
     }
 
-    override suspend fun updateData(data: StaticBike) {
+    override suspend fun completeMission(data: StaticBike) {
         data.isCompleted = true
         repository.updateData(data.toEntity())
         repository.updatePoints()

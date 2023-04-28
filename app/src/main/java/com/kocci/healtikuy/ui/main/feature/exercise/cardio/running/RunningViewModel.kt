@@ -19,7 +19,7 @@ class RunningViewModel @Inject constructor(
     fun showFormattedTime(time: Long) = runningUseCase.showFormattedTime(time)
     fun updateData(data: Running) {
         viewModelScope.launch {
-            runningUseCase.updateData(data)
+            runningUseCase.completeMission(data)
         }
     }
 

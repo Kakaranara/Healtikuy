@@ -39,7 +39,7 @@ class JoggingInteractor @Inject constructor(
         repository.insertNewData(data.toEntity())
     }
 
-    override suspend fun updateData(data: Jogging) {
+    override suspend fun completeMission(data: Jogging) {
         data.isCompleted = true
         repository.updateData(data.toEntity())
         repository.updatePoints()

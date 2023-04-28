@@ -26,7 +26,7 @@ class StaticBikeViewModel @Inject constructor(
 
     fun submitData(data: StaticBike) {
         viewModelScope.launch {
-            staticBikeUseCase.updateData(data)
+            staticBikeUseCase.completeMission(data)
         }
     }
 

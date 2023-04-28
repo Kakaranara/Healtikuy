@@ -19,7 +19,7 @@ class JoggingViewModel @Inject constructor(
 
     fun updateData(data: Jogging) {
         viewModelScope.launch {
-            joggingUseCase.updateData(data)
+            joggingUseCase.completeMission(data)
         }
     }
 

@@ -6,7 +6,7 @@ interface ExerciseUseCase<T> {
     fun getDataProgress(): Flow<T>
     suspend fun getAllData(): List<T>
     suspend fun insertNewData(data: T)
-    suspend fun updateData(data: T)
+    suspend fun completeMission(data: T)
 }
 
 
