@@ -17,6 +17,7 @@ import com.kocci.healtikuy.core.constant.GameRules
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.usecase.HealthyStatusIndicator
 import com.kocci.healtikuy.databinding.FragmentHomeBinding
+import com.kocci.healtikuy.ui.dialog.ChallengeDialog
 import com.kocci.healtikuy.util.extension.showToast
 import com.kocci.healtikuy.util.helper.DrawableHelper
 import dagger.hilt.android.AndroidEntryPoint
@@ -128,6 +129,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 val directions = HomeFragmentDirections.actionHomeFragmentToSunExposureFragment()
                 findNavController().navigate(directions)
             }
+
+            binding.btnChallenges -> {
+                ChallengeDialog(requireActivity()).show(parentFragmentManager, "me")
+            }
         }
     }
 
@@ -137,6 +142,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         binding.btnSleep.setOnClickListener(this)
         binding.btnSunExposure.setOnClickListener(this)
         binding.btnWaterIntake.setOnClickListener(this)
+        binding.btnChallenges.setOnClickListener(this)
     }
 
     private fun setupAppBarWithMenuDrawer() {
