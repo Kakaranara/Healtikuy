@@ -3,17 +3,18 @@ package com.kocci.healtikuy.core.data.repository
 import android.util.Log
 import com.google.firebase.auth.FirebaseUser
 import com.kocci.healtikuy.core.data.local.LocalDataSource
+import com.kocci.healtikuy.core.data.local.preferences.UserPreferencesManager
 import com.kocci.healtikuy.core.data.remote.RemoteDataSource
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.model.Challenge
 import com.kocci.healtikuy.core.domain.repository.IHealtikuyRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import java.lang.Exception
 import javax.inject.Inject
 
 class HealtikuyRepository @Inject constructor(
     private val localDataSource: LocalDataSource,
+    private val preferences: UserPreferencesManager,
     private val remoteDataSource: RemoteDataSource
 ) : IHealtikuyRepository {
     override fun getChallenges(): Flow<Async<List<Challenge>>> = flow {
@@ -30,6 +31,7 @@ class HealtikuyRepository @Inject constructor(
                 val data = it.data!!
                 val challengeDesc = remoteDataSource.getChallengesData(challengeId).data!!
                 Challenge(
+                    challengeId = challengeId,
                     name = challengeDesc["name"] as String,
                     coinRewards = (challengeDesc["coin_reward"] as Long).toInt(),
                     isCompleted = data["is_completed"] as Boolean,
@@ -46,8 +48,20 @@ class HealtikuyRepository @Inject constructor(
         }
     }
 
-    override suspend fun updateChallenges(entity: Challenge) {
-        TODO("Not yet implemented")
+    override fun completeChallenges(cId: String): Flow<Async<Unit>> = flow {
+        emit(Async.Loading)
+        try {
+            val fbUser = remoteDataSource.getFirebaseUser() as FirebaseUser
+            remoteDataSource.updateChallengeData(fbUser.uid, cId, true)
+            emit(Async.Success(Unit))
+        } catch (e: Exception) {
+            Log.e(TAG, "completeChallenges: ERROR MESSGE: ${e.message}")
+            emit(Async.Error("error. ${e.message}"))
+        }
+    }
+
+    override suspend fun addCoins(coin: Int) {
+        preferences.addCoin(coin)
     }
 
     companion object {

@@ -1,6 +1,7 @@
 package com.kocci.healtikuy.core.domain.model
 
 data class Challenge(
+    val challengeId : String,
     val name: String,
     val coinRewards: Int,
     var isCompleted: Boolean = false,

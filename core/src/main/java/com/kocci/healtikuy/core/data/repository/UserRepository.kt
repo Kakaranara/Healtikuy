@@ -23,6 +23,10 @@ class UserRepository @Inject constructor(
         return userPreferenceManager.userPreferences
     }
 
+    override suspend fun getRawUserPreferences(): UserPreferences {
+        return getUserPreferences().first()
+    }
+
     override fun isUserLogin(): Boolean {
         return remoteDataSource.getFirebaseUser() != null
     }

@@ -128,6 +128,12 @@ class UserPreferencesManager @Inject constructor(
         }
     }
 
+    suspend fun addCoin(coin: Int) {
+        dataStore.edit { pref ->
+            pref[PreferenceKeys.COIN] = (pref[PreferenceKeys.COIN] ?: 0) + coin
+        }
+    }
+
     suspend fun changeSleepTime(time: Long) {
         dataStore.edit { preferences ->
             preferences[PreferenceKeys.SLEEP_TIME] = time

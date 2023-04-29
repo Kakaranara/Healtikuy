@@ -1,6 +1,5 @@
 package com.kocci.healtikuy.core.domain.repository
 
-import com.kocci.healtikuy.core.data.local.entity.ChallengeEntity
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.model.Challenge
 import kotlinx.coroutines.flow.Flow
@@ -11,5 +10,6 @@ import kotlinx.coroutines.flow.Flow
  */
 interface IHealtikuyRepository {
     fun getChallenges(): Flow<Async<List<Challenge>>>
-    suspend fun updateChallenges(entity: Challenge)
+    fun completeChallenges(cId: String): Flow<Async<Unit>>
+    suspend fun addCoins(coin: Int)
 }

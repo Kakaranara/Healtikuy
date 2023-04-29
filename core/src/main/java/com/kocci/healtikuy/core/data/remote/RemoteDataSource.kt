@@ -66,11 +66,19 @@ class RemoteDataSource @Inject constructor(
             .await()
     }
 
+    suspend fun updateChallengeData(uid: String, cId: String, isCompleted: Boolean) {
+        val isCompletedData = hashMapOf<String, Any>("is_completed" to isCompleted)
+        firestore.collection(FsCollection.USERS).document(uid)
+            .collection(FsCollection.CHALLENGES).document(cId)
+            .update(isCompletedData)
+            .await()
+    }
+
     suspend fun createUserChallenges(uid: String) {
         val chal = firestore.collection(FsCollection.USERS).document(uid)
             .collection(FsCollection.CHALLENGES)
         val doc1 = chal.document("UC001")
-        val attrDoc1: HashMap<String, Any> = hashMapOf("isComplete" to false)
+        val attrDoc1: HashMap<String, Any> = hashMapOf("is_completed" to false)
         firestore.runBatch { batch ->
             batch.set(doc1, attrDoc1)
         }.await()

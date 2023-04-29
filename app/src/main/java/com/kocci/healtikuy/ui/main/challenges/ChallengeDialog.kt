@@ -12,9 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.model.Challenge
+import com.kocci.healtikuy.core.domain.model.UserPreferences
 import com.kocci.healtikuy.databinding.DialogChallengesBinding
 import com.kocci.healtikuy.util.extension.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
 class ChallengeDialog(context: Context) : DialogFragment() {
@@ -45,15 +47,39 @@ class ChallengeDialog(context: Context) : DialogFragment() {
                 }
 
                 is Async.Success -> {
-                    setupAdapter(it.data)
-                    showToast("Success")
+                    runBlocking {
+                        val userData = viewModel.getUserPreferences()
+                        setupAdapter(it.data, userData)
+                        showToast("Success")
+                    }
                 }
             }
         }
     }
 
-    private fun setupAdapter(list: List<Challenge>) {
-        val mAdapter = ChallengeAdapter(list)
+    private fun setupAdapter(list: List<Challenge>, userPreferences: UserPreferences) {
+        val mAdapter = ChallengeAdapter(list, userPreferences).apply {
+            clickListener = object : ChallengeAdapter.OnButtonClickListener {
+                override fun onButtonComplete(data: Challenge) {
+                    viewModel.completeChallenges(data.challengeId).observe(viewLifecycleOwner) {
+                        when (it) {
+                            is Async.Error -> {
+                                showToast("Check your internet connection. msg : ${it.msg}")
+                            }
+
+                            Async.Loading -> {
+                                showToast("Loading..")
+                            }
+
+                            is Async.Success -> {
+                                viewModel.addCoin(data.coinRewards)
+                                showToast("You got ${data.coinRewards} Coins!")
+                            }
+                        }
+                    }
+                }
+            }
+        }
         val mLayoutManager = LinearLayoutManager(requireActivity())
         binding.rvChallenges.apply {
             adapter = mAdapter
@@ -62,9 +88,7 @@ class ChallengeDialog(context: Context) : DialogFragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         return binding.root
     }
@@ -74,9 +98,4 @@ class ChallengeDialog(context: Context) : DialogFragment() {
         _binding = null
     }
 
-    fun generateList(): List<Challenge> {
-        return List(20) {
-            Challenge("Reach point > 5", 40, false, "points")
-        }
-    }
 }
