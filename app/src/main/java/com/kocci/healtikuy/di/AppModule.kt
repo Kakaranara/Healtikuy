@@ -8,6 +8,7 @@ import com.kocci.healtikuy.core.domain.usecase.*
 import com.kocci.healtikuy.core.domain.usecase.exercise.cardio.JoggingUseCase
 import com.kocci.healtikuy.core.domain.usecase.exercise.cardio.RunningUseCase
 import com.kocci.healtikuy.core.domain.usecase.exercise.cardio.StaticBikeUseCase
+import com.kocci.healtikuy.core.domain.usecase.home.ChallengesUseCase
 import com.kocci.healtikuy.core.domain.usecase.leaderboards.LeaderboardsUseCase
 import dagger.Binds
 import dagger.Module
@@ -64,4 +65,8 @@ abstract class AppModule {
     @Binds
     @ViewModelScoped
     abstract fun bindLeaderboardsUseCase(leaderboardsInteractor: LeaderboardsInteractor): LeaderboardsUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindChallengesUseCase(interactor: ChallengesInteractor): ChallengesUseCase
 }

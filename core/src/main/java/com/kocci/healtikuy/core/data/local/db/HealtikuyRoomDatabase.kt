@@ -5,6 +5,7 @@ import androidx.room.RoomDatabase
 import com.kocci.healtikuy.core.data.local.db.exercise.JoggingDao
 import com.kocci.healtikuy.core.data.local.db.exercise.RunningDao
 import com.kocci.healtikuy.core.data.local.db.exercise.StaticBikeDao
+import com.kocci.healtikuy.core.data.local.entity.ChallengeEntity
 import com.kocci.healtikuy.core.data.local.entity.SleepEntity
 import com.kocci.healtikuy.core.data.local.entity.WaterIntakeEntity
 import com.kocci.healtikuy.core.data.local.entity.exercise.JoggingEntity
@@ -17,7 +18,8 @@ import com.kocci.healtikuy.core.data.local.entity.exercise.StaticBikeEntity
         SleepEntity::class,
         JoggingEntity::class,
         RunningEntity::class,
-        StaticBikeEntity::class
+        StaticBikeEntity::class,
+        ChallengeEntity::class
     ],
     version = 1,
     exportSchema = false

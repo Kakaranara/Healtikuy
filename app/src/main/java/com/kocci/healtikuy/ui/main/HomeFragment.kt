@@ -17,7 +17,7 @@ import com.kocci.healtikuy.core.constant.GameRules
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.usecase.HealthyStatusIndicator
 import com.kocci.healtikuy.databinding.FragmentHomeBinding
-import com.kocci.healtikuy.ui.dialog.ChallengeDialog
+import com.kocci.healtikuy.ui.main.challenges.ChallengeDialog
 import com.kocci.healtikuy.util.extension.showToast
 import com.kocci.healtikuy.util.helper.DrawableHelper
 import dagger.hilt.android.AndroidEntryPoint

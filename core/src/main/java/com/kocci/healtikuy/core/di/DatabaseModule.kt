@@ -2,6 +2,7 @@ package com.kocci.healtikuy.core.di
 
 import android.content.Context
 import androidx.room.Room
+import com.kocci.healtikuy.core.data.local.db.HealtikuyDao
 import com.kocci.healtikuy.core.data.local.db.HealtikuyRoomDatabase
 import com.kocci.healtikuy.core.data.local.db.SleepDao
 import com.kocci.healtikuy.core.data.local.db.WaterIntakeDao
@@ -57,6 +58,12 @@ class DatabaseModule {
     @Singleton
     fun provideStaticBikeDao(database: HealtikuyRoomDatabase): StaticBikeDao {
         return database.staticBikeDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideHealtikuyDao(database: HealtikuyRoomDatabase) : HealtikuyDao{
+        return database.dao()
     }
 
 

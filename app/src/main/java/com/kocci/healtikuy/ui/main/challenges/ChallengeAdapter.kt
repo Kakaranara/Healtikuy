@@ -7,12 +7,12 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kocci.healtikuy.R
-import com.kocci.healtikuy.core.domain.model.Challenges
+import com.kocci.healtikuy.core.domain.model.Challenge
 
-class ChallengeAdapter(private val list: List<Challenges>) :
+class ChallengeAdapter(private val list: List<Challenge>) :
     RecyclerView.Adapter<ChallengeAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(data: Challenges) {
+        fun bind(data: Challenge) {
             val tv = itemView.findViewById<TextView>(R.id.tvItemChallengesName)
             val btn = itemView.findViewById<Button>(R.id.btnItemChallenges)
 
