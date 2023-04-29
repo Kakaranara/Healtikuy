@@ -4,11 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.domain.model.Challenge
 import com.kocci.healtikuy.core.domain.model.UserPreferences
+import com.kocci.healtikuy.util.extension.gone
+import com.kocci.healtikuy.util.extension.visible
 
 class ChallengeAdapter(
     private val list: List<Challenge>,
@@ -20,6 +23,7 @@ class ChallengeAdapter(
             val tvName = itemView.findViewById<TextView>(R.id.tvItemChallengesName)
             val tvBonusCoin = itemView.findViewById<TextView>(R.id.tvItemChallengeBonusCoin)
             val btnComplete = itemView.findViewById<Button>(R.id.btnItemChallenges)
+            val checkmark = itemView.findViewById<ImageView>(R.id.imgItemChallengeCheckmark)
 
 
             tvName.text = data.name
@@ -36,12 +40,14 @@ class ChallengeAdapter(
 
             if (data.isCompleted) {
                 //TODO : Change with checkmark icon
-                btnComplete.isEnabled = false
+                btnComplete.gone()
+                checkmark.visible()
             }
 
             btnComplete.setOnClickListener {
                 clickListener?.onButtonComplete(data)
-                btnComplete.isEnabled = false //TODO : Change with checkmark icon
+                btnComplete.gone()
+                checkmark.visible()
             }
         }
     }

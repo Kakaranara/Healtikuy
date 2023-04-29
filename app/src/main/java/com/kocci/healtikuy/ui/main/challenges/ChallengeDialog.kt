@@ -14,7 +14,9 @@ import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.model.Challenge
 import com.kocci.healtikuy.core.domain.model.UserPreferences
 import com.kocci.healtikuy.databinding.DialogChallengesBinding
+import com.kocci.healtikuy.util.extension.gone
 import com.kocci.healtikuy.util.extension.showToast
+import com.kocci.healtikuy.util.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
 
@@ -39,18 +41,19 @@ class ChallengeDialog(context: Context) : DialogFragment() {
         viewModel.progress.observe(viewLifecycleOwner) {
             when (it) {
                 is Async.Error -> {
+                    binding.progressBarDialogChallenge.gone()
                     showToast("Error ${it.msg}")
                 }
 
                 Async.Loading -> {
-                    showToast("Loading..")
+                    binding.progressBarDialogChallenge.visible()
                 }
 
                 is Async.Success -> {
+                    binding.progressBarDialogChallenge.gone()
                     runBlocking {
                         val userData = viewModel.getUserPreferences()
                         setupAdapter(it.data, userData)
-                        showToast("Success")
                     }
                 }
             }
@@ -68,7 +71,6 @@ class ChallengeDialog(context: Context) : DialogFragment() {
                             }
 
                             Async.Loading -> {
-                                showToast("Loading..")
                             }
 
                             is Async.Success -> {
