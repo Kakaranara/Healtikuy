@@ -4,7 +4,7 @@ import com.kocci.healtikuy.core.data.local.LocalDataSource
 import com.kocci.healtikuy.core.data.local.entity.SleepEntity
 import com.kocci.healtikuy.core.data.local.preferences.UserPreferencesManager
 import com.kocci.healtikuy.core.domain.repository.ISleepRepository
-import com.kocci.healtikuy.core.domain.usecase.sleep.SleepIndicator
+import com.kocci.healtikuy.core.domain.usecase.TimeIndicator
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -35,12 +35,12 @@ class SleepRepository @Inject constructor(
         preferenceManager.addPoints(1000)
     }
 
-    override fun getSchedule(): Flow<SleepIndicator> {
+    override fun getSchedule(): Flow<TimeIndicator> {
         return preferenceManager.sleepTimePreference.map {
             if (it == null) {
-                SleepIndicator.NotSet
+                TimeIndicator.NotSet
             } else {
-                SleepIndicator.Set(it)
+                TimeIndicator.Set(it)
             }
         }
     }

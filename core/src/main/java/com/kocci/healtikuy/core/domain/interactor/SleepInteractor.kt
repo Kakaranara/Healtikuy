@@ -3,7 +3,7 @@ package com.kocci.healtikuy.core.domain.interactor
 import android.icu.util.Calendar
 import com.kocci.healtikuy.core.data.repository.SleepRepository
 import com.kocci.healtikuy.core.domain.model.Sleep
-import com.kocci.healtikuy.core.domain.usecase.sleep.SleepIndicator
+import com.kocci.healtikuy.core.domain.usecase.TimeIndicator
 import com.kocci.healtikuy.core.domain.usecase.sleep.SleepUseCase
 import com.kocci.healtikuy.core.util.helper.DateHelper
 import com.kocci.healtikuy.core.util.helper.FormatHelper
@@ -51,7 +51,7 @@ class SleepInteractor @Inject constructor(
         repository.updateAndAddPoints(sleep.toEntity())
     }
 
-    override fun getSchedule(): Flow<SleepIndicator> {
+    override fun getSchedule(): Flow<TimeIndicator> {
         return repository.getSchedule()
     }
 
