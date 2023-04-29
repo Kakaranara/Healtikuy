@@ -1,12 +1,8 @@
-package com.kocci.healtikuy.core.domain.usecase
+package com.kocci.healtikuy.core.domain.usecase.sleep
 
 import com.kocci.healtikuy.core.domain.model.Sleep
 import kotlinx.coroutines.flow.Flow
 
-sealed class SleepIndicator(val sleepTime: Long) {
-    class Set(data: Long) : SleepIndicator(data)
-    object NotSet : SleepIndicator(0)
-}
 
 interface SleepUseCase {
     suspend fun getAllData(): List<Sleep>

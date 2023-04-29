@@ -4,7 +4,7 @@ import com.kocci.healtikuy.core.data.local.LocalDataSource
 import com.kocci.healtikuy.core.data.local.entity.SleepEntity
 import com.kocci.healtikuy.core.data.local.preferences.UserPreferencesManager
 import com.kocci.healtikuy.core.domain.repository.ISleepRepository
-import com.kocci.healtikuy.core.domain.usecase.SleepIndicator
+import com.kocci.healtikuy.core.domain.usecase.sleep.SleepIndicator
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

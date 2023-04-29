@@ -2,7 +2,7 @@ package com.kocci.healtikuy.core.domain.interactor
 
 import com.kocci.healtikuy.core.data.repository.WaterIntakeRepository
 import com.kocci.healtikuy.core.domain.model.WaterIntake
-import com.kocci.healtikuy.core.domain.usecase.WaterIntakeUseCase
+import com.kocci.healtikuy.core.domain.usecase.waterintake.WaterIntakeUseCase
 import com.kocci.healtikuy.core.service.AlarmService
 import com.kocci.healtikuy.core.util.mapper.toEntity
 import kotlinx.coroutines.runBlocking

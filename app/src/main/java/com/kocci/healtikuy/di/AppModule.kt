@@ -10,6 +10,8 @@ import com.kocci.healtikuy.core.domain.usecase.exercise.cardio.RunningUseCase
 import com.kocci.healtikuy.core.domain.usecase.exercise.cardio.StaticBikeUseCase
 import com.kocci.healtikuy.core.domain.usecase.home.ChallengesUseCase
 import com.kocci.healtikuy.core.domain.usecase.leaderboards.LeaderboardsUseCase
+import com.kocci.healtikuy.core.domain.usecase.sleep.SleepUseCase
+import com.kocci.healtikuy.core.domain.usecase.waterintake.WaterIntakeUseCase
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

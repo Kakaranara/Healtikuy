@@ -1,4 +1,4 @@
-package com.kocci.healtikuy.core.domain.usecase
+package com.kocci.healtikuy.core.domain.usecase.waterintake
 
 import com.kocci.healtikuy.core.domain.model.WaterIntake
 import kotlinx.coroutines.flow.Flow

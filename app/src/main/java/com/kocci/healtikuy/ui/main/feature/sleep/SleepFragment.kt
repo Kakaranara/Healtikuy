@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.domain.model.Sleep
-import com.kocci.healtikuy.core.domain.usecase.SleepIndicator
+import com.kocci.healtikuy.core.domain.usecase.sleep.SleepIndicator
 import com.kocci.healtikuy.databinding.FragmentSleepBinding
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
 import com.kocci.healtikuy.util.extension.showToast

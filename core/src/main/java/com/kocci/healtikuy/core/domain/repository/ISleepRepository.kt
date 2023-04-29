@@ -1,7 +1,7 @@
 package com.kocci.healtikuy.core.domain.repository
 
 import com.kocci.healtikuy.core.data.local.entity.SleepEntity
-import com.kocci.healtikuy.core.domain.usecase.SleepIndicator
+import com.kocci.healtikuy.core.domain.usecase.sleep.SleepIndicator
 import kotlinx.coroutines.flow.Flow
 
 interface ISleepRepository {
