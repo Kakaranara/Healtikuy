@@ -8,8 +8,8 @@ interface TimeBasedFeatureUseCase<T> {
     fun getSleepProgress(): Flow<T>
     fun getSchedule(): Flow<TimeIndicator>
     fun isTheTimeWithin1Hours(time: Long): Boolean
-    fun showFormattedSetTime(time: Long): String
-    fun setScheduleForNotification(sleep: Sleep, time: Long)
+    fun showFormattedTime(time: Long): String
+    fun setScheduleForNotification(time: Long)
 
     suspend fun setSchedule(time: Long)
     suspend fun insertNewData(sleep: Sleep)

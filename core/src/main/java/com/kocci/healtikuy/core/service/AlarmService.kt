@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import com.kocci.healtikuy.core.constant.CardioType
-import com.kocci.healtikuy.core.domain.model.Sleep
 import com.kocci.healtikuy.core.receiver.alarm.ExerciseAlarmReceiver
 import com.kocci.healtikuy.core.receiver.alarm.SleepAlarmReceiver
 import com.kocci.healtikuy.core.receiver.alarm.WaterAlarmReceiver
@@ -16,11 +15,10 @@ import javax.inject.Inject
 class AlarmService @Inject constructor(@ApplicationContext private val context: Context) {
     private val manager = context.getSystemService(AlarmManager::class.java)
 
-    fun setRepeatingScheduleForSleep(sleepData: Sleep, time: Long) {
+    fun setRepeatingScheduleForSleep(time: Long) {
 
-        val intent = Intent(context, SleepAlarmReceiver::class.java).apply {
-            putExtra(EXTRA_SLEEP_SCHEDULE, sleepData)
-        }
+        val intent = Intent(context, SleepAlarmReceiver::class.java)
+//            putExtra(EXTRA_SLEEP_SCHEDULE, sleepData)
 
         val pendingIntent = PendingIntent.getBroadcast(
             context,
@@ -77,7 +75,6 @@ class AlarmService @Inject constructor(@ApplicationContext private val context: 
         )
         manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, time, intervalInMillis, pendingIntent)
     }
-
 
 
     companion object {

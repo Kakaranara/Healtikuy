@@ -7,13 +7,12 @@ import android.media.RingtoneManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.kocci.healtikuy.core.R
-import com.kocci.healtikuy.core.domain.model.Sleep
 
 class NotificationService(private val context: Context) {
 
     private val manager = context.getSystemService(NotificationManager::class.java)
 
-    fun showNotificationForSleep(sleep: Sleep) {
+    fun showNotificationForSleep() {
         val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
         val builder = NotificationCompat.Builder(context, SLEEP_CHANNEL_ID)

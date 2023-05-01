@@ -15,12 +15,12 @@ class SleepAlarmReceiver : BroadcastReceiver() {
         val sleep: Sleep? = intent?.getParcel(EXTRA_SLEEP_SCHEDULE)
         Log.e(TAG, "onReceive: BROADCAST RECEIVED")
 
-        if (sleep != null) {
-            if (!sleep.isCompleted) {
+//        if (sleep != null) {
+//            if (!sleep.isCompleted) {
                 val notification = NotificationService(context)
-                notification.showNotificationForSleep(sleep)
-            }
-        }
+                notification.showNotificationForSleep()
+//            }
+//        }
     }
 
     companion object {

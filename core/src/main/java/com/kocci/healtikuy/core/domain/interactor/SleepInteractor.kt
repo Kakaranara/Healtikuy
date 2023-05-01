@@ -1,19 +1,15 @@
 package com.kocci.healtikuy.core.domain.interactor
 
-import android.icu.util.Calendar
 import com.kocci.healtikuy.core.data.repository.SleepRepository
 import com.kocci.healtikuy.core.domain.model.Sleep
 import com.kocci.healtikuy.core.domain.usecase.TimeIndicator
 import com.kocci.healtikuy.core.domain.usecase.sleep.SleepUseCase
+import com.kocci.healtikuy.core.service.AlarmService
 import com.kocci.healtikuy.core.util.helper.DateHelper
-import com.kocci.healtikuy.core.util.helper.FormatHelper
 import com.kocci.healtikuy.core.util.mapper.toDomain
 import com.kocci.healtikuy.core.util.mapper.toEntity
-import com.kocci.healtikuy.core.service.AlarmService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import java.time.LocalTime
-import java.util.*
 import javax.inject.Inject
 
 class SleepInteractor @Inject constructor(
@@ -55,31 +51,15 @@ class SleepInteractor @Inject constructor(
         return repository.getSchedule()
     }
 
-    override fun isTheTimeWithin1Hours(time: Long): Boolean {
-        val setTime = Calendar.getInstance()
-        setTime.time = Date(time)
-
-        val hours = setTime.get(Calendar.HOUR_OF_DAY)
-        val minutes = setTime.get(Calendar.MINUTE)
-        val hourString = FormatHelper.pad2StartForTime(hours)
-        val minuteString = FormatHelper.pad2StartForTime(minutes)
-
-        val timeInString = "$hourString:$minuteString"
-        val localTime = LocalTime.parse(timeInString)
-        val localTimeNow = LocalTime.now()
-
-        return localTimeNow.plusHours(1).isAfter(localTime) && localTimeNow.minusHours(1)
-            .isBefore(localTime)
-    }
-
-    override fun showFormattedSetTime(time: Long): String = DateHelper.showHoursAndMinutes(time)
+    override fun isTheTimeWithin1Hours(time: Long): Boolean = DateHelper.isTimeWithin1Hours(time)
+    override fun showFormattedTime(time: Long): String = DateHelper.showHoursAndMinutes(time)
 
     override suspend fun setSchedule(time: Long) {
         repository.changeSchedule(time)
-        setScheduleForNotification(Sleep(), time)
+        setScheduleForNotification(time)
     }
 
-    override fun setScheduleForNotification(sleep: Sleep, time: Long) {
-        sleepAlarmReceiver.setRepeatingScheduleForSleep(sleep, time)
+    override fun setScheduleForNotification(time: Long) {
+        sleepAlarmReceiver.setRepeatingScheduleForSleep(time)
     }
 }
