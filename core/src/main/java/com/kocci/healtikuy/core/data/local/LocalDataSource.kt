@@ -2,18 +2,21 @@ package com.kocci.healtikuy.core.data.local
 
 import com.kocci.healtikuy.core.data.local.db.HealtikuyDao
 import com.kocci.healtikuy.core.data.local.db.HealtikuyRoomDatabase
+import com.kocci.healtikuy.core.data.local.db.NutritionDao
 import com.kocci.healtikuy.core.data.local.db.SleepDao
 import com.kocci.healtikuy.core.data.local.db.WaterIntakeDao
 import com.kocci.healtikuy.core.data.local.db.exercise.JoggingDao
 import com.kocci.healtikuy.core.data.local.db.exercise.RunningDao
 import com.kocci.healtikuy.core.data.local.db.exercise.StaticBikeDao
 import com.kocci.healtikuy.core.data.local.entity.ChallengeEntity
+import com.kocci.healtikuy.core.data.local.entity.NutritionEntity
 import com.kocci.healtikuy.core.data.local.entity.SleepEntity
 import com.kocci.healtikuy.core.data.local.entity.WaterIntakeEntity
 import com.kocci.healtikuy.core.data.local.entity.exercise.JoggingEntity
 import com.kocci.healtikuy.core.data.local.entity.exercise.RunningEntity
 import com.kocci.healtikuy.core.data.local.entity.exercise.StaticBikeEntity
 import com.kocci.healtikuy.core.domain.model.Challenge
+import com.kocci.healtikuy.core.util.helper.DateHelper
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -25,7 +28,8 @@ class LocalDataSource @Inject constructor(
     private val sleepDao: SleepDao,
     private val joggingDao: JoggingDao,
     private val runningDao: RunningDao,
-    private val staticBikeDao: StaticBikeDao
+    private val staticBikeDao: StaticBikeDao,
+    private val nutritionDao: NutritionDao
 ) {
 
     /**
@@ -71,6 +75,13 @@ class LocalDataSource @Inject constructor(
     suspend fun getAllStaticBikeData() = staticBikeDao.getAllData()
     suspend fun insertStaticBikeData(entity: StaticBikeEntity) = staticBikeDao.insertEntity(entity)
     suspend fun updateStaticBikeData(entity: StaticBikeEntity) = staticBikeDao.updateEntity(entity)
+
+    /**
+     * Nutrition Related
+     */
+
+    fun getNutritionData() = nutritionDao.selectTodayData(DateHelper.getUnixEpoch())
+    suspend fun insertNutritionData(entity: NutritionEntity) = nutritionDao.insert(entity)
 
     /**
      * Home related

@@ -86,4 +86,6 @@ object DateHelper {
             .isBefore(localTime)
     }
 
+    fun getUnixEpoch() = System.currentTimeMillis() / 1000L
+
 }

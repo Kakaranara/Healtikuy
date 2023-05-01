@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.kocci.healtikuy.core.data.local.db.HealtikuyDao
 import com.kocci.healtikuy.core.data.local.db.HealtikuyRoomDatabase
+import com.kocci.healtikuy.core.data.local.db.NutritionDao
 import com.kocci.healtikuy.core.data.local.db.SleepDao
 import com.kocci.healtikuy.core.data.local.db.WaterIntakeDao
 import com.kocci.healtikuy.core.data.local.db.exercise.JoggingDao
@@ -62,8 +63,14 @@ class DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideHealtikuyDao(database: HealtikuyRoomDatabase) : HealtikuyDao{
+    fun provideHealtikuyDao(database: HealtikuyRoomDatabase): HealtikuyDao {
         return database.dao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideNutritionDao(database: HealtikuyRoomDatabase): NutritionDao {
+        return database.nutritionDao()
     }
 
 

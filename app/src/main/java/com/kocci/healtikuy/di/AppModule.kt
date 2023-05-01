@@ -10,6 +10,7 @@ import com.kocci.healtikuy.core.domain.usecase.exercise.cardio.RunningUseCase
 import com.kocci.healtikuy.core.domain.usecase.exercise.cardio.StaticBikeUseCase
 import com.kocci.healtikuy.core.domain.usecase.home.ChallengesUseCase
 import com.kocci.healtikuy.core.domain.usecase.leaderboards.LeaderboardsUseCase
+import com.kocci.healtikuy.core.domain.usecase.nutrition.NutritionUseCase
 import com.kocci.healtikuy.core.domain.usecase.sleep.SleepUseCase
 import com.kocci.healtikuy.core.domain.usecase.waterintake.WaterIntakeUseCase
 import dagger.Binds
@@ -71,4 +72,8 @@ abstract class AppModule {
     @Binds
     @ViewModelScoped
     abstract fun bindChallengesUseCase(interactor: ChallengesInteractor): ChallengesUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindNutritionUseCase(interactor: NutritionInteractor): NutritionUseCase
 }
