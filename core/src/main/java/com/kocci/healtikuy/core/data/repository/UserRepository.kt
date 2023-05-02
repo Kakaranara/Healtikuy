@@ -44,7 +44,7 @@ class UserRepository @Inject constructor(
                 userData.username,
                 userData.avatar,
             )
-            remoteDataSource.updateAvatar(firebaseUser.uid, userData.avatar)
+            remoteDataSource.updateAvatar(firebaseUser.uid, userData.avatar, userData.username)
             emit(Async.Success(Unit))
         } catch (e: Exception) {
             emit(Async.Error(e.message.toString()))

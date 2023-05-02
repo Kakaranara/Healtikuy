@@ -25,10 +25,6 @@ class RemoteDataSource @Inject constructor(
         return firebaseAuth
     }
 
-    fun getFirestore(): FirebaseFirestore {
-        return firestore
-    }
-
     suspend fun createUserDataFirstTime(uid: String, username: String) {
         val document = FirstTimeService.getFirstTimeAttributes()
         document["username"] = username
@@ -91,10 +87,13 @@ class RemoteDataSource @Inject constructor(
             .await()
     }
 
-    suspend fun updateAvatar(uid: String, newAvatar: String) {
-        val avatar: HashMap<String, Any> = hashMapOf("avatar" to newAvatar)
+    suspend fun updateAvatar(uid: String, newAvatar: String, newUsername: String) {
+        val docs: HashMap<String, Any> = hashMapOf(
+            "avatar" to newAvatar,
+            "username" to newUsername
+        )
         firestore.collection(FsCollection.USERS).document(uid).update(
-            avatar
+            docs
         ).await()
     }
 
