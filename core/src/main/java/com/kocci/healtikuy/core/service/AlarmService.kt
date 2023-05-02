@@ -8,6 +8,7 @@ import android.util.Log
 import com.kocci.healtikuy.core.constant.CardioType
 import com.kocci.healtikuy.core.receiver.alarm.ExerciseAlarmReceiver
 import com.kocci.healtikuy.core.receiver.alarm.SleepAlarmReceiver
+import com.kocci.healtikuy.core.receiver.alarm.SunExposureReceiver
 import com.kocci.healtikuy.core.receiver.alarm.WaterAlarmReceiver
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -35,7 +36,7 @@ class AlarmService @Inject constructor(@ApplicationContext private val context: 
 
     fun setRepeatingScheduleForSunExposure(time: Long) {
 
-        val intent = Intent(context, SleepAlarmReceiver::class.java)
+        val intent = Intent(context, SunExposureReceiver::class.java)
 
         val pendingIntent = PendingIntent.getBroadcast(
             context,
@@ -47,7 +48,7 @@ class AlarmService @Inject constructor(@ApplicationContext private val context: 
         manager.setInexactRepeating(
             AlarmManager.RTC_WAKEUP, time, AlarmManager.INTERVAL_DAY, pendingIntent
         )
-        Log.e(TAG, "setRepeatingSchedule: SLEEP Alarm SET")
+        Log.e(TAG, "setRepeatingSchedule: SUN EXPOSURE Alarm SET")
     }
 
 

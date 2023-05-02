@@ -41,7 +41,7 @@ class SunExposureFragment : Fragment(), TimePickerFragment.TimePickerListener,
 
                 is TimeIndicator.Set -> {
                     binding.tvSunfireTime.text = viewModel.showFormattedTime(timeIndicator.time)
-                    binding.btnSunfireTime.text = "Sunbathe"
+                    binding.btnSunfireTime.text = getString(R.string.sunbathe)
                     binding.btnChangeSunfireTime.visibility = View.VISIBLE
 
                     viewModel.getDataModel.observe(viewLifecycleOwner) { data ->
@@ -49,7 +49,7 @@ class SunExposureFragment : Fragment(), TimePickerFragment.TimePickerListener,
                         if (data.isCompleted) {
                             binding.btnSunfireTime.isEnabled = false
                             binding.tvSunfireDesc.text =
-                                getString(R.string.sleep_description_after_complete)
+                                getString(R.string.sun_desc_after_complete)
                         } else {
                             buttonClickGoesToCompleteMission(data)
                             viewModel.isTheTimeWithin1Hours(timeIndicator.time)
@@ -57,12 +57,11 @@ class SunExposureFragment : Fragment(), TimePickerFragment.TimePickerListener,
                                     if (!isWithinOneHours) {
                                         binding.btnSunfireTime.isEnabled = false
                                         binding.tvSunfireDesc.text =
-                                            getString(R.string.sleep_description_not_in_time)
-                                        TODO(" change sleep to sunfire desc")
+                                            getString(R.string.sun_desc_not_in_time)
                                     } else {
                                         binding.btnSunfireTime.isEnabled = true
                                         binding.tvSunfireDesc.text =
-                                            getString(R.string.sleep_description_before_sleep)
+                                            getString(R.string.sun_desc_before_press)
                                     }
                                 }
                         }
