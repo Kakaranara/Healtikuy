@@ -17,6 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ModalBottomSheet : BottomSheetDialogFragment() {
 
+    //! note that this was activityScoped
     private val viewModel: EditProfileViewModel by activityViewModels()
     var pref: UserPreferences? = null
 

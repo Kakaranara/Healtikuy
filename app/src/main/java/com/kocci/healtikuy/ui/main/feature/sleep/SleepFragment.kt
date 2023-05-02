@@ -12,6 +12,7 @@ import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.domain.model.Sleep
 import com.kocci.healtikuy.core.domain.usecase.TimeIndicator
 import com.kocci.healtikuy.databinding.FragmentSleepBinding
+import com.kocci.healtikuy.ui.dialog.TipsDialogBSheet
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
 import com.kocci.healtikuy.util.extension.showToast
 import com.kocci.healtikuy.util.helper.HistoryHelper
@@ -39,6 +40,7 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
         binding.btnChangeSleepTime.setOnClickListener(this)
+        binding.cardSleepTips.btnMoreTips.setOnClickListener(this)
 
         viewModel.isTimeSet.observe(viewLifecycleOwner) { sleepIndicator ->
             when (sleepIndicator) {
@@ -107,6 +109,20 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
         when (v) {
             binding.btnChangeSleepTime -> {
                 TimePickerFragment().show(childFragmentManager, "sleep")
+            }
+
+            binding.cardSleepTips.btnMoreTips -> {
+
+                //? this was only dummy
+                //TODO: Make a class that manage tip list.
+                val tipList = listOf<String>(
+                    "8 hours sleep is actually recommended sleep time, but you should not always to look at that.",
+                    "Kamu",
+                    "Jangan",
+                    "Nakal"
+                )
+                TipsDialogBSheet(tipList).show(childFragmentManager, "t")
+
             }
         }
     }
