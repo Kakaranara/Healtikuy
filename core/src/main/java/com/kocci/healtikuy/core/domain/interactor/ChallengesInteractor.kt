@@ -5,7 +5,7 @@ import com.kocci.healtikuy.core.data.repository.HealtikuyRepository
 import com.kocci.healtikuy.core.data.repository.UserRepository
 import com.kocci.healtikuy.core.domain.model.Challenge
 import com.kocci.healtikuy.core.domain.model.UserPreferences
-import com.kocci.healtikuy.core.domain.usecase.home.ChallengesUseCase
+import com.kocci.healtikuy.core.domain.usecase.ChallengesUseCase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

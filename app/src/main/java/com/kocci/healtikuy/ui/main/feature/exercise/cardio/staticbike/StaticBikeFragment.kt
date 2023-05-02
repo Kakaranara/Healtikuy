@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.domain.model.exercise.StaticBike
-import com.kocci.healtikuy.core.domain.usecase.exercise.scheduler.ExerciseTimeIndicator
+import com.kocci.healtikuy.core.domain.usecase.feature.exercise.scheduler.ExerciseTimeIndicator
 import com.kocci.healtikuy.core.util.helper.DateHelper
 import com.kocci.healtikuy.databinding.FragmentStaticBikeBinding
 import com.kocci.healtikuy.ui.picker.TimePickerFragment

@@ -6,7 +6,7 @@ import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.data.repository.LeaderboardsRepository
 import com.kocci.healtikuy.core.domain.model.leaderboards.LeaderboardsAttr
 import com.kocci.healtikuy.core.domain.model.leaderboards.LeaderboardsPoint
-import com.kocci.healtikuy.core.domain.usecase.leaderboards.LeaderboardsUseCase
+import com.kocci.healtikuy.core.domain.usecase.LeaderboardsUseCase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
