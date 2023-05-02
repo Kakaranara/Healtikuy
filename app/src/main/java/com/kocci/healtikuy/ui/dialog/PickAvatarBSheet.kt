@@ -15,7 +15,7 @@ import com.kocci.healtikuy.ui.auth.profile.edit.EditProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ModalBottomSheet : BottomSheetDialogFragment() {
+class PickAvatarBSheet : BottomSheetDialogFragment() {
 
     //! note that this was activityScoped
     private val viewModel: EditProfileViewModel by activityViewModels()
