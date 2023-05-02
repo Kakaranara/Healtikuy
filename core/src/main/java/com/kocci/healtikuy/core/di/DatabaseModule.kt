@@ -6,6 +6,7 @@ import com.kocci.healtikuy.core.data.local.db.HealtikuyDao
 import com.kocci.healtikuy.core.data.local.db.HealtikuyRoomDatabase
 import com.kocci.healtikuy.core.data.local.db.NutritionDao
 import com.kocci.healtikuy.core.data.local.db.SleepDao
+import com.kocci.healtikuy.core.data.local.db.SunExposureDao
 import com.kocci.healtikuy.core.data.local.db.WaterIntakeDao
 import com.kocci.healtikuy.core.data.local.db.exercise.JoggingDao
 import com.kocci.healtikuy.core.data.local.db.exercise.RunningDao
@@ -73,5 +74,10 @@ class DatabaseModule {
         return database.nutritionDao()
     }
 
+    @Provides
+    @Singleton
+    fun provideSunexposureDao(database: HealtikuyRoomDatabase): SunExposureDao {
+        return database.sunExposureDao()
+    }
 
 }

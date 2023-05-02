@@ -33,6 +33,24 @@ class AlarmService @Inject constructor(@ApplicationContext private val context: 
         Log.e(TAG, "setRepeatingSchedule: SLEEP Alarm SET")
     }
 
+    fun setRepeatingScheduleForSunExposure(time: Long) {
+
+        val intent = Intent(context, SleepAlarmReceiver::class.java)
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            context,
+            RQC_SUN_EXPOSURE,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE
+        )
+
+        manager.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP, time, AlarmManager.INTERVAL_DAY, pendingIntent
+        )
+        Log.e(TAG, "setRepeatingSchedule: SLEEP Alarm SET")
+    }
+
+
     fun setRepeatingScheduleForWater() {
         val interval3Hours = AlarmManager.INTERVAL_HOUR * 3
         val triggerTime = System.currentTimeMillis() + interval3Hours
@@ -85,6 +103,7 @@ class AlarmService @Inject constructor(@ApplicationContext private val context: 
         const val RQC_SLEEP = 5
         const val RQC_WATER = 6
         const val RQC_EXERCISE = 7
+        const val RQC_SUN_EXPOSURE = 8
         private const val TAG = "AlarmService"
     }
 }

@@ -21,7 +21,7 @@ class SleepInteractor @Inject constructor(
         return repository.getAllData().map { it.toDomain() }
     }
 
-    override fun getSleepProgress(): Flow<Sleep> {
+    override fun getDataProgress(): Flow<Sleep> {
         return repository.getLatestData().map {
             if (it == null) {
                 val sleep = Sleep()
@@ -37,14 +37,14 @@ class SleepInteractor @Inject constructor(
         }
     }
 
-    override suspend fun insertNewData(sleep: Sleep) {
-        repository.insertData(sleep.toEntity())
+    override suspend fun insertNewData(data: Sleep) {
+        repository.insertData(data.toEntity())
     }
 
-    override suspend fun completeMission(sleep: Sleep) {
-        sleep.isCompleted = true
-        sleep.timeCompleted = System.currentTimeMillis()
-        repository.updateAndAddPoints(sleep.toEntity())
+    override suspend fun completeMission(data: Sleep) {
+        data.isCompleted = true
+        data.timeCompleted = System.currentTimeMillis()
+        repository.updateAndAddPoints(data.toEntity())
     }
 
     override fun getSchedule(): Flow<TimeIndicator> {

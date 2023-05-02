@@ -1,20 +1,21 @@
-package com.kocci.healtikuy.ui.main.feature.sleep
+package com.kocci.healtikuy.ui.main.feature.sun
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.kocci.healtikuy.core.domain.model.Sleep
-import com.kocci.healtikuy.core.domain.usecase.sleep.SleepUseCase
+import com.kocci.healtikuy.core.domain.model.SunExposure
+import com.kocci.healtikuy.core.domain.usecase.sunexposure.SunExposureUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SleepViewModel @Inject constructor(
-    private val useCase: SleepUseCase,
+class SunExposureViewModel @Inject constructor(
+    private val useCase: SunExposureUseCase
 ) : ViewModel() {
+
 
     val getDataModel = useCase.getDataProgress().asLiveData()
     val isTimeSet = useCase.getSchedule().asLiveData()
@@ -33,9 +34,9 @@ class SleepViewModel @Inject constructor(
         }
     }
 
-    fun completeMission(sleep: Sleep) {
+    fun completeMission(data: SunExposure) {
         viewModelScope.launch {
-            useCase.completeMission(sleep)
+            useCase.completeMission(data)
         }
     }
 }

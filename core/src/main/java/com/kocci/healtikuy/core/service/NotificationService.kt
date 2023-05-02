@@ -25,6 +25,19 @@ class NotificationService(private val context: Context) {
         manager.notify(AlarmService.RQC_SLEEP, builder.build())
     }
 
+    fun showNotificationForSunExposure() {
+        val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        val builder = NotificationCompat.Builder(context, SLEEP_CHANNEL_ID)
+            .setSmallIcon(R.drawable.baseline_edit_24)
+            .setContentTitle("Sun Exposure time!")
+            .setContentText("Best time to do it is within 10.00 - 15.00!")
+            .setSound(soundUri)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+
+        manager.notify(AlarmService.RQC_SUN_EXPOSURE, builder.build())
+    }
+
     fun showNotificationForWater() {
         val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 

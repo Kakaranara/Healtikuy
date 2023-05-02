@@ -33,6 +33,7 @@ class UserPreferencesManager @Inject constructor(
 
         //? FEATURE PREFERENCES
         val SLEEP_TIME = longPreferencesKey("sleep_time")
+        val SUN_EXPOSURE_TIME = longPreferencesKey("sun_exposure_time")
 
         //? Exercise PREFERENCE
         val JOGGING_TIME = longPreferencesKey("jogging_time")
@@ -82,6 +83,10 @@ class UserPreferencesManager @Inject constructor(
 
     val sleepTimePreference: Flow<Long?> = dataStore.data.map { preferences ->
         preferences[PreferenceKeys.SLEEP_TIME]
+    }
+
+    val sunExposureTimePreference: Flow<Long?> = dataStore.data.map { pref ->
+        pref[PreferenceKeys.SUN_EXPOSURE_TIME]
     }
 
     val joggingTimePreference: Flow<ExerciseTimePreferences> = dataStore.data.map { pref ->
@@ -137,6 +142,12 @@ class UserPreferencesManager @Inject constructor(
     suspend fun changeSleepTime(time: Long) {
         dataStore.edit { preferences ->
             preferences[PreferenceKeys.SLEEP_TIME] = time
+        }
+    }
+
+    suspend fun changeSunExposureTime(time: Long) {
+        dataStore.edit { pref ->
+            pref[PreferenceKeys.SUN_EXPOSURE_TIME] = time
         }
     }
 

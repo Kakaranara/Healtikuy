@@ -1,4 +1,8 @@
 package com.kocci.healtikuy.core.domain.model
 
-class SunExposure {
-}
+data class SunExposure(
+    val id: Int = 0,
+    val timeStamp: Long = System.currentTimeMillis(),
+    var isCompleted: Boolean = false,
+    var timeCompleted: Long = System.currentTimeMillis()
+)

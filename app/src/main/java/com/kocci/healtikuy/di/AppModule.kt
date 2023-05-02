@@ -12,6 +12,7 @@ import com.kocci.healtikuy.core.domain.usecase.home.ChallengesUseCase
 import com.kocci.healtikuy.core.domain.usecase.leaderboards.LeaderboardsUseCase
 import com.kocci.healtikuy.core.domain.usecase.nutrition.NutritionUseCase
 import com.kocci.healtikuy.core.domain.usecase.sleep.SleepUseCase
+import com.kocci.healtikuy.core.domain.usecase.sunexposure.SunExposureUseCase
 import com.kocci.healtikuy.core.domain.usecase.waterintake.WaterIntakeUseCase
 import dagger.Binds
 import dagger.Module
@@ -76,4 +77,8 @@ abstract class AppModule {
     @Binds
     @ViewModelScoped
     abstract fun bindNutritionUseCase(interactor: NutritionInteractor): NutritionUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindSunExposureUseCase(interactor: SunExposureInteractor): SunExposureUseCase
 }
