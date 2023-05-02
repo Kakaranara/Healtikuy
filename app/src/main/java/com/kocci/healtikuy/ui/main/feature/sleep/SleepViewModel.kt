@@ -18,6 +18,7 @@ class SleepViewModel @Inject constructor(
 
     val getDataModel = useCase.getDataProgress().asLiveData()
     val isTimeSet = useCase.getSchedule().asLiveData()
+    fun getTips() = useCase.getSleepTips()
     suspend fun getAllData() = useCase.getAllData()
     fun isTheTimeWithin1Hours(time: Long): LiveData<Boolean> {
         val isTimeReady = MutableLiveData<Boolean>(false)

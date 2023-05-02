@@ -6,6 +6,7 @@ import com.kocci.healtikuy.core.domain.usecase.TimeIndicator
 import com.kocci.healtikuy.core.domain.usecase.feature.SleepUseCase
 import com.kocci.healtikuy.core.service.AlarmService
 import com.kocci.healtikuy.core.util.helper.DateHelper
+import com.kocci.healtikuy.core.util.helper.TipsManager
 import com.kocci.healtikuy.core.util.mapper.toDomain
 import com.kocci.healtikuy.core.util.mapper.toEntity
 import kotlinx.coroutines.flow.Flow
@@ -16,6 +17,8 @@ class SleepInteractor @Inject constructor(
     private val repository: SleepRepository,
     private val sleepAlarmReceiver: AlarmService,
 ) : SleepUseCase {
+
+    override fun getSleepTips(): List<String> = TipsManager.generateSleepTips()
 
     override suspend fun getAllData(): List<Sleep> {
         return repository.getAllData().map { it.toDomain() }

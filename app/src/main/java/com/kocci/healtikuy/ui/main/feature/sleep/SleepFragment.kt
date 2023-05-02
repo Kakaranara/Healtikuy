@@ -112,17 +112,8 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
             }
 
             binding.cardSleepTips.btnMoreTips -> {
-
-                //? this was only dummy
-                //TODO: Make a class that manage tip list.
-                val tipList = listOf<String>(
-                    "8 hours sleep is actually recommended sleep time, but you should not always to look at that.",
-                    "Kamu",
-                    "Jangan",
-                    "Nakal"
-                )
+                val tipList = viewModel.getTips()
                 TipsDialogBSheet(tipList).show(childFragmentManager, "t")
-
             }
         }
     }
