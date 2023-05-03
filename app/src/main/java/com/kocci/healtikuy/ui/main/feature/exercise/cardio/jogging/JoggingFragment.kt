@@ -20,7 +20,7 @@ import com.kocci.healtikuy.util.extension.visible
 import com.kocci.healtikuy.util.helper.HistoryHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
-import java.util.*
+import java.util.Calendar
 
 @AndroidEntryPoint
 class JoggingFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimePickerListener {
@@ -33,15 +33,15 @@ class JoggingFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
-        binding.btnExerciseTimeSubmit.setOnClickListener(this)
-        binding.btnExerciseTimeEdit.setOnClickListener(this)
-        binding.btnExerciseSetTime.setOnClickListener(this)
+        binding.scheduler.btnExerciseTimeSubmit.setOnClickListener(this)
+        binding.scheduler.btnExerciseTimeEdit.setOnClickListener(this)
+        binding.scheduler.btnExerciseSetTime.setOnClickListener(this)
         binding.btnJoggingSubmit.setOnClickListener(this)
 
         viewModel.getSchedule().observe(viewLifecycleOwner) {
             when (it) {
                 is ExerciseTimeIndicator.Set -> {
-                    binding.apply {
+                    binding.scheduler.apply {
                         spacer.visible()
                         tvInterval.visible()
                         etInterval.gone()
@@ -51,8 +51,9 @@ class JoggingFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
                         tvExerciseTime.text = DateHelper.showHoursAndMinutes(it.time)
                     }
                 }
+
                 ExerciseTimeIndicator.NotSet -> {
-                    binding.apply {
+                    binding.scheduler.apply {
                         spacer.gone()
                         tvInterval.gone()
                         etInterval.visible()
@@ -93,7 +94,6 @@ class JoggingFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
             toolbarJogging.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.action_history -> {
-                        //TODO : ORCHESTRATE HISTORY LIST HERE
                         runBlocking {
                             val joggingList = viewModel.getAllData()
                             val historyList = HistoryHelper.orchestrateJogging(joggingList)
@@ -105,6 +105,7 @@ class JoggingFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
 
                         true
                     }
+
                     else -> {
                         false
                     }
@@ -116,19 +117,34 @@ class JoggingFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
 
     override fun onClick(v: View?) {
         when (v) {
-            binding.btnExerciseSetTime -> {
+            binding.scheduler.btnExerciseSetTime -> {
                 val picker = TimePickerFragment()
                 picker.show(childFragmentManager, "jogging")
             }
-            binding.btnExerciseTimeSubmit -> {
-                val timeInString = binding.tvExerciseTime.text.toString()
-                val interval = binding.etInterval.text.toString().toInt()
-                viewModel.setExerciseSchedule(timeInString, interval)
-                showToast("Alarm set!")
+
+            binding.scheduler.btnExerciseTimeSubmit -> {
+
+                try {
+                    val timeInString = binding.scheduler.tvExerciseTime.text.toString()
+                    val interval =
+                        binding.scheduler.etInterval.text.toString().toDouble().toInt()
+//                    DateHelper.convertTimeStringToTodayDate(timeInString)
+                    if (timeInString == getString(R.string.not_set)) {
+                        showToast("Please set the time first")
+                        return
+                    }
+                    viewModel.setExerciseSchedule(timeInString, interval)
+                    showToast("Alarm set!")
+                } catch (e: Exception) {
+                    showToast("Please fill all the field")
+                }
+
             }
-            binding.btnExerciseTimeEdit -> {
+
+            binding.scheduler.btnExerciseTimeEdit -> {
                 viewModel.editSchedule()
             }
+
             binding.btnJoggingSubmit -> {
                 val duration = binding.etJoggingDuration.text.toString().toInt()
                 val mileage = binding.etJoggingMileage.text.toString().toInt()
@@ -150,7 +166,7 @@ class JoggingFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
             set(Calendar.MINUTE, minute)
         }
         val formattedTime = viewModel.showFormattedTime(cal.timeInMillis)
-        binding.tvExerciseTime.text = formattedTime
+        binding.scheduler.tvExerciseTime.text = formattedTime
     }
 
 

@@ -105,6 +105,12 @@
     <string name="button_for_complete_sunfire_feature">button for complete sunfire feature</string>
     <string name="more_tips">More Tips</string>
     <string name="did_you_know">Did you know?</string>
+    <string name="fill_duration_in_minutes">fill duration in minutes</string>
+    <string name="track_your_record">Track your record</string>
+    <string name="example_exercise_small_number">60</string>
+    <string name="example_exercise_medium_number">120</string>
+    <string name="example_exercise_large_number">180</string>
+
     <!-- Nutrition Related -->
     <!-- Sun Related -->
 
