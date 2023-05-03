@@ -1,4 +1,4 @@
-package com.kocci.healtikuy.ui.dialog
+package com.kocci.healtikuy.ui.dialog.tips.linear
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kocci.healtikuy.R
 
+/**
+ * Just a bottom sheet with linear recycler view.
+ */
 class TipsDialogBSheet(private val tips: List<String>) : BottomSheetDialogFragment() {
 
 

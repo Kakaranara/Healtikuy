@@ -13,7 +13,7 @@ import com.kocci.healtikuy.core.domain.model.Sleep
 import com.kocci.healtikuy.core.domain.usecase.TimeIndicator
 import com.kocci.healtikuy.core.util.helper.PointsManager
 import com.kocci.healtikuy.databinding.FragmentSleepBinding
-import com.kocci.healtikuy.ui.dialog.TipsDialogBSheet
+import com.kocci.healtikuy.ui.dialog.tips.linear.TipsDialogBSheet
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
 import com.kocci.healtikuy.util.extension.showToast
 import com.kocci.healtikuy.util.helper.HistoryHelper

@@ -1,9 +1,18 @@
 package com.kocci.healtikuy.core.util.helper
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Tips(
     private val tips: String,
     private val category: String
-)
+) : Parcelable
+
+@Parcelize
+data class TipList(
+    private val list: List<Tips>
+) : Parcelable
 
 object TipsManager {
     //! Still dummy
