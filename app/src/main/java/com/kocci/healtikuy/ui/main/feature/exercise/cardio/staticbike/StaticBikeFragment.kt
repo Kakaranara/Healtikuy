@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.domain.model.exercise.StaticBike
-import com.kocci.healtikuy.core.domain.usecase.exercise.scheduler.ExerciseTimeIndicator
+import com.kocci.healtikuy.core.domain.usecase.feature.exercise.scheduler.ExerciseTimeIndicator
 import com.kocci.healtikuy.core.util.helper.DateHelper
 import com.kocci.healtikuy.databinding.FragmentStaticBikeBinding
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
@@ -39,7 +39,7 @@ class StaticBikeFragment : Fragment(), View.OnClickListener, TimePickerFragment.
         viewModel.schedule.observe(viewLifecycleOwner) {
             when (it) {
                 is ExerciseTimeIndicator.Set -> {
-                    binding.apply {
+                    binding.scheduler.apply {
                         spacer.visible()
                         tvInterval.visible()
                         etInterval.gone()
@@ -51,7 +51,7 @@ class StaticBikeFragment : Fragment(), View.OnClickListener, TimePickerFragment.
                 }
 
                 ExerciseTimeIndicator.NotSet -> {
-                    binding.apply {
+                    binding.scheduler.apply {
                         spacer.gone()
                         tvInterval.gone()
                         etInterval.visible()
@@ -93,9 +93,9 @@ class StaticBikeFragment : Fragment(), View.OnClickListener, TimePickerFragment.
     }
 
     private fun setupButtonBinding() {
-        binding.btnExerciseSetTime.setOnClickListener(this)
-        binding.btnExerciseTimeEdit.setOnClickListener(this)
-        binding.btnExerciseTimeSubmit.setOnClickListener(this)
+        binding.scheduler.btnExerciseSetTime.setOnClickListener(this)
+        binding.scheduler.btnExerciseTimeEdit.setOnClickListener(this)
+        binding.scheduler.btnExerciseTimeSubmit.setOnClickListener(this)
         binding.btnStaticBikeSubmit.setOnClickListener(this)
     }
 
@@ -124,34 +124,48 @@ class StaticBikeFragment : Fragment(), View.OnClickListener, TimePickerFragment.
 
     override fun onClick(v: View?) {
         when (v) {
-            binding.btnExerciseSetTime -> {
+            binding.scheduler.btnExerciseSetTime -> {
                 val picker = TimePickerFragment()
                 picker.show(childFragmentManager, "Running")
             }
 
-            binding.btnExerciseTimeSubmit -> {
-                val timeInString = binding.tvExerciseTime.text.toString()
-                val interval = binding.etInterval.text.toString().toInt()
-                viewModel.setExerciseSchedule(timeInString, interval)
-                showToast("Alarm set!")
+            binding.scheduler.btnExerciseTimeSubmit -> {
+                try {
+                    val timeInString = binding.scheduler.tvExerciseTime.text.toString()
+                    val interval =
+                        binding.scheduler.etInterval.text.toString().toDouble().toInt()
+                    if (timeInString == getString(R.string.not_set)) {
+                        showToast("Please set the time first")
+                        return
+                    }
+                    viewModel.setExerciseSchedule(timeInString, interval)
+                    showToast("Alarm set!")
+                } catch (e: Exception) {
+                    showToast("Please fill all the field")
+                }
             }
 
-            binding.btnExerciseTimeEdit -> {
+            binding.scheduler.btnExerciseTimeEdit -> {
                 viewModel.editSchedule()
             }
 
             binding.btnStaticBikeSubmit -> {
-                val set = binding.etStaticBikeSet.text.toString().toInt()
-                val interval = binding.etStaticBikeInterval.text.toString().toInt()
-                val restTime = binding.etStaticBikeRest.text.toString().toInt()
-                staticBikeValue?.let { staticBike ->
-                    staticBike.set = set
-                    staticBike.interval = interval
-                    staticBike.restTime = restTime
+                try{
+                    val set = binding.etStaticBikeSet.text.toString().toInt()
+                    val interval = binding.etStaticBikeInterval.text.toString().toInt()
+                    val restTime = binding.etStaticBikeRest.text.toString().toInt()
+                    staticBikeValue?.let { staticBike ->
+                        staticBike.set = set
+                        staticBike.interval = interval
+                        staticBike.restTime = restTime
 
-                    viewModel.submitData(staticBike)
-                } ?: kotlin.run {
-                    showToast("NO DATA!")
+                        viewModel.submitData(staticBike)
+                    } ?: kotlin.run {
+                        showToast("NO DATA!")
+                    }
+
+                }catch (e: NumberFormatException){
+                    showToast("Please input all the field!")
                 }
             }
         }
@@ -164,7 +178,7 @@ class StaticBikeFragment : Fragment(), View.OnClickListener, TimePickerFragment.
             set(Calendar.MINUTE, minute)
         }
         val formattedTime = viewModel.showFormattedTime(cal.timeInMillis)
-        binding.tvExerciseTime.text = formattedTime
+        binding.scheduler.tvExerciseTime.text = formattedTime
     }
 
     override fun onCreateView(

@@ -6,20 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.domain.model.Sleep
-import com.kocci.healtikuy.core.domain.usecase.SleepIndicator
+import com.kocci.healtikuy.core.domain.usecase.TimeIndicator
 import com.kocci.healtikuy.databinding.FragmentSleepBinding
+import com.kocci.healtikuy.ui.dialog.TipsDialogBSheet
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
 import com.kocci.healtikuy.util.extension.showToast
 import com.kocci.healtikuy.util.helper.HistoryHelper
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.util.*
+import java.util.Calendar
 
 
 @AndroidEntryPoint
@@ -41,18 +40,19 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
         binding.btnChangeSleepTime.setOnClickListener(this)
+        binding.cardSleepTips.btnMoreTips.setOnClickListener(this)
 
         viewModel.isTimeSet.observe(viewLifecycleOwner) { sleepIndicator ->
             when (sleepIndicator) {
-                SleepIndicator.NotSet -> {
+                TimeIndicator.NotSet -> {
                     buttonClickGoesToTimer()
                     binding.tvSleepTime.text = getString(R.string.time_not_set)
                     binding.btnChangeSleepTime.visibility = View.GONE
                     binding.tvSleepDesc.text = getString(R.string.description_when_time_not_set)
                 }
 
-                is SleepIndicator.Set -> {
-                    binding.tvSleepTime.text = viewModel.showFormattedTime(sleepIndicator.sleepTime)
+                is TimeIndicator.Set -> {
+                    binding.tvSleepTime.text = viewModel.showFormattedTime(sleepIndicator.time)
                     binding.btnSleepTime.text = getString(R.string.sleep)
                     binding.btnChangeSleepTime.visibility = View.VISIBLE
 
@@ -64,7 +64,7 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
                                 getString(R.string.sleep_description_after_complete)
                         } else {
                             buttonClickGoesToCompleteMission(sleep)
-                            viewModel.isTheTimeWithin1Hours(sleepIndicator.sleepTime)
+                            viewModel.isTheTimeWithin1Hours(sleepIndicator.time)
                                 .observe(viewLifecycleOwner) { isWithinOneHours ->
                                     if (!isWithinOneHours) {
                                         binding.btnSleepTime.isEnabled = false
@@ -109,6 +109,11 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
         when (v) {
             binding.btnChangeSleepTime -> {
                 TimePickerFragment().show(childFragmentManager, "sleep")
+            }
+
+            binding.cardSleepTips.btnMoreTips -> {
+                val tipList = viewModel.getTips()
+                TipsDialogBSheet(tipList).show(childFragmentManager, "t")
             }
         }
     }

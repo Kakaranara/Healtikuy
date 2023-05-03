@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.kocci.healtikuy.core.domain.model.WaterIntake
-import com.kocci.healtikuy.core.domain.usecase.WaterIntakeUseCase
+import com.kocci.healtikuy.core.domain.usecase.feature.WaterIntakeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

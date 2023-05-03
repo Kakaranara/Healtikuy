@@ -5,12 +5,43 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.kocci.healtikuy.core.domain.model.Nutrition
 import com.kocci.healtikuy.databinding.FragmentNutritionBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class NutritionFragment : Fragment() {
     private var _binding: FragmentNutritionBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: NutritionViewModel by viewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupToolbar()
+        binding.btnNutritionSubmit.setOnClickListener {
+            val foodName = binding.etNutritionFood.text.toString()
+            viewModel.addFood(Nutrition(foodName))
+        }
+
+        viewModel.getData().observe(viewLifecycleOwner) {
+            val mAdapter = NutritionAdapter(it)
+            val mLayoutManager = LinearLayoutManager(requireActivity())
+            binding.rvNutrition.apply {
+                adapter = mAdapter
+                layoutManager = mLayoutManager
+            }
+        }
+
+    }
+
+    private fun setupToolbar() {
+        binding.toolbarNutrition.setupWithNavController(findNavController())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

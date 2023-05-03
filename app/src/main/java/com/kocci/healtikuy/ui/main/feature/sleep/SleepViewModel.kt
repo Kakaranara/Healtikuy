@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.kocci.healtikuy.core.domain.model.Sleep
-import com.kocci.healtikuy.core.domain.usecase.SleepUseCase
+import com.kocci.healtikuy.core.domain.usecase.feature.SleepUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,8 +16,9 @@ class SleepViewModel @Inject constructor(
     private val useCase: SleepUseCase,
 ) : ViewModel() {
 
-    val getDataModel = useCase.getSleepProgress().asLiveData()
+    val getDataModel = useCase.getDataProgress().asLiveData()
     val isTimeSet = useCase.getSchedule().asLiveData()
+    fun getTips() = useCase.getSleepTips()
     suspend fun getAllData() = useCase.getAllData()
     fun isTheTimeWithin1Hours(time: Long): LiveData<Boolean> {
         val isTimeReady = MutableLiveData<Boolean>(false)
@@ -25,7 +26,7 @@ class SleepViewModel @Inject constructor(
         return isTimeReady
     }
 
-    fun showFormattedTime(time: Long) = useCase.showFormattedSetTime(time)
+    fun showFormattedTime(time: Long) = useCase.showFormattedTime(time)
 
     fun setSchedule(time: Long) {
         viewModelScope.launch {

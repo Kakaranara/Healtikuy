@@ -7,13 +7,12 @@ import android.media.RingtoneManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.kocci.healtikuy.core.R
-import com.kocci.healtikuy.core.domain.model.Sleep
 
 class NotificationService(private val context: Context) {
 
     private val manager = context.getSystemService(NotificationManager::class.java)
 
-    fun showNotificationForSleep(sleep: Sleep) {
+    fun showNotificationForSleep() {
         val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
         val builder = NotificationCompat.Builder(context, SLEEP_CHANNEL_ID)
@@ -24,6 +23,19 @@ class NotificationService(private val context: Context) {
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 
         manager.notify(AlarmService.RQC_SLEEP, builder.build())
+    }
+
+    fun showNotificationForSunExposure() {
+        val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        val builder = NotificationCompat.Builder(context, SLEEP_CHANNEL_ID)
+            .setSmallIcon(R.drawable.baseline_edit_24)
+            .setContentTitle("Sun Exposure time!")
+            .setContentText("Best time to do it is within 10.00 - 15.00!")
+            .setSound(soundUri)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+
+        manager.notify(AlarmService.RQC_SUN_EXPOSURE, builder.build())
     }
 
     fun showNotificationForWater() {

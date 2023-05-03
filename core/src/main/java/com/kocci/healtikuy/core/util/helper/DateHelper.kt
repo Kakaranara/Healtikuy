@@ -1,6 +1,7 @@
 package com.kocci.healtikuy.core.util.helper
 
 import java.text.SimpleDateFormat
+import java.time.LocalTime
 import java.util.*
 
 object DateHelper {
@@ -58,7 +59,7 @@ object DateHelper {
         return cal.time.time
     }
 
-    fun convertDayToMillis(dayTime : Int) : Long {
+    fun convertDayToMillis(dayTime: Int): Long {
         return (dayInMill * dayTime).toLong()
     }
 
@@ -67,5 +68,24 @@ object DateHelper {
         val formatter = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
         return formatter.format(date)
     }
+
+    fun isTimeWithin1Hours(time: Long): Boolean {
+        val setTime = Calendar.getInstance()
+        setTime.time = Date(time)
+
+        val hours = setTime.get(Calendar.HOUR_OF_DAY)
+        val minutes = setTime.get(Calendar.MINUTE)
+        val hourString = FormatHelper.pad2StartForTime(hours)
+        val minuteString = FormatHelper.pad2StartForTime(minutes)
+
+        val timeInString = "$hourString:$minuteString"
+        val localTime = LocalTime.parse(timeInString)
+        val localTimeNow = LocalTime.now()
+
+        return localTimeNow.plusHours(1).isAfter(localTime) && localTimeNow.minusHours(1)
+            .isBefore(localTime)
+    }
+
+    fun getUnixEpoch() = System.currentTimeMillis() / 1000L
 
 }

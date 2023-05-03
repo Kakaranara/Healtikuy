@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.kocci.healtikuy.core.domain.model.exercise.StaticBike
-import com.kocci.healtikuy.core.domain.usecase.exercise.cardio.StaticBikeUseCase
+import com.kocci.healtikuy.core.domain.usecase.feature.exercise.cardio.StaticBikeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,7 +26,7 @@ class StaticBikeViewModel @Inject constructor(
 
     fun submitData(data: StaticBike) {
         viewModelScope.launch {
-            staticBikeUseCase.updateData(data)
+            staticBikeUseCase.completeMission(data)
         }
     }
 

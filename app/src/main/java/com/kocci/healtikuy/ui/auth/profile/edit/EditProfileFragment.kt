@@ -13,7 +13,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.databinding.FragmentEditProfileBinding
-import com.kocci.healtikuy.ui.dialog.ModalBottomSheet
+import com.kocci.healtikuy.ui.dialog.PickAvatarBSheet
 import com.kocci.healtikuy.util.extension.showToast
 import com.kocci.healtikuy.util.helper.DrawableHelper
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,9 +49,9 @@ class EditProfileFragment : Fragment() {
 
 
         binding.btnChangeAvatar.setOnClickListener {
-            val modalBottomSheet = ModalBottomSheet()
-            modalBottomSheet.pref = userPreferences
-            modalBottomSheet.show(childFragmentManager, ModalBottomSheet.TAG)
+            val pickAvatarBSheet = PickAvatarBSheet()
+            pickAvatarBSheet.pref = userPreferences
+            pickAvatarBSheet.show(childFragmentManager, PickAvatarBSheet.TAG)
         }
 
         binding.btnSubmit.setOnClickListener {

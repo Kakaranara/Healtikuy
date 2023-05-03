@@ -6,13 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kocci.healtikuy.core.util.store.Avatar
+import com.kocci.healtikuy.core.data.remote.model.Async
+import com.kocci.healtikuy.core.domain.model.leaderboards.LeaderboardsAttr
 import com.kocci.healtikuy.databinding.FragmentLeaderboardsBinding
+import com.kocci.healtikuy.util.extension.showToast
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LeaderboardsFragment : Fragment() {
     private var _binding: FragmentLeaderboardsBinding? = null
     private val binding get() = _binding!!
@@ -22,21 +25,31 @@ class LeaderboardsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
-        setupAdapter()
+
+        viewModel.getData().observe(viewLifecycleOwner) {
+            when (it) {
+                Async.Loading -> {
+                    showToast("Loading..")
+                }
+
+                is Async.Error -> {
+                    showToast("Error ${it.msg}")
+                }
+
+                is Async.Success -> {
+                    setupAdapter(it.data)
+                }
+            }
+        }
     }
 
-    private fun setupAdapter() {
-        val mAdapter = LeadPointsAdapter(generateList(), requireActivity())
+    private fun setupAdapter(data: List<LeaderboardsAttr>) {
+        val listOfPoints = viewModel.getSortedData(data)
+        val mAdapter = LeadPointsAdapter(listOfPoints, requireActivity())
         val manager = LinearLayoutManager(requireActivity())
         binding.rvLeaderboards.apply {
             adapter = mAdapter
             layoutManager = manager
-        }
-    }
-
-    private fun generateList(): List<LeaderPoints> {
-        return List(5) {
-            LeaderPoints("hey $it", Avatar.FINN.lowerNames, 5000, it)
         }
     }
 

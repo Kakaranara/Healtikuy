@@ -24,7 +24,8 @@
 
         <receiver android:name=".core.receiver.alarm.SleepAlarmReceiver" />
         <receiver android:name=".core.receiver.alarm.WaterAlarmReceiver" />
-        <receiver android:name=".core.receiver.alarm.ExerciseAlarmReceiver"/>
+        <receiver android:name=".core.receiver.alarm.ExerciseAlarmReceiver" />
+        <receiver android:name=".core.receiver.alarm.SunExposureReceiver" />
     </application>
 
 </manifest>

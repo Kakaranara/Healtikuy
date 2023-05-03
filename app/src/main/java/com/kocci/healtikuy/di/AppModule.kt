@@ -1,13 +1,23 @@
 package com.kocci.healtikuy.di
 
 import com.kocci.healtikuy.core.domain.interactor.*
-import com.kocci.healtikuy.core.domain.interactor.exercise.JoggingInteractor
-import com.kocci.healtikuy.core.domain.interactor.exercise.RunningInteractor
-import com.kocci.healtikuy.core.domain.interactor.exercise.StaticBikeInteractor
+import com.kocci.healtikuy.core.domain.interactor.feature.NutritionInteractor
+import com.kocci.healtikuy.core.domain.interactor.feature.SleepInteractor
+import com.kocci.healtikuy.core.domain.interactor.feature.SunExposureInteractor
+import com.kocci.healtikuy.core.domain.interactor.feature.WaterIntakeInteractor
+import com.kocci.healtikuy.core.domain.interactor.feature.exercise.JoggingInteractor
+import com.kocci.healtikuy.core.domain.interactor.feature.exercise.RunningInteractor
+import com.kocci.healtikuy.core.domain.interactor.feature.exercise.StaticBikeInteractor
 import com.kocci.healtikuy.core.domain.usecase.*
-import com.kocci.healtikuy.core.domain.usecase.exercise.cardio.JoggingUseCase
-import com.kocci.healtikuy.core.domain.usecase.exercise.cardio.RunningUseCase
-import com.kocci.healtikuy.core.domain.usecase.exercise.cardio.StaticBikeUseCase
+import com.kocci.healtikuy.core.domain.usecase.feature.exercise.cardio.JoggingUseCase
+import com.kocci.healtikuy.core.domain.usecase.feature.exercise.cardio.RunningUseCase
+import com.kocci.healtikuy.core.domain.usecase.feature.exercise.cardio.StaticBikeUseCase
+import com.kocci.healtikuy.core.domain.usecase.ChallengesUseCase
+import com.kocci.healtikuy.core.domain.usecase.LeaderboardsUseCase
+import com.kocci.healtikuy.core.domain.usecase.feature.NutritionUseCase
+import com.kocci.healtikuy.core.domain.usecase.feature.SleepUseCase
+import com.kocci.healtikuy.core.domain.usecase.feature.SunExposureUseCase
+import com.kocci.healtikuy.core.domain.usecase.feature.WaterIntakeUseCase
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -59,4 +69,20 @@ abstract class AppModule {
     @Binds
     @ViewModelScoped
     abstract fun bindSyncUseCase(syncInteractor: SynchronizationInteractor): SynchronizationUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindLeaderboardsUseCase(leaderboardsInteractor: LeaderboardsInteractor): LeaderboardsUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindChallengesUseCase(interactor: ChallengesInteractor): ChallengesUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindNutritionUseCase(interactor: NutritionInteractor): NutritionUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindSunExposureUseCase(interactor: SunExposureInteractor): SunExposureUseCase
 }

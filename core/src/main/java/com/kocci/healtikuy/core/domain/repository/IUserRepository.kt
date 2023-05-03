@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface IUserRepository {
     fun getUserPreferences(): Flow<UserPreferences>
+    suspend fun getRawUserPreferences(): UserPreferences
     fun updateUserProfile(userData: UserPreferences): Flow<Async<Unit>>
     fun isUserLogin(): Boolean
     fun buyAvatar(characterInStore: CharacterInStore): Flow<Async<Unit>>

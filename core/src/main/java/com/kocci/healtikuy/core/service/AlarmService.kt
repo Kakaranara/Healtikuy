@@ -6,9 +6,9 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import com.kocci.healtikuy.core.constant.CardioType
-import com.kocci.healtikuy.core.domain.model.Sleep
 import com.kocci.healtikuy.core.receiver.alarm.ExerciseAlarmReceiver
 import com.kocci.healtikuy.core.receiver.alarm.SleepAlarmReceiver
+import com.kocci.healtikuy.core.receiver.alarm.SunExposureReceiver
 import com.kocci.healtikuy.core.receiver.alarm.WaterAlarmReceiver
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -16,11 +16,10 @@ import javax.inject.Inject
 class AlarmService @Inject constructor(@ApplicationContext private val context: Context) {
     private val manager = context.getSystemService(AlarmManager::class.java)
 
-    fun setRepeatingScheduleForSleep(sleepData: Sleep, time: Long) {
+    fun setRepeatingScheduleForSleep(time: Long) {
 
-        val intent = Intent(context, SleepAlarmReceiver::class.java).apply {
-            putExtra(EXTRA_SLEEP_SCHEDULE, sleepData)
-        }
+        val intent = Intent(context, SleepAlarmReceiver::class.java)
+//            putExtra(EXTRA_SLEEP_SCHEDULE, sleepData)
 
         val pendingIntent = PendingIntent.getBroadcast(
             context,
@@ -34,6 +33,24 @@ class AlarmService @Inject constructor(@ApplicationContext private val context: 
         )
         Log.e(TAG, "setRepeatingSchedule: SLEEP Alarm SET")
     }
+
+    fun setRepeatingScheduleForSunExposure(time: Long) {
+
+        val intent = Intent(context, SunExposureReceiver::class.java)
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            context,
+            RQC_SUN_EXPOSURE,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE
+        )
+
+        manager.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP, time, AlarmManager.INTERVAL_DAY, pendingIntent
+        )
+        Log.e(TAG, "setRepeatingSchedule: SUN EXPOSURE Alarm SET")
+    }
+
 
     fun setRepeatingScheduleForWater() {
         val interval3Hours = AlarmManager.INTERVAL_HOUR * 3
@@ -79,7 +96,6 @@ class AlarmService @Inject constructor(@ApplicationContext private val context: 
     }
 
 
-
     companion object {
 
         const val EXTRA_SLEEP_SCHEDULE = "extra_sleep_schedule"
@@ -88,6 +104,7 @@ class AlarmService @Inject constructor(@ApplicationContext private val context: 
         const val RQC_SLEEP = 5
         const val RQC_WATER = 6
         const val RQC_EXERCISE = 7
+        const val RQC_SUN_EXPOSURE = 8
         private const val TAG = "AlarmService"
     }
 }
