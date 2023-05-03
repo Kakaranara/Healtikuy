@@ -12,6 +12,7 @@ import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.domain.model.exercise.Jogging
 import com.kocci.healtikuy.core.domain.usecase.feature.exercise.scheduler.ExerciseTimeIndicator
 import com.kocci.healtikuy.core.util.helper.DateHelper
+import com.kocci.healtikuy.core.util.helper.PointsManager
 import com.kocci.healtikuy.databinding.FragmentJoggingBinding
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
 import com.kocci.healtikuy.util.extension.gone
@@ -155,6 +156,7 @@ class JoggingFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
                         it.duration = duration
                         it.distance = mileage
                         viewModel.updateData(it)
+                        showToast(getString(R.string.got_point_template, PointsManager.EXERCISE_POINT))
                     } ?: run {
                         showToast("Make sure!")
                     }

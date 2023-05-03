@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.domain.model.SunExposure
 import com.kocci.healtikuy.core.domain.usecase.TimeIndicator
+import com.kocci.healtikuy.core.util.helper.PointsManager
 import com.kocci.healtikuy.databinding.FragmentSunExposureBinding
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
 import com.kocci.healtikuy.util.extension.showToast
@@ -98,6 +99,7 @@ class SunExposureFragment : Fragment(), TimePickerFragment.TimePickerListener,
             setOnClickListener(null)
             setOnClickListener {
                 viewModel.completeMission(data)
+                showToast(getString(R.string.got_point_template, PointsManager.SUN_EXPOSURE_POINT))
             }
         }
     }

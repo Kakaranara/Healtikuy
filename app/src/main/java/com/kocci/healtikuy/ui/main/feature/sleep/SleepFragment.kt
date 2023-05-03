@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.domain.model.Sleep
 import com.kocci.healtikuy.core.domain.usecase.TimeIndicator
+import com.kocci.healtikuy.core.util.helper.PointsManager
 import com.kocci.healtikuy.databinding.FragmentSleepBinding
 import com.kocci.healtikuy.ui.dialog.TipsDialogBSheet
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
@@ -57,7 +58,6 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
                     binding.btnChangeSleepTime.visibility = View.VISIBLE
 
                     viewModel.getDataModel.observe(viewLifecycleOwner) { sleep ->
-                        showToast(sleep.toString())
                         if (sleep.isCompleted) {
                             binding.btnSleepTime.isEnabled = false
                             binding.tvSleepDesc.text =
@@ -133,6 +133,7 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
             setOnClickListener(null)
             setOnClickListener {
                 viewModel.completeMission(sleepData)
+                showToast(getString(R.string.got_point_template, PointsManager.SLEEP_POINT))
             }
         }
     }
@@ -144,7 +145,6 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
         cal.set(Calendar.MINUTE, minute)
 
         viewModel.setSchedule(cal.timeInMillis)
-        showToast("$hour : $minute")
     }
 
     override fun onDestroyView() {

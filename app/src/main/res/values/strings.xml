@@ -110,6 +110,7 @@
     <string name="example_exercise_small_number">60</string>
     <string name="example_exercise_medium_number">120</string>
     <string name="example_exercise_large_number">180</string>
+    <string name="got_point_template">You got %d Points!</string>
 
     <!-- Nutrition Related -->
     <!-- Sun Related -->
