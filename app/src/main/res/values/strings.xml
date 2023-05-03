@@ -35,7 +35,7 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="change_avatar">Change Avatar</string>
     <string name="submit">Submit</string>
-    <string name="description_when_time_not_set">a notification will appear once you set the time.</string>
+    <string name="description_when_time_not_set">Setting the time will provide you a notification and will fire everyday within your schedule. You can disable this in app > notification settings.</string>
     <string name="button_for_complete_sleep_mission">button for complete sleep mission</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -49,9 +49,9 @@
     <string name="status_points">Points : %d / %d</string>
     <string name="status_low">Cheers up! You can do this!</string>
     <string name="status_mid">You can do this!</string>
-    <string name="status_near_complete">Butuh sedikit lagi perjalanan menuju pola hidup sehat!</string>
-    <string name="status_completed">Selamat! anda sudah menjalankan pola hidup sehat. Pertahankanlah! </string>
-    <string name="ways_to_healthy">Langkah Menuju Hidup Sehat</string>
+    <string name="status_near_complete">Your journey is near to success! Keep it up!</string>
+    <string name="status_completed">Congratulation! You\'ve implemented a Healthy Lifestyle. Keep it up! </string>
+    <string name="ways_to_healthy">Ways to Improve your Health</string>
 
 
     <!-- Water Related -->
