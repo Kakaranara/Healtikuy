@@ -1,7 +1,10 @@
 package com.kocci.healtikuy.core.util.helper
 
 import java.text.SimpleDateFormat
-import java.time.LocalTime
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.temporal.ChronoUnit
 import java.util.*
 
 object DateHelper {
@@ -70,20 +73,24 @@ object DateHelper {
     }
 
     fun isTimeWithin1Hours(time: Long): Boolean {
-        val setTime = Calendar.getInstance()
-        setTime.time = Date(time)
+//        val cal = Calendar.getInstance()
+//        cal.timeInMillis = time
+//        val cal2 = Calendar.getInstance()
+//        cal2.set(Calendar.HOUR_OF_DAY, cal.get(Calendar.HOUR_OF_DAY))
+//        cal2.set(Calendar.MINUTE, cal.get(Calendar.MINUTE))
+//
+//        val setTime =
+//            LocalDateTime.ofInstant(Instant.ofEpochMilli(cal2.timeInMillis), ZoneId.systemDefault())
+//        val now = LocalDateTime.now()
+//
+//        return setTime.isAfter(now.minusHours(1)) && setTime.isBefore(now.plusHours(1))
+//? above code also work
 
-        val hours = setTime.get(Calendar.HOUR_OF_DAY)
-        val minutes = setTime.get(Calendar.MINUTE)
-        val hourString = FormatHelper.pad2StartForTime(hours)
-        val minuteString = FormatHelper.pad2StartForTime(minutes)
-
-        val timeInString = "$hourString:$minuteString"
-        val localTime = LocalTime.parse(timeInString)
-        val localTimeNow = LocalTime.now()
-
-        return localTimeNow.plusHours(1).isAfter(localTime) && localTimeNow.minusHours(1)
-            .isBefore(localTime)
+        val timeLocalTime = Instant.ofEpochMilli(time).atZone(ZoneId.systemDefault()).toLocalTime()
+        val now = LocalDateTime.now().toLocalDate().atTime(timeLocalTime)
+        return now.isAfter(LocalDateTime.now().minusHours(1)) && now.isBefore(
+            LocalDateTime.now().plusHours(1)
+        )
     }
 
     fun getUnixEpoch() = System.currentTimeMillis() / 1000L
