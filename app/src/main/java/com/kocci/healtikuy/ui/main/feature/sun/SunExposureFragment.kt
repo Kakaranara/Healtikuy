@@ -30,6 +30,8 @@ class SunExposureFragment : Fragment(), TimePickerFragment.TimePickerListener,
         setupToolbar()
         binding.btnChangeSunfireTime.setOnClickListener(this)
 
+        binding.sunExposureTips.tvBodyTips.text = getString(R.string.sun_tips_home)
+
         viewModel.isTimeSet.observe(viewLifecycleOwner) { timeIndicator ->
             when (timeIndicator) {
                 TimeIndicator.NotSet -> {

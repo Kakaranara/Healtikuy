@@ -14,6 +14,7 @@ object TipsManager {
     )
 
     fun generateSunExposureTips() = listOf<String>(
-
+        "The best time for sunbathing is between 10.00 - 15.00",
+        "15 minutes is an optimal duration for sunbathing"
     )
 }
