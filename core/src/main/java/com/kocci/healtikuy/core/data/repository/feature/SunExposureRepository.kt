@@ -5,6 +5,7 @@ import com.kocci.healtikuy.core.data.local.entity.SunExposureEntity
 import com.kocci.healtikuy.core.data.local.preferences.UserPreferencesManager
 import com.kocci.healtikuy.core.domain.repository.feature.timebased.ISunExposureRepository
 import com.kocci.healtikuy.core.domain.usecase.TimeIndicator
+import com.kocci.healtikuy.core.util.helper.PointsManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -41,7 +42,7 @@ class SunExposureRepository @Inject constructor(
 
     override suspend fun updateAndAddPoints(entity: SunExposureEntity) {
         updateData(entity)
-        userPreferencesManager.addPoints(500)
+        userPreferencesManager.addPoints(PointsManager.SUN_EXPOSURE_POINT)
     }
 
     override suspend fun changeSchedule(time: Long) {

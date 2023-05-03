@@ -5,6 +5,7 @@ import com.kocci.healtikuy.core.data.local.entity.exercise.JoggingEntity
 import com.kocci.healtikuy.core.data.local.preferences.UserPreferencesManager
 import com.kocci.healtikuy.core.domain.repository.feature.exercise.ICardioRepository
 import com.kocci.healtikuy.core.domain.usecase.feature.exercise.scheduler.ExerciseTimeIndicator
+import com.kocci.healtikuy.core.util.helper.PointsManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -50,6 +51,6 @@ class JoggingRepository @Inject constructor(
     }
 
     override suspend fun updatePoints() {
-        preference.addPoints(1000)
+        preference.addPoints(PointsManager.EXERCISE_POINT)
     }
 }
