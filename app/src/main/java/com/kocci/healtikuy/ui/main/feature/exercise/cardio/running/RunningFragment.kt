@@ -21,6 +21,7 @@ import com.kocci.healtikuy.util.extension.visible
 import com.kocci.healtikuy.util.helper.HistoryHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
+import java.lang.NumberFormatException
 import java.util.Calendar
 
 
@@ -125,9 +126,9 @@ class RunningFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
             }
 
             binding.btnRunningSubmit -> {
-                val duration = binding.etRunningDuration.text.toString().toInt()
-                val mileage = binding.actvRunningMileage.text.toString().toInt()
                 try {
+                    val duration = binding.etRunningDuration.text.toString().toInt()
+                    val mileage = binding.actvRunningMileage.text.toString().toInt()
                     runningValue?.let {
                         it.duration = duration
                         it.distance = mileage
@@ -135,7 +136,10 @@ class RunningFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
                     } ?: kotlin.run {
                         showToast("Data is null!")
                     }
-                } catch (e: Exception) {
+                }catch (e: NumberFormatException){
+                    showToast("Please input all the field!")
+                }
+                catch (e: Exception) {
                     Log.e("Running fragment", "onClick: ${e.message}")
                     showToast("Failed to execute!")
                 }

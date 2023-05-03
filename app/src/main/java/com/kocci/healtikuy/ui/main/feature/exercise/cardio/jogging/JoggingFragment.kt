@@ -20,6 +20,7 @@ import com.kocci.healtikuy.util.extension.visible
 import com.kocci.healtikuy.util.helper.HistoryHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
+import java.lang.NumberFormatException
 import java.util.Calendar
 
 @AndroidEntryPoint
@@ -146,15 +147,21 @@ class JoggingFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
             }
 
             binding.btnJoggingSubmit -> {
-                val duration = binding.etJoggingDuration.text.toString().toInt()
-                val mileage = binding.etJoggingMileage.text.toString().toInt()
-                joggingValue?.let {
-                    it.duration = duration
-                    it.distance = mileage
-                    viewModel.updateData(it)
-                } ?: run {
-                    showToast("Make sure!")
+                try {
+                    val duration = binding.etJoggingDuration.text.toString().toInt()
+                    val mileage = binding.etJoggingMileage.text.toString().toInt()
+
+                    joggingValue?.let {
+                        it.duration = duration
+                        it.distance = mileage
+                        viewModel.updateData(it)
+                    } ?: run {
+                        showToast("Make sure!")
+                    }
+                } catch (e: NumberFormatException) {
+                    showToast("Please input all the field")
                 }
+
             }
         }
     }

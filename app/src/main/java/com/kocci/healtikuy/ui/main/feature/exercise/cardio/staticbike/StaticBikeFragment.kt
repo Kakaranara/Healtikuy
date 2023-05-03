@@ -150,17 +150,22 @@ class StaticBikeFragment : Fragment(), View.OnClickListener, TimePickerFragment.
             }
 
             binding.btnStaticBikeSubmit -> {
-                val set = binding.etStaticBikeSet.text.toString().toInt()
-                val interval = binding.etStaticBikeInterval.text.toString().toInt()
-                val restTime = binding.etStaticBikeRest.text.toString().toInt()
-                staticBikeValue?.let { staticBike ->
-                    staticBike.set = set
-                    staticBike.interval = interval
-                    staticBike.restTime = restTime
+                try{
+                    val set = binding.etStaticBikeSet.text.toString().toInt()
+                    val interval = binding.etStaticBikeInterval.text.toString().toInt()
+                    val restTime = binding.etStaticBikeRest.text.toString().toInt()
+                    staticBikeValue?.let { staticBike ->
+                        staticBike.set = set
+                        staticBike.interval = interval
+                        staticBike.restTime = restTime
 
-                    viewModel.submitData(staticBike)
-                } ?: kotlin.run {
-                    showToast("NO DATA!")
+                        viewModel.submitData(staticBike)
+                    } ?: kotlin.run {
+                        showToast("NO DATA!")
+                    }
+
+                }catch (e: NumberFormatException){
+                    showToast("Please input all the field!")
                 }
             }
         }
