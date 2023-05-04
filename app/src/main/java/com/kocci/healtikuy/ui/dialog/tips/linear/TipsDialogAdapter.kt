@@ -21,8 +21,8 @@ class TipsDialogAdapter(
                 tvTitleTips.gone()
                 tvTips.text = data.content
             } else {
-                tvTips.text = data.content
-                tvTitleTips.text = data.category
+                tvTips.text = data.content.replaceFirstChar(Char::titlecase)
+                tvTitleTips.text = data.category.replaceFirstChar(Char::titlecase)
             }
         }
     }
