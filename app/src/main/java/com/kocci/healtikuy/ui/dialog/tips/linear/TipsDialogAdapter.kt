@@ -6,13 +6,24 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kocci.healtikuy.R
+import com.kocci.healtikuy.core.util.helper.Tips
+import com.kocci.healtikuy.util.extension.gone
 
-class TipsDialogAdapter(private val list: List<String>) :
-    RecyclerView.Adapter<TipsDialogAdapter.ViewHolder>() {
+class TipsDialogAdapter(
+    private val list: List<Tips>,
+    private val withoutTitle: Boolean = false,
+) : RecyclerView.Adapter<TipsDialogAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(data: String) {
+        fun bind(data: Tips) {
             val tvTips = itemView.findViewById<TextView>(R.id.tvItemTips)
-            tvTips.text = data
+            val tvTitleTips = itemView.findViewById<TextView>(R.id.tvItemTitleTips)
+            if (withoutTitle) {
+                tvTitleTips.gone()
+                tvTips.text = data.content
+            } else {
+                tvTips.text = data.content
+                tvTitleTips.text = data.category
+            }
         }
     }
 

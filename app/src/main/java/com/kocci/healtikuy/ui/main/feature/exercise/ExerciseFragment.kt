@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.kocci.healtikuy.core.util.helper.TipsManager
 import com.kocci.healtikuy.databinding.FragmentExerciseBinding
 import com.kocci.healtikuy.ui.dialog.tips.withdialog.TipsBSheetDialogWithTabs
 
@@ -22,19 +23,14 @@ class ExerciseFragment : Fragment() {
             val direction = ExerciseFragmentDirections.actionExerciseFragmentToCardioListFragment()
             findNavController().navigate(direction)
         }
-//
-//        binding.exerciseTips.btnMoreTips.setOnClickListener {
-//            TipsDialogBSheet(TipsManager.generateExerciseTips()).show(
-//                childFragmentManager,
-//                "tips"
-//            )
-//        }
+
         binding.exerciseTips.setOnClickListener {
 //            TipsDialogBSheet(TipsManager.generateExerciseTips()).show(
 //                childFragmentManager,
 //                "tips"
 //            )
-            TipsBSheetDialogWithTabs().show(childFragmentManager, "tst")
+            TipsBSheetDialogWithTabs(TipsManager.generateExerciseTips())
+                .show(childFragmentManager, "tips")
         }
     }
 

@@ -12,6 +12,7 @@ import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.domain.model.Sleep
 import com.kocci.healtikuy.core.domain.usecase.TimeIndicator
 import com.kocci.healtikuy.core.util.helper.PointsManager
+import com.kocci.healtikuy.core.util.helper.TipsManager
 import com.kocci.healtikuy.databinding.FragmentSleepBinding
 import com.kocci.healtikuy.ui.dialog.tips.linear.TipsDialogBSheet
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
@@ -112,7 +113,7 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
             }
 
             binding.cardSleepTips.btnMoreTips -> {
-                val tipList = viewModel.getTips()
+                val tipList = TipsManager.generateSleepTips()
                 TipsDialogBSheet(tipList).show(childFragmentManager, "t")
             }
         }
