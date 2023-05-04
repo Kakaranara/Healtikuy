@@ -1,4 +1,4 @@
-package com.kocci.healtikuy.ui.dialog.tips.linear
+package com.kocci.healtikuy.ui.dialog.tips.adapter
 
 import android.view.LayoutInflater
 import android.view.View

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.util.helper.TipList
+import com.kocci.healtikuy.ui.dialog.tips.adapter.TipsDialogAdapter
 
 /**
  * Just a bottom sheet with linear recycler view.

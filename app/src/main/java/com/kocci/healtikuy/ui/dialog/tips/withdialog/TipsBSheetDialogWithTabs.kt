@@ -24,7 +24,7 @@ class TipsBSheetDialogWithTabs(private val tipList: TipList) : BottomSheetDialog
 
         val tabLayout: TabLayout = view.findViewById(R.id.tabLayoutTest)
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = if (position == 0) "Tips" else "Info"
+            tab.text = if (position == 0) "Tips" else "Information"
         }.attach()
     }
 

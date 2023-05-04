@@ -17,7 +17,6 @@ data class TipList(
 ) : Parcelable
 
 object TipsManager {
-    //! Still dummy
     fun generateSleepTips(): TipList = TipList(
         listOf<Tips>(
             Tips(
@@ -82,6 +81,34 @@ object TipsManager {
             Tips(
                 "tips",
                 "For Adults (aged 18-64 years), should do at least 150-300 minutes of moderate-intensity, or at least 75-150 minutes of vigorous-intensity aerobic physical activity, throughout a week."
+            )
+        )
+    )
+
+    fun generateSunExposureTips() = TipList(
+        listOf<Tips>(
+            Tips(
+                "tips",
+                "Avoid having too much sun exposure. The optimal duration was 5-15 minutes."
+            ),
+            Tips(
+                "tips",
+                "You can apply sunblock if you want. However, if you wanna sunbathe in more than 15 minutes, apply sunblock is a must."
+            ),
+            Tips(
+                "info",
+                "Sun Exposure has many benefit, such as vitamin D and promote better body immunity. However, avoid having too much sun exposure. Stop when you feels like your skin burn."
+            ),
+            Tips(
+                "info",
+                """
+                    Here's the benefit if you have enough sun exposure : 
+                    - Increase Vitamin D :  Vitamin D has some important functions in the body. It promotes reduced inflammation and modulates cell growth. Sunlight was a natural source of vitamin D
+                    - Improve Mood 
+                    - Higher Quality Sleep
+                    - Stronger Bones 
+                    - Lower Blood Pressure
+                """.trimIndent()
             )
         )
     )

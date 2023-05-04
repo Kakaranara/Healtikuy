@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.util.extension.parcelable
 import com.kocci.healtikuy.core.util.helper.TipList
-import com.kocci.healtikuy.ui.dialog.tips.linear.TipsDialogAdapter
+import com.kocci.healtikuy.ui.dialog.tips.adapter.TipsDialogAdapter
 
 class TipsFragment : Fragment(R.layout.fragment_tips) {
 
