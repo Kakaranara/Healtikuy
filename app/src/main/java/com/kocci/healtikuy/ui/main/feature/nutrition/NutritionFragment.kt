@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kocci.healtikuy.core.domain.model.Nutrition
 import com.kocci.healtikuy.databinding.FragmentNutritionBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,9 +22,12 @@ class NutritionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
-        binding.btnNutritionSubmit.setOnClickListener {
-            val foodName = binding.etNutritionFood.text.toString()
-            viewModel.addFood(Nutrition(foodName))
+//        binding.btnNutritionSubmit.setOnClickListener {
+//            val foodName = binding.etNutritionFood.text.toString()
+//            viewModel.addFood(Nutrition(foodName))
+//        }
+        binding.btnShowDialog.setOnClickListener {
+            AddFoodDialog().show(childFragmentManager, "")
         }
 
         viewModel.getData().observe(viewLifecycleOwner) {
@@ -40,7 +42,15 @@ class NutritionFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        binding.toolbarNutrition.setupWithNavController(findNavController())
+        binding.toolbarNutrition.apply {
+            setupWithNavController(findNavController())
+            setOnMenuItemClickListener { menu ->
+                when(menu.itemId){
+                    //TODO : func hist
+                    else -> false
+                }
+            }
+        }
     }
 
     override fun onCreateView(
