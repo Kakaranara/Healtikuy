@@ -12,9 +12,7 @@ import javax.inject.Inject
 class AddDialogViewModel @Inject constructor(
     private val nutritionUseCase: NutritionUseCase
 ) : ViewModel() {
-    fun addFood(food: Nutrition) {
-        viewModelScope.launch {
-            nutritionUseCase.addFood(food)
-        }
+    suspend fun addFood(food: Nutrition) {
+        nutritionUseCase.addFood(food)
     }
 }

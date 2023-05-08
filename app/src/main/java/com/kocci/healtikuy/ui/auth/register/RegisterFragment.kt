@@ -59,6 +59,11 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                         }
                     }
             }
+
+            binding.btnToLogin -> {
+                val direction = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
+                findNavController().navigate(direction)
+            }
         }
     }
 
