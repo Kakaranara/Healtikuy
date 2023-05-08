@@ -1,5 +1,6 @@
 package com.kocci.healtikuy.util.helper
 
+import com.kocci.healtikuy.core.domain.model.Nutrition
 import com.kocci.healtikuy.core.domain.model.Sleep
 import com.kocci.healtikuy.core.domain.model.exercise.Jogging
 import com.kocci.healtikuy.core.domain.model.exercise.Running
@@ -9,14 +10,25 @@ import com.kocci.healtikuy.core.util.helper.DateHelper
 
 object HistoryHelper {
 
-//    fun orchestrateWaterIntake(list: List<WaterIntake>): HistoryList {
-//        val groupList = mutableListOf<String>()
-//        val itemList = hashMapOf<String, List<String>>()
-//
-//        list.forEach { water ->
-//
-//        }
-//    }
+    fun orchestrateNutrition(list: List<Nutrition>): HistoryList {
+        val groupList = mutableListOf<String>()
+        val itemList = hashMapOf<String, List<String>>()
+
+        val titleTemp = mutableSetOf<String>()
+        val foodTemp = mutableListOf<String>()
+        list.forEach { nutrition ->
+            val dateString = DateHelper.formatDateString(nutrition.unixTimestamp * 1000)
+            titleTemp.add(dateString)
+            foodTemp.add(nutrition.foodName)
+        }
+
+        groupList.addAll(titleTemp)
+        groupList.forEach {
+            itemList[it] = foodTemp
+        }
+
+        return HistoryList(groupList, itemList)
+    }
 
     fun orchestrateSleep(list: List<Sleep>): HistoryList {
         val groupList = mutableListOf<String>()

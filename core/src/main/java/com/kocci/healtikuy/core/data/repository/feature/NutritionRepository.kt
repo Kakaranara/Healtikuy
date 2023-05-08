@@ -20,4 +20,12 @@ class NutritionRepository @Inject constructor(
         localDataSource.insertNutritionData(entity)
         preferencesManager.addPoints(PointsManager.NUTRITION_POINT)
     }
+
+    override suspend fun getAllData(): List<NutritionEntity> {
+        return localDataSource.getAllNutritionData()
+    }
+
+    override suspend fun deleteHistory() {
+        return localDataSource.clearNutrition()
+    }
 }

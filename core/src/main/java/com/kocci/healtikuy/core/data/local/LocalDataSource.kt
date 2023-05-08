@@ -100,6 +100,7 @@ class LocalDataSource @Inject constructor(
 
     fun getNutritionData() = nutritionDao.selectTodayData(DateHelper.getUnixEpoch())
     suspend fun insertNutritionData(entity: NutritionEntity) = nutritionDao.insert(entity)
+    suspend fun getAllNutritionData() = nutritionDao.getAllData()
     suspend fun clearNutrition() = nutritionDao.deleteTables()
 
     /**

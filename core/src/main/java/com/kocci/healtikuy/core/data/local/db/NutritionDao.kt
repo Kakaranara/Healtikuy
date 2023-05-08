@@ -22,6 +22,9 @@ interface NutritionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(entity: NutritionEntity)
 
+    @Query("SELECT * FROM nutrition")
+    suspend fun getAllData(): List<NutritionEntity>
+
     @Query("DELETE FROM nutrition")
     suspend fun deleteTables()
 }

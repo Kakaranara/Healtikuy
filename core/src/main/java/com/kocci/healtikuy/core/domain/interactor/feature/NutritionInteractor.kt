@@ -19,4 +19,12 @@ class NutritionInteractor @Inject constructor(
     override suspend fun addFood(nutrition: Nutrition) {
         repository.insertNewData(nutrition.toEntity())
     }
+
+    override suspend fun getAllData(): List<Nutrition> {
+        return repository.getAllData().map { it.toDomain() }
+    }
+
+    override suspend fun clearHistory() {
+        repository.deleteHistory()
+    }
 }

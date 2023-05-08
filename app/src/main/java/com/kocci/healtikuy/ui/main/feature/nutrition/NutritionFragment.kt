@@ -9,8 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kocci.healtikuy.R
 import com.kocci.healtikuy.databinding.FragmentNutritionBinding
+import com.kocci.healtikuy.util.helper.HistoryHelper
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 
 
 @AndroidEntryPoint
@@ -41,8 +44,24 @@ class NutritionFragment : Fragment() {
         binding.toolbarNutrition.apply {
             setupWithNavController(findNavController())
             setOnMenuItemClickListener { menu ->
-                when(menu.itemId){
-                    //TODO : func hist
+                when (menu.itemId) {
+                    R.id.action_history -> {
+                        runBlocking {
+                            val data = viewModel.getAllData()
+                            val history = HistoryHelper.orchestrateNutrition(data)
+
+                            val direction =
+                                NutritionFragmentDirections.actionGlobalHistoryFragment(history)
+                            findNavController().navigate(direction)
+                            true
+                        }
+                    }
+
+                    R.id.action_clear_history -> {
+                        viewModel.clearHistory()
+                        true
+                    }
+
                     else -> false
                 }
             }
