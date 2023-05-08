@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.kocci.healtikuy.core.domain.usecase.StoreUseCase
 import com.kocci.healtikuy.core.domain.usecase.UserUseCase
-import com.kocci.healtikuy.core.util.store.CharacterInStore
+import com.kocci.healtikuy.core.util.helper.CharacterInStore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

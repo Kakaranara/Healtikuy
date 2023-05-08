@@ -2,7 +2,7 @@ package com.kocci.healtikuy.core.domain.repository
 
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.model.UserPreferences
-import com.kocci.healtikuy.core.util.store.CharacterInStore
+import com.kocci.healtikuy.core.util.helper.CharacterInStore
 import kotlinx.coroutines.flow.Flow
 
 interface IUserRepository {

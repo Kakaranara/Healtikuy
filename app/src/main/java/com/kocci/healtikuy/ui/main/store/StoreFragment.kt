@@ -11,10 +11,11 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.kocci.healtikuy.core.data.remote.model.Async
-import com.kocci.healtikuy.core.util.store.CharacterInStore
-import com.kocci.healtikuy.core.util.store.generateCharacterInStore
+import com.kocci.healtikuy.core.util.helper.CharacterInStore
+import com.kocci.healtikuy.core.util.helper.generateCharacterInStore
 import com.kocci.healtikuy.databinding.FragmentStoreBinding
 import com.kocci.healtikuy.util.extension.showToast
+import com.kocci.healtikuy.util.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,6 +32,10 @@ class StoreFragment : Fragment() {
             val inventory = it.inventory.toList()
             val generatedList = generateCharacterInStore()
             val storeItem = generatedList.filterNot { it.name in inventory }
+
+            if(storeItem.isEmpty()){
+                binding.tvStoreEmpty.visible()
+            }
 
             setupAdapter(it.coin, storeItem)
             binding.tvStoreCoin.text = it.coin.toString()
