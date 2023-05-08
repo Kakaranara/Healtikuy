@@ -18,6 +18,7 @@
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgItemNutrition"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:padding="16dp"

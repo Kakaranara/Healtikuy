@@ -116,6 +116,8 @@
     <string name="drink_1_glass">Drink 1 glass</string>
     <string name="store_is_empty">Store is empty</string>
     <string name="food_name">Food Name</string>
+    <string name="category">Category</string>
+    <string name="vegetables">vegetables</string>
 
     <!-- Nutrition Related -->
     <!-- Sun Related -->

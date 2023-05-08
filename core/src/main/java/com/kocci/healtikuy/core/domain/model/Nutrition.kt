@@ -4,5 +4,6 @@ import com.kocci.healtikuy.core.util.helper.DateHelper
 
 data class Nutrition(
     val foodName: String,
-    val unixTimestamp: Long = DateHelper.getUnixEpoch()
+    val category: String,
+    val unixTimestamp: Long = DateHelper.getUnixEpoch(),
 )

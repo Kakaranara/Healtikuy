@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.domain.model.Nutrition
 import com.kocci.healtikuy.databinding.DialogNutritionAddFoodBinding
+import com.kocci.healtikuy.util.extension.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,12 +39,29 @@ class AddFoodDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val foodCategory = requireActivity().resources.getStringArray(R.array.nutrition_category)
+//        binding.actvFoodCategory.setText(foodCategory[0])
+
         binding.btnAddFood.setOnClickListener {
             val foodName = binding.etFoodName.text.toString()
             val category = binding.actvFoodCategory.text.toString()
-            viewModel.addFood(Nutrition(foodName))
-            dismiss()
+            val inputError = validateInput(foodName)
+            if (inputError == null) {
+                viewModel.addFood(Nutrition(foodName, category))
+                dismiss()
+            } else {
+                showToast(inputError)
+            }
         }
+    }
+
+    private fun validateInput(str: String): String? {
+        if (str.isEmpty()) {
+            return "Empty string."
+        } else if (str.length < 3) {
+            return "please input a valid name"
+        }
+        return null
     }
 
     override fun onCreateView(
