@@ -39,13 +39,18 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                         when (it) {
                             is Async.Error -> {
                                 binding.progressRegisterIndicator.gone()
+                                binding.btnRegister.isEnabled = true
                                 showToast(it.msg)
                             }
+
                             Async.Loading -> {
                                 binding.progressRegisterIndicator.visible()
+                                binding.btnRegister.isEnabled = false
                             }
+
                             is Async.Success -> {
                                 binding.progressRegisterIndicator.gone()
+                                binding.btnRegister.isEnabled = true
                                 showToast("Welcome")
                                 val goToHome =
                                     RegisterFragmentDirections.actionGlobalHomeFragment()
