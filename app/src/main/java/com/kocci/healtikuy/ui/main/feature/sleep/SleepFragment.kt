@@ -100,6 +100,11 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
                         true
                     }
 
+                    R.id.action_clear_history -> {
+                        viewModel.deleteHistory()
+                        true
+                    }
+
                     else -> false
                 }
             }

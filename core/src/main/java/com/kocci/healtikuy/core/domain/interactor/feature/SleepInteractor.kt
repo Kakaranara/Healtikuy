@@ -66,4 +66,8 @@ class SleepInteractor @Inject constructor(
     override fun setScheduleForNotification(time: Long) {
         sleepAlarmReceiver.setRepeatingScheduleForSleep(time)
     }
+
+    override suspend fun deleteHistory() {
+        repository.deleteAllData()
+    }
 }

@@ -52,4 +52,7 @@ class StaticBikeRepository @Inject constructor(
         localDataSource.insertStaticBikeData(data)
     }
 
+    override suspend fun deleteAllData() {
+        localDataSource.clearStaticBike()
+    }
 }

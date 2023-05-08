@@ -41,6 +41,7 @@ class LocalDataSource @Inject constructor(
     fun getWaterIntakeLastRow() = waterIntakeDao.selectLastRow()
     suspend fun insertWaterIntake(data: WaterIntakeEntity) = waterIntakeDao.insertNewData(data)
     suspend fun updateWaterIntake(data: WaterIntakeEntity) = waterIntakeDao.updateData(data)
+    suspend fun clearWaterIntake() = waterIntakeDao.deleteTables()
 
     /**
      * Sleep
@@ -50,6 +51,7 @@ class LocalDataSource @Inject constructor(
     suspend fun insertSleep(entity: SleepEntity) = sleepDao.insertNewData(entity)
     suspend fun updateSleep(entity: SleepEntity) = sleepDao.insertNewData(entity)
     suspend fun getAllData() = sleepDao.getAllData()
+    suspend fun clearSleep() = sleepDao.deleteTables()
 
     /**
      * Sun Exposure
@@ -59,6 +61,7 @@ class LocalDataSource @Inject constructor(
     suspend fun insertSunExposure(entity: SunExposureEntity) = sunExposureDao.insertNewData(entity)
     suspend fun updateSunExposure(entity: SunExposureEntity) = sunExposureDao.updateData(entity)
     suspend fun getAllSunExposureData() = sunExposureDao.getAllData()
+    suspend fun clearSunExposure() = sunExposureDao.deleteTables()
 
     /**
      * Jogging
@@ -68,6 +71,7 @@ class LocalDataSource @Inject constructor(
     suspend fun getAllJoggingData() = joggingDao.getAllData()
     suspend fun insertJoggingData(entity: JoggingEntity) = joggingDao.insertEntity(entity)
     suspend fun updateJoggingData(entity: JoggingEntity) = joggingDao.updateEntity(entity)
+    suspend fun clearJogging() = joggingDao.deleteTables()
 
     /**
      * Running
@@ -77,6 +81,7 @@ class LocalDataSource @Inject constructor(
     suspend fun getAllRunningData() = runningDao.getAllData()
     suspend fun insertRunningData(entity: RunningEntity) = runningDao.insertEntity(entity)
     suspend fun updateRunningData(entity: RunningEntity) = runningDao.updateEntity(entity)
+    suspend fun clearRunning() = runningDao.deleteTables()
 
 
     /**
@@ -87,6 +92,7 @@ class LocalDataSource @Inject constructor(
     suspend fun getAllStaticBikeData() = staticBikeDao.getAllData()
     suspend fun insertStaticBikeData(entity: StaticBikeEntity) = staticBikeDao.insertEntity(entity)
     suspend fun updateStaticBikeData(entity: StaticBikeEntity) = staticBikeDao.updateEntity(entity)
+    suspend fun clearStaticBike() = staticBikeDao.deleteTables()
 
     /**
      * Nutrition Related
@@ -94,6 +100,7 @@ class LocalDataSource @Inject constructor(
 
     fun getNutritionData() = nutritionDao.selectTodayData(DateHelper.getUnixEpoch())
     suspend fun insertNutritionData(entity: NutritionEntity) = nutritionDao.insert(entity)
+    suspend fun clearNutrition() = nutritionDao.deleteTables()
 
     /**
      * Home related
@@ -111,13 +118,14 @@ class LocalDataSource @Inject constructor(
     //? Clear all tables. Used when we logout.
     @Transaction
     suspend fun clearDatabase() {
-        waterIntakeDao.deleteTables()
-        sleepDao.deleteTables()
-        nutritionDao.deleteTables()
-        joggingDao.deleteTables()
-        runningDao.deleteTables()
-        staticBikeDao.deleteTables()
-        sunExposureDao.deleteTables()
+        //write it in sequentially like the main feature in home.
+        clearWaterIntake()
+        clearSleep()
+        clearJogging()
+        clearRunning()
+        clearStaticBike()
+        clearNutrition()
+        clearSunExposure()
 //            database.clearAllTables() //literally clear all tables but also remove pre-populated tables
     }
 }

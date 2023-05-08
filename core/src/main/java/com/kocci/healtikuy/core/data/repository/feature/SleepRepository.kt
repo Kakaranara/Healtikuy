@@ -49,4 +49,8 @@ class SleepRepository @Inject constructor(
     override suspend fun changeSchedule(time: Long) {
         return preferenceManager.changeSleepTime(time)
     }
+
+    override suspend fun deleteAllData() {
+        localDataSource.clearSleep()
+    }
 }

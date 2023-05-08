@@ -62,4 +62,8 @@ class SunExposureInteractor @Inject constructor(
         data.timeCompleted = System.currentTimeMillis()
         repository.updateAndAddPoints(data.toEntity())
     }
+
+    override suspend fun deleteHistory() {
+        repository.deleteAllData()
+    }
 }

@@ -36,7 +36,10 @@ class SunExposureFragment : Fragment(), TimePickerFragment.TimePickerListener,
             tvBodyTips.text = getString(R.string.sun_tips_home)
             tvTitleTips.text = getString(R.string.tips)
             btnMoreTips.setOnClickListener {
-                TipsDialogBSheet(TipsManager.generateSunExposureTips()).show(childFragmentManager, "sun_exposure")
+                TipsDialogBSheet(TipsManager.generateSunExposureTips()).show(
+                    childFragmentManager,
+                    "sun_exposure"
+                )
             }
         }
 
@@ -56,7 +59,6 @@ class SunExposureFragment : Fragment(), TimePickerFragment.TimePickerListener,
                     binding.btnChangeSunfireTime.visibility = View.VISIBLE
 
                     viewModel.getDataModel.observe(viewLifecycleOwner) { data ->
-                        showToast(data.toString())
                         if (data.isCompleted) {
                             binding.btnSunfireTime.isEnabled = false
                             binding.tvSunfireDesc.text =
@@ -122,7 +124,23 @@ class SunExposureFragment : Fragment(), TimePickerFragment.TimePickerListener,
 
 
     private fun setupToolbar() {
-        binding.toolbarSunfire.setupWithNavController(findNavController())
+        binding.toolbarSunfire.apply {
+            setupWithNavController(findNavController())
+            setOnMenuItemClickListener { menu ->
+                when (menu.itemId) {
+                    R.id.action_history -> {
+                        true
+                    }
+
+                    R.id.action_clear_history -> {
+                        viewModel.clearHistory()
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+        }
     }
 
     override fun onCreateView(

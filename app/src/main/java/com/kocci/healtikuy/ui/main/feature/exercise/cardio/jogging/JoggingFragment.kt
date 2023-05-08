@@ -104,7 +104,11 @@ class JoggingFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
 
                             findNavController().navigate(direction)
                         }
+                        true
+                    }
 
+                    R.id.action_clear_history -> {
+                        viewModel.clearHistory()
                         true
                     }
 

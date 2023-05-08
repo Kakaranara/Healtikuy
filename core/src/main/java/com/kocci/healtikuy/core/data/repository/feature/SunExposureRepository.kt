@@ -49,4 +49,7 @@ class SunExposureRepository @Inject constructor(
         userPreferencesManager.changeSunExposureTime(time)
     }
 
+    override suspend fun deleteAllData() {
+        localDataSource.clearSunExposure()
+    }
 }

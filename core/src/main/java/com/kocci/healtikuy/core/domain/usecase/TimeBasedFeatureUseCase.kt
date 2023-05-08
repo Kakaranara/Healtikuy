@@ -13,6 +13,7 @@ interface TimeBasedFeatureUseCase<T> {
     suspend fun setSchedule(time: Long)
     suspend fun insertNewData(data: T)
     suspend fun completeMission(data: T)
+    suspend fun deleteHistory()
 }
 
 sealed class TimeIndicator(val time: Long) {

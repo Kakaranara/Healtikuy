@@ -34,4 +34,10 @@ class RunningViewModel @Inject constructor(
             runningUseCase.editSchedule()
         }
     }
+
+    fun clearHistory(){
+        viewModelScope.launch {
+            runningUseCase.clearHistory()
+        }
+    }
 }

@@ -53,4 +53,8 @@ class JoggingRepository @Inject constructor(
     override suspend fun updatePoints() {
         preference.addPoints(PointsManager.EXERCISE_POINT)
     }
+
+    override suspend fun deleteAllData() {
+        localDataSource.clearJogging()
+    }
 }

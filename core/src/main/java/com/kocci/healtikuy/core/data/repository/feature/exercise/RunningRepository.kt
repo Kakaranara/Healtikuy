@@ -54,4 +54,7 @@ class RunningRepository @Inject constructor(
         localDataSource.insertRunningData(data)
     }
 
+    override suspend fun deleteAllData() {
+        localDataSource.clearRunning()
+    }
 }

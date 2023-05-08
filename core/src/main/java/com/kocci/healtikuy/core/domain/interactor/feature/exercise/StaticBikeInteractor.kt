@@ -70,4 +70,8 @@ class StaticBikeInteractor @Inject constructor(
     override suspend fun editSchedule() {
         repository.editSchedule()
     }
+
+    override suspend fun clearHistory() {
+        repository.deleteAllData()
+    }
 }

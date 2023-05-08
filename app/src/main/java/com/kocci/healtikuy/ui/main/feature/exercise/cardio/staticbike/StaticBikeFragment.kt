@@ -116,6 +116,11 @@ class StaticBikeFragment : Fragment(), View.OnClickListener, TimePickerFragment.
                         true
                     }
 
+                    R.id.action_clear_history -> {
+                        viewModel.clearHistory()
+                        true
+                    }
+
                     else -> false
                 }
             }
@@ -151,7 +156,7 @@ class StaticBikeFragment : Fragment(), View.OnClickListener, TimePickerFragment.
             }
 
             binding.btnStaticBikeSubmit -> {
-                try{
+                try {
                     val set = binding.etStaticBikeSet.text.toString().toInt()
                     val interval = binding.etStaticBikeInterval.text.toString().toInt()
                     val restTime = binding.etStaticBikeRest.text.toString().toInt()
@@ -161,12 +166,17 @@ class StaticBikeFragment : Fragment(), View.OnClickListener, TimePickerFragment.
                         staticBike.restTime = restTime
 
                         viewModel.submitData(staticBike)
-                        showToast(getString(R.string.got_point_template, PointsManager.EXERCISE_POINT))
+                        showToast(
+                            getString(
+                                R.string.got_point_template,
+                                PointsManager.EXERCISE_POINT
+                            )
+                        )
                     } ?: kotlin.run {
                         showToast("NO DATA!")
                     }
 
-                }catch (e: NumberFormatException){
+                } catch (e: NumberFormatException) {
                     showToast("Please input all the field!")
                 }
             }

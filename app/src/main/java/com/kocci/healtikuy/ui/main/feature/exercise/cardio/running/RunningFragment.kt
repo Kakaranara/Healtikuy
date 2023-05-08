@@ -168,6 +168,11 @@ class RunningFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
                         true
                     }
 
+                    R.id.action_clear_history -> {
+                        viewModel.clearHistory()
+                        true
+                    }
+
                     else -> false
                 }
             }
