@@ -17,4 +17,7 @@ interface JoggingDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertEntity(entity: JoggingEntity)
+
+    @Query("DELETE FROM  jogging")
+    suspend fun deleteTables()
 }

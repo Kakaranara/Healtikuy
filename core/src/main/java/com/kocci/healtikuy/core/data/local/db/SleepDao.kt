@@ -2,7 +2,6 @@ package com.kocci.healtikuy.core.data.local.db
 
 import androidx.room.*
 import com.kocci.healtikuy.core.data.local.entity.SleepEntity
-import com.kocci.healtikuy.core.data.local.entity.WaterIntakeEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -18,4 +17,7 @@ interface SleepDao {
 
     @Query("SELECT * FROM sleep")
     suspend fun getAllData(): List<SleepEntity>
+
+    @Query("DELETE FROM sleep")
+    suspend fun deleteTables()
 }

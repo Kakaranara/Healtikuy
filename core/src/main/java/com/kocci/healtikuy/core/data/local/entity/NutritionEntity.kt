@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.kocci.healtikuy.core.util.helper.DateHelper
 
-@Entity
+@Entity("nutrition")
 data class NutritionEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,

@@ -20,4 +20,8 @@ interface StaticBikeDao {
 
     @Insert
     suspend fun insertEntity(entity: StaticBikeEntity)
+
+
+    @Query("DELETE FROM static_bike")
+    suspend fun deleteTables()
 }

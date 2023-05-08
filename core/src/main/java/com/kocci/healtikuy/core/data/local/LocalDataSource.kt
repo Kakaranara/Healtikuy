@@ -1,5 +1,6 @@
 package com.kocci.healtikuy.core.data.local
 
+import androidx.room.Transaction
 import com.kocci.healtikuy.core.data.local.db.HealtikuyDao
 import com.kocci.healtikuy.core.data.local.db.HealtikuyRoomDatabase
 import com.kocci.healtikuy.core.data.local.db.NutritionDao
@@ -98,6 +99,7 @@ class LocalDataSource @Inject constructor(
      * Home related
      */
 
+    //? Challenges aren't used because for now we use remote database (could be used later)
     fun getChallengesData() = healtikuyDao.getChallengeProgress()
     fun updateChallenges(entity: ChallengeEntity) = healtikuyDao.update(entity)
     fun insertChallenges(entity: ChallengeEntity) = healtikuyDao.insert(entity)
@@ -106,7 +108,16 @@ class LocalDataSource @Inject constructor(
      * ! Danger Zone
      */
 
-    fun clearDatabase() {
-        database.clearAllTables()
+    //? Clear all tables. Used when we logout.
+    @Transaction
+    suspend fun clearDatabase() {
+        waterIntakeDao.deleteTables()
+        sleepDao.deleteTables()
+        nutritionDao.deleteTables()
+        joggingDao.deleteTables()
+        runningDao.deleteTables()
+        staticBikeDao.deleteTables()
+        sunExposureDao.deleteTables()
+//            database.clearAllTables() //literally clear all tables but also remove pre-populated tables
     }
 }

@@ -21,4 +21,7 @@ interface SunExposureDao {
 
     @Query("SELECT * FROM sun_exposure")
     suspend fun getAllData(): List<SunExposureEntity>
+
+    @Query("DELETE FROM sun_exposure")
+    suspend fun deleteTables()
 }
