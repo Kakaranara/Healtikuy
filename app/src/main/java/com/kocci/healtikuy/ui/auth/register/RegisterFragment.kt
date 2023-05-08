@@ -25,6 +25,7 @@ class RegisterFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnRegister.setOnClickListener(this)
+        binding.btnToLogin.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
