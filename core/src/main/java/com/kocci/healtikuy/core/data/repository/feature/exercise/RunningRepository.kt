@@ -3,7 +3,7 @@ package com.kocci.healtikuy.core.data.repository.feature.exercise
 import com.kocci.healtikuy.core.data.local.LocalDataSource
 import com.kocci.healtikuy.core.data.local.entity.exercise.RunningEntity
 import com.kocci.healtikuy.core.data.local.preferences.UserPreferencesManager
-import com.kocci.healtikuy.core.domain.repository.feature.exercise.ICardioRepository
+import com.kocci.healtikuy.core.domain.repository.feature.exercise.IRunningRepository
 import com.kocci.healtikuy.core.domain.usecase.feature.exercise.scheduler.ExerciseTimeIndicator
 import com.kocci.healtikuy.core.util.helper.PointsManager
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +13,7 @@ import javax.inject.Inject
 class RunningRepository @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val preferencesManager: UserPreferencesManager
-) : ICardioRepository<RunningEntity> {
+) : IRunningRepository{
     override suspend fun getAllData(): List<RunningEntity> {
         return localDataSource.getAllRunningData()
     }
@@ -56,5 +56,9 @@ class RunningRepository @Inject constructor(
 
     override suspend fun deleteAllData() {
         localDataSource.clearRunning()
+    }
+
+    override suspend fun changeLeaderboards(runningType: Int, time: Long) {
+        preferencesManager.changeRunningLeaderboards(runningType, time)
     }
 }

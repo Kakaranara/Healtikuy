@@ -4,4 +4,6 @@ import com.kocci.healtikuy.core.domain.model.exercise.Running
 import com.kocci.healtikuy.core.domain.usecase.feature.exercise.ExerciseUseCase
 import com.kocci.healtikuy.core.domain.usecase.feature.exercise.scheduler.ExerciseSchedulerUseCase
 
-interface RunningUseCase : ExerciseUseCase<Running>, ExerciseSchedulerUseCase {}
+interface RunningUseCase : ExerciseUseCase<Running>, ExerciseSchedulerUseCase {
+    suspend fun editLeaderboardsIfReachGoals(runningType: Int, time: Long)
+}
