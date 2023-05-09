@@ -8,6 +8,7 @@ import java.time.ZoneId
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import java.util.concurrent.TimeUnit
 
 object DateHelper {
 
@@ -116,6 +117,13 @@ object DateHelper {
 //        return now.isAfter(LocalDateTime.now().minusHours(1)) && now.isBefore(
 //            LocalDateTime.now().plusHours(1)
 //        )
+    }
+
+    fun calculateDayDiff(time: Long, currentTime: Long = System.currentTimeMillis()) : Long{
+        val millisDiff = currentTime - time //in millis
+        val dayDiff = TimeUnit.DAYS.convert(millisDiff, TimeUnit.MILLISECONDS)
+
+        return dayDiff
     }
 
     fun getUnixEpoch() = System.currentTimeMillis() / 1000L

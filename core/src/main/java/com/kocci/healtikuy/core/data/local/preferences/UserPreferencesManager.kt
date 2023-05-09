@@ -16,6 +16,11 @@ import javax.inject.Singleton
 class UserPreferencesManager @Inject constructor(
     private val dataStore: DataStore<Preferences>,
 ) {
+
+    /**
+     * Every thing that related to date are implemented by Long (date in millis)
+     * Careful! UnixEpoch is millis/1000 in value..
+     */
     private object PreferenceKeys {
         //? USER PREFERENCES
         val LAST_LOGIN = longPreferencesKey("last_login")
@@ -211,6 +216,12 @@ class UserPreferencesManager @Inject constructor(
         dataStore.edit { preferences ->
             preferences[PreferenceKeys.POINTS] =
                 (preferences[PreferenceKeys.POINTS] ?: GameRules.FIRST_TIME_POINTS) + points
+        }
+    }
+
+    suspend fun reducePoint(points: Long){
+        dataStore.edit { pref ->
+            pref[PreferenceKeys.POINTS] = (pref[PreferenceKeys.POINTS] ?: GameRules.FIRST_TIME_POINTS) - points
         }
     }
 
