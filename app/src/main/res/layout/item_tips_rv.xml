@@ -2,17 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center"
     android:orientation="vertical"
     android:padding="8dp">
 
     <TextView
+        android:id="@+id/tvItemTitleTips"
+        style="@style/TextAppearance.Material3.TitleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Info" />
+
+    <TextView
         android:id="@+id/tvItemTips"
+        style="@style/TextAppearance.Material3.BodyMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Yo, lorem ipsum sir amet, when i cannot do anything shit you still do, oh gpt"
-        android:textAlignment="center" />
+        android:text="Yo, lorem ipsum sir amet, when i cannot do anything shit you still do, oh gpt" />
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="wrap_content"

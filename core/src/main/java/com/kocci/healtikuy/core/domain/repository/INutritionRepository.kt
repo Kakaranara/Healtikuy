@@ -6,4 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface INutritionRepository {
     fun getTodaysData(): Flow<List<NutritionEntity>>
     suspend fun insertNewData(entity: NutritionEntity)
+
+    suspend fun getAllData() : List<NutritionEntity>
+    suspend fun deleteHistory()
 }

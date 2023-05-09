@@ -20,6 +20,11 @@ class SleepViewModel @Inject constructor(
     val isTimeSet = useCase.getSchedule().asLiveData()
     fun getTips() = useCase.getSleepTips()
     suspend fun getAllData() = useCase.getAllData()
+    fun deleteHistory(){
+        viewModelScope.launch {
+            useCase.deleteHistory()
+        }
+    }
     fun isTheTimeWithin1Hours(time: Long): LiveData<Boolean> {
         val isTimeReady = MutableLiveData<Boolean>(false)
         isTimeReady.value = useCase.isTheTimeWithin1Hours(time)

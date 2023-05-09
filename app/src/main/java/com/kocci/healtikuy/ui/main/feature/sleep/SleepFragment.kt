@@ -11,8 +11,10 @@ import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.domain.model.Sleep
 import com.kocci.healtikuy.core.domain.usecase.TimeIndicator
+import com.kocci.healtikuy.core.util.helper.PointsManager
+import com.kocci.healtikuy.core.util.helper.TipsManager
 import com.kocci.healtikuy.databinding.FragmentSleepBinding
-import com.kocci.healtikuy.ui.dialog.TipsDialogBSheet
+import com.kocci.healtikuy.ui.dialog.tips.withdialog.TipsBSheetDialogWithTabs
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
 import com.kocci.healtikuy.util.extension.showToast
 import com.kocci.healtikuy.util.helper.HistoryHelper
@@ -57,7 +59,6 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
                     binding.btnChangeSleepTime.visibility = View.VISIBLE
 
                     viewModel.getDataModel.observe(viewLifecycleOwner) { sleep ->
-                        showToast(sleep.toString())
                         if (sleep.isCompleted) {
                             binding.btnSleepTime.isEnabled = false
                             binding.tvSleepDesc.text =
@@ -99,6 +100,11 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
                         true
                     }
 
+                    R.id.action_clear_history -> {
+                        viewModel.deleteHistory()
+                        true
+                    }
+
                     else -> false
                 }
             }
@@ -112,8 +118,9 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
             }
 
             binding.cardSleepTips.btnMoreTips -> {
-                val tipList = viewModel.getTips()
-                TipsDialogBSheet(tipList).show(childFragmentManager, "t")
+                val tipList = TipsManager.generateSleepTips()
+//                TipsDialogBSheet(tipList).show(childFragmentManager, "t")
+                TipsBSheetDialogWithTabs(tipList).show(childFragmentManager, "sleep")
             }
         }
     }
@@ -133,6 +140,7 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
             setOnClickListener(null)
             setOnClickListener {
                 viewModel.completeMission(sleepData)
+                showToast(getString(R.string.got_point_template, PointsManager.SLEEP_POINT))
             }
         }
     }
@@ -144,7 +152,6 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
         cal.set(Calendar.MINUTE, minute)
 
         viewModel.setSchedule(cal.timeInMillis)
-        showToast("$hour : $minute")
     }
 
     override fun onDestroyView() {

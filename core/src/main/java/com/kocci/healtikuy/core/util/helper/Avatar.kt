@@ -1,4 +1,4 @@
-package com.kocci.healtikuy.core.util.store
+package com.kocci.healtikuy.core.util.helper
 
 enum class Avatar(val lowerNames: String, val prices: Int) {
     POPEYE("popeye", 800),
@@ -20,7 +20,3 @@ fun generateCharacterInStore() = listOf<CharacterInStore>(
     CharacterInStore(Avatar.HELLO_KITTY.lowerNames, Avatar.HELLO_KITTY.prices),
     CharacterInStore(Avatar.POPEYE.lowerNames, Avatar.POPEYE.prices),
 )
-
-fun main() {
-    println(Avatar.POPEYE.lowerNames)
-}

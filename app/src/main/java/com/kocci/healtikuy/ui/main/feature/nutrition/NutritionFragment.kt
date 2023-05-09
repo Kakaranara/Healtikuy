@@ -9,9 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kocci.healtikuy.core.domain.model.Nutrition
+import com.kocci.healtikuy.R
 import com.kocci.healtikuy.databinding.FragmentNutritionBinding
+import com.kocci.healtikuy.util.helper.HistoryHelper
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 
 
 @AndroidEntryPoint
@@ -23,13 +25,12 @@ class NutritionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
-        binding.btnNutritionSubmit.setOnClickListener {
-            val foodName = binding.etNutritionFood.text.toString()
-            viewModel.addFood(Nutrition(foodName))
+        binding.btnShowDialog.setOnClickListener {
+            AddFoodDialog().show(childFragmentManager, "")
         }
 
         viewModel.getData().observe(viewLifecycleOwner) {
-            val mAdapter = NutritionAdapter(it)
+            val mAdapter = NutritionAdapter(requireActivity(), it)
             val mLayoutManager = LinearLayoutManager(requireActivity())
             binding.rvNutrition.apply {
                 adapter = mAdapter
@@ -40,7 +41,31 @@ class NutritionFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        binding.toolbarNutrition.setupWithNavController(findNavController())
+        binding.toolbarNutrition.apply {
+            setupWithNavController(findNavController())
+            setOnMenuItemClickListener { menu ->
+                when (menu.itemId) {
+                    R.id.action_history -> {
+                        runBlocking {
+                            val data = viewModel.getAllData()
+                            val history = HistoryHelper.orchestrateNutrition(data)
+
+                            val direction =
+                                NutritionFragmentDirections.actionGlobalHistoryFragment(history)
+                            findNavController().navigate(direction)
+                            true
+                        }
+                    }
+
+                    R.id.action_clear_history -> {
+                        viewModel.clearHistory()
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+        }
     }
 
     override fun onCreateView(

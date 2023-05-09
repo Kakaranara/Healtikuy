@@ -20,4 +20,8 @@ interface RunningDao {
 
     @Insert
     suspend fun insertEntity(entity: RunningEntity)
+
+
+    @Query("DELETE FROM  running")
+    suspend fun deleteTables()
 }

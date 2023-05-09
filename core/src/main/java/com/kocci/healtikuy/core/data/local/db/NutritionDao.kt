@@ -13,7 +13,7 @@ interface NutritionDao {
     @Query(
         """
         SELECT *, DATE(unixTimestamp, 'unixepoch') as tanggal
-        FROM nutritionentity
+        FROM nutrition
         WHERE tanggal = DATE(:unixEpoch,'unixepoch')
     """
     )
@@ -21,4 +21,10 @@ interface NutritionDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(entity: NutritionEntity)
+
+    @Query("SELECT * FROM nutrition")
+    suspend fun getAllData(): List<NutritionEntity>
+
+    @Query("DELETE FROM nutrition")
+    suspend fun deleteTables()
 }

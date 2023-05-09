@@ -13,6 +13,7 @@ import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.domain.model.exercise.Running
 import com.kocci.healtikuy.core.domain.usecase.feature.exercise.scheduler.ExerciseTimeIndicator
 import com.kocci.healtikuy.core.util.helper.DateHelper
+import com.kocci.healtikuy.core.util.helper.PointsManager
 import com.kocci.healtikuy.databinding.FragmentRunningBinding
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
 import com.kocci.healtikuy.util.extension.gone
@@ -133,6 +134,7 @@ class RunningFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
                         it.duration = duration
                         it.distance = mileage
                         viewModel.updateData(it)
+                        showToast(getString(R.string.got_point_template, PointsManager.EXERCISE_POINT))
                     } ?: kotlin.run {
                         showToast("Data is null!")
                     }
@@ -163,6 +165,11 @@ class RunningFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
 
                             findNavController().navigate(direction)
                         }
+                        true
+                    }
+
+                    R.id.action_clear_history -> {
+                        viewModel.clearHistory()
                         true
                     }
 

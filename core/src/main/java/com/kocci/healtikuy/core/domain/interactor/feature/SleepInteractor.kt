@@ -6,6 +6,7 @@ import com.kocci.healtikuy.core.domain.usecase.TimeIndicator
 import com.kocci.healtikuy.core.domain.usecase.feature.SleepUseCase
 import com.kocci.healtikuy.core.service.AlarmService
 import com.kocci.healtikuy.core.util.helper.DateHelper
+import com.kocci.healtikuy.core.util.helper.TipList
 import com.kocci.healtikuy.core.util.helper.TipsManager
 import com.kocci.healtikuy.core.util.mapper.toDomain
 import com.kocci.healtikuy.core.util.mapper.toEntity
@@ -18,7 +19,7 @@ class SleepInteractor @Inject constructor(
     private val sleepAlarmReceiver: AlarmService,
 ) : SleepUseCase {
 
-    override fun getSleepTips(): List<String> = TipsManager.generateSleepTips()
+    override fun getSleepTips(): TipList = TipsManager.generateSleepTips()
 
     override suspend fun getAllData(): List<Sleep> {
         return repository.getAllData().map { it.toDomain() }
@@ -64,5 +65,9 @@ class SleepInteractor @Inject constructor(
 
     override fun setScheduleForNotification(time: Long) {
         sleepAlarmReceiver.setRepeatingScheduleForSleep(time)
+    }
+
+    override suspend fun deleteHistory() {
+        repository.deleteAllData()
     }
 }

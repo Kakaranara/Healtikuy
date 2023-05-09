@@ -20,6 +20,12 @@ class SunExposureViewModel @Inject constructor(
     val getDataModel = useCase.getDataProgress().asLiveData()
     val isTimeSet = useCase.getSchedule().asLiveData()
     suspend fun getAllData() = useCase.getAllData()
+    fun clearHistory() {
+        viewModelScope.launch {
+            useCase.deleteHistory()
+        }
+    }
+
     fun isTheTimeWithin1Hours(time: Long): LiveData<Boolean> {
         val isTimeReady = MutableLiveData<Boolean>(false)
         isTimeReady.value = useCase.isTheTimeWithin1Hours(time)

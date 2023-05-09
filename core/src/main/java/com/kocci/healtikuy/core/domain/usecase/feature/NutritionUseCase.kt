@@ -6,4 +6,6 @@ import kotlinx.coroutines.flow.Flow
 interface NutritionUseCase {
     fun getNutritionFood(): Flow<List<Nutrition>>
     suspend fun addFood(nutrition: Nutrition)
+    suspend fun getAllData() : List<Nutrition>
+    suspend fun clearHistory()
 }

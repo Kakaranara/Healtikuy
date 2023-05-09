@@ -36,4 +36,10 @@ class JoggingViewModel @Inject constructor(
             joggingUseCase.editSchedule()
         }
     }
+
+    fun clearHistory(){
+        viewModelScope.launch {
+            joggingUseCase.clearHistory()
+        }
+    }
 }

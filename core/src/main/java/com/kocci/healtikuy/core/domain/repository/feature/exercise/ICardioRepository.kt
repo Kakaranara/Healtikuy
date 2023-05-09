@@ -12,4 +12,5 @@ interface ICardioRepository<EntityType> {
     suspend fun setSchedule(time: Long, interval: Int)
     suspend fun editSchedule()
     suspend fun updatePoints()
+    suspend fun deleteAllData()
 }

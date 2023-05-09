@@ -25,6 +25,7 @@ class RegisterFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnRegister.setOnClickListener(this)
+        binding.btnToLogin.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -39,13 +40,18 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                         when (it) {
                             is Async.Error -> {
                                 binding.progressRegisterIndicator.gone()
+                                binding.btnRegister.isEnabled = true
                                 showToast(it.msg)
                             }
+
                             Async.Loading -> {
                                 binding.progressRegisterIndicator.visible()
+                                binding.btnRegister.isEnabled = false
                             }
+
                             is Async.Success -> {
                                 binding.progressRegisterIndicator.gone()
+                                binding.btnRegister.isEnabled = true
                                 showToast("Welcome")
                                 val goToHome =
                                     RegisterFragmentDirections.actionGlobalHomeFragment()
@@ -53,6 +59,11 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                             }
                         }
                     }
+            }
+
+            binding.btnToLogin -> {
+                val direction = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
+                findNavController().navigate(direction)
             }
         }
     }

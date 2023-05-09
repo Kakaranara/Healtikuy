@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kocci.healtikuy.R
-import com.kocci.healtikuy.core.util.store.CharacterInStore
+import com.kocci.healtikuy.core.util.helper.CharacterInStore
 
 class StoreAdapter(private val item: List<CharacterInStore>, private val activityContext: Context) :
     RecyclerView.Adapter<StoreAdapter.ViewHolder>() {

@@ -21,12 +21,16 @@ class HealtikuyRepository @Inject constructor(
         emit(Async.Loading)
         try {
             val fbUser = remoteDataSource.getFirebaseUser() as FirebaseUser
-            var challengeList = remoteDataSource.getUserChallenges(fbUser.uid).documents
-            if (challengeList.isEmpty()) {
-                remoteDataSource.createUserChallenges(fbUser.uid)
-                challengeList = remoteDataSource.getUserChallenges(fbUser.uid).documents
+            var userChallenge = remoteDataSource.getUserChallenges(fbUser.uid).documents
+            val challengeInformation = remoteDataSource.getChallengesData().documents
+            if (userChallenge.size != challengeInformation.size || userChallenge.isEmpty()) {
+                val challengeInformationId = challengeInformation.map { it.id }
+                val userExistedChallengeId = userChallenge.map { it.id }
+                val newChallengesId = challengeInformationId.filterNot { it in userExistedChallengeId }
+                remoteDataSource.createUserChallenges(fbUser.uid, newChallengesId)
+                userChallenge = remoteDataSource.getUserChallenges(fbUser.uid).documents
             }
-            val data = challengeList.map {
+            val data = userChallenge.map {
                 val challengeId = it.id
                 val data = it.data!!
                 val challengeDesc = remoteDataSource.getChallengesData(challengeId).data!!

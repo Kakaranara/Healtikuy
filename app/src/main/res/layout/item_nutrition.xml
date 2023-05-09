@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/Widget.Material3.CardView.Elevated"
+    android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:padding="8dp"
-    android:layout_width="match_parent">
+    android:padding="8dp">
 
-    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.google.android.material.card.MaterialCardView
         style="@style/Widget.Material3.CardView.Elevated"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -14,15 +15,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:orientation="vertical">
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgItemNutrition"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:padding="16dp"
+                android:src="@drawable/apple" />
 
             <TextView
                 android:id="@+id/tvItemNutrition"
-                style="@style/TextAppearance.Material3.TitleLarge"
+                style="@style/TextAppearance.Material3.BodyMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="halo" />
+                tools:text="halo" />
 
         </LinearLayout>
 

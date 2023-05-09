@@ -2,7 +2,7 @@ package com.kocci.healtikuy.core.service
 
 import com.kocci.healtikuy.core.constant.GameRules
 import com.kocci.healtikuy.core.domain.model.UserPreferences
-import com.kocci.healtikuy.core.util.store.Avatar
+import com.kocci.healtikuy.core.util.helper.Avatar
 
 object FirstTimeService {
 

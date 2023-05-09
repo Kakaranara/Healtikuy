@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.constant.GameRules
 import com.kocci.healtikuy.core.domain.model.WaterIntake
+import com.kocci.healtikuy.core.util.helper.PointsManager
 import com.kocci.healtikuy.databinding.FragmentWaterIntakeBinding
 import com.kocci.healtikuy.util.extension.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +24,7 @@ class WaterIntakeFragment : Fragment(), View.OnClickListener {
     private val viewModel: WaterIntakeViewModel by viewModels()
 
     private lateinit var waterIntake: WaterIntake
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,6 +50,12 @@ class WaterIntakeFragment : Fragment(), View.OnClickListener {
                 binding.tvGlassLeft.text = getString(R.string.water_intake_glass_left, 0)
                 if (!it.isCompleted) {
                     viewModel.updatePointsForGoals(it)
+                    showToast(
+                        getString(
+                            R.string.got_point_template,
+                            PointsManager.WATER_INTAKE_POINT
+                        )
+                    )
                 }
             } else {
                 val glassLeft = GameRules.GOALS_WATER_INTAKE - waterIntake.quantity
@@ -55,7 +63,6 @@ class WaterIntakeFragment : Fragment(), View.OnClickListener {
                 binding.tvGlassLeft.text =
                     getString(R.string.water_intake_glass_left, glassLeft)
             }
-            showToast(it.toString())
         }
 
     }

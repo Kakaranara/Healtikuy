@@ -35,4 +35,10 @@ class StaticBikeViewModel @Inject constructor(
             staticBikeUseCase.editSchedule()
         }
     }
+
+    fun clearHistory() {
+        viewModelScope.launch {
+            staticBikeUseCase.clearHistory()
+        }
+    }
 }

@@ -41,13 +41,16 @@ class LoginFragment : Fragment(), View.OnClickListener {
                     when (it) {
                         Async.Loading -> {
                             binding.progressBarLogin.visible()
+                            binding.btnLogin.isEnabled = false
                         }
                         is Async.Error -> {
                             showToast(it.msg)
                             binding.progressBarLogin.gone()
+                            binding.btnLogin.isEnabled = true
                         }
                         is Async.Success -> {
                             binding.progressBarLogin.gone()
+                            binding.btnLogin.isEnabled = true
                             val goToHome = LoginFragmentDirections.actionGlobalHomeFragment()
                             findNavController().navigate(goToHome)
                             showToast("Welcome!")

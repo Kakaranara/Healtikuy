@@ -8,7 +8,7 @@ import com.kocci.healtikuy.core.data.remote.RemoteDataSource
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.model.UserPreferences
 import com.kocci.healtikuy.core.domain.repository.IUserRepository
-import com.kocci.healtikuy.core.util.store.CharacterInStore
+import com.kocci.healtikuy.core.util.helper.CharacterInStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow

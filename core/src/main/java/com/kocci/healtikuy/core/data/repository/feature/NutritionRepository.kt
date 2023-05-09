@@ -4,6 +4,7 @@ import com.kocci.healtikuy.core.data.local.LocalDataSource
 import com.kocci.healtikuy.core.data.local.entity.NutritionEntity
 import com.kocci.healtikuy.core.data.local.preferences.UserPreferencesManager
 import com.kocci.healtikuy.core.domain.repository.INutritionRepository
+import com.kocci.healtikuy.core.util.helper.PointsManager
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -17,6 +18,14 @@ class NutritionRepository @Inject constructor(
 
     override suspend fun insertNewData(entity: NutritionEntity) {
         localDataSource.insertNutritionData(entity)
-        preferencesManager.addPoints(100)
+        preferencesManager.addPoints(PointsManager.NUTRITION_POINT)
+    }
+
+    override suspend fun getAllData(): List<NutritionEntity> {
+        return localDataSource.getAllNutritionData()
+    }
+
+    override suspend fun deleteHistory() {
+        return localDataSource.clearNutrition()
     }
 }
