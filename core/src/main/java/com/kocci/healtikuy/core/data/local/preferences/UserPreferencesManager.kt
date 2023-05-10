@@ -121,6 +121,7 @@ class UserPreferencesManager @Inject constructor(
 
     suspend fun loginSync(userPreferences: UserPreferences) {
         dataStore.edit { pref ->
+            //! all user preference member should be there
             pref[PreferenceKeys.EMAIL] = userPreferences.email
             pref[PreferenceKeys.USERNAME] = userPreferences.username
             pref[PreferenceKeys.AVATAR] = userPreferences.avatar
@@ -128,6 +129,9 @@ class UserPreferencesManager @Inject constructor(
             pref[PreferenceKeys.POINTS] = userPreferences.points
             pref[PreferenceKeys.INVENTORY] = userPreferences.inventory
             pref[PreferenceKeys.LAST_LOGIN] = userPreferences.lastLogin
+            pref[PreferenceKeys.LEADERBOARDS_RUNNING100] = userPreferences.running100MPoint
+            pref[PreferenceKeys.LEADERBOARDS_RUNNING200] = userPreferences.running200MPoint
+            pref[PreferenceKeys.LEADERBOARDS_RUNNING400] = userPreferences.running400MPoint
         }
     }
 
