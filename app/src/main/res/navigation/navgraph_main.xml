@@ -96,7 +96,11 @@
         android:id="@+id/leaderboardsFragment"
         android:name="com.kocci.healtikuy.ui.main.leaderboards.LeaderboardsFragment"
         android:label="Leaderboards"
-        tools:layout="@layout/fragment_leaderboards" />
+        tools:layout="@layout/fragment_leaderboards" >
+        <action
+            android:id="@+id/action_leaderboardsFragment_to_pickLeaderboardFragment"
+            app:destination="@id/pickLeaderboardFragment" />
+    </fragment>
     <fragment
         android:id="@+id/storeFragment"
         android:name="com.kocci.healtikuy.ui.main.store.StoreFragment"
@@ -153,4 +157,25 @@
     <action
         android:id="@+id/action_global_historyFragment"
         app:destination="@id/historyFragment" />
+    <fragment
+        android:id="@+id/pickLeaderboardFragment"
+        android:name="com.kocci.healtikuy.ui.main.leaderboards.PickLeaderboardFragment"
+        android:label="Pick leaderboards"
+        tools:layout="@layout/fragment_pick_leaderboard" >
+        <action
+            android:id="@+id/action_pickLeaderboardFragment_to_runningLeaderboardsFragment"
+            app:destination="@id/runningLeaderboardsFragment" />
+        <argument
+            android:name="list"
+            app:argType="com.kocci.healtikuy.core.domain.model.leaderboards.LeaderboardsAttrArgs" />
+    </fragment>
+    <fragment
+        android:id="@+id/runningLeaderboardsFragment"
+        android:name="com.kocci.healtikuy.ui.main.leaderboards.running.RunningLeaderboardsFragment"
+        android:label="Running Leaderboards"
+        tools:layout="@layout/fragment_running_leaderboards" >
+        <argument
+            android:name="list"
+            app:argType="com.kocci.healtikuy.core.domain.model.leaderboards.LeaderboardsAttrArgs" />
+    </fragment>
 </navigation>

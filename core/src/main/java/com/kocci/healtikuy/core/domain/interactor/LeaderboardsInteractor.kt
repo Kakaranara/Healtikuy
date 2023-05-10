@@ -13,17 +13,21 @@ import javax.inject.Inject
 class LeaderboardsInteractor @Inject constructor(
     private val repository: LeaderboardsRepository
 ) : LeaderboardsUseCase {
-    override fun getLeaderboardsData(): Flow<Async<List<LeaderboardsAttr>>> {
+    override fun getLeaderboardPoint(): Flow<Async<List<LeaderboardsAttr>>> {
         return repository.getLeaderboards()
     }
 
-    override fun sortByPoints(list: List<LeaderboardsAttr>): List<LeaderboardsPoint> {
-        return list.sortedByDescending { it.points }.mapIndexed { i, it ->
+    override fun getLeaderboardRunning(runningType: RunningType): Flow<Async<List<LeaderboardsAttr>>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun mapToPoints(list: List<LeaderboardsAttr>): List<LeaderboardsPoint> {
+        return list.mapIndexed { i, it ->
             LeaderboardsPoint(it.name, it.avatar, it.points, i + 1)
         }
     }
 
-    override fun sortByRunningPoints(
+    override fun mapToRunningPoints(
         list: List<LeaderboardsAttr>,
         runningType: RunningType
     ): List<LeaderboardsPoint> {

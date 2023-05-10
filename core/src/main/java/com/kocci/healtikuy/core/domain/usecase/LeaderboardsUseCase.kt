@@ -8,9 +8,13 @@ import kotlinx.coroutines.flow.Flow
 
 
 interface LeaderboardsUseCase {
-    fun getLeaderboardsData(): Flow<Async<List<LeaderboardsAttr>>>
-    fun sortByPoints(list: List<LeaderboardsAttr>): List<LeaderboardsPoint>
-    fun sortByRunningPoints(
+    fun getLeaderboardPoint(): Flow<Async<List<LeaderboardsAttr>>>
+    fun getLeaderboardRunning(
+        runningType: RunningType
+    ): Flow<Async<List<LeaderboardsAttr>>>
+
+    fun mapToPoints(list: List<LeaderboardsAttr>): List<LeaderboardsPoint>
+    fun mapToRunningPoints(
         list: List<LeaderboardsAttr>,
         runningType: RunningType
     ): List<LeaderboardsPoint>

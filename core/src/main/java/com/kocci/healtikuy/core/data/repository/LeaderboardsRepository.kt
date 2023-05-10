@@ -1,5 +1,6 @@
 package com.kocci.healtikuy.core.data.repository
 
+import com.kocci.healtikuy.core.constant.RunningType
 import com.kocci.healtikuy.core.data.remote.RemoteDataSource
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.model.leaderboards.LeaderboardsAttr
@@ -39,4 +40,26 @@ class LeaderboardsRepository @Inject constructor(
             emit(Async.Error(e.message.toString()))
         }
     }
+
+    override fun getRunningLeaderboards(runningType: RunningType): Flow<Async<List<LeaderboardsAttr>>> =
+        flow {
+            emit(Async.Loading)
+            try {
+                val remoteList = remoteDataSource.getRunningLeaderboards(runningType).documents
+                val leaderList = remoteList.map {
+                    val data = it.data!! //! my app guarantees non-null in firestore (for now).
+                    LeaderboardsAttr(
+                        name = data["username"] as String,
+                        avatar = data["avatar"] as String,
+                        points = data["points"] as Long,
+                        data["running_100"] as Long,
+                        data["running_200"] as Long,
+                        data["running_400"] as Long
+                    )
+                }
+                emit(Async.Success(leaderList))
+            } catch (e: Exception) {
+                emit(Async.Error(e.message.toString()))
+            }
+        }
 }

@@ -11,6 +11,6 @@ import javax.inject.Inject
 class LeaderboardsVM @Inject constructor(
     private val leaderboardsUseCase: LeaderboardsUseCase
 ) : ViewModel() {
-    fun getData() = leaderboardsUseCase.getLeaderboardsData().asLiveData()
-    fun getSortedData(list: List<LeaderboardsAttr>) = leaderboardsUseCase.sortByPoints(list)
+    fun getData() = leaderboardsUseCase.getLeaderboardPoint().asLiveData()
+    fun getSortedData(list: List<LeaderboardsAttr>) = leaderboardsUseCase.mapToPoints(list)
 }
