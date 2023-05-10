@@ -118,6 +118,11 @@
     <string name="food_name">Food Name</string>
     <string name="category">Category</string>
     <string name="vegetables">vegetables</string>
+    <string name="running_leaderboards">Running Leaderboards</string>
+    <string name="fastest_person">Fastest Person</string>
+    <string name="no_data_recorded">No data recorded.</string>
+    <string name="highest_points">Highest Points</string>
+    <string name="check_another">Check Another</string>
 
     <!-- Nutrition Related -->
     <!-- Sun Related -->

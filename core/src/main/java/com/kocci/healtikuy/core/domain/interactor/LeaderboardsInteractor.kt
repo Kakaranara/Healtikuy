@@ -18,7 +18,7 @@ class LeaderboardsInteractor @Inject constructor(
     }
 
     override fun getLeaderboardRunning(runningType: RunningType): Flow<Async<List<LeaderboardsAttr>>> {
-        TODO("Not yet implemented")
+        return repository.getRunningLeaderboards(runningType)
     }
 
     override fun mapToPoints(list: List<LeaderboardsAttr>): List<LeaderboardsPoint> {
@@ -33,7 +33,7 @@ class LeaderboardsInteractor @Inject constructor(
     ): List<LeaderboardsPoint> {
         return when (runningType) {
             Running100M -> {
-                list.sortedByDescending { it.running100MPoints }.mapIndexed { i, it ->
+                list.filterNot { it.running100MPoints == 0L }.mapIndexed { i, it ->
                     LeaderboardsPoint(
                         it.name,
                         it.avatar,
@@ -44,7 +44,7 @@ class LeaderboardsInteractor @Inject constructor(
             }
 
             Running200M -> {
-                list.sortedByDescending { it.running200MPoints }.mapIndexed { i, it ->
+                list.filterNot { it.running200MPoints == 0L }.mapIndexed { i, it ->
                     LeaderboardsPoint(
                         it.name,
                         it.avatar,
@@ -55,7 +55,7 @@ class LeaderboardsInteractor @Inject constructor(
             }
 
             Running400M -> {
-                list.sortedByDescending { it.running400MPoints }.mapIndexed { i, it ->
+                list.filterNot { it.running400MPoints == 0L }.mapIndexed { i, it ->
                     LeaderboardsPoint(
                         it.name,
                         it.avatar,

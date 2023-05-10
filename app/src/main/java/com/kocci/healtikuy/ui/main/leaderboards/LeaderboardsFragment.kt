@@ -3,7 +3,6 @@ package com.kocci.healtikuy.ui.main.leaderboards
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -35,18 +34,17 @@ class LeaderboardsFragment : Fragment(), View.OnClickListener {
         viewModel.getData().observe(viewLifecycleOwner) {
             when (it) {
                 Async.Loading -> {
-                    showToast("Loading..")
-                    binding.btnCheckAnother.gone()
+                    binding.progressBar.visible()
                 }
 
                 is Async.Error -> {
                     showToast("Error ${it.msg}")
-                    binding.btnCheckAnother.gone()
+                    binding.progressBar.gone()
                 }
 
                 is Async.Success -> {
+                    binding.progressBar.gone()
                     setupAdapter(it.data)
-                    binding.btnCheckAnother.visible()
                     leaderboardsArgs = LeaderboardsAttrArgs(it.data)
                 }
             }

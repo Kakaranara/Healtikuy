@@ -1,16 +1,15 @@
 package com.kocci.healtikuy.ui.main.leaderboards.running
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
-import com.kocci.healtikuy.R
+import com.google.android.material.tabs.TabLayoutMediator
 import com.kocci.healtikuy.databinding.FragmentRunningLeaderboardsBinding
-import com.kocci.healtikuy.util.extension.showToast
 
 
 class RunningLeaderboardsFragment : Fragment() {
@@ -21,9 +20,24 @@ class RunningLeaderboardsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbarRunningLeaderboards.setupWithNavController(findNavController())
-        val data = args.list
 
-        showToast(data.toString())
+        val viewPager = binding.vpRunningLeaderboards
+        val tabLayout = binding.tlRunningLeaderboards
+
+        viewPager.adapter = RunningLeadStateAdapter(this)
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            when (position) {
+                0 -> {
+                    tab.text = "100M"
+                }
+
+                1 -> {
+                    tab.text = "200M"
+                }
+
+                2 -> tab.text = "400M"
+            }
+        }.attach()
     }
 
     override fun onCreateView(

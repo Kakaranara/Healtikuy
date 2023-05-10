@@ -1,5 +1,6 @@
 package com.kocci.healtikuy.ui.main.leaderboards.running
 
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
@@ -9,6 +10,22 @@ class RunningLeadStateAdapter(fragment: Fragment) : FragmentStateAdapter(fragmen
     }
 
     override fun createFragment(position: Int): Fragment {
-        return RunningLeaderboardsFragment()
+        val fragment = RunningLeadTabFragment();
+        fragment.arguments = Bundle().apply {
+            when (position) {
+                0 -> {
+                    putString(RunningLeadTabFragment.RUNNING_TYPE, "100")
+                }
+
+                1 -> {
+                    putString(RunningLeadTabFragment.RUNNING_TYPE, "200")
+                }
+
+                2 -> {
+                    putString(RunningLeadTabFragment.RUNNING_TYPE, "400")
+                }
+            }
+        }
+        return fragment
     }
 }

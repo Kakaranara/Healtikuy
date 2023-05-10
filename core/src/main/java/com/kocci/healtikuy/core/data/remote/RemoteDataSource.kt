@@ -59,7 +59,7 @@ class RemoteDataSource @Inject constructor(
         }
 
         return firestore.collection(FsCollection.USERS)
-            .orderBy(runningType)
+            .orderBy(runningType, Query.Direction.ASCENDING)
             .limit(20)
             .get()
             .await()
