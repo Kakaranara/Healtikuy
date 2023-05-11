@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.kocci.healtikuy.databinding.FragmentRunningLeaderboardsBinding
@@ -15,7 +14,6 @@ import com.kocci.healtikuy.databinding.FragmentRunningLeaderboardsBinding
 class RunningLeaderboardsFragment : Fragment() {
     private var _binding: FragmentRunningLeaderboardsBinding? = null
     private val binding get() = _binding!!
-    val args by navArgs<RunningLeaderboardsFragmentArgs>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

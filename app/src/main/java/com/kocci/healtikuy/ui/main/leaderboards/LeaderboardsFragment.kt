@@ -11,7 +11,6 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.model.leaderboards.LeaderboardsAttr
-import com.kocci.healtikuy.core.domain.model.leaderboards.LeaderboardsAttrArgs
 import com.kocci.healtikuy.databinding.FragmentLeaderboardsBinding
 import com.kocci.healtikuy.util.extension.gone
 import com.kocci.healtikuy.util.extension.showToast
@@ -23,9 +22,6 @@ class LeaderboardsFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentLeaderboardsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: LeaderboardsVM by viewModels()
-
-    private var leaderboardsArgs: LeaderboardsAttrArgs? = null
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
@@ -45,7 +41,6 @@ class LeaderboardsFragment : Fragment(), View.OnClickListener {
                 is Async.Success -> {
                     binding.progressBar.gone()
                     setupAdapter(it.data)
-                    leaderboardsArgs = LeaderboardsAttrArgs(it.data)
                 }
             }
         }
@@ -64,13 +59,9 @@ class LeaderboardsFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v) {
             binding.btnCheckAnother -> {
-                leaderboardsArgs?.let { args ->
-                    val directions =
-                        LeaderboardsFragmentDirections.actionLeaderboardsFragmentToPickLeaderboardFragment(
-                            args
-                        )
-                    findNavController().navigate(directions)
-                } ?: showToast("data is null!")
+                val directions =
+                    LeaderboardsFragmentDirections.actionLeaderboardsFragmentToPickLeaderboardFragment()
+                findNavController().navigate(directions)
             }
         }
     }

@@ -165,17 +165,10 @@
         <action
             android:id="@+id/action_pickLeaderboardFragment_to_runningLeaderboardsFragment"
             app:destination="@id/runningLeaderboardsFragment" />
-        <argument
-            android:name="list"
-            app:argType="com.kocci.healtikuy.core.domain.model.leaderboards.LeaderboardsAttrArgs" />
     </fragment>
     <fragment
         android:id="@+id/runningLeaderboardsFragment"
         android:name="com.kocci.healtikuy.ui.main.leaderboards.running.RunningLeaderboardsFragment"
         android:label="Running Leaderboards"
-        tools:layout="@layout/fragment_running_leaderboards" >
-        <argument
-            android:name="list"
-            app:argType="com.kocci.healtikuy.core.domain.model.leaderboards.LeaderboardsAttrArgs" />
-    </fragment>
+        tools:layout="@layout/fragment_running_leaderboards" />
 </navigation>

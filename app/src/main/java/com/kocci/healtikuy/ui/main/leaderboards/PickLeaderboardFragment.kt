@@ -6,14 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.databinding.FragmentPickLeaderboardBinding
 
 class PickLeaderboardFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentPickLeaderboardBinding? = null
     private val binding get() = _binding!!
-    val args by navArgs<PickLeaderboardFragmentArgs>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -25,9 +23,7 @@ class PickLeaderboardFragment : Fragment(), View.OnClickListener {
         when (v) {
             binding.btnToRunningLeaderboards -> {
                 val direction =
-                    PickLeaderboardFragmentDirections.actionPickLeaderboardFragmentToRunningLeaderboardsFragment(
-                        args.list
-                    )
+                    PickLeaderboardFragmentDirections.actionPickLeaderboardFragmentToRunningLeaderboardsFragment()
                 findNavController().navigate(direction)
             }
         }

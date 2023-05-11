@@ -15,7 +15,7 @@ import com.kocci.healtikuy.core.domain.usecase.feature.exercise.scheduler.Exerci
 import com.kocci.healtikuy.core.util.helper.DateHelper
 import com.kocci.healtikuy.core.util.helper.PointsManager
 import com.kocci.healtikuy.databinding.FragmentRunningBinding
-import com.kocci.healtikuy.exception.NonsenseException
+import com.kocci.healtikuy.exception.NonSenseException
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
 import com.kocci.healtikuy.util.extension.gone
 import com.kocci.healtikuy.util.extension.showToast
@@ -132,7 +132,7 @@ class RunningFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
                     val duration = binding.etRunningDuration.text.toString().toInt()
                     val mileage = binding.actvRunningMileage.text.toString().toInt()
                     if (duration in 0..8) {
-                        throw NonsenseException("Even usain bolt needs 9 seconds.")
+                        throw NonSenseException("Even usain bolt needs 9 seconds to do a 100M running!.")
                     }
                     runningValue?.let {
                         it.duration = duration
@@ -149,7 +149,7 @@ class RunningFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
                     }
                 } catch (e: NumberFormatException) {
                     showToast("Please input all the field!")
-                } catch (e: NonsenseException) {
+                } catch (e: NonSenseException) {
                     showToast(e.message.toString())
                 } catch (e: Exception) {
                     Log.e("Running fragment", "onClick: ${e.message}")
