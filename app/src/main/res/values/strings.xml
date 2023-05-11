@@ -125,6 +125,7 @@
     <string name="check_another">Check Another</string>
 
     <!-- Nutrition Related -->
+    <string name="nutrition_tips">There are 3 different things we must avoid eating too much : sugar, salt, and oil.</string>
     <!-- Sun Related -->
 
 </resources>

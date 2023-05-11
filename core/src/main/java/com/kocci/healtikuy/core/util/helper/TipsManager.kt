@@ -85,6 +85,12 @@ object TipsManager {
         )
     )
 
+    fun generateNutritionTips() = TipList(
+        listOf<Tips>(
+            Tips("tips", "Coming Soon!")
+        )
+    )
+
     fun generateSunExposureTips() = TipList(
         listOf<Tips>(
             Tips(
