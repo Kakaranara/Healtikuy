@@ -15,17 +15,29 @@ object HistoryHelper {
         val itemList = hashMapOf<String, List<String>>()
 
         val titleTemp = mutableSetOf<String>()
-        val foodTemp = mutableListOf<String>()
-        list.forEach { nutrition ->
+        val itemTemp = mutableListOf<String>()
+        var lastDate: String = DateHelper.formatDateString(list[0].unixTimestamp * 1000)
+        list.forEachIndexed { index, nutrition ->
             val dateString = DateHelper.formatDateString(nutrition.unixTimestamp * 1000)
+            if (dateString != lastDate) {
+                itemList[lastDate] = itemTemp
+                lastDate = dateString
+                itemTemp.clear()
+            }
             titleTemp.add(dateString)
-            foodTemp.add(nutrition.foodName)
+            itemTemp.add(nutrition.foodName)
+            if (index == list.lastIndex) {
+                itemList[lastDate] = itemTemp
+            }
         }
-
         groupList.addAll(titleTemp)
-        groupList.forEach {
-            itemList[it] = foodTemp
-        }
+//        groupList.forEach { title ->
+//            val itemForGroups = list.filter {
+//                val dateInString = DateHelper.formatDateString(it.unixTimestamp * 1000)
+//                dateInString == title
+//            }.map { it.foodName }
+//            itemList[title] = itemForGroups
+//        }
 
         return HistoryList(groupList, itemList)
     }
