@@ -1,9 +1,11 @@
 package com.kocci.healtikuy.ui.main
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -30,6 +32,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     private val viewModel: HomeViewModel by viewModels()
 
+    private val permissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) {}
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,6 +49,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         setupAppBarWithMenuDrawer()
         bindClickListener()
+        requestNotificationPermission()
 
         runBlocking {
             if (!viewModel.isUserLogin()) {
@@ -82,24 +89,26 @@ class HomeFragment : Fragment(), View.OnClickListener {
             when (healthyStatusIndicator) {
                 is HealthyStatusIndicator.Completed -> {
                     binding.desc.text = getString(R.string.status_completed)
-//                    showToast("completed : ${healthyStatusIndicator.point}")
                 }
 
                 is HealthyStatusIndicator.NearlyComplete -> {
                     binding.desc.text = getString(R.string.status_near_complete)
-//                    showToast("nearly complete ${healthyStatusIndicator.point}")
                 }
 
                 is HealthyStatusIndicator.MidComplete -> {
                     binding.desc.text = getString(R.string.status_mid)
-//                    showToast("mid complete ${healthyStatusIndicator.point}")
                 }
 
                 is HealthyStatusIndicator.Low -> {
                     binding.desc.text = getString(R.string.status_low)
-//                    showToast("low complete ${healthyStatusIndicator.point}")
                 }
             }
+        }
+    }
+
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= 33) {
+            permissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
         }
     }
 
