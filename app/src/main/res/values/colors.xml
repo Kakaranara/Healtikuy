@@ -66,6 +66,6 @@
     <color name="black">#000000</color>
     <color name="gray">#D3D3D3</color>
     <color name="very_light_gray">#FCFCFC</color>
-    <color name="green_success">#8AFF8A</color>
+    <color name="green_success">#00e06c</color>
     <color name="transparent">#80FFFFFF</color>
 </resources>

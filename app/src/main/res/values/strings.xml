@@ -126,6 +126,7 @@
 
     <!-- Nutrition Related -->
     <string name="nutrition_tips">There are 3 different things we must avoid eating too much : sugar, salt, and oil.</string>
+    <string name="image_of_app_logo">image of app logo</string>
     <!-- Sun Related -->
 
 </resources>
