@@ -13,6 +13,11 @@ object HistoryHelper {
     fun orchestrateNutrition(list: List<Nutrition>): HistoryList {
         val groupList = mutableListOf<String>()
         val itemList = hashMapOf<String, List<String>>()
+        val history = HistoryList(groupList, itemList)
+
+        if(list.isEmpty()){
+            return history
+        }
 
         val titleTemp = mutableSetOf<String>()
         val itemTemp = mutableListOf<String>()
@@ -31,15 +36,7 @@ object HistoryHelper {
             }
         }
         groupList.addAll(titleTemp)
-//        groupList.forEach { title ->
-//            val itemForGroups = list.filter {
-//                val dateInString = DateHelper.formatDateString(it.unixTimestamp * 1000)
-//                dateInString == title
-//            }.map { it.foodName }
-//            itemList[title] = itemForGroups
-//        }
-
-        return HistoryList(groupList, itemList)
+        return history
     }
 
     fun orchestrateSleep(list: List<Sleep>): HistoryList {
