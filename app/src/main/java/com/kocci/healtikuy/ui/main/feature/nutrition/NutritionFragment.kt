@@ -13,6 +13,7 @@ import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.util.helper.TipsManager
 import com.kocci.healtikuy.databinding.FragmentNutritionBinding
 import com.kocci.healtikuy.ui.dialog.tips.linear.TipsDialogBSheet
+import com.kocci.healtikuy.ui.dialog.tips.withdialog.TipsBSheetDialogWithTabs
 import com.kocci.healtikuy.util.helper.HistoryHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
@@ -33,7 +34,7 @@ class NutritionFragment : Fragment() {
         }
         binding.nutritionTips.btnMoreTips.setOnClickListener {
             val tipList = TipsManager.generateNutritionTips()
-            TipsDialogBSheet(tipList).show(childFragmentManager, "nut")
+            TipsBSheetDialogWithTabs(tipList).show(childFragmentManager, "nut")
         }
 
         viewModel.getData().observe(viewLifecycleOwner) {

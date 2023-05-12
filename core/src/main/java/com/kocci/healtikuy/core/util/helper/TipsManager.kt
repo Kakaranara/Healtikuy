@@ -87,7 +87,30 @@ object TipsManager {
 
     fun generateNutritionTips() = TipList(
         listOf<Tips>(
-            Tips("tips", "Coming Soon!")
+            Tips(
+                "tips",
+                "Avoid too much saturated fat. On average, men should have no more 30g of saturated fat per day. 20g for women. Too much saturated fat can increase the amount of cholesterol."
+            ),
+            Tips(
+                "tips",
+                "Avoid too much sugar. Regularly consuming it can increase your risk of obesity and tooth decay."
+            ),
+            Tips(
+                "tips",
+                "eat less salt, no more than 6g a day for adults. Eating too much salt can raise your blood pressure, which lead to many health problem."
+            ),
+            Tips(
+                "tips",
+                "Base your meals on higher fibre starchy carbohydrates, such as potatoes, bread, cereal, pasta and rice. It can help you feel full for longer."
+            ),
+            Tips(
+                "tips",
+                "Eat lots of fruit and vegetables. It's recommended that you eat at least 5 portions of a variety of fruit and veg every day. They can be fresh, frozen, canned, dried or juiced."
+            ),
+            Tips(
+                "tips",
+                "Eat more fish, including a portion of oily fish. Fish is a good source of protein and contain many vitamin and minerals."
+            )
         )
     )
 
