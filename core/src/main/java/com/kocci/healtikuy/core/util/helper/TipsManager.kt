@@ -110,6 +110,30 @@ object TipsManager {
             Tips(
                 "tips",
                 "Eat more fish, including a portion of oily fish. Fish is a good source of protein and contain many vitamin and minerals."
+            ),
+            Tips(
+                "info",
+                """
+                    There are 2 types of fat : saturated and unsaturated fat. 
+                    Eating too much saturated fat, can increase the amount of cholesterol in the blood, 
+                    which increase the risk of heart disease and another disease.
+                """.trimIndent()
+            ),
+            Tips(
+                "info",
+                """
+                    Sugary food or drinks are often high in energy (measured by calories), and if consumed too much can lead to weight gain and also tooth decay.
+                    Free sugar is what we call sugar added to a food or drink, or found naturally in honey, syrups, and smoothies.
+                    This is the type of sugar that we should avoid, rather than sugar found in fruit and milk.
+                    Free sugar are found in many food such as : 
+                    - sugary fizzy drinks
+                    - sugary breakfast cereals
+                    - cakes
+                    - biscuits
+                    - pastries and puddings
+                    - sweets and chocolate
+                    - alcoholic drinks
+                """.trimIndent()
             )
         )
     )
