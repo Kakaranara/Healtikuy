@@ -27,7 +27,7 @@ class AppRepository @Inject constructor(
                     lastLogin = System.currentTimeMillis(),
                     points = map["points"] as Long,
                     coin = (map["coin"] as Long).toInt(),
-                    username = fbUser.displayName.toString(),
+                    username = map["username"] as String,
                     email = fbUser.email.toString(),
                     avatar = map["avatar"] as String,
                     inventory = (map["inventory"] as ArrayList<String>).toSet(),
