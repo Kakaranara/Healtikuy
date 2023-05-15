@@ -13,15 +13,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/menu_feature" />
 
-    <View
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgViewSunfire"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="16dp"
-        android:background="@color/black"
+        android:src="@drawable/sun"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbarSunfire" />
+        app:layout_constraintTop_toBottomOf="@id/toolbarSunfire"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
 
     <TextView
         android:id="@+id/tvSunfireTime"
