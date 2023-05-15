@@ -17,7 +17,9 @@ import com.kocci.healtikuy.databinding.FragmentSunExposureBinding
 import com.kocci.healtikuy.ui.dialog.tips.linear.TipsDialogBSheet
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
 import com.kocci.healtikuy.util.extension.showToast
+import com.kocci.healtikuy.util.helper.HistoryHelper
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 import java.util.Calendar
 
 
@@ -129,6 +131,16 @@ class SunExposureFragment : Fragment(), TimePickerFragment.TimePickerListener,
             setOnMenuItemClickListener { menu ->
                 when (menu.itemId) {
                     R.id.action_history -> {
+                        runBlocking {
+                            val data = viewModel.getAllData()
+                            val historyList = HistoryHelper.orchestrateSunExposure(data)
+
+                            val direction =
+                                SunExposureFragmentDirections.actionGlobalHistoryFragment(
+                                    historyList
+                                )
+                            findNavController().navigate(direction)
+                        }
                         true
                     }
 

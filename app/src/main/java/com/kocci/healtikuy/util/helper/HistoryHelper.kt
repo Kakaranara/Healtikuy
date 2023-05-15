@@ -2,6 +2,7 @@ package com.kocci.healtikuy.util.helper
 
 import com.kocci.healtikuy.core.domain.model.Nutrition
 import com.kocci.healtikuy.core.domain.model.Sleep
+import com.kocci.healtikuy.core.domain.model.SunExposure
 import com.kocci.healtikuy.core.domain.model.exercise.Jogging
 import com.kocci.healtikuy.core.domain.model.exercise.Running
 import com.kocci.healtikuy.core.domain.model.exercise.StaticBike
@@ -15,7 +16,7 @@ object HistoryHelper {
         val itemList = hashMapOf<String, List<String>>()
         val history = HistoryList(groupList, itemList)
 
-        if(list.isEmpty()){
+        if (list.isEmpty()) {
             return history
         }
 
@@ -37,6 +38,23 @@ object HistoryHelper {
         }
         groupList.addAll(titleTemp)
         return history
+    }
+
+    fun orchestrateSunExposure(list: List<SunExposure>): HistoryList {
+        val groupList = mutableListOf<String>()
+        val itemList = hashMapOf<String, List<String>>()
+
+        list.forEach { sleep ->
+            if (sleep.isCompleted) {
+                val title = DateHelper.formatDateString(dateInMillis = sleep.timeCompleted)
+                groupList.add(title)
+                val child = listOf<String>(
+                    "Sunbathe Time : ${DateHelper.showHoursAndMinutes(sleep.timeCompleted)}",
+                )
+                itemList[title] = child
+            }
+        }
+        return HistoryList(groupList, itemList)
     }
 
     fun orchestrateSleep(list: List<Sleep>): HistoryList {
@@ -102,7 +120,7 @@ object HistoryHelper {
                 groupList.add(title)
                 val child = listOf<String>(
                     "Set : ${it.set} Set",
-                    "Interval : ${it.interval} Meter",
+                    "Interval : ${it.interval} Minutes",
                     "Rest Time : ${it.restTime} Seconds"
                 )
                 itemList[title] = child
