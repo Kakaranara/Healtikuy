@@ -6,4 +6,5 @@ object PointsManager {
     const val SLEEP_POINT: Long = 1000
     const val NUTRITION_POINT: Long = 25
     const val SUN_EXPOSURE_POINT: Long = 250
+    const val MISSING_POINT : Long = 1000
 }

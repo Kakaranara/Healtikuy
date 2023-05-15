@@ -233,7 +233,7 @@
                         android:layout_height="160dp"
                         android:contentDescription="@string/image_of_nutrition"
                         android:scaleType="fitXY"
-                        android:src="@drawable/water" />
+                        android:src="@drawable/nutrition" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -270,7 +270,7 @@
                         android:layout_height="160dp"
                         android:contentDescription="@string/image_of_sun_exposure"
                         android:scaleType="fitXY"
-                        android:src="@drawable/water" />
+                        android:src="@drawable/sun" />
 
                     <TextView
                         android:layout_width="match_parent"

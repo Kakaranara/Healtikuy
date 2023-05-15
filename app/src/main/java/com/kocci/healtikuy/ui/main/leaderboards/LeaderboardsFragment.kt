@@ -12,31 +12,34 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.model.leaderboards.LeaderboardsAttr
 import com.kocci.healtikuy.databinding.FragmentLeaderboardsBinding
+import com.kocci.healtikuy.util.extension.gone
 import com.kocci.healtikuy.util.extension.showToast
+import com.kocci.healtikuy.util.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LeaderboardsFragment : Fragment() {
+class LeaderboardsFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentLeaderboardsBinding? = null
     private val binding get() = _binding!!
-
     private val viewModel: LeaderboardsVM by viewModels()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
+        binding.btnCheckAnother.setOnClickListener(this)
 
         viewModel.getData().observe(viewLifecycleOwner) {
             when (it) {
                 Async.Loading -> {
-                    showToast("Loading..")
+                    binding.progressBar.visible()
                 }
 
                 is Async.Error -> {
                     showToast("Error ${it.msg}")
+                    binding.progressBar.gone()
                 }
 
                 is Async.Success -> {
+                    binding.progressBar.gone()
                     setupAdapter(it.data)
                 }
             }
@@ -50,6 +53,16 @@ class LeaderboardsFragment : Fragment() {
         binding.rvLeaderboards.apply {
             adapter = mAdapter
             layoutManager = manager
+        }
+    }
+
+    override fun onClick(v: View?) {
+        when (v) {
+            binding.btnCheckAnother -> {
+                val directions =
+                    LeaderboardsFragmentDirections.actionLeaderboardsFragmentToPickLeaderboardFragment()
+                findNavController().navigate(directions)
+            }
         }
     }
 

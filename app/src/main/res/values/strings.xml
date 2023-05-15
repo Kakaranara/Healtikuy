@@ -118,8 +118,15 @@
     <string name="food_name">Food Name</string>
     <string name="category">Category</string>
     <string name="vegetables">vegetables</string>
+    <string name="running_leaderboards">Running Leaderboards</string>
+    <string name="fastest_person">Fastest Person</string>
+    <string name="no_data_recorded">No data recorded.</string>
+    <string name="highest_points">Highest Points</string>
+    <string name="check_another">Check Another</string>
 
     <!-- Nutrition Related -->
+    <string name="nutrition_tips">There are 3 different things we must avoid eating too much : sugar, salt, and saturated fat.</string>
+    <string name="image_of_app_logo">image of app logo</string>
     <!-- Sun Related -->
 
 </resources>

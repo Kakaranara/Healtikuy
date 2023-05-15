@@ -47,6 +47,7 @@ class RunningInteractor @Inject constructor(
         data.isCompleted = true
         repository.updateData(data.toEntity())
         repository.updatePoints()
+        editLeaderboardsIfReachGoals(data.distance, data.duration.toLong())
     }
 
     override fun getSchedule(): Flow<ExerciseTimeIndicator> {
@@ -74,5 +75,9 @@ class RunningInteractor @Inject constructor(
 
     override suspend fun clearHistory() {
         repository.deleteAllData()
+    }
+
+    override suspend fun editLeaderboardsIfReachGoals(runningType: Int, time: Long) {
+        repository.changeLeaderboards(runningType, time)
     }
 }

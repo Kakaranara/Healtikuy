@@ -10,7 +10,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kocci.healtikuy.R
+import com.kocci.healtikuy.core.util.helper.TipsManager
 import com.kocci.healtikuy.databinding.FragmentNutritionBinding
+import com.kocci.healtikuy.ui.dialog.tips.linear.TipsDialogBSheet
+import com.kocci.healtikuy.ui.dialog.tips.withdialog.TipsBSheetDialogWithTabs
 import com.kocci.healtikuy.util.helper.HistoryHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
@@ -25,8 +28,13 @@ class NutritionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
+        binding.nutritionTips.tvBodyTips.text = getString(R.string.nutrition_tips)
         binding.btnShowDialog.setOnClickListener {
             AddFoodDialog().show(childFragmentManager, "")
+        }
+        binding.nutritionTips.btnMoreTips.setOnClickListener {
+            val tipList = TipsManager.generateNutritionTips()
+            TipsBSheetDialogWithTabs(tipList).show(childFragmentManager, "nut")
         }
 
         viewModel.getData().observe(viewLifecycleOwner) {

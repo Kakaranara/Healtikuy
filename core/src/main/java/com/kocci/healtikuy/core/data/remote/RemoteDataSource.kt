@@ -4,7 +4,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
+import com.kocci.healtikuy.core.constant.RunningType
 import com.kocci.healtikuy.core.data.remote.firestore.FsCollection
 import com.kocci.healtikuy.core.service.FirstTimeService
 import kotlinx.coroutines.tasks.await
@@ -43,6 +45,21 @@ class RemoteDataSource @Inject constructor(
 
     suspend fun getUserDataForLeaderboards(): QuerySnapshot {
         return firestore.collection(FsCollection.USERS)
+            .orderBy("points", Query.Direction.DESCENDING)
+            .limit(20)
+            .get()
+            .await()
+    }
+
+    suspend fun getRunningLeaderboards(type: RunningType): QuerySnapshot {
+        val runningType: String = when (type) {
+            RunningType.Running100M -> "running_100"
+            RunningType.Running200M -> "running_200"
+            RunningType.Running400M -> "running_400"
+        }
+
+        return firestore.collection(FsCollection.USERS)
+            .orderBy(runningType, Query.Direction.ASCENDING)
             .limit(20)
             .get()
             .await()

@@ -7,6 +7,7 @@ import com.kocci.healtikuy.core.data.remote.RemoteDataSource
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.model.UserPreferences
 import com.kocci.healtikuy.core.util.helper.DateHelper
+import com.kocci.healtikuy.core.util.helper.PointsManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
@@ -71,6 +72,7 @@ class AppRepository @Inject constructor(
         val localData = preferencesManager.userPreferences.first()
         val lastLogin = localData.lastLogin
         if (!DateHelper.isToday(lastLogin)) {
+            reducePointIfAbsent(lastLogin)
             val fbUser = remoteDataSource.getFirebaseUser() as FirebaseUser
             try {
                 val firestoreDocument = hashMapOf<String, Any>(
@@ -91,6 +93,16 @@ class AppRepository @Inject constructor(
             } catch (e: Exception) {
                 Log.e("APP REPO SYNC", "FAILED with msg : ${e.message}")
             }
+        }
+    }
+
+    private suspend fun reducePointIfAbsent(lastLogin: Long) {
+        val missingDays = DateHelper.calculateDayDiff(lastLogin)
+        //the day after tomorrow
+        //because if it only tomorrow then it was a regular sync.
+        if (missingDays > 1) {
+            val pointReduced = missingDays * PointsManager.MISSING_POINT
+            preferencesManager.reducePoint(pointReduced)
         }
     }
 

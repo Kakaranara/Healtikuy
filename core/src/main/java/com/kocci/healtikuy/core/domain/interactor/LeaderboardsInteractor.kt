@@ -13,23 +13,27 @@ import javax.inject.Inject
 class LeaderboardsInteractor @Inject constructor(
     private val repository: LeaderboardsRepository
 ) : LeaderboardsUseCase {
-    override fun getLeaderboardsData(): Flow<Async<List<LeaderboardsAttr>>> {
+    override fun getLeaderboardPoint(): Flow<Async<List<LeaderboardsAttr>>> {
         return repository.getLeaderboards()
     }
 
-    override fun sortByPoints(list: List<LeaderboardsAttr>): List<LeaderboardsPoint> {
-        return list.sortedByDescending { it.points }.mapIndexed { i, it ->
+    override fun getLeaderboardRunning(runningType: RunningType): Flow<Async<List<LeaderboardsAttr>>> {
+        return repository.getRunningLeaderboards(runningType)
+    }
+
+    override fun mapToPoints(list: List<LeaderboardsAttr>): List<LeaderboardsPoint> {
+        return list.mapIndexed { i, it ->
             LeaderboardsPoint(it.name, it.avatar, it.points, i + 1)
         }
     }
 
-    override fun sortByRunningPoints(
+    override fun mapToRunningPoints(
         list: List<LeaderboardsAttr>,
         runningType: RunningType
     ): List<LeaderboardsPoint> {
         return when (runningType) {
             Running100M -> {
-                list.sortedByDescending { it.running100MPoints }.mapIndexed { i, it ->
+                list.filterNot { it.running100MPoints == 0L }.mapIndexed { i, it ->
                     LeaderboardsPoint(
                         it.name,
                         it.avatar,
@@ -40,7 +44,7 @@ class LeaderboardsInteractor @Inject constructor(
             }
 
             Running200M -> {
-                list.sortedByDescending { it.running200MPoints }.mapIndexed { i, it ->
+                list.filterNot { it.running200MPoints == 0L }.mapIndexed { i, it ->
                     LeaderboardsPoint(
                         it.name,
                         it.avatar,
@@ -51,7 +55,7 @@ class LeaderboardsInteractor @Inject constructor(
             }
 
             Running400M -> {
-                list.sortedByDescending { it.running400MPoints }.mapIndexed { i, it ->
+                list.filterNot { it.running400MPoints == 0L }.mapIndexed { i, it ->
                     LeaderboardsPoint(
                         it.name,
                         it.avatar,

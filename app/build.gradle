@@ -19,8 +19,8 @@ android {
         applicationId "com.kocci.healtikuy"
         minSdk 24
         targetSdk 33
-        versionCode 2
-        versionName "2.0"
+        versionCode 4
+        versionName "1.0.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

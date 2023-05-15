@@ -15,6 +15,7 @@ import com.kocci.healtikuy.core.domain.usecase.feature.exercise.scheduler.Exerci
 import com.kocci.healtikuy.core.util.helper.DateHelper
 import com.kocci.healtikuy.core.util.helper.PointsManager
 import com.kocci.healtikuy.databinding.FragmentRunningBinding
+import com.kocci.healtikuy.exception.NonSenseException
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
 import com.kocci.healtikuy.util.extension.gone
 import com.kocci.healtikuy.util.extension.showToast
@@ -130,18 +131,27 @@ class RunningFragment : Fragment(), View.OnClickListener, TimePickerFragment.Tim
                 try {
                     val duration = binding.etRunningDuration.text.toString().toInt()
                     val mileage = binding.actvRunningMileage.text.toString().toInt()
+                    if (duration in 0..8) {
+                        throw NonSenseException("Even usain bolt needs 9 seconds to do a 100M running!.")
+                    }
                     runningValue?.let {
                         it.duration = duration
                         it.distance = mileage
                         viewModel.updateData(it)
-                        showToast(getString(R.string.got_point_template, PointsManager.EXERCISE_POINT))
+                        showToast(
+                            getString(
+                                R.string.got_point_template,
+                                PointsManager.EXERCISE_POINT
+                            )
+                        )
                     } ?: kotlin.run {
                         showToast("Data is null!")
                     }
-                }catch (e: NumberFormatException){
+                } catch (e: NumberFormatException) {
                     showToast("Please input all the field!")
-                }
-                catch (e: Exception) {
+                } catch (e: NonSenseException) {
+                    showToast(e.message.toString())
+                } catch (e: Exception) {
                     Log.e("Running fragment", "onClick: ${e.message}")
                     showToast("Failed to execute!")
                 }

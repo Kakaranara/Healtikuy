@@ -85,6 +85,59 @@ object TipsManager {
         )
     )
 
+    fun generateNutritionTips() = TipList(
+        listOf<Tips>(
+            Tips(
+                "tips",
+                "Avoid too much saturated fat. On average, men should have no more 30g of saturated fat per day. 20g for women. Too much saturated fat can increase the amount of cholesterol."
+            ),
+            Tips(
+                "tips",
+                "Avoid too much sugar. Regularly consuming it can increase your risk of obesity and tooth decay."
+            ),
+            Tips(
+                "tips",
+                "eat less salt, no more than 6g a day for adults. Eating too much salt can raise your blood pressure, which lead to many health problem."
+            ),
+            Tips(
+                "tips",
+                "Base your meals on higher fibre starchy carbohydrates, such as potatoes, bread, cereal, pasta and rice. It can help you feel full for longer."
+            ),
+            Tips(
+                "tips",
+                "Eat lots of fruit and vegetables. It's recommended that you eat at least 5 portions of a variety of fruit and veg every day. They can be fresh, frozen, canned, dried or juiced."
+            ),
+            Tips(
+                "tips",
+                "Eat more fish, including a portion of oily fish. Fish is a good source of protein and contain many vitamin and minerals."
+            ),
+            Tips(
+                "info",
+                """
+                    There are 2 types of fat : saturated and unsaturated fat. 
+                    Eating too much saturated fat, can increase the amount of cholesterol in the blood, 
+                    which increase the risk of heart disease and another disease.
+                """.trimIndent()
+            ),
+            Tips(
+                "info",
+                """
+                    Sugary food or drinks are often high in energy (measured by calories), and if consumed too much can lead to weight gain and also tooth decay.
+                    Free sugar is what we call sugar added to a food or drink, or found naturally in honey, syrups, and smoothies.
+                    This is the type of sugar that we should avoid, rather than sugar found in fruit and milk.
+                    Free sugar are found in many food such as : 
+                    - sugary fizzy drinks
+                    - sugary breakfast cereals
+                    - cakes
+                    - biscuits
+                    - pastries and puddings
+                    - sweets and chocolate
+                    - alcoholic drinks
+                """.trimIndent()
+            )
+        )
+    )
+
     fun generateSunExposureTips() = TipList(
         listOf<Tips>(
             Tips(

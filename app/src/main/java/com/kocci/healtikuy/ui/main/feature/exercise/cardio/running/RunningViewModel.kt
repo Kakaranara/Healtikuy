@@ -35,7 +35,7 @@ class RunningViewModel @Inject constructor(
         }
     }
 
-    fun clearHistory(){
+    fun clearHistory() {
         viewModelScope.launch {
             runningUseCase.clearHistory()
         }
