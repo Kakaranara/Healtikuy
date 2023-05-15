@@ -71,10 +71,17 @@ class WaterIntakeFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v) {
             binding.button -> {
-                val adapter = WaterIntakeAdapter(waterIntake.quantity)
-                binding.recyclerView.adapter = adapter
+                if (waterIntake.quantity > 16) {
+                    showToast(
+                        "Stop! Too much water can harm your health.",
+                        longToast = true
+                    )
+                } else {
+                    val adapter = WaterIntakeAdapter(waterIntake.quantity)
+                    binding.recyclerView.adapter = adapter
 
-                viewModel.drinkOneGlass(waterIntake)
+                    viewModel.drinkOneGlass(waterIntake)
+                }
             }
         }
     }
