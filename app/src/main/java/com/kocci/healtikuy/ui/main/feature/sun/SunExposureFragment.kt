@@ -52,6 +52,7 @@ class SunExposureFragment : Fragment(), TimePickerFragment.TimePickerListener,
                     buttonClickGoesToTimer()
                     binding.tvSunfireTime.text = getString(R.string.time_not_set)
                     binding.btnChangeSunfireTime.visibility = View.GONE
+                    binding.btnSunfireTime.isEnabled = true
                     binding.tvSunfireDesc.text = getString(R.string.description_when_time_not_set)
                 }
 
