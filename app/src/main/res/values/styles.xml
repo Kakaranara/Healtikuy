@@ -9,6 +9,14 @@
         <item name="cornerSize">10%</item>
     </style>
 
+    <style name="textGuide.title" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
+    <style name="textGuide.body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
     <!-- TOOLBAR -->
 
     <style name="Widget.App.Toolbar" parent="Widget.Material3.Toolbar">

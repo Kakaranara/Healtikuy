@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.other.GuidanceFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.main.other.GuidanceFragment">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbarGuidance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+
+            <TextView
+                style="@style/textGuide.title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/features" />
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Material3.CardView.Filled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="450dp"
+                    android:src="@drawable/home_feature_example"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                style="@style/textGuide.body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/guide_main_features" />
+
+            <TextView
+                style="@style/textGuide.title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_attributes" />
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Material3.CardView.Filled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:src="@drawable/home_attr_example"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                style="@style/textGuide.body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/guide_user_attributes" />
+
+            <TextView
+                style="@style/textGuide.title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/feature_example" />
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Material3.CardView.Filled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="450dp"
+                    android:src="@drawable/feature_sleep_example"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                style="@style/textGuide.body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/guide_feature_sleep" />
+
+            <TextView
+                style="@style/textGuide.title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/system" />
+
+            <TextView
+                style="@style/textGuide.body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_system" />
+
+            <TextView
+                style="@style/textGuide.title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy" />
+
+            <TextView
+                style="@style/textGuide.body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_privacy" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

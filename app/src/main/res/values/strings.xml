@@ -127,6 +127,31 @@
     <!-- Nutrition Related -->
     <string name="nutrition_tips">There are 3 different things we must avoid eating too much : sugar, salt, and saturated fat.</string>
     <string name="image_of_app_logo">image of app logo</string>
+
+    <!-- Other related -->
+    <string name="guidance">Guidance</string>
+    <string name="about">About</string>
+    <string name="about_expectation">
+        Healtikuy purpose was to help you to achieve your goals, in terms of a Healthy Lifestyle.
+        The developer aspires for this application to facilitate the cultivation of beneficial habits for users.
+        Once the habit has been successfully established, it\'s okay to remove this app.
+    </string>
+    <string name="about_special_thanks">Freepik, Flaticon, Icons8, Material Icon, for providing a free assets for this app.</string>
+    <string name="special_thanks_to">Special thanks to :</string>
+    <string name="expectation">Expectation</string>
+    <string name="guide_feature_sleep">To complete the mission, you should follow the description text. In this feature (sleep), you should set the time first and you should click the button to complete the mission if the time is within 1 hours with your schedule.</string>
+    <string name="feature_example">Feature Example</string>
+    <string name="guide_user_attributes">There are user attributes such as points, coin, and another. Point is the indicator that if you have reach a healthy lifestyle or not, and points is working together with progress bar. Full Progress Bar, means you reach the goals (healthy lifestyle). There\'s also a coin, to purchase an avatar in the store.\nYou can get the points by completing each mission in main feature. And the points is different for each feature. \nFor coin, you can get it in challenges, and when you have reach the goals (you get it per day).</string>
+    <string name="user_attributes">User Attributes</string>
+    <string name="guide_main_features">There\'s exactly 5 main feature to help you promotes your health. You aren\'t necessary doing all of that if you dont want to. You can choose what you like. However, if you can do all of that, it\'s good.</string>
+    <string name="features">Features</string>
+    <string name="about_apps">Why this app named \'healtikuy\'? It was actually from indonesia jargon and english words, and Kuy just means like \'Lets go!\'. So this app means Healthy + Kuy = Let\'s be healthy!</string>
+    <string name="about_title">About this app</string>
+    <string name="system">System</string>
+    <string name="about_system">Your progress will reset every day, and will be recorded in your history. And there\'s a punishment system, that is if you not doing any 1 features in 2 days streak, your point will be reduced by 1000 each day</string>
+    <string name="privacy">About Privacy</string>
+    <string name="about_privacy">Everything inside the 5 main feature uses a local database, and never be uploaded to cloud database. That\'s why if you logged out your account or uninstalled it, your main feature will be lost. However, the points, coin, and other thing beside the main feature, will be uploaded to cloud database. Also, if you want your account deleted, just contact the developer that listed in playstore.</string>
+    <string name="other">Other</string>
     <!-- Sun Related -->
 
 </resources>
