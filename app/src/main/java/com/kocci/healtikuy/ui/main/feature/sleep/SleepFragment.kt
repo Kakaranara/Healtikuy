@@ -155,6 +155,7 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
         cal.set(Calendar.MINUTE, minute)
 
         viewModel.setSchedule(cal.timeInMillis)
+        showToast("Alarm set!")
     }
 
     override fun onDestroyView() {

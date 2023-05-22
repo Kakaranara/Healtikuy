@@ -94,7 +94,7 @@ class SunExposureFragment : Fragment(), TimePickerFragment.TimePickerListener,
         cal.set(Calendar.MINUTE, minute)
 
         viewModel.setSchedule(cal.timeInMillis)
-        showToast("$hour : $minute")
+        showToast("Alarm set!")
     }
 
     private fun buttonClickGoesToTimer() {
