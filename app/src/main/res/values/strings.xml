@@ -47,8 +47,8 @@
 
     <!-- Home Related -->
     <string name="status_points">Points : %d / %d</string>
-    <string name="status_low">Cheers up! You can do this!</string>
-    <string name="status_mid">You can do this!</string>
+    <string name="status_low">Cheers up! It was never too late to change your life!</string>
+    <string name="status_mid">You are in the middle of your journey! You can do this!</string>
     <string name="status_near_complete">Your journey is near to success! Keep it up!</string>
     <string name="status_completed">Congratulation! You\'ve implemented a Healthy Lifestyle. Keep it up! </string>
     <string name="ways_to_healthy">Ways to Improve your Health</string>
