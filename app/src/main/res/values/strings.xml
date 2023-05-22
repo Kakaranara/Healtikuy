@@ -154,6 +154,9 @@
     <string name="other">Other</string>
     <string name="login_streak">Login Streak</string>
     <string name="daily_log_in_streak">Daily Log-in Streak:</string>
-    <!-- Sun Related -->
+    <string name="bonus_coin_d">Bonus Coin : %d</string>
+
+
+
 
 </resources>

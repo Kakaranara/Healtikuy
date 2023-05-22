@@ -26,19 +26,25 @@ class ChallengeAdapter(
             val checkmark = itemView.findViewById<ImageView>(R.id.imgItemChallengeCheckmark)
 
             tvName.text = data.name
-            tvBonusCoin.text = "Bonus Coin: ${data.coinRewards}"
+            tvBonusCoin.text = itemView.resources.getString(R.string.bonus_coin_d, data.coinRewards)
 
-
-            if (data.category == "points") {
-                if (userAttr.points >= data.pointRequired) {
-                    btnComplete.isEnabled = true
+            when (data.category) {
+                "points" -> {
+                    if (userAttr.points >= data.pointRequired) {
+                        btnComplete.isEnabled = true
+                    }
                 }
-            } else {
-                btnComplete.isEnabled = false
+
+                "login" -> {
+                    if (userAttr.loginStreak >= data.loginRequired) {
+                        btnComplete.isEnabled = true
+                    }
+                }
+
+                else -> btnComplete.isEnabled = false
             }
 
             if (data.isCompleted) {
-                //TODO : Change with checkmark icon
                 btnComplete.gone()
                 checkmark.visible()
             }
