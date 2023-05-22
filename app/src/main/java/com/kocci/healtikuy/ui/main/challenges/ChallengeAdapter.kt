@@ -8,14 +8,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kocci.healtikuy.R
-import com.kocci.healtikuy.core.domain.model.Challenge
-import com.kocci.healtikuy.core.domain.model.UserPreferences
+import com.kocci.healtikuy.core.domain.model.challenges.Challenge
+import com.kocci.healtikuy.core.domain.model.challenges.UserChallengeAttributes
 import com.kocci.healtikuy.util.extension.gone
 import com.kocci.healtikuy.util.extension.visible
 
 class ChallengeAdapter(
     private val list: List<Challenge>,
-    private val userPreferences: UserPreferences
+    private val userAttr: UserChallengeAttributes
 ) :
     RecyclerView.Adapter<ChallengeAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -25,13 +25,12 @@ class ChallengeAdapter(
             val btnComplete = itemView.findViewById<Button>(R.id.btnItemChallenges)
             val checkmark = itemView.findViewById<ImageView>(R.id.imgItemChallengeCheckmark)
 
-
             tvName.text = data.name
             tvBonusCoin.text = "Bonus Coin: ${data.coinRewards}"
 
 
             if (data.category == "points") {
-                if (userPreferences.points >= data.pointRequired) {
+                if (userAttr.points >= data.pointRequired) {
                     btnComplete.isEnabled = true
                 }
             } else {

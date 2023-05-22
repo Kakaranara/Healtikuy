@@ -3,8 +3,8 @@ package com.kocci.healtikuy.core.domain.interactor
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.data.repository.HealtikuyRepository
 import com.kocci.healtikuy.core.data.repository.UserRepository
-import com.kocci.healtikuy.core.domain.model.Challenge
-import com.kocci.healtikuy.core.domain.model.UserPreferences
+import com.kocci.healtikuy.core.domain.model.challenges.Challenge
+import com.kocci.healtikuy.core.domain.model.challenges.UserChallengeAttributes
 import com.kocci.healtikuy.core.domain.usecase.ChallengesUseCase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -21,8 +21,8 @@ class ChallengesInteractor @Inject constructor(
         return healtikuyRepository.completeChallenges(documentId)
     }
 
-    override suspend fun getUserLocalData(): UserPreferences {
-        return userRepository.getRawUserPreferences()
+    override suspend fun getUserAttributes(): UserChallengeAttributes {
+        return userRepository.getUserChallengeAttributes()
     }
 
     override suspend fun addCoins(coin: Int) {

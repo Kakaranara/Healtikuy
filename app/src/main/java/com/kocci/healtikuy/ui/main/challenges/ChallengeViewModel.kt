@@ -14,7 +14,7 @@ class ChallengeViewModel @Inject constructor(
 ) : ViewModel() {
     val progress = challengesUseCase.getChallengeProgress().asLiveData()
     fun completeChallenges(id: String) = challengesUseCase.completeChallenge(id).asLiveData()
-    suspend fun getUserPreferences() = challengesUseCase.getUserLocalData()
+    suspend fun getUserAttributes() = challengesUseCase.getUserAttributes()
     fun addCoin(coin: Int) {
         viewModelScope.launch {
             challengesUseCase.addCoins(coin)

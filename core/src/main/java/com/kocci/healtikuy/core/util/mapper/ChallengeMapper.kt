@@ -1,8 +1,5 @@
 package com.kocci.healtikuy.core.util.mapper
 
-import com.kocci.healtikuy.core.data.local.entity.ChallengeEntity
-import com.kocci.healtikuy.core.domain.model.Challenge
-
 //fun Challenge.toEntity(): ChallengeEntity {
 //    return ChallengeEntity(
 //        name = this.name,
