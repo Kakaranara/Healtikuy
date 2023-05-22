@@ -153,6 +153,7 @@
     <string name="about_privacy">Everything inside the 5 main feature uses a local database, and never be uploaded to cloud database. That\'s why if you logged out your account or uninstalled it, your main feature will be lost. However, the points, coin, and other thing beside the main feature, will be uploaded to cloud database. Also, if you want your account deleted, just contact the developer that listed in playstore.</string>
     <string name="other">Other</string>
     <string name="login_streak">Login Streak</string>
+    <string name="daily_log_in_streak">Daily Log-in Streak:</string>
     <!-- Sun Related -->
 
 </resources>
