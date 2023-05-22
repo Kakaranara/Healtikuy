@@ -26,6 +26,10 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbarProfile.setupWithNavController(findNavController())
 
+        viewModel.loginStreakLivedata.observe(viewLifecycleOwner) { loginStreak ->
+            binding.tvProfileLoginStreak.text = loginStreak.toString()
+        }
+
         viewModel.userData.observe(viewLifecycleOwner) { userData ->
             userPreference = userData
             binding.imgProfile.setImageDrawable(
