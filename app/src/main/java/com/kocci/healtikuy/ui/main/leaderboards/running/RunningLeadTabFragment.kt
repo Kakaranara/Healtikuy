@@ -60,7 +60,7 @@ class RunningLeadTabFragment : Fragment() {
                         if (dataAdapter.isEmpty()) {
                             binding.tvNoItem.visible()
                         }
-                        val mAdapter = LeadPointsAdapter(dataAdapter, requireActivity())
+                        val mAdapter = LeadPointsAdapter(dataAdapter, requireActivity(), "Sec")
                         val mLayout = LinearLayoutManager(requireActivity())
 
                         binding.rvRunningLeaderboard.apply {
