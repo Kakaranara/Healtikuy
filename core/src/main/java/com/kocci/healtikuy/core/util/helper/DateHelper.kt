@@ -2,9 +2,6 @@ package com.kocci.healtikuy.core.util.helper
 
 import android.util.Log
 import java.text.SimpleDateFormat
-import java.time.Instant
-import java.time.LocalDateTime
-import java.time.ZoneId
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
@@ -76,14 +73,53 @@ object DateHelper {
     }
 
     fun isTimeWithin1Hours(time: Long): Boolean {
-        val calendarForTime = Calendar.getInstance()
-        calendarForTime.timeInMillis = time
-        val nowTime = LocalDateTime.now()
-        val cal2 = Calendar.getInstance()
-        cal2.apply {
-            set(Calendar.HOUR_OF_DAY, calendarForTime.get(Calendar.HOUR_OF_DAY))
-            set(Calendar.MINUTE, calendarForTime.get(Calendar.MINUTE))
+//        val calendarForTime = Calendar.getInstance()
+//        calendarForTime.timeInMillis = time
+//        val nowTime = LocalDateTime.now()
+//        val cal2 = Calendar.getInstance()
+//        cal2.apply {
+//            set(Calendar.HOUR_OF_DAY, calendarForTime.get(Calendar.HOUR_OF_DAY))
+//            set(Calendar.MINUTE, calendarForTime.get(Calendar.MINUTE))
+//        }
+//        try {
+//            /**
+//             * It'd be a problem if the time is between 23.00 - 00.59.
+//             * because, cal2 get the calendarForTime, only the HOURS and MINUTES.
+//             * and, cal2 automatically have a NOW date. which isn't right.
+//             * if cal2 are compared to now local date time, it will be different like 23 Hours.
+//             * Example : Cal2 = 5 May 2023, 23: 55 -> nowTime = 5 May 2023, 00 : 40
+//             * The solution for that example is to decrease the cal2 days to 4 May.
+//             * Or, if this condition true, should i directly return TRUE? HAHAHA
+//             */
+//            if (cal2.get(Calendar.HOUR_OF_DAY) == 0 && nowTime.hour == 23) {
+//                cal2.set(Calendar.DAY_OF_MONTH, cal2.get(Calendar.DAY_OF_MONTH) + 1)
+//            }
+//            if (cal2.get(Calendar.HOUR_OF_DAY) == 23 && nowTime.hour == 0) {
+//                cal2.set(Calendar.DAY_OF_MONTH, cal2.get(Calendar.DAY_OF_MONTH) - 1)
+//            }
+//        } catch (e: Exception) {
+//            Log.e("Date Helper", "isTimeWithin1Hours: ERROR PARSING DATE ${e.message}")
+//            return true //? because when this happen, probably it should be true..
+//        }
+//        val setTime =
+//            LocalDateTime.ofInstant(Instant.ofEpochMilli(cal2.timeInMillis), ZoneId.systemDefault())
+//
+//        val isAfter = setTime.isAfter(nowTime.minusHours(1))
+//        val isBefore = setTime.isBefore(nowTime.plusHours(1))
+//
+//        return isAfter && isBefore
+
+        /**
+         * Solution for backward compatibility (not using LocalDateTime)
+         */
+
+        val rawTimeCal = Calendar.getInstance().apply { timeInMillis = time }
+        val todaySchedule = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, rawTimeCal.get(Calendar.HOUR_OF_DAY))
+            set(Calendar.MINUTE, rawTimeCal.get(Calendar.MINUTE))
         }
+        val todayMillis = System.currentTimeMillis()
+
         try {
             /**
              * It'd be a problem if the time is between 23.00 - 00.59.
@@ -94,32 +130,26 @@ object DateHelper {
              * The solution for that example is to decrease the cal2 days to 4 May.
              * Or, if this condition true, should i directly return TRUE? HAHAHA
              */
-            if (cal2.get(Calendar.HOUR_OF_DAY) == 0 && nowTime.hour == 23) {
-                cal2.set(Calendar.DAY_OF_MONTH, cal2.get(Calendar.DAY_OF_MONTH) + 1)
+            val nowTime = Calendar.getInstance().apply { timeInMillis = todayMillis }
+            if (todaySchedule.get(Calendar.HOUR_OF_DAY) == 0 && nowTime.get(Calendar.HOUR_OF_DAY) == 23) {
+                todaySchedule.set(Calendar.DAY_OF_MONTH, todaySchedule.get(Calendar.DAY_OF_MONTH) + 1)
             }
-            if (cal2.get(Calendar.HOUR_OF_DAY) == 23 && nowTime.hour == 0) {
-                cal2.set(Calendar.DAY_OF_MONTH, cal2.get(Calendar.DAY_OF_MONTH) - 1)
+            if (todaySchedule.get(Calendar.HOUR_OF_DAY) == 23 && nowTime.get(Calendar.HOUR_OF_DAY) == 0) {
+                todaySchedule.set(Calendar.DAY_OF_MONTH, todaySchedule.get(Calendar.DAY_OF_MONTH) - 1)
             }
         } catch (e: Exception) {
             Log.e("Date Helper", "isTimeWithin1Hours: ERROR PARSING DATE ${e.message}")
             return true //? because when this happen, probably it should be true..
         }
-        val setTime =
-            LocalDateTime.ofInstant(Instant.ofEpochMilli(cal2.timeInMillis), ZoneId.systemDefault())
 
-        val isAfter = setTime.isAfter(nowTime.minusHours(1))
-        val isBefore = setTime.isBefore(nowTime.plusHours(1))
-
-        return isAfter && isBefore
-//
-//        val timeLocalTime = Instant.ofEpochMilli(time).atZone(ZoneId.systemDefault()).toLocalTime()
-//        val now = LocalDateTime.now().toLocalDate().atTime(timeLocalTime)
-//        return now.isAfter(LocalDateTime.now().minusHours(1)) && now.isBefore(
-//            LocalDateTime.now().plusHours(1)
-//        )
+        val todayScheduleMillis = todaySchedule.timeInMillis
+        if (todayMillis > todayScheduleMillis - hourInMill && todayMillis < todayScheduleMillis + hourInMill) {
+            return true
+        }
+        return false
     }
 
-    fun calculateDayDiff(time: Long, currentTime: Long = System.currentTimeMillis()) : Long{
+    fun calculateDayDiff(time: Long, currentTime: Long = System.currentTimeMillis()): Long {
         val millisDiff = currentTime - time //in millis
         val dayDiff = TimeUnit.DAYS.convert(millisDiff, TimeUnit.MILLISECONDS)
 

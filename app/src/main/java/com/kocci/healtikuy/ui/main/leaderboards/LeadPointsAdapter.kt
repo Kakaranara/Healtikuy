@@ -13,7 +13,8 @@ import com.kocci.healtikuy.util.helper.DrawableHelper
 
 class LeadPointsAdapter(
     private val data: List<LeaderboardsPoint>,
-    private val context: Context
+    private val context: Context,
+    private val unit: String? = null
 ) : RecyclerView.Adapter<LeadPointsAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(data: LeaderboardsPoint) {
@@ -27,7 +28,13 @@ class LeadPointsAdapter(
                 DrawableHelper.getAvatarDrawable(context, data.avatar)
             )
             username.text = data.name
-            points.text = data.points.toString()
+
+            unit?.let { unit ->
+                points.text = "${data.points} $unit"
+
+            } ?: run {
+                points.text = data.points.toString()
+            }
         }
     }
 

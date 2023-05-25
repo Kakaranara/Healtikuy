@@ -55,7 +55,8 @@ class UserPreferencesManager @Inject constructor(
         val STATIC_BIKE_INTERVAL = intPreferencesKey("static_bike_interval")
         val STATIC_BIKE_IS_EDITING = booleanPreferencesKey("static_bike_is_editing")
 
-
+        //? Another preferences?
+        val LOGIN_STREAK = intPreferencesKey("login_streak")
     }
 
     /**
@@ -152,6 +153,13 @@ class UserPreferencesManager @Inject constructor(
     suspend fun setLastLoginToToday() {
         dataStore.edit { preferences ->
             preferences[PreferenceKeys.LAST_LOGIN] = System.currentTimeMillis()
+        }
+    }
+
+    //debug
+    suspend fun setLastLogin(time: Long){
+        dataStore.edit { preferences ->
+            preferences[PreferenceKeys.LAST_LOGIN] = time
         }
     }
 
@@ -283,6 +291,26 @@ class UserPreferencesManager @Inject constructor(
 
                 else -> throw Exception("RUNNING TYPE EXPECTED")
             }
+        }
+    }
+
+    /**
+     * Another feature preferences
+     */
+
+    val loginStreak: Flow<Int> = dataStore.data.map { pref ->
+        pref[PreferenceKeys.LOGIN_STREAK] ?: 0
+    }
+
+    suspend fun addLoginStreak() {
+        dataStore.edit { pref ->
+            pref[PreferenceKeys.LOGIN_STREAK] = (pref[PreferenceKeys.LOGIN_STREAK] ?: 0) + 1
+        }
+    }
+
+    suspend fun resetLoginStreak() {
+        dataStore.edit { pref ->
+            pref[PreferenceKeys.LOGIN_STREAK] = 0
         }
     }
 

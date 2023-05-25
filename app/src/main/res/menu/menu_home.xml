@@ -10,4 +10,10 @@
         android:id="@+id/action_sync_local"
         android:title="@string/local_sync"
         app:showAsAction="never" />
+
+<!--    <item-->
+<!--        android:id="@+id/action_guide"-->
+<!--        android:icon="@drawable/baseline_question_mark_24"-->
+<!--        android:title="@string/guidance"-->
+<!--        app:showAsAction="ifRoom" />-->
 </menu>

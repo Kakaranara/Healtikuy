@@ -16,6 +16,10 @@ class UserInteractor @Inject constructor(
         return repository.getUserPreferences()
     }
 
+    override suspend fun getUserLoginStreak(): Int {
+        return repository.getLoginStreak()
+    }
+
     override fun listenForPointsChanges(): Flow<HealthyStatusIndicator> {
         return repository.getUserPreferences().map {
             val points = it.points

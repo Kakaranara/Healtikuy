@@ -6,7 +6,7 @@ import com.kocci.healtikuy.core.data.local.LocalDataSource
 import com.kocci.healtikuy.core.data.local.preferences.UserPreferencesManager
 import com.kocci.healtikuy.core.data.remote.RemoteDataSource
 import com.kocci.healtikuy.core.data.remote.model.Async
-import com.kocci.healtikuy.core.domain.model.Challenge
+import com.kocci.healtikuy.core.domain.model.challenges.Challenge
 import com.kocci.healtikuy.core.domain.repository.IHealtikuyRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

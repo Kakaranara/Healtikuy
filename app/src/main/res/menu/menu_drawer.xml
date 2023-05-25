@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--
+        Note that every navigation in drawer are determined
+        by the same id of menu and the fragment.
+        Use fragment id and navigation component automatically make the nav!
+      -->
+
     <item
         android:id="@+id/main_action"
         android:title="@string/feature">
@@ -39,9 +46,27 @@
                 android:title="@string/logout"
                 app:showAsAction="never" />
         </menu>
-
-
     </item>
 
+    <item
+        android:id="@+id/other_action"
+        android:title="@string/other">
+
+        <menu>
+            <item
+                android:id="@id/guidanceFragment"
+                android:icon="@drawable/baseline_question_mark_24"
+                android:title="@string/guidance"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@id/aboutFragment"
+                android:icon="@drawable/baseline_domain_24"
+                android:title="@string/about"
+                app:showAsAction="never" />
+
+        </menu>
+
+    </item>
 
 </menu>

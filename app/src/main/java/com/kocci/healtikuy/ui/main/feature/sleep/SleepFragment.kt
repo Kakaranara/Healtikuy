@@ -50,6 +50,9 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
                     buttonClickGoesToTimer()
                     binding.tvSleepTime.text = getString(R.string.time_not_set)
                     binding.btnChangeSleepTime.visibility = View.GONE
+                    //! This was actually bad practice.
+                    //! Refactor later, use Frame Layout instead for this btn.
+                    binding.btnSleepTime.isEnabled = true
                     binding.tvSleepDesc.text = getString(R.string.description_when_time_not_set)
                 }
 
@@ -152,6 +155,7 @@ class SleepFragment : Fragment(), View.OnClickListener, TimePickerFragment.TimeP
         cal.set(Calendar.MINUTE, minute)
 
         viewModel.setSchedule(cal.timeInMillis)
+        showToast("Alarm set!")
     }
 
     override fun onDestroyView() {

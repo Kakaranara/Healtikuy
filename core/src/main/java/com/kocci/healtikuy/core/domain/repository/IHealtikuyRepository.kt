@@ -1,7 +1,7 @@
 package com.kocci.healtikuy.core.domain.repository
 
 import com.kocci.healtikuy.core.data.remote.model.Async
-import com.kocci.healtikuy.core.domain.model.Challenge
+import com.kocci.healtikuy.core.domain.model.challenges.Challenge
 import kotlinx.coroutines.flow.Flow
 
 /**

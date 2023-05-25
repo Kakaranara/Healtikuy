@@ -1,4 +1,4 @@
-package com.kocci.healtikuy.core.domain.model
+package com.kocci.healtikuy.core.domain.model.challenges
 
 data class Challenge(
     val challengeId : String,

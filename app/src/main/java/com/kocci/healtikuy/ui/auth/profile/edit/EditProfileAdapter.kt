@@ -27,7 +27,7 @@ class EditProfileAdapter(private val list: List<String>, private val context: Co
                 DrawableHelper.getIdentifier(context, name)
             )
             imgView.setImageDrawable(drawable)
-            tv.text = name
+            tv.text = name.replace("_"," ")
             card.setOnClickListener {
                 listener?.setOnItemClick(name)
             }

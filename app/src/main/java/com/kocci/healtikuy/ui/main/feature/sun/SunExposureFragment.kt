@@ -17,7 +17,9 @@ import com.kocci.healtikuy.databinding.FragmentSunExposureBinding
 import com.kocci.healtikuy.ui.dialog.tips.linear.TipsDialogBSheet
 import com.kocci.healtikuy.ui.picker.TimePickerFragment
 import com.kocci.healtikuy.util.extension.showToast
+import com.kocci.healtikuy.util.helper.HistoryHelper
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 import java.util.Calendar
 
 
@@ -50,6 +52,7 @@ class SunExposureFragment : Fragment(), TimePickerFragment.TimePickerListener,
                     buttonClickGoesToTimer()
                     binding.tvSunfireTime.text = getString(R.string.time_not_set)
                     binding.btnChangeSunfireTime.visibility = View.GONE
+                    binding.btnSunfireTime.isEnabled = true
                     binding.tvSunfireDesc.text = getString(R.string.description_when_time_not_set)
                 }
 
@@ -91,7 +94,7 @@ class SunExposureFragment : Fragment(), TimePickerFragment.TimePickerListener,
         cal.set(Calendar.MINUTE, minute)
 
         viewModel.setSchedule(cal.timeInMillis)
-        showToast("$hour : $minute")
+        showToast("Alarm set!")
     }
 
     private fun buttonClickGoesToTimer() {
@@ -129,6 +132,16 @@ class SunExposureFragment : Fragment(), TimePickerFragment.TimePickerListener,
             setOnMenuItemClickListener { menu ->
                 when (menu.itemId) {
                     R.id.action_history -> {
+                        runBlocking {
+                            val data = viewModel.getAllData()
+                            val historyList = HistoryHelper.orchestrateSunExposure(data)
+
+                            val direction =
+                                SunExposureFragmentDirections.actionGlobalHistoryFragment(
+                                    historyList
+                                )
+                            findNavController().navigate(direction)
+                        }
                         true
                     }
 

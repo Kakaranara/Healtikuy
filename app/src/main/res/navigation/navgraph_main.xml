@@ -171,4 +171,14 @@
         android:name="com.kocci.healtikuy.ui.main.leaderboards.running.RunningLeaderboardsFragment"
         android:label="Running Leaderboards"
         tools:layout="@layout/fragment_running_leaderboards" />
+    <fragment
+        android:id="@+id/guidanceFragment"
+        android:name="com.kocci.healtikuy.ui.main.other.GuidanceFragment"
+        android:label="Guide"
+        tools:layout="@layout/fragment_guidance" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.kocci.healtikuy.ui.main.other.AboutFragment"
+        android:label="About"
+        tools:layout="@layout/fragment_about" />
 </navigation>

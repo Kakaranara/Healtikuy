@@ -11,8 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.kocci.healtikuy.core.data.remote.model.Async
-import com.kocci.healtikuy.core.domain.model.Challenge
-import com.kocci.healtikuy.core.domain.model.UserPreferences
+import com.kocci.healtikuy.core.domain.model.challenges.Challenge
+import com.kocci.healtikuy.core.domain.model.challenges.UserChallengeAttributes
 import com.kocci.healtikuy.databinding.DialogChallengesBinding
 import com.kocci.healtikuy.util.extension.gone
 import com.kocci.healtikuy.util.extension.showToast
@@ -52,7 +52,7 @@ class ChallengeDialog(context: Context) : DialogFragment() {
                 is Async.Success -> {
                     binding.progressBarDialogChallenge.gone()
                     runBlocking {
-                        val userData = viewModel.getUserPreferences()
+                        val userData = viewModel.getUserAttributes()
                         setupAdapter(it.data, userData)
                     }
                 }
@@ -60,8 +60,8 @@ class ChallengeDialog(context: Context) : DialogFragment() {
         }
     }
 
-    private fun setupAdapter(list: List<Challenge>, userPreferences: UserPreferences) {
-        val mAdapter = ChallengeAdapter(list, userPreferences).apply {
+    private fun setupAdapter(list: List<Challenge>, userAttr: UserChallengeAttributes) {
+        val mAdapter = ChallengeAdapter(list, userAttr).apply {
             clickListener = object : ChallengeAdapter.OnButtonClickListener {
                 override fun onButtonComplete(data: Challenge) {
                     viewModel.completeChallenges(data.challengeId).observe(viewLifecycleOwner) {

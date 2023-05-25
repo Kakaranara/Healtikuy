@@ -13,6 +13,10 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
+/**
+ * This repository handles synchronization data.
+ * You might be interested looking at regularSync().
+ */
 class AppRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val preferencesManager: UserPreferencesManager
@@ -27,7 +31,7 @@ class AppRepository @Inject constructor(
                     lastLogin = System.currentTimeMillis(),
                     points = map["points"] as Long,
                     coin = (map["coin"] as Long).toInt(),
-                    username = fbUser.displayName.toString(),
+                    username = map["username"] as String,
                     email = fbUser.email.toString(),
                     avatar = map["avatar"] as String,
                     inventory = (map["inventory"] as ArrayList<String>).toSet(),
@@ -72,7 +76,9 @@ class AppRepository @Inject constructor(
         val localData = preferencesManager.userPreferences.first()
         val lastLogin = localData.lastLogin
         if (!DateHelper.isToday(lastLogin)) {
+            Log.e("SYNC", "regularSync: SYNC TRIGGERED")
             reducePointIfAbsent(lastLogin)
+            preferencesManager.addLoginStreak()
             val fbUser = remoteDataSource.getFirebaseUser() as FirebaseUser
             try {
                 val firestoreDocument = hashMapOf<String, Any>(
@@ -100,10 +106,24 @@ class AppRepository @Inject constructor(
         val missingDays = DateHelper.calculateDayDiff(lastLogin)
         //the day after tomorrow
         //because if it only tomorrow then it was a regular sync.
+        Log.e("APP Repository", "reducePointIfAbsent: POINT REDUCED")
         if (missingDays > 1) {
             val pointReduced = missingDays * PointsManager.MISSING_POINT
             preferencesManager.reducePoint(pointReduced)
+            preferencesManager.resetLoginStreak()
         }
+    }
+
+    //!Debug function : put in top of regular sync
+    private suspend fun forceLastLoginYesterday() {
+        /**
+         * You might determine the time to other time than yesterday.
+         * Determine the time : https://www.unixtimestamp.com/
+         * After convert, multiply it by 1000. because converted unix not in millis.
+         */
+        //set to yesterday
+        preferencesManager.setLastLogin(System.currentTimeMillis() - 86500000)
+//        preferencesManager.setLastLogin(1684191668000L)
     }
 
 }

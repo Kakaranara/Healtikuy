@@ -7,6 +7,7 @@ import com.kocci.healtikuy.core.data.local.preferences.UserPreferencesManager
 import com.kocci.healtikuy.core.data.remote.RemoteDataSource
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.domain.model.UserPreferences
+import com.kocci.healtikuy.core.domain.model.challenges.UserChallengeAttributes
 import com.kocci.healtikuy.core.domain.repository.IUserRepository
 import com.kocci.healtikuy.core.util.helper.CharacterInStore
 import kotlinx.coroutines.flow.Flow
@@ -25,6 +26,16 @@ class UserRepository @Inject constructor(
 
     override suspend fun getRawUserPreferences(): UserPreferences {
         return getUserPreferences().first()
+    }
+
+    override suspend fun getUserChallengeAttributes(): UserChallengeAttributes {
+        val points = userPreferenceManager.userPreferences.first().points
+        val loginStreak = userPreferenceManager.loginStreak.first()
+        return UserChallengeAttributes(points, loginStreak)
+    }
+
+    override suspend fun getLoginStreak(): Int {
+        return userPreferenceManager.loginStreak.first()
     }
 
     override fun isUserLogin(): Boolean {
