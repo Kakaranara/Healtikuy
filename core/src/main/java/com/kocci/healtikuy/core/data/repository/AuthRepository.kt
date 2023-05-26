@@ -36,19 +36,22 @@ class AuthRepository @Inject constructor(
         emit(Async.Loading)
         val firebaseAuth = remoteDataSource.getFirebaseAuth()
         try {
-            firebaseAuth.createUserWithEmailAndPassword(
-                form.email, form.password
-            ).await()
-            val fbUser = firebaseAuth.currentUser as FirebaseUser
-            fbUser.updateProfile(userProfileChangeRequest {
-                displayName = form.username
-            }).await()
+            firebaseAuth.createUserWithEmailAndPassword(form.email, form.password).await()
+
+            // * now user has created, so we can access firebase user.
+            val fbUser = firebaseAuth.currentUser as FirebaseUser //! Order is important
+            val profileChangeRequest = userProfileChangeRequest { displayName = form.username }
+            fbUser.updateProfile(profileChangeRequest).await()
+
+            // * sync user local data attributes with predefined FIRST_TIME_ATTRIBUTES
             preferencesManager.loginSync(
                 FirstTimeService.getFirstTimeSync(
                     fbUser.displayName.toString(),
                     fbUser.email.toString()
                 )
             )
+
+            // * upload user attributes to cloud db (firestore)
             remoteDataSource.createUserDataFirstTime(fbUser.uid, fbUser.displayName.toString())
             emit(Async.Success(Unit))
         } catch (e: Exception) {
