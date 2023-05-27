@@ -19,16 +19,16 @@ class AvatarListAdapter(private val list: List<String>, private val context: Con
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(name: String) {
-            val avatarView = itemView.findViewById<ImageView>(R.id.imgProfileItemAvatar)
-            val tv = itemView.findViewById<TextView>(R.id.tvProfileItemName)
-            val card = itemView.findViewById<CardView>(R.id.cardProfileItemAvatar)
-            val drawable = ContextCompat.getDrawable(
+            val avatarImage = itemView.findViewById<ImageView>(R.id.imgProfileItemAvatar)
+            val avatarName = itemView.findViewById<TextView>(R.id.tvProfileItemName)
+            val content = itemView.findViewById<CardView>(R.id.cardProfileItemAvatar)
+            val imageForAvatar = ContextCompat.getDrawable(
                 context,
                 DrawableHelper.getIdentifier(context, name)
             )
-            avatarView.setImageDrawable(drawable)
-            tv.text = name.replace("_"," ")
-            card.setOnClickListener {
+            avatarImage.setImageDrawable(imageForAvatar)
+            avatarName.text = name.replace("_"," ")
+            content.setOnClickListener {
                 clickListener?.setOnItemClick(name)
             }
         }
