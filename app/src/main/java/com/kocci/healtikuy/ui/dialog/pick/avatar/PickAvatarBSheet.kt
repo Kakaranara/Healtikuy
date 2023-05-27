@@ -32,11 +32,12 @@ class PickAvatarBSheet : BottomSheetDialogFragment() {
         val args = arguments?.getStringArrayList(INVENTORY_ARGS)
 
         args?.let { inventory ->
-            val mAdapter = AvatarListAdapter(inventory, requireActivity())
-            mAdapter.clickListener = object : AvatarListAdapter.ClickListener {
-                override fun setOnItemClick(name: String) {
-                    viewModel.changeAvatar(name)
-                    dismiss()
+            val mAdapter = AvatarListAdapter(inventory, requireActivity()).apply {
+                clickListener = object : AvatarListAdapter.ClickListener {
+                    override fun setOnItemClick(name: String) {
+                        viewModel.changeAvatar(name)
+                        dismiss()
+                    }
                 }
             }
             val gridLayout = GridLayoutManager(requireActivity(), 3)
