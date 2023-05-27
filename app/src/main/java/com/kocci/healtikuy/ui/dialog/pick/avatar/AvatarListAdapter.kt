@@ -1,4 +1,4 @@
-package com.kocci.healtikuy.ui.auth.profile.edit
+package com.kocci.healtikuy.ui.dialog.pick.avatar
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -12,24 +12,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.util.helper.DrawableHelper
 
-class EditProfileAdapter(private val list: List<String>, private val context: Context) :
-    RecyclerView.Adapter<EditProfileAdapter.ViewHolder>() {
+class AvatarListAdapter(private val list: List<String>, private val context: Context) :
+    RecyclerView.Adapter<AvatarListAdapter.ViewHolder>() {
 
-    var listener: Listener? = null
+    var clickListener: ClickListener? = null
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(name: String) {
-            val imgView = itemView.findViewById<ImageView>(R.id.imgProfileItemAvatar)
+            val avatarView = itemView.findViewById<ImageView>(R.id.imgProfileItemAvatar)
             val tv = itemView.findViewById<TextView>(R.id.tvProfileItemName)
             val card = itemView.findViewById<CardView>(R.id.cardProfileItemAvatar)
             val drawable = ContextCompat.getDrawable(
                 context,
                 DrawableHelper.getIdentifier(context, name)
             )
-            imgView.setImageDrawable(drawable)
+            avatarView.setImageDrawable(drawable)
             tv.text = name.replace("_"," ")
             card.setOnClickListener {
-                listener?.setOnItemClick(name)
+                clickListener?.setOnItemClick(name)
             }
         }
     }
@@ -45,7 +45,7 @@ class EditProfileAdapter(private val list: List<String>, private val context: Co
     }
 
     override fun getItemCount(): Int = list.size
-    interface Listener {
+    interface ClickListener {
         fun setOnItemClick(name: String)
     }
 }

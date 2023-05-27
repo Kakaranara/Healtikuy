@@ -1,4 +1,4 @@
-package com.kocci.healtikuy.ui.dialog
+package com.kocci.healtikuy.ui.dialog.pick.avatar
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kocci.healtikuy.R
-import com.kocci.healtikuy.core.domain.model.UserPreferences
-import com.kocci.healtikuy.ui.auth.profile.edit.EditProfileAdapter
 import com.kocci.healtikuy.ui.auth.profile.edit.EditProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,7 +17,6 @@ class PickAvatarBSheet : BottomSheetDialogFragment() {
 
     //! note that this was activityScoped
     private val viewModel: EditProfileViewModel by activityViewModels()
-    var pref: UserPreferences? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,26 +29,28 @@ class PickAvatarBSheet : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val args = arguments?.getStringArrayList(INVENTORY_ARGS)
 
-        pref?.let {
-            val rv = view.findViewById<RecyclerView>(R.id.rvChangeProfile)
-            val adapter = EditProfileAdapter(it.inventory.toList(), requireActivity())
-            adapter.listener = object : EditProfileAdapter.Listener {
+        args?.let { inventory ->
+            val mAdapter = AvatarListAdapter(inventory, requireActivity())
+            mAdapter.clickListener = object : AvatarListAdapter.ClickListener {
                 override fun setOnItemClick(name: String) {
                     viewModel.changeAvatar(name)
                     dismiss()
                 }
             }
-            val layoutManager = GridLayoutManager(requireActivity(), 3)
-
-            rv.adapter = adapter
-            rv.layoutManager = layoutManager
-
+            val gridLayout = GridLayoutManager(requireActivity(), 3)
+            //set rv
+            view.findViewById<RecyclerView>(R.id.rvChangeProfile).apply {
+                adapter = mAdapter
+                layoutManager = gridLayout
+            }
         }
 
     }
 
     companion object {
         const val TAG = "ModalBottomSheet"
+        const val INVENTORY_ARGS = "inventory_args"
     }
 }
