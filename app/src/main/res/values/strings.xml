@@ -155,8 +155,8 @@
     <string name="login_streak">Login Streak</string>
     <string name="daily_log_in_streak">Daily Log-in Streak:</string>
     <string name="bonus_coin_d">Bonus Coin : %d</string>
-
-
+    <string name="how_to_get_coin">How to get coin?</string>
+    <string name="about_get_coin">You can get your coin by either daily-login or complete challenges. Daily login reward will be doubled in every 3 days, and for the starter is 8 Coin.</string>
 
 
 </resources>
