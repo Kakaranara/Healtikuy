@@ -69,10 +69,10 @@
 
     <!-- SunExposure Related -->
     <string name="sunbathe">Sunbathe</string>
-    <string name="sun_desc_after_complete"> Good Job! </string>
-    <string name="sun_desc_before_press"> Ready to do it? </string>
+    <string name="sun_desc_after_complete"> Good Job! At least you have daily vitamin D Needs! Keep it up! </string>
+    <string name="sun_desc_before_press"> Make sure you have receive sunlight exposure or sunbathe this day. </string>
     <string name="sun_desc_not_in_time"> You can complete this mission in within 1 hours of your Sun Exposure schedule.</string>
-    <string name="sun_tips_home">Sunbathe is best doing in between 10.00 &#8211; 15.00, with 5 &#8211; 15 Minutes Duration.</string>
+    <string name="sun_tips_home">Sunbathe is best doing in between 10.00 &#8211; 15.00, with 5 &#8211; 15 Minutes Duration. Sunbathe is not strictly necessary, the important thing is you have receive sunlight exposure.</string>
 
     <!-- Exercise Related -->
     <string name="cardio">Cardio</string>
