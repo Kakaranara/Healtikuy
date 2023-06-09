@@ -77,11 +77,12 @@ class AppRepository @Inject constructor(
         val lastLogin = localData.lastLogin
         if (!DateHelper.isToday(lastLogin)) {
             Log.e("SYNC", "regularSync: SYNC TRIGGERED")
-            reducePointIfAbsent(lastLogin)
             preferencesManager.addLoginStreak()
+            reducePointIfAbsent(lastLogin)
+            addCoinPerLoginStreak()
             val fbUser = remoteDataSource.getFirebaseUser() as FirebaseUser
             try {
-                val firestoreDocument = hashMapOf<String, Any>(
+                val document = hashMapOf<String, Any>(
                     "avatar" to localData.avatar,
                     "inventory" to (localData.inventory.toMutableList() as ArrayList<String>), //? firestore just accept a few datatypes
                     "coin" to localData.coin,
@@ -92,10 +93,9 @@ class AppRepository @Inject constructor(
                     "running_400" to localData.running400MPoint,
                     "last_login" to localData.lastLogin
                 )
-                remoteDataSource.updateUserData(fbUser.uid, firestoreDocument)
+                remoteDataSource.updateUserData(fbUser.uid, document)
                 preferencesManager.setLastLoginToToday()
                 Log.e("APP REPO SYNC", "regular sync success")
-
             } catch (e: Exception) {
                 Log.e("APP REPO SYNC", "FAILED with msg : ${e.message}")
             }
@@ -103,7 +103,8 @@ class AppRepository @Inject constructor(
     }
 
     private suspend fun reducePointIfAbsent(lastLogin: Long) {
-        val missingDays = DateHelper.calculateDayDiff(lastLogin)
+        val missingDays =
+            DateHelper.calculateDayDiff(lastLogin, currentTime = System.currentTimeMillis())
         //the day after tomorrow
         //because if it only tomorrow then it was a regular sync.
         Log.e("APP Repository", "reducePointIfAbsent: POINT REDUCED")
@@ -111,6 +112,15 @@ class AppRepository @Inject constructor(
             val pointReduced = missingDays * PointsManager.MISSING_POINT
             preferencesManager.reducePoint(pointReduced)
             preferencesManager.resetLoginStreak()
+        }
+    }
+
+    private suspend fun addCoinPerLoginStreak() {
+        val loginStreak = preferencesManager.loginStreak.first()
+        if (loginStreak != 0) {
+            val bonus = (loginStreak / 3) + 1
+            val coinReward = PointsManager.DAILY_LOGIN_COIN * bonus
+            preferencesManager.addCoin(coinReward)
         }
     }
 

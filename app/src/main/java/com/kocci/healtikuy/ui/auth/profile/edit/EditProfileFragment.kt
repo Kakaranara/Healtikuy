@@ -13,7 +13,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.databinding.FragmentEditProfileBinding
-import com.kocci.healtikuy.ui.dialog.PickAvatarBSheet
+import com.kocci.healtikuy.ui.dialog.pick.avatar.PickAvatarBSheet
 import com.kocci.healtikuy.util.extension.showToast
 import com.kocci.healtikuy.util.helper.DrawableHelper
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,8 +49,13 @@ class EditProfileFragment : Fragment() {
 
 
         binding.btnChangeAvatar.setOnClickListener {
-            val pickAvatarBSheet = PickAvatarBSheet()
-            pickAvatarBSheet.pref = userPreferences
+            val inventory = ArrayList(userPreferences.inventory)
+            val bundle = Bundle().apply {
+                putStringArrayList(PickAvatarBSheet.INVENTORY_ARGS, inventory)
+            }
+            val pickAvatarBSheet = PickAvatarBSheet().apply {
+                arguments = bundle
+            }
             pickAvatarBSheet.show(childFragmentManager, PickAvatarBSheet.TAG)
         }
 
@@ -63,10 +68,12 @@ class EditProfileFragment : Fragment() {
                     is Async.Error -> {
                         showToast("Error")
                     }
+
                     Async.Loading -> {
 
                         showToast("Loading")
                     }
+
                     is Async.Success -> {
                         showToast("success")
                         findNavController().popBackStack()

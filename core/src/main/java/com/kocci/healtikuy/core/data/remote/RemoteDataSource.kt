@@ -46,7 +46,7 @@ class RemoteDataSource @Inject constructor(
     suspend fun getUserDataForLeaderboards(): QuerySnapshot {
         return firestore.collection(FsCollection.USERS)
             .orderBy("points", Query.Direction.DESCENDING)
-            .limit(20)
+            .limit(10)
             .get()
             .await()
     }
@@ -60,7 +60,7 @@ class RemoteDataSource @Inject constructor(
 
         return firestore.collection(FsCollection.USERS)
             .orderBy(runningType, Query.Direction.ASCENDING)
-            .limit(20)
+            .limit(10)
             .get()
             .await()
     }

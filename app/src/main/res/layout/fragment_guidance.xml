@@ -120,6 +120,19 @@
                 style="@style/textGuide.title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/how_to_get_coin" />
+
+            <TextView
+                style="@style/textGuide.body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_get_coin" />
+
+
+            <TextView
+                style="@style/textGuide.title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/privacy" />
 
             <TextView
@@ -127,6 +140,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/about_privacy" />
+
+
         </LinearLayout>
 
     </LinearLayout>

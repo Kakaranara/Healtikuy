@@ -26,17 +26,13 @@ class SleepInteractor @Inject constructor(
     }
 
     override fun getDataProgress(): Flow<Sleep> {
-        return repository.getLatestData().map {
-            if (it == null) {
-                val sleep = Sleep()
-                insertNewData(sleep)
-                sleep
-            } else if (!DateHelper.isToday(it.timeStamp)) {
-                val sleep = Sleep()
-                insertNewData(sleep)
-                sleep
+        return repository.getLatestData().map { entity ->
+            if (entity == null) {
+                Sleep().also { insertNewData(it) }
+            } else if (!DateHelper.isToday(entity.timeStamp)) {
+                Sleep().also { insertNewData(it) }
             } else {
-                it.toDomain()
+                entity.toDomain()
             }
         }
     }
