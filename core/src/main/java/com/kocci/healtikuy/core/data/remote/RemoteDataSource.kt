@@ -59,6 +59,7 @@ class RemoteDataSource @Inject constructor(
         }
 
         return firestore.collection(FsCollection.USERS)
+            .whereNotEqualTo(runningType, 0)
             .orderBy(runningType, Query.Direction.ASCENDING)
             .limit(10)
             .get()
