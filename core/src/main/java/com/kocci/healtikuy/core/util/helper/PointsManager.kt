@@ -6,6 +6,6 @@ object PointsManager {
     const val SLEEP_POINT: Long = 1000
     const val NUTRITION_POINT: Long = 60
     const val SUN_EXPOSURE_POINT: Long = 350
-    const val MISSING_POINT : Long = 1000
+    const val MISSING_POINT : Long = 2000
     const val DAILY_LOGIN_COIN : Int = 8 //? should be refactored since it was not coin manager?
 }

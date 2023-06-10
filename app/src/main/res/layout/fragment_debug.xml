@@ -14,6 +14,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ProgressBar
+        android:id="@+id/progressbarDebug"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -26,17 +36,28 @@
         app:layout_constraintTop_toBottomOf="@id/toolbarDebug">
 
         <Button
+            android:id="@+id/btnLastLoginToYesterday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Change last login to yesterday"
             />
 
         <Button
+            android:id="@+id/btnLastLoginTo1Week"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Change last login to 1 week ago"
             />
+
+        <Button
+            android:id="@+id/btnAdd5000Points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Add 5000 points"
+            />
+
 
 
 <!--        <TextView-->
