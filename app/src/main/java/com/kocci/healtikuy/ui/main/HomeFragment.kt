@@ -210,9 +210,13 @@ class HomeFragment : Fragment(), View.OnClickListener {
                                     }
                                 }
                             }
-                            .setNegativeButton(resources.getString(R.string.no)) { _, _ ->
+                            .setNegativeButton(resources.getString(R.string.no)) { _, _ -> }.show()
+                        true
+                    }
 
-                            }.show()
+                    R.id.action_debug_function -> {
+                        val direction = HomeFragmentDirections.actionHomeFragmentToDebugFragment()
+                        findNavController().navigate(direction)
                         true
                     }
 
