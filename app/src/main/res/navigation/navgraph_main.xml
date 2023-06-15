@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_homeFragment_to_debugFragment"
             app:destination="@id/debugFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_avoidSomethingFragment"
+            app:destination="@id/avoidSomethingFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -189,4 +192,9 @@
         android:name="com.kocci.healtikuy.ui.temp.DebugFragment"
         android:label="Debug Function (Dev)"
         tools:layout="@layout/fragment_debug" />
+    <fragment
+        android:id="@+id/avoidSomethingFragment"
+        android:name="com.kocci.healtikuy.ui.main.feature.avoid.AvoidSomethingFragment"
+        android:label="Avoid This!"
+        tools:layout="@layout/fragment_avoid_someting" />
 </navigation>

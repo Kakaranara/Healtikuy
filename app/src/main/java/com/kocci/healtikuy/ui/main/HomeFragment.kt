@@ -135,7 +135,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
             }
 
             binding.btnSunExposure -> {
-                val directions = HomeFragmentDirections.actionHomeFragmentToSunExposureFragment()
+//                val directions = HomeFragmentDirections.actionHomeFragmentToSunExposureFragment()
+//                findNavController().navigate(directions)
+                val directions = HomeFragmentDirections.actionHomeFragmentToAvoidSomethingFragment()
                 findNavController().navigate(directions)
             }
 
