@@ -214,11 +214,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
                         true
                     }
 
-                    R.id.action_debug_function -> {
-                        val direction = HomeFragmentDirections.actionHomeFragmentToDebugFragment()
-                        findNavController().navigate(direction)
-                        true
-                    }
+//                    R.id.action_debug_function -> {
+//                        val direction = HomeFragmentDirections.actionHomeFragmentToDebugFragment()
+//                        findNavController().navigate(direction)
+//                        true
+//                    }
 
                     else -> false
                 }

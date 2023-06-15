@@ -11,11 +11,13 @@
         android:title="@string/local_sync"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/action_debug_function"
-        android:title="Debug Function"
-        app:showAsAction="never"
-        />
+<!-- Uncomment this to present app (debug) -->
+
+<!--    <item-->
+<!--        android:id="@+id/action_debug_function"-->
+<!--        android:title="Debug Function"-->
+<!--        app:showAsAction="never"-->
+<!--        />-->
 
 <!--    <item-->
 <!--        android:id="@+id/action_guide"-->
