@@ -15,6 +15,7 @@ import com.kocci.healtikuy.core.domain.usecase.feature.exercise.cardio.RunningUs
 import com.kocci.healtikuy.core.domain.usecase.feature.exercise.cardio.StaticBikeUseCase
 import com.kocci.healtikuy.core.domain.usecase.ChallengesUseCase
 import com.kocci.healtikuy.core.domain.usecase.LeaderboardsUseCase
+import com.kocci.healtikuy.core.domain.usecase.feature.AvoidFeatureUseCase
 import com.kocci.healtikuy.core.domain.usecase.feature.NutritionUseCase
 import com.kocci.healtikuy.core.domain.usecase.feature.SleepUseCase
 import com.kocci.healtikuy.core.domain.usecase.feature.SunExposureUseCase

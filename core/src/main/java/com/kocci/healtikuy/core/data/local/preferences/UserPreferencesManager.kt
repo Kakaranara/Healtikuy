@@ -57,6 +57,7 @@ class UserPreferencesManager @Inject constructor(
 
         //? Another preferences?
         val LOGIN_STREAK = intPreferencesKey("login_streak")
+        val IS_AVOID_CHECKED = booleanPreferencesKey("is_avoid_checked")
     }
 
     /**
@@ -300,6 +301,16 @@ class UserPreferencesManager @Inject constructor(
 
     val loginStreak: Flow<Int> = dataStore.data.map { pref ->
         pref[PreferenceKeys.LOGIN_STREAK] ?: 0
+    }
+
+    val isAvoidChecked : Flow<Boolean> = dataStore.data.map { pref ->
+        pref[PreferenceKeys.IS_AVOID_CHECKED] ?: false
+    }
+
+    suspend fun changeAvoidCheckedState(state: Boolean){
+        dataStore.edit { pref ->
+            pref[PreferenceKeys.IS_AVOID_CHECKED] = state
+        }
     }
 
     suspend fun addLoginStreak() {

@@ -10,6 +10,8 @@ class AvoidFeatureRepository @Inject constructor(
     private val preference: UserPreferencesManager
 ) {
     fun getData() = localDataSource.getAvoidData()
+    fun isAvoidChecked() = preference.isAvoidChecked
     suspend fun insert(entity: AvoidFeatureEntity) = localDataSource.insertAvoidData(entity)
     suspend fun update(entity: AvoidFeatureEntity) = localDataSource.updateAvoidData(entity)
+    suspend fun changeCheckedState(state: Boolean) = preference.changeAvoidCheckedState(state)
 }

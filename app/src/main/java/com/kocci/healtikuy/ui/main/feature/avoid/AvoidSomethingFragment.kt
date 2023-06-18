@@ -15,10 +15,11 @@ import com.kocci.healtikuy.databinding.FragmentAvoidSometingBinding
 import com.kocci.healtikuy.util.extension.gone
 import com.kocci.healtikuy.util.extension.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 
 
 @AndroidEntryPoint
-class AvoidSomethingFragment : Fragment(){
+class AvoidSomethingFragment : Fragment() {
     /**
      * Please change "AvoidFeature" to something else..
      */
@@ -31,7 +32,7 @@ class AvoidSomethingFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         binding.toolbarAvoid.setupWithNavController(findNavController())
         binding.tipsAvoid.apply {
-            tvTitleTips.text = "Information"
+            tvTitleTips.text = getString(R.string.information)
             tvBodyTips.text = getString(R.string.tips_avoid)
             btnMoreTips.gone()
         }
@@ -43,17 +44,38 @@ class AvoidSomethingFragment : Fragment(){
             dataObj = it
         }
 
+        viewModel.neverDoneItLiveData.observe(viewLifecycleOwner) { never ->
+            if (never) {
+                binding.checkAll.isChecked = true
+                runBlocking {
+                    val data = viewModel.getAwaitedData()
+                    if (!data.isTodayAllChecked) {
+                        viewModel.checkAll(data)
+                        showToast("You got X points! ")
+                    }
+                }
+            } else {
+                binding.checkAll.isChecked = false
+            }
+        }
+
         val arrayBinding = arrayOf(binding.checkAlcohol, binding.checkSmoking)
         arrayBinding.forEach { binding ->
             handleCheckListener(binding)
         }
 
-        handleClickListener(binding.checkSmoking){
+        handleClickListener(binding.checkSmoking) {
             viewModel.checkSmoke(it)
+            showToast("You got X Points!")
         }
 
-        handleClickListener(binding.checkAlcohol){
+        handleClickListener(binding.checkAlcohol) {
             viewModel.checkAlcohol(it)
+            showToast("You got X Points!")
+        }
+
+        binding.checkAll.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.changeNeverDoneState(isChecked)
         }
     }
 
@@ -65,7 +87,7 @@ class AvoidSomethingFragment : Fragment(){
         }
     }
 
-    private fun handleClickListener(checkView: CheckBox, operation : (data: AvoidFeature) -> Unit) {
+    private fun handleClickListener(checkView: CheckBox, operation: (data: AvoidFeature) -> Unit) {
         checkView.setOnClickListener {
             dataObj?.let {
                 operation(it)

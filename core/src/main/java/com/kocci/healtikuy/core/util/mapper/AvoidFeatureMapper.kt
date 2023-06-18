@@ -10,7 +10,8 @@ fun AvoidFeature.toEntity(): AvoidFeatureEntity {
         smoke = this.smoke,
         limitSugar = this.limitSugar,
         limitFat = this.limitFat,
-        timeStamp = this.timeStamp
+        timeStamp = this.timeStamp,
+        isTodayAllChecked = this.isTodayAllChecked
     )
 }
 
@@ -21,6 +22,8 @@ fun AvoidFeatureEntity.toDomain(): AvoidFeature {
         smoke = this.smoke,
         limitSugar = this.limitSugar,
         limitFat = this.limitFat,
-        timeStamp = this.timeStamp
+        timeStamp = this.timeStamp,
+        isTodayAllChecked = this.isTodayAllChecked
+
     )
 }

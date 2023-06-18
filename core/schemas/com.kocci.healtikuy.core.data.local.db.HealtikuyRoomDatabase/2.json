@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "79a3bd2dd27508907483e193ccac27fa",
+    "identityHash": "162c0ea2b375a5faf785ebe607c0bc8e",
     "entities": [
       {
         "tableName": "Water_intake",
@@ -358,7 +358,7 @@
       },
       {
         "tableName": "avoid_feature",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `alcohol` INTEGER NOT NULL, `smoke` INTEGER NOT NULL, `limitSugar` INTEGER NOT NULL, `limitFat` INTEGER NOT NULL, `timeStamp` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `alcohol` INTEGER NOT NULL, `smoke` INTEGER NOT NULL, `limitSugar` INTEGER NOT NULL, `limitFat` INTEGER NOT NULL, `isTodayAllChecked` INTEGER NOT NULL, `timeStamp` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -391,6 +391,12 @@
             "notNull": true
           },
           {
+            "fieldPath": "isTodayAllChecked",
+            "columnName": "isTodayAllChecked",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
             "fieldPath": "timeStamp",
             "columnName": "timeStamp",
             "affinity": "INTEGER",
@@ -410,7 +416,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '79a3bd2dd27508907483e193ccac27fa')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '162c0ea2b375a5faf785ebe607c0bc8e')"
     ]
   }
 }

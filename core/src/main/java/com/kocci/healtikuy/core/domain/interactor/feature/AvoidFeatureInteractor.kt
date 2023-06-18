@@ -2,7 +2,7 @@ package com.kocci.healtikuy.core.domain.interactor.feature
 
 import com.kocci.healtikuy.core.data.repository.feature.AvoidFeatureRepository
 import com.kocci.healtikuy.core.domain.model.AvoidFeature
-import com.kocci.healtikuy.core.domain.usecase.AvoidFeatureUseCase
+import com.kocci.healtikuy.core.domain.usecase.feature.AvoidFeatureUseCase
 import com.kocci.healtikuy.core.util.helper.DateHelper
 import com.kocci.healtikuy.core.util.mapper.toDomain
 import com.kocci.healtikuy.core.util.mapper.toEntity
@@ -33,11 +33,24 @@ class AvoidFeatureInteractor @Inject constructor(
 
     override fun isCheckable(): Boolean {
         // only available in > 9 PM.
-        val checkAbleTime =  Calendar.getInstance().apply {
+        val checkAbleTime = Calendar.getInstance().apply {
             set(Calendar.HOUR_OF_DAY, 21)
             set(Calendar.MINUTE, 0)
         }.time
         return Date(System.currentTimeMillis()).after(checkAbleTime)
+    }
+
+    override fun neverDoneItListener(): Flow<Boolean> {
+        return repository.isAvoidChecked()
+    }
+
+    override suspend fun changeNeverDone(state: Boolean) {
+        return repository.changeCheckedState(state)
+    }
+
+    override suspend fun checkAllForToday(obj: AvoidFeature) {
+        obj.isTodayAllChecked = true
+        repository.update(obj.toEntity())
     }
 
     override suspend fun imNotDrinkAlcohol(obj: AvoidFeature) {

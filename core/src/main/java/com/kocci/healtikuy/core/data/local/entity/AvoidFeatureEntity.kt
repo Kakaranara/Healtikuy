@@ -11,5 +11,6 @@ data class AvoidFeatureEntity(
     var smoke: Boolean = false,
     var limitSugar : Boolean = false,
     var limitFat : Boolean = false,
+    var isTodayAllChecked : Boolean = false,
     var timeStamp: Long = System.currentTimeMillis(),
 )
