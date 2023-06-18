@@ -21,13 +21,41 @@
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbarAvoid">
+        app:layout_constraintTop_toBottomOf="@id/tips_avoid">
 
         <CheckBox
-            android:layout_width="wrap_content"
+            android:id="@+id/checkAll"
+            android:layout_marginBottom="16dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Halo Kawan"/>
+            android:text="@string/i_ve_never_done_any_of_those_things" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <CheckBox
+            android:id="@+id/checkAlcohol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/im_not_drinking_alcohol_today" />
+
+        <CheckBox
+            android:id="@+id/checkSmoking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/im_not_smoking_today" />
 
     </LinearLayout>
+
+    <include
+        android:id="@+id/tips_avoid"
+        layout="@layout/card_tips"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarAvoid" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

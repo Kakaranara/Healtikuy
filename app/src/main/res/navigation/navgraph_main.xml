@@ -195,6 +195,6 @@
     <fragment
         android:id="@+id/avoidSomethingFragment"
         android:name="com.kocci.healtikuy.ui.main.feature.avoid.AvoidSomethingFragment"
-        android:label="Avoid This!"
+        android:label="@string/avoid_these"
         tools:layout="@layout/fragment_avoid_someting" />
 </navigation>

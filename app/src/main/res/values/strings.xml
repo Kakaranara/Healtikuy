@@ -157,6 +157,11 @@
     <string name="bonus_coin_d">Bonus Coin : %d</string>
     <string name="how_to_get_coin">How to get coin?</string>
     <string name="about_get_coin">You can get your coin by either daily-login or complete challenges. Daily login reward will be doubled in every 3 days, and for the starter is 8 Coin.</string>
+    <string name="im_not_smoking_today">Im not smoking Today</string>
+    <string name="im_not_drinking_alcohol_today">Im not Drinking Alcohol Today</string>
+    <string name="tips_avoid">Alcohol and smoking are examples of things that we need to avoid. These two factors can have serious long-term effects on your body. It is advisable to avoid them at all costs. And if you have never tried them before, it is best not to experiment with them.</string>
+    <string name="i_ve_never_done_any_of_those_things">I\'ve never done any of those things</string>
+    <string name="avoid_these">Avoid These</string>
 
 
 </resources>

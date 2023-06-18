@@ -1,6 +1,7 @@
 package com.kocci.healtikuy.di
 
 import com.kocci.healtikuy.core.domain.interactor.*
+import com.kocci.healtikuy.core.domain.interactor.feature.AvoidFeatureInteractor
 import com.kocci.healtikuy.core.domain.interactor.feature.NutritionInteractor
 import com.kocci.healtikuy.core.domain.interactor.feature.SleepInteractor
 import com.kocci.healtikuy.core.domain.interactor.feature.SunExposureInteractor
@@ -85,4 +86,8 @@ abstract class AppModule {
     @Binds
     @ViewModelScoped
     abstract fun bindSunExposureUseCase(interactor: SunExposureInteractor): SunExposureUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindAvoidUseCase(inter : AvoidFeatureInteractor) : AvoidFeatureUseCase
 }
