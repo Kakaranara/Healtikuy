@@ -163,6 +163,10 @@
     <string name="i_ve_never_done_any_of_those_things">I\'ve never done any of those things</string>
     <string name="avoid_these">Avoid These</string>
     <string name="information">Information</string>
+    <string name="checkable_after_9pm">checkable after 9PM</string>
+    <string name="i_limit_sugar_consumption_today">I limit sugar consumption today.</string>
+    <string name="i_limit_fatty_foods_today">I limit fatty foods today.</string>
+    <string name="add_food">Add Food</string>
 
 
 </resources>

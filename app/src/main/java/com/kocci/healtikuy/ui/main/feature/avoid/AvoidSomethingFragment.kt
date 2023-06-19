@@ -78,6 +78,11 @@ class AvoidSomethingFragment : Fragment() {
         binding.checkAll.setOnCheckedChangeListener { _, isChecked ->
             viewModel.changeNeverDoneState(isChecked)
         }
+
+        if(!viewModel.isCheckable){
+            binding.checkAlcohol.isEnabled = false
+            binding.checkSmoking.isEnabled = false
+        }
     }
 
     private fun handleCheckListener(checkView: CheckBox) {

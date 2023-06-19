@@ -15,7 +15,7 @@ class AvoidSmthViewModel @Inject constructor(
     private val useCase: AvoidFeatureUseCase
 ) : ViewModel() {
     val data = useCase.getData().asLiveData()
-    val checkAble = useCase.isCheckable()
+    val isCheckable = useCase.isCheckable()
     val neverDoneItLiveData = useCase.neverDoneItListener().asLiveData()
 
     suspend fun getAwaitedData() : AvoidFeature{
