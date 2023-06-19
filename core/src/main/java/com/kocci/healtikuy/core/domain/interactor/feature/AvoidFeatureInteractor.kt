@@ -4,6 +4,7 @@ import com.kocci.healtikuy.core.data.repository.feature.AvoidFeatureRepository
 import com.kocci.healtikuy.core.domain.model.AvoidFeature
 import com.kocci.healtikuy.core.domain.usecase.feature.AvoidFeatureUseCase
 import com.kocci.healtikuy.core.util.helper.DateHelper
+import com.kocci.healtikuy.core.util.helper.PointsManager
 import com.kocci.healtikuy.core.util.mapper.toDomain
 import com.kocci.healtikuy.core.util.mapper.toEntity
 import kotlinx.coroutines.flow.Flow
@@ -56,20 +57,24 @@ class AvoidFeatureInteractor @Inject constructor(
     override suspend fun imNotDrinkAlcohol(obj: AvoidFeature) {
         obj.alcohol = true
         repository.update(obj.toEntity())
+        repository.addPoints(PointsManager.AVOID_POINT)
     }
 
     override suspend fun imNotSmoking(obj: AvoidFeature) {
         obj.smoke = true
         repository.update(obj.toEntity())
+        repository.addPoints(PointsManager.AVOID_POINT)
     }
 
     override suspend fun iLimitMySugar(obj: AvoidFeature) {
         obj.limitSugar = true
         repository.update(obj.toEntity())
+        repository.addPoints(PointsManager.AVOID_POINT)
     }
 
     override suspend fun iLimitMyOil(obj: AvoidFeature) {
         obj.limitFat = true
         repository.update(obj.toEntity())
+        repository.addPoints(PointsManager.AVOID_POINT)
     }
 }

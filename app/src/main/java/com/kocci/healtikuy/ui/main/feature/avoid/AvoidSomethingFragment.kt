@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.domain.model.AvoidFeature
+import com.kocci.healtikuy.core.util.helper.PointsManager
 import com.kocci.healtikuy.databinding.FragmentAvoidSometingBinding
 import com.kocci.healtikuy.util.extension.gone
 import com.kocci.healtikuy.util.extension.showToast
@@ -51,7 +52,7 @@ class AvoidSomethingFragment : Fragment() {
                     val data = viewModel.getAwaitedData()
                     if (!data.isTodayAllChecked) {
                         viewModel.checkAll(data)
-                        showToast("You got X points! ")
+                        showToast("You got ${PointsManager.AVOID_POINT * 2} points! ")
                     }
                 }
             } else {
@@ -66,12 +67,12 @@ class AvoidSomethingFragment : Fragment() {
 
         handleClickListener(binding.checkSmoking) {
             viewModel.checkSmoke(it)
-            showToast("You got X Points!")
+            showToast("You got ${PointsManager.AVOID_POINT} Points!")
         }
 
         handleClickListener(binding.checkAlcohol) {
             viewModel.checkAlcohol(it)
-            showToast("You got X Points!")
+            showToast("You got ${PointsManager.AVOID_POINT} Points!")
         }
 
         binding.checkAll.setOnCheckedChangeListener { _, isChecked ->
