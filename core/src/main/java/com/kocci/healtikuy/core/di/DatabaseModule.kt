@@ -27,7 +27,8 @@ class DatabaseModule {
 
     private val MIGRATION_1_2 = object : Migration(1, 2) {
         override fun migrate(database: SupportSQLiteDatabase) {
-            database.execSQL("CREATE TABLE IF NOT EXISTS `avoid_feature` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `alcohol` INTEGER NOT NULL, `smoke` INTEGER NOT NULL, `limitSugar` INTEGER NOT NULL, `limitFat` INTEGER NOT NULL, `timeStamp` INTEGER NOT NULL)")
+            //? You can get this code in core > schemas > latest version database.
+            database.execSQL("CREATE TABLE IF NOT EXISTS `avoid_feature` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `alcohol` INTEGER NOT NULL, `smoke` INTEGER NOT NULL, `limitSugar` INTEGER NOT NULL, `limitFat` INTEGER NOT NULL, `isTodayAllChecked` INTEGER NOT NULL, `timeStamp` INTEGER NOT NULL)")
         }
     }
 
