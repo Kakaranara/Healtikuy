@@ -270,13 +270,13 @@
                         android:layout_height="160dp"
                         android:contentDescription="@string/image_of_sun_exposure"
                         android:scaleType="fitXY"
-                        android:src="@drawable/sun" />
+                        android:src="@drawable/avoid" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="@string/sun_exposure"
+                        android:text="@string/avoid_these"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 

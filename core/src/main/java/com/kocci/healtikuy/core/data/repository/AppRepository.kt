@@ -124,16 +124,53 @@ class AppRepository @Inject constructor(
         }
     }
 
-    //!Debug function : put in top of regular sync
-    private suspend fun forceLastLoginYesterday() {
+
+    /**
+     * ! DEBUG ZONE! DON'T USE THIS IN PRODUCTION!
+     */
+
+    private suspend fun forceLastLoginToTime(time : Int = DateHelper.dayInMill) {
         /**
-         * You might determine the time to other time than yesterday.
+         * Determine the day in millis. Default value is 1 day, meaning last login is yesterday.
          * Determine the time : https://www.unixtimestamp.com/
          * After convert, multiply it by 1000. because converted unix not in millis.
          */
         //set to yesterday
-        preferencesManager.setLastLogin(System.currentTimeMillis() - 86500000)
-//        preferencesManager.setLastLogin(1684191668000L)
+        preferencesManager.setLastLogin(System.currentTimeMillis() - (time + 1000000))
+    }
+
+    fun debugRegularSync(time: Int = DateHelper.dayInMill): Flow<Async<Unit>> = flow {
+        emit(Async.Loading)
+        forceLastLoginToTime(time)
+        val localData = preferencesManager.userPreferences.first()
+        val lastLogin = localData.lastLogin
+        if (!DateHelper.isToday(lastLogin)) {
+            Log.e("SYNC", "regularSync: SYNC TRIGGERED")
+            preferencesManager.addLoginStreak()
+            reducePointIfAbsent(lastLogin)
+            addCoinPerLoginStreak()
+            val fbUser = remoteDataSource.getFirebaseUser() as FirebaseUser
+            try {
+                val document = hashMapOf<String, Any>(
+                    "avatar" to localData.avatar,
+                    "inventory" to (localData.inventory.toMutableList() as ArrayList<String>), //? firestore just accept a few datatypes
+                    "coin" to localData.coin,
+                    "points" to localData.points,
+                    "username" to localData.username,
+                    "running_100" to localData.running100MPoint,
+                    "running_200" to localData.running200MPoint,
+                    "running_400" to localData.running400MPoint,
+                    "last_login" to localData.lastLogin
+                )
+                remoteDataSource.updateUserData(fbUser.uid, document)
+                preferencesManager.setLastLoginToToday()
+                emit(Async.Success(Unit))
+                Log.e("APP REPO SYNC", "regular sync success")
+            } catch (e: Exception) {
+                Log.e("APP REPO SYNC", "FAILED with msg : ${e.message}")
+                emit(Async.Error(e.message.toString()))
+            }
+        }
     }
 
 }

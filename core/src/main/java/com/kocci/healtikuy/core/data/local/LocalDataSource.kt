@@ -1,6 +1,7 @@
 package com.kocci.healtikuy.core.data.local
 
 import androidx.room.Transaction
+import com.kocci.healtikuy.core.data.local.db.AvoidFeatureDao
 import com.kocci.healtikuy.core.data.local.db.HealtikuyDao
 import com.kocci.healtikuy.core.data.local.db.HealtikuyRoomDatabase
 import com.kocci.healtikuy.core.data.local.db.NutritionDao
@@ -10,6 +11,7 @@ import com.kocci.healtikuy.core.data.local.db.WaterIntakeDao
 import com.kocci.healtikuy.core.data.local.db.exercise.JoggingDao
 import com.kocci.healtikuy.core.data.local.db.exercise.RunningDao
 import com.kocci.healtikuy.core.data.local.db.exercise.StaticBikeDao
+import com.kocci.healtikuy.core.data.local.entity.AvoidFeatureEntity
 import com.kocci.healtikuy.core.data.local.entity.ChallengeEntity
 import com.kocci.healtikuy.core.data.local.entity.NutritionEntity
 import com.kocci.healtikuy.core.data.local.entity.SleepEntity
@@ -32,7 +34,8 @@ class LocalDataSource @Inject constructor(
     private val runningDao: RunningDao,
     private val staticBikeDao: StaticBikeDao,
     private val nutritionDao: NutritionDao,
-    private val sunExposureDao: SunExposureDao
+    private val sunExposureDao: SunExposureDao,
+    private val avoidDao: AvoidFeatureDao
 ) {
 
     /**
@@ -102,6 +105,15 @@ class LocalDataSource @Inject constructor(
     suspend fun insertNutritionData(entity: NutritionEntity) = nutritionDao.insert(entity)
     suspend fun getAllNutritionData() = nutritionDao.getAllData()
     suspend fun clearNutrition() = nutritionDao.deleteTables()
+
+    /**
+     * Avoid Feature Related
+     */
+
+    fun getAvoidData() = avoidDao.getLatestData()
+    suspend fun insertAvoidData(entity: AvoidFeatureEntity) = avoidDao.insertNewData(entity)
+
+    suspend fun updateAvoidData(entity: AvoidFeatureEntity) = avoidDao.changeData(entity)
 
     /**
      * Home related

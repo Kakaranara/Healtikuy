@@ -30,6 +30,12 @@
         <action
             android:id="@+id/action_homeFragment_to_nutritionFragment"
             app:destination="@id/nutritionFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_debugFragment"
+            app:destination="@id/debugFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_avoidSomethingFragment"
+            app:destination="@id/avoidSomethingFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -181,4 +187,14 @@
         android:name="com.kocci.healtikuy.ui.main.other.AboutFragment"
         android:label="About"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/debugFragment"
+        android:name="com.kocci.healtikuy.ui.temp.DebugFragment"
+        android:label="Debug Function (Dev)"
+        tools:layout="@layout/fragment_debug" />
+    <fragment
+        android:id="@+id/avoidSomethingFragment"
+        android:name="com.kocci.healtikuy.ui.main.feature.avoid.AvoidSomethingFragment"
+        android:label="@string/avoid_these"
+        tools:layout="@layout/fragment_avoid_someting" />
 </navigation>

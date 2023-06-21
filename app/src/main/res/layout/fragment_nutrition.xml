@@ -26,6 +26,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbarNutrition" />
 
+    <LinearLayout
+        android:id="@+id/limitBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nutritionTips">
+
+        <CheckBox
+            android:id="@+id/checkSugar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/i_limit_sugar_consumption_today" />
+
+        <CheckBox
+            android:id="@+id/checkFat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/i_limit_fatty_foods_today" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/checkable_after_9pm"
+            android:gravity="end"
+            style="@style/TextAppearance.Material3.LabelSmall"/>
+
+    </LinearLayout>
+
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/dividerNutrition"
         android:layout_width="match_parent"
@@ -33,7 +64,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintTop_toBottomOf="@id/nutritionTips" />
+        app:layout_constraintTop_toBottomOf="@id/limitBox" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -56,6 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:contentDescription="@string/add_food"
         android:src="@drawable/baseline_add_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

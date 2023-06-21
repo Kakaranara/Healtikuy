@@ -17,6 +17,7 @@ object DateHelper {
     const val minuteInMill = secondInMill * 60
     const val hourInMill = minuteInMill * 60
     const val dayInMill = hourInMill * 24
+    const val weekInMill = dayInMill * 7
 
     fun dayTimeElapsed(from: Long): Int {
         val timeNow = System.currentTimeMillis()

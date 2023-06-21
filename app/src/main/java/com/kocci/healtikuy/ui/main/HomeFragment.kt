@@ -135,7 +135,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
             }
 
             binding.btnSunExposure -> {
-                val directions = HomeFragmentDirections.actionHomeFragmentToSunExposureFragment()
+//                val directions = HomeFragmentDirections.actionHomeFragmentToSunExposureFragment()
+//                findNavController().navigate(directions)
+                val directions = HomeFragmentDirections.actionHomeFragmentToAvoidSomethingFragment()
                 findNavController().navigate(directions)
             }
 
@@ -210,11 +212,15 @@ class HomeFragment : Fragment(), View.OnClickListener {
                                     }
                                 }
                             }
-                            .setNegativeButton(resources.getString(R.string.no)) { _, _ ->
-
-                            }.show()
+                            .setNegativeButton(resources.getString(R.string.no)) { _, _ -> }.show()
                         true
                     }
+
+//                    R.id.action_debug_function -> {
+//                        val direction = HomeFragmentDirections.actionHomeFragmentToDebugFragment()
+//                        findNavController().navigate(direction)
+//                        true
+//                    }
 
                     else -> false
                 }
