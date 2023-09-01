@@ -11,11 +11,11 @@ apply from : "../shared_dependencies.gradle"
 
 android {
     namespace 'com.kocci.healtikuy.core'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         minSdk 24
-        targetSdk 33
+        targetSdk 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -57,13 +57,13 @@ dependencies {
 
     // ? Persistence Data Related
     // * Database
-    implementation "androidx.room:room-runtime:2.5.1"
-    implementation "androidx.room:room-ktx:2.5.1"
-    implementation 'com.google.firebase:firebase-firestore-ktx:24.5.0'
-    implementation 'com.google.firebase:firebase-auth-ktx:21.3.0'
-    implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
+    implementation "androidx.room:room-runtime:2.5.2"
+    implementation "androidx.room:room-ktx:2.5.2"
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.7.1'
+    implementation 'com.google.firebase:firebase-auth-ktx:22.1.1'
+    implementation 'com.google.firebase:firebase-storage-ktx:20.2.1'
     //   annotationProcessor "androidx.room:room-compiler:2.5.0"
-    ksp "androidx.room:room-compiler:2.5.1"
+    ksp "androidx.room:room-compiler:2.5.2"
 
     // * Preferences Datastore (most likely same with shared preferences)
     implementation "androidx.datastore:datastore-preferences:1.0.0"
