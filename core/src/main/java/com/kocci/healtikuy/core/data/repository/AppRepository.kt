@@ -72,11 +72,12 @@ class AppRepository @Inject constructor(
         }
     }
 
-    suspend fun regularSync() {
+    fun regularSync() : Flow<Async<Unit>> = flow {
         val userLocalData = preferencesManager.userPreferences.first()
         val lastLogin = userLocalData.lastLogin
         val userPoint = userLocalData.points
         if (!DateHelper.isToday(lastLogin)) {
+            emit(Async.Loading)
             Log.e("SYNC", "regularSync: SYNC TRIGGERED")
             preferencesManager.addLoginStreak()
             reducePointIfAbsent(lastLogin, userPoint)
@@ -96,8 +97,10 @@ class AppRepository @Inject constructor(
                 )
                 remoteDataSource.updateUserData(fbUser.uid, document)
                 preferencesManager.setLastLoginToToday()
+                emit(Async.Success(Unit))
                 Log.e("APP REPO SYNC", "regular sync success")
             } catch (e: Exception) {
+                emit(Async.Error(e.message.toString()))
                 Log.e("APP REPO SYNC", "FAILED with msg : ${e.message}")
             }
         }
