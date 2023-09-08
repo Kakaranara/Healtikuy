@@ -151,6 +151,13 @@ class UserPreferencesManager @Inject constructor(
         }
     }
 
+    // cheat (Developer Privilege) >:)
+    suspend fun setPoint(points: Long){
+        dataStore.edit { pref ->
+            pref[PreferenceKeys.POINTS] = points
+        }
+    }
+
     suspend fun setLastLoginToToday() {
         dataStore.edit { preferences ->
             preferences[PreferenceKeys.LAST_LOGIN] = System.currentTimeMillis()

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.kocci.healtikuy.R
 import com.kocci.healtikuy.core.data.remote.model.Async
 import com.kocci.healtikuy.core.util.helper.DateHelper
 import com.kocci.healtikuy.databinding.FragmentDebugBinding
@@ -38,19 +37,21 @@ class DebugFragment : Fragment() {
         binding.toolbarDebug.setupWithNavController(findNavController())
 
         binding.btnLastLoginToYesterday.setOnClickListener{
-            viewModel.regularSync().observe(viewLifecycleOwner){
-                when(it){
-                    Async.Loading -> binding.progressbarDebug.visible()
-                    is Async.Error -> {
-                        binding.progressbarDebug.gone()
-                        showToast("Failed! error with msg ${it.msg}")
-                    }
-                    is Async.Success -> {
-                        binding.progressbarDebug.gone()
-                        showToast("Success!")
-                    }
-                }
-            }
+            viewModel.setLastLoginToYesterday()
+            showToast("Restart your app")
+//            viewModel.regularSync().observe(viewLifecycleOwner){
+//                when(it){
+//                    Async.Loading -> binding.progressbarDebug.visible()
+//                    is Async.Error -> {
+//                        binding.progressbarDebug.gone()
+//                        showToast("Failed! error with msg ${it.msg}")
+//                    }
+//                    is Async.Success -> {
+//                        binding.progressbarDebug.gone()
+//                        showToast("Success!")
+//                    }
+//                }
+//            }
         }
         binding.btnLastLoginTo1Week.setOnClickListener{
             viewModel.regularSync(DateHelper.weekInMill).observe(viewLifecycleOwner){

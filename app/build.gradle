@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
-    id 'com.google.devtools.ksp'
+    id 'com.google.devtools.ksp' //? Processing local database
     id 'com.google.dagger.hilt.android'
     id 'kotlin-kapt' //? for hilt support
     id 'com.google.gms.google-services'
@@ -13,14 +13,14 @@ apply from : "../shared_dependencies.gradle"
 
 android {
     namespace 'com.kocci.healtikuy'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.kocci.healtikuy"
         minSdk 24
-        targetSdk 33
-        versionCode 11
-        versionName "1.0.11"
+        targetSdk 34
+        versionCode 12
+        versionName "1.0.12"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -48,8 +48,8 @@ dependencies {
     implementation project (":core")
 
     //? navigation component
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.1'
 
     //? Memory Leaks Detector
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'

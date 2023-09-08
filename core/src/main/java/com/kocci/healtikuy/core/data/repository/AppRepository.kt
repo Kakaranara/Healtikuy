@@ -72,37 +72,41 @@ class AppRepository @Inject constructor(
         }
     }
 
-    suspend fun regularSync() {
-        val localData = preferencesManager.userPreferences.first()
-        val lastLogin = localData.lastLogin
+    fun regularSync() : Flow<Async<Unit>> = flow {
+        val userLocalData = preferencesManager.userPreferences.first()
+        val lastLogin = userLocalData.lastLogin
+        val userPoint = userLocalData.points
         if (!DateHelper.isToday(lastLogin)) {
+            emit(Async.Loading)
             Log.e("SYNC", "regularSync: SYNC TRIGGERED")
             preferencesManager.addLoginStreak()
-            reducePointIfAbsent(lastLogin)
+            reducePointIfAbsent(lastLogin, userPoint)
             addCoinPerLoginStreak()
             val fbUser = remoteDataSource.getFirebaseUser() as FirebaseUser
             try {
                 val document = hashMapOf<String, Any>(
-                    "avatar" to localData.avatar,
-                    "inventory" to (localData.inventory.toMutableList() as ArrayList<String>), //? firestore just accept a few datatypes
-                    "coin" to localData.coin,
-                    "points" to localData.points,
-                    "username" to localData.username,
-                    "running_100" to localData.running100MPoint,
-                    "running_200" to localData.running200MPoint,
-                    "running_400" to localData.running400MPoint,
-                    "last_login" to localData.lastLogin
+                    "avatar" to userLocalData.avatar,
+                    "inventory" to (userLocalData.inventory.toMutableList() as ArrayList<String>), //? firestore just accept a few datatypes
+                    "coin" to userLocalData.coin,
+                    "points" to userLocalData.points,
+                    "username" to userLocalData.username,
+                    "running_100" to userLocalData.running100MPoint,
+                    "running_200" to userLocalData.running200MPoint,
+                    "running_400" to userLocalData.running400MPoint,
+                    "last_login" to userLocalData.lastLogin
                 )
                 remoteDataSource.updateUserData(fbUser.uid, document)
                 preferencesManager.setLastLoginToToday()
+                emit(Async.Success(Unit))
                 Log.e("APP REPO SYNC", "regular sync success")
             } catch (e: Exception) {
+                emit(Async.Error(e.message.toString()))
                 Log.e("APP REPO SYNC", "FAILED with msg : ${e.message}")
             }
         }
     }
 
-    private suspend fun reducePointIfAbsent(lastLogin: Long) {
+    private suspend fun reducePointIfAbsent(lastLogin: Long, userPoint: Long) {
         val missingDays =
             DateHelper.calculateDayDiff(lastLogin, currentTime = System.currentTimeMillis())
         //the day after tomorrow
@@ -110,7 +114,11 @@ class AppRepository @Inject constructor(
         Log.e("APP Repository", "reducePointIfAbsent: POINT REDUCED")
         if (missingDays > 1) {
             val pointReduced = missingDays * PointsManager.MISSING_POINT
-            preferencesManager.reducePoint(pointReduced)
+            if (pointReduced >= userPoint) {
+                preferencesManager.setPoint(0) //prevent negative point
+            } else {
+                preferencesManager.reducePoint(pointReduced)
+            }
             preferencesManager.resetLoginStreak()
         }
     }
@@ -129,7 +137,7 @@ class AppRepository @Inject constructor(
      * ! DEBUG ZONE! DON'T USE THIS IN PRODUCTION!
      */
 
-    private suspend fun forceLastLoginToTime(time : Int = DateHelper.dayInMill) {
+    private suspend fun forceLastLoginToTime(time: Int = DateHelper.dayInMill) {
         /**
          * Determine the day in millis. Default value is 1 day, meaning last login is yesterday.
          * Determine the time : https://www.unixtimestamp.com/
@@ -144,10 +152,11 @@ class AppRepository @Inject constructor(
         forceLastLoginToTime(time)
         val localData = preferencesManager.userPreferences.first()
         val lastLogin = localData.lastLogin
+        val userPoint = localData.points
         if (!DateHelper.isToday(lastLogin)) {
             Log.e("SYNC", "regularSync: SYNC TRIGGERED")
             preferencesManager.addLoginStreak()
-            reducePointIfAbsent(lastLogin)
+            reducePointIfAbsent(lastLogin, userPoint)
             addCoinPerLoginStreak()
             val fbUser = remoteDataSource.getFirebaseUser() as FirebaseUser
             try {

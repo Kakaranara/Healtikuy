@@ -1,6 +1,7 @@
 package com.kocci.healtikuy.ui.main
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.kocci.healtikuy.core.domain.usecase.AuthUseCase
 import com.kocci.healtikuy.core.domain.usecase.SynchronizationUseCase
 import com.kocci.healtikuy.core.domain.usecase.UserUseCase
@@ -16,9 +17,9 @@ class MainViewModel @Inject constructor(
 
     val isUserLogin = userUseCase.isUserLogin()
 
-    suspend fun syncData() {
-        synchronizationUseCase.syncDataIfDayChanged()
-    }
+    val syncProgress =
+        synchronizationUseCase.syncDataIfDayChanged().asLiveData()
+
 
     fun logout() {
         authUseCase.logout()
